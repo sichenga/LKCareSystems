@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "material": "猪肉",
+    "unit": "斤",
+    "supplier": "新民桥菜场",
+    "trade": 100.0,
+    "retail": 110.0,
+    "purchase": 105.0,
+    "price": "2020-02-02"
+  },
+  {
+    "id": 2,
+    "material": "鸡肉",
+    "unit": "斤",
+    "supplier": "国泰民安菜场",
+    "trade": 100.0,
+    "retail": 110.0,
+    "purchase": 105.0,
+    "price": "2020-02-02"
+  },
+  {
+    "id": 3,
+    "material": "鱼",
+    "unit": "斤",
+    "supplier": "幸福大菜场",
+    "trade": 100.0,
+    "retail": 110.0,
+    "purchase": 105.0,
+    "price": "2020-02-02"
+  },
+  {
+    "id": 4,
+    "material": "茄子",
+    "unit": "斤",
+    "supplier": "新民桥菜场",
+    "trade": 100.0,
+    "retail": 110.0,
+    "purchase": 105.0,
+    "price": "2020-02-02"
+  },
+  {
+    "id": 5,
+    "material": "大白菜",
+    "unit": "斤",
+    "supplier": "国泰民安菜场",
+    "trade": 100.0,
+    "retail": 110.0,
+    "purchase": 105.0,
+    "price": "2020-02-02"
+  }
+]

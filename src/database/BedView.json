@@ -1,0 +1,35 @@
+[
+  {
+    "id": "1",
+    "oldname": "张国锋",
+    "sex": "男",
+    "idcard": "320918892919222",
+    "Originalbed": "501/01",
+    "Changebed": "504/03",
+    "proposer": "张三",
+    "applicationdate": "2020-02-02 16:00",
+    "approvalstatus": "待审批"
+  },
+  {
+    "id": "2",
+    "oldname": "张国锋",
+    "sex": "男",
+    "idcard": "320918892919222",
+    "Originalbed": "501/01",
+    "Changebed": "504/03",
+    "proposer": "张三",
+    "applicationdate": "2020-02-02 16:00",
+    "approvalstatus": "审批通过"
+  },
+  {
+    "id": "3",
+    "oldname": "张国锋",
+    "sex": "男",
+    "idcard": "320918892919222",
+    "Originalbed": "501/01",
+    "Changebed": "504/03",
+    "proposer": "李四",
+    "applicationdate": "2020-02-02 16:00",
+    "approvalstatus": "审批拒绝"
+  }
+]

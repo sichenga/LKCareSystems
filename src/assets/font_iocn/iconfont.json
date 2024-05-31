@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1187461",
+      "name": "小旗1",
+      "font_class": "xiaoqi1",
+      "unicode": "e69c",
+      "unicode_decimal": 59036
+    },
+    {
+      "icon_id": "1345932",
+      "name": "项目成员",
+      "font_class": "chengyuan",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "12184892",
+      "name": "笑脸",
+      "font_class": "xiaolian",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "16316165",
+      "name": "数字货币",
+      "font_class": "shuzihuobi",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    }
+  ]
+}

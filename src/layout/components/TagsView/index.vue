@@ -99,7 +99,7 @@ watch(
   route,
   () => {
     addTags();
-    moveToCurrentTag();
+    // moveToCurrentTag();
   },
   {
     immediate: true, //初始化立即执行
@@ -155,6 +155,7 @@ function initTags() {
 
 function addTags() {
   if (route.meta.title) {
+    console.log("title", route);
     tagsViewStore.addView({
       name: route.name as string,
       title: route.meta.title,

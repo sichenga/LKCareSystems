@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "project": "床位费",
+    "subtotal": "500"
+  },
+  {
+    "id": "2",
+    "project": "护理费",
+    "subtotal": "500"
+  },
+  {
+    "id": "3",
+    "project": "膳食费",
+    "subtotal": "500"
+  },
+  {
+    "id": "4",
+    "project": "押金",
+    "subtotal": "500"
+  },
+  {
+    "id": "5",
+    "project": "一次性生活费",
+    "subtotal": "500"
+  },
+  {
+    "id": "6",
+    "project": "定金抵扣",
+    "subtotal": "500"
+  },
+  {
+    "id": "",
+    "project": "合计",
+    "subtotal": "25000"
+  }
+]

@@ -1,0 +1,520 @@
+{
+  "id": "4543128",
+  "name": "cardsMenus",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "20853332",
+      "name": "岗位管理",
+      "font_class": "post",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "21273231",
+      "name": "新增分机构",
+      "font_class": "addfenjigou",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    },
+    {
+      "icon_id": "5961366",
+      "name": "分机构列表",
+      "font_class": "fenjigoulist",
+      "unicode": "ec6b",
+      "unicode_decimal": 60523
+    },
+    {
+      "icon_id": "14826981",
+      "name": "分机构管理",
+      "font_class": "fenjigou",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "6789079",
+      "name": "供应商管理",
+      "font_class": "supplier",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "5324511",
+      "name": "价格分析",
+      "font_class": "jiage",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "6509212",
+      "name": "膳食管理",
+      "font_class": "meals",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "33764431",
+      "name": "食材管理",
+      "font_class": "shicai",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "37226587",
+      "name": "采购申请",
+      "font_class": "purchase",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "8403020",
+      "name": "账号设置",
+      "font_class": "zhanghao",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "8605733",
+      "name": "角色管理",
+      "font_class": "role",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "38912810",
+      "name": "新增角色",
+      "font_class": "addrole",
+      "unicode": "e951",
+      "unicode_decimal": 59729
+    },
+    {
+      "icon_id": "39376986",
+      "name": "编辑角色",
+      "font_class": "editrole",
+      "unicode": "e722",
+      "unicode_decimal": 59170
+    },
+    {
+      "icon_id": "6455673",
+      "name": "账号管理,账号列表",
+      "font_class": "set",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "10324825",
+      "name": "机构列表",
+      "font_class": "jigoulist",
+      "unicode": "e80a",
+      "unicode_decimal": 59402
+    },
+    {
+      "icon_id": "16092419",
+      "name": "机构管理",
+      "font_class": "jigou",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "40296159",
+      "name": "账号设置",
+      "font_class": "account-copy",
+      "unicode": "ec84",
+      "unicode_decimal": 60548
+    },
+    {
+      "icon_id": "6058884",
+      "name": "账号设置",
+      "font_class": "account",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "441286",
+      "name": "房型管理",
+      "font_class": "housetype",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "4354241",
+      "name": "表单组件-表格",
+      "font_class": "form",
+      "unicode": "eb94",
+      "unicode_decimal": 60308
+    },
+    {
+      "icon_id": "1680676",
+      "name": "审批设置",
+      "font_class": "accraditation",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "12910676",
+      "name": "床位管理",
+      "font_class": "bed",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "28329511",
+      "name": "房间管理",
+      "font_class": "room",
+      "unicode": "e767",
+      "unicode_decimal": 59239
+    },
+    {
+      "icon_id": "11443185",
+      "name": "楼层管理",
+      "font_class": "floor",
+      "unicode": "e768",
+      "unicode_decimal": 59240
+    },
+    {
+      "icon_id": "12576613",
+      "name": "护理项目",
+      "font_class": "nursingitem",
+      "unicode": "e86c",
+      "unicode_decimal": 59500
+    },
+    {
+      "icon_id": "30770181",
+      "name": "护理等级",
+      "font_class": "nursinggrade",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "28567772",
+      "name": "护理服务",
+      "font_class": "nursingworker",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "12875282",
+      "name": "基础设置",
+      "font_class": "basics",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "21771953",
+      "name": "护工设置",
+      "font_class": "careworker",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "17033726",
+      "name": "护理等级变更申请审批",
+      "font_class": "pflapproval",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "3439349",
+      "name": "外出申请审批",
+      "font_class": "toapproval",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "5434084",
+      "name": "审批管理",
+      "font_class": "approval",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "35209673",
+      "name": "床位更换申请审批",
+      "font_class": "bedapproval",
+      "unicode": "e79c",
+      "unicode_decimal": 59292
+    },
+    {
+      "icon_id": "8216312",
+      "name": "任务奖励设置",
+      "font_class": "taskreward",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "32331064",
+      "name": "护士薪资管理",
+      "font_class": "salaryworker",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "15188145",
+      "name": "员工管理",
+      "font_class": "staff",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "4396316",
+      "name": "部门管理",
+      "font_class": "department",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "10578093",
+      "name": "人事行政管理",
+      "font_class": "personnel",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "10268869",
+      "name": "出院结算",
+      "font_class": "settleaccounts",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "21555754",
+      "name": "薪资福利管理",
+      "font_class": "salary",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "23265019",
+      "name": "入院费用核对管理",
+      "font_class": "hospitalexpense",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "6060229",
+      "name": "财务收支",
+      "font_class": "finance",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "7225813",
+      "name": "催收管理",
+      "font_class": "collection",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "1356151",
+      "name": "投诉建议",
+      "font_class": "complaint",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "30276681",
+      "name": "行政查房",
+      "font_class": "wardround",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "20127041",
+      "name": "合作组织管理",
+      "font_class": "cooperative",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "20104508",
+      "name": "推荐人管理",
+      "font_class": "referrer",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "1368548",
+      "name": "护理登记变更",
+      "font_class": "pflegestufe",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "36034232",
+      "name": "出院管理",
+      "font_class": "tohospital",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "27541967",
+      "name": "入院管理",
+      "font_class": "hospitalized",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "8569073",
+      "name": "预定登记",
+      "font_class": "reserve",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "3469714",
+      "name": "老人管理",
+      "font_class": "oldy",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "2823943",
+      "name": "市场销售",
+      "font_class": "marketing",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "15651708",
+      "name": "潜在客户",
+      "font_class": "client",
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
+    },
+    {
+      "icon_id": "25439361",
+      "name": "后勤管理",
+      "font_class": "logistics",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "29256905",
+      "name": "医生查房记录",
+      "font_class": "doctor",
+      "unicode": "e77f",
+      "unicode_decimal": 59263
+    },
+    {
+      "icon_id": "15570279",
+      "name": "门诊医生替诊",
+      "font_class": "menzhenyishengtizhen",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "38728203",
+      "name": "用药计划",
+      "font_class": "project",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "7150786",
+      "name": "用药登记",
+      "font_class": "register",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "9851218",
+      "name": "医护管理",
+      "font_class": "medicalcare",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    },
+    {
+      "icon_id": "1134177",
+      "name": "洗衣错衣",
+      "font_class": "laundry",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "3151250",
+      "name": "老人晨练",
+      "font_class": "morning",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "67542",
+      "name": "外出登记",
+      "font_class": "applyfor",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "23080233",
+      "name": "精神慰藉",
+      "font_class": "comfort",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "26600444",
+      "name": "老人文娱",
+      "font_class": "entertainment",
+      "unicode": "ec83",
+      "unicode_decimal": 60547
+    },
+    {
+      "icon_id": "7817212",
+      "name": "地址管理",
+      "font_class": "address",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "28247608",
+      "name": "外出申请",
+      "font_class": "goout",
+      "unicode": "e71f",
+      "unicode_decimal": 59167
+    },
+    {
+      "icon_id": "33499104",
+      "name": "床位更换",
+      "font_class": "exchange",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "8868076",
+      "name": "夜巡管理",
+      "font_class": "nightwatch",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "11494227",
+      "name": "养老护理，护士测量记录",
+      "font_class": "nurse",
+      "unicode": "e881",
+      "unicode_decimal": 59521
+    },
+    {
+      "icon_id": "6279663",
+      "name": "交接记录，健康档案",
+      "font_class": "record",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "5261532",
+      "name": "任务看板",
+      "font_class": "spectaculars",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "7171159",
+      "name": "任务管理",
+      "font_class": "task",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    }
+  ]
+}

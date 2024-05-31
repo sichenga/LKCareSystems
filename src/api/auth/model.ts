@@ -2,6 +2,24 @@
  * 登录请求参数
  */
 export interface LoginData {
+  // /**
+  //  * 用户名
+  //  */
+  // username: string;
+  // /**
+  //  * 密码
+  //  */
+  // password: string;
+  //
+  // /**
+  //  * 验证码缓存key
+  //  */
+  // captchaKey?: string;
+  //
+  // /**
+  //  * 验证码
+  //  */
+  // captchaCode?: string;
   /**
    * 用户名
    */
@@ -9,17 +27,7 @@ export interface LoginData {
   /**
    * 密码
    */
-  password: string;
-
-  /**
-   * 验证码缓存key
-   */
-  captchaKey?: string;
-
-  /**
-   * 验证码
-   */
-  captchaCode?: string;
+  pwd: string;
 }
 
 /**

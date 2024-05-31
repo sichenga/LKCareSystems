@@ -36,13 +36,14 @@ export function setupPermission() {
         NProgress.done();
       } else {
         const userStore = useUserStore();
-        const hasRoles =
-          userStore.user.roles && userStore.user.roles.length > 0;
+        const hasRoles = router.getRoutes().length > 7;
+        // console.log('路由11111', hasRoles,userStore.user.roles)
         if (hasRoles) {
           // 未匹配到任何路由，跳转404
           if (to.matched.length === 0) {
             from.name ? next({ name: from.name }) : next("/404");
           } else {
+            // console.log('跳转',router.getRoutes())
             next();
           }
         } else {
@@ -50,7 +51,9 @@ export function setupPermission() {
           try {
             const { roles } = await userStore.getUserInfo();
             const accessRoutes = await permissionStore.generateRoutes(roles);
+            // console.log('路由守卫', accessRoutes)
             accessRoutes.forEach((route: RouteRecordRaw) => {
+              // console.log(1111, route)
               router.addRoute(route);
             });
             next({ ...to, replace: true });

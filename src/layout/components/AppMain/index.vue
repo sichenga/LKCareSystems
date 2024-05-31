@@ -6,16 +6,18 @@
           enter-active-class="animate__animated animate__fadeIn"
           mode="out-in"
         >
-          <keep-alive :include="cachedViews">
-            <component :is="Component" :key="route.path" />
-          </keep-alive>
+          <Suspense>
+            <keep-alive :include="cachedViews">
+              <component :is="Component" :key="route.path" />
+            </keep-alive>
+          </Suspense>
         </transition>
       </template>
     </router-view>
   </section>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useTagsViewStore } from "@/store";
 
 const cachedViews = computed(() => useTagsViewStore().cachedViews); // 缓存页面集合

@@ -1,0 +1,293 @@
+[
+  {
+    "checked": 0,
+    "children": [],
+    "ico": "icon-guanyuwomen",
+    "id": 1,
+    "name": "工作台",
+    "pid": 0,
+    "sort": 1,
+    "url": "about",
+    "$treeNodeId": 1
+  },
+  {
+    "checked": 0,
+    "children": [
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-xinshouzhinan",
+        "id": 2,
+        "name": "预定登记",
+        "pid": 1,
+        "sort": 2,
+        "url": "records/7",
+        "$treeNodeId": 2
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-lianluoxinxi",
+        "id": 3,
+        "name": "入驻登记",
+        "pid": 1,
+        "sort": 3,
+        "url": "contact",
+        "$treeNodeId": 3
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-jigoujieshao",
+        "id": 4,
+        "name": "老人列表",
+        "pid": 1,
+        "sort": 4,
+        "url": "records/6",
+        "$treeNodeId": 4
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-jigoujieshao",
+        "id": 5,
+        "name": "来访登记",
+        "pid": 1,
+        "sort": 5,
+        "url": "records/6",
+        "$treeNodeId": 5
+      }
+    ],
+    "ico": "icon-guanyuwomen",
+    "id": 1,
+    "name": "出入院管理",
+    "pid": 0,
+    "sort": 1,
+    "url": "about",
+    "$treeNodeId": 1
+  },
+  {
+    "checked": 0,
+    "children": [
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-kechenglist",
+        "id": 6,
+        "name": "服务项目管理",
+        "pid": 5,
+        "sort": 6,
+        "url": "courses",
+        "$treeNodeId": 6
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-kechengadd",
+        "id": 7,
+        "name": "服务等级管理",
+        "pid": 5,
+        "sort": 7,
+        "url": "coursesadd",
+        "$treeNodeId": 7
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-kechengadd",
+        "id": 7,
+        "name": "排班方案管理",
+        "pid": 5,
+        "sort": 7,
+        "url": "coursesadd",
+        "$treeNodeId": 7
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-kechengadd",
+        "id": 7,
+        "name": "护工排班",
+        "pid": 5,
+        "sort": 7,
+        "url": "coursesadd",
+        "$treeNodeId": 7
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-kechengadd",
+        "id": 7,
+        "name": "护工服务查询",
+        "pid": 5,
+        "sort": 7,
+        "url": "coursesadd",
+        "$treeNodeId": 7
+      }
+    ],
+    "ico": "icon-kecheng",
+    "id": 5,
+    "name": "服务管理",
+    "pid": 0,
+    "sort": 5,
+    "url": "course",
+    "$treeNodeId": 5
+  },
+  {
+    "checked": 0,
+    "children": [
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "菜品管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "配送管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "套餐管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      }
+    ],
+    "ico": "icon-xitong",
+    "id": 24,
+    "name": "膳食管理",
+    "pid": 0,
+    "sort": 24,
+    "url": "system",
+    "$treeNodeId": 24
+  },
+  {
+    "checked": 0,
+    "children": [
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "部门管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "岗位管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "员工管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      }
+    ],
+    "ico": "icon-xitong",
+    "id": 24,
+    "name": "人事管理",
+    "pid": 0,
+    "sort": 24,
+    "url": "system",
+    "$treeNodeId": 24
+  },
+  {
+    "checked": 0,
+    "children": [
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "房间设置",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "房间类型管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "床位类型管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      },
+      {
+        "checked": 0,
+        "children": null,
+        "ico": "icon-guanliyuan",
+        "id": 25,
+        "name": "服务类型管理",
+        "pid": 24,
+        "sort": 25,
+        "url": "administrators",
+        "$treeNodeId": 25
+      }
+    ],
+    "ico": "icon-xitong",
+    "id": 24,
+    "name": "基础数据",
+    "pid": 0,
+    "sort": 24,
+    "url": "system",
+    "$treeNodeId": 24
+  },
+  {
+    "checked": 0,
+    "children": [],
+    "ico": "icon-xitong",
+    "id": 24,
+    "name": "账号设置",
+    "pid": 0,
+    "sort": 24,
+    "url": "system",
+    "$treeNodeId": 24
+  }
+]

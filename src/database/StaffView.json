@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1",
+    "name": "张晓雅",
+    "ibnumber": "17768089870",
+    "department": "320723871887323",
+    "station": "安防部",
+    "account": "安防检测员",
+    "password": "zhangxiaoya",
+    "creator": "123456",
+    "creation": "2020-02-02 16：00",
+    "state": "禁用中"
+  },
+  {
+    "id": "2",
+    "name": "张晓雅",
+    "ibnumber": "17768089870",
+    "department": "320723871887323",
+    "station": "安防部",
+    "account": "安防检测员",
+    "password": "zhangxiaoya",
+    "creator": "123456",
+    "creation": "2020-02-02 16：00",
+    "state": "禁用中"
+  },
+  {
+    "id": "3",
+    "name": "张晓雅",
+    "ibnumber": "17768089870",
+    "department": "320723871887323",
+    "station": "安防部",
+    "account": "安防检测员",
+    "password": "zhangxiaoya",
+    "creator": "123456",
+    "creation": "2020-02-02 16：00",
+    "state": "禁用中"
+  },
+  {
+    "id": "4",
+    "name": "张晓雅",
+    "ibnumber": "17768089870",
+    "department": "320723871887323",
+    "station": "安防部",
+    "account": "安防检测员",
+    "password": "zhangxiaoya",
+    "creator": "123456",
+    "creation": "2020-02-02 16：00",
+    "state": "禁用中"
+  },
+  {
+    "id": "5",
+    "name": "张晓雅",
+    "ibnumber": "17768089870",
+    "department": "320723871887323",
+    "station": "安防部",
+    "account": "安防检测员",
+    "password": "zhangxiaoya",
+    "creator": "123456",
+    "creation": "2020-02-02 16：00",
+    "state": "禁用中"
+  },
+  {
+    "id": "6",
+    "name": "张晓雅",
+    "ibnumber": "17768089870",
+    "department": "320723871887323",
+    "station": "安防部",
+    "account": "安防检测员",
+    "password": "zhangxiaoya",
+    "creator": "123456",
+    "creation": "2020-02-02 16：00",
+    "state": "禁用中"
+  }
+]

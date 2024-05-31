@@ -8,8 +8,23 @@ export interface UserInfo {
   avatar?: string;
   roles: string[];
   perms: string[];
+  model?: Model;
 }
-
+// 用户信息
+export interface Model {
+  id?: number;
+  companyId?: number;
+  level?: number;
+  staffId?: number;
+  name?: string;
+  pwd?: null;
+  type?: number;
+  enable?: number;
+  mobile?: string;
+  username?: string;
+  roleIds?: null;
+  photo?: string;
+}
 /**
  * 用户查询对象类型
  */

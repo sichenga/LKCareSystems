@@ -1,0 +1,63 @@
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'iconfont'; /* Project id 4564477 */
+  src:
+    url('//at.alicdn.com/t/c/font_4564477_96y89n1kvr8.woff2?t=1716869165003') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4564477_96y89n1kvr8.woff?t=1716869165003') format('woff'),
+    url('//at.alicdn.com/t/c/font_4564477_96y89n1kvr8.ttf?t=1716869165003') format('truetype');
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-iconxt:before {
+  content: '\e60e';
+}
+
+.icon-iconxy:before {
+  content: '\e60f';
+}
+
+.icon-zixun:before {
+  content: '\e619';
+}
+
+.icon-market:before {
+  content: '\e651';
+}
+
+.iocn-building:before {
+  content: '\e768';
+}
+
+.icon-caigoushenqing:before {
+  content: '\e64f';
+}
+
+.icon-carer:before {
+  content: '\e605';
+}
+
+.incon-discharge:before {
+  content: '\e615';
+}
+
+.icon-house:before {
+  content: '\e63d';
+}
+
+.icon-nursingservice:before {
+  content: '\e636';
+}
+
+.icon-Thermometer:before {
+  content: '\e68f';
+}
+.icon-config::before {
+  content: '\e61c';
+}

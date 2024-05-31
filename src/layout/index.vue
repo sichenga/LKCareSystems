@@ -37,7 +37,10 @@
         <NavBar v-if="layout === 'left'" />
         <TagsView v-if="showTagsView" />
       </div>
-      <AppMain />
+      <div class="app-container">
+        <AppMain />
+      </div>
+
       <Settings v-if="defaultSettings.showSettings" />
     </div>
   </div>

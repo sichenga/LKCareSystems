@@ -1,0 +1,292 @@
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'iconfont';  /* Project id 4543128 */
+  src: url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.woff2?t=1715507018555') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.woff?t=1715507018555') format('woff'),
+       url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.ttf?t=1715507018555') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-post:before {
+  content: "\e6a4";
+}
+
+.icon-addfenjigou:before {
+  content: "\e6a2";
+}
+
+.icon-fenjigoulist:before {
+  content: "\ec6b";
+}
+
+.icon-fenjigou:before {
+  content: "\e643";
+}
+
+.icon-supplier:before {
+  content: "\e632";
+}
+
+.icon-jiage:before {
+  content: "\e607";
+}
+
+.icon-meals:before {
+  content: "\e623";
+}
+
+.icon-shicai:before {
+  content: "\e60a";
+}
+
+.icon-purchase:before {
+  content: "\e63c";
+}
+
+.icon-zhanghao:before {
+  content: "\e606";
+}
+
+.icon-role:before {
+  content: "\e665";
+}
+
+.icon-addrole:before {
+  content: "\e951";
+}
+
+.icon-editrole:before {
+  content: "\e722";
+}
+
+.icon-set:before {
+  content: "\e666";
+}
+
+.icon-jigoulist:before {
+  content: "\e80a";
+}
+
+.icon-jigou:before {
+  content: "\e68f";
+}
+
+.icon-account-copy:before {
+  content: "\ec84";
+}
+
+.icon-account:before {
+  content: "\e622";
+}
+
+.icon-housetype:before {
+  content: "\e605";
+}
+
+.icon-form:before {
+  content: "\eb94";
+}
+
+.icon-accraditation:before {
+  content: "\e65e";
+}
+
+.icon-bed:before {
+  content: "\e604";
+}
+
+.icon-room:before {
+  content: "\e767";
+}
+
+.icon-nursingitem:before {
+  content: "\e86c";
+}
+
+.icon-nursinggrade:before {
+  content: "\e66b";
+}
+
+.icon-nursingworker:before {
+  content: "\e636";
+}
+
+.icon-basics:before {
+  content: "\e609";
+}
+
+.icon-careworker:before {
+  content: "\e639";
+}
+
+.icon-pflapproval:before {
+  content: "\e6b2";
+}
+
+.icon-approval:before {
+  content: "\e61e";
+}
+
+.icon-bedapproval:before {
+  content: "\e79c";
+}
+
+.icon-taskreward:before {
+  content: "\e61f";
+}
+
+.icon-salaryworker:before {
+  content: "\e619";
+}
+
+.icon-staff:before {
+  content: "\e60d";
+}
+
+.icon-department:before {
+  content: "\e625";
+}
+
+.icon-personnel:before {
+  content: "\e62f";
+}
+
+.icon-settleaccounts:before {
+  content: "\e690";
+}
+
+.icon-salary:before {
+  content: "\e63a";
+}
+
+.icon-hospitalexpense:before {
+  content: "\e601";
+}
+
+.icon-finance:before {
+  content: "\e618";
+}
+
+.icon-collection:before {
+  content: "\e6ae";
+}
+
+.icon-complaint:before {
+  content: "\e616";
+}
+
+.icon-wardround:before {
+  content: "\e624";
+}
+
+.icon-cooperative:before {
+  content: "\e620";
+}
+
+.icon-referrer:before {
+  content: "\e615";
+}
+
+.icon-pflegestufe:before {
+  content: "\e603";
+}
+
+.icon-hospitalized:before {
+  content: "\e602";
+}
+
+.icon-reserve:before {
+  content: "\e621";
+}
+
+.icon-oldy:before {
+  content: "\e62a";
+}
+
+.icon-marketing:before {
+  content: "\e651";
+}
+
+.icon-client:before {
+  content: "\e6ef";
+}
+
+.icon-logistics:before {
+  content: "\e63e";
+}
+
+.icon-doctor:before {
+  content: "\e77f";
+}
+
+.icon-menzhenyishengtizhen:before {
+  content: "\e656";
+}
+
+.icon-project:before {
+  content: "\e688";
+}
+
+.icon-register:before {
+  content: "\e608";
+}
+
+.icon-medicalcare:before {
+  content: "\e6e2";
+}
+
+.icon-morning:before {
+  content: "\e648";
+}
+
+.icon-applyfor:before {
+  content: "\e63b";
+}
+
+.icon-comfort:before {
+  content: "\e630";
+}
+
+.icon-entertainment:before {
+  content: "\ec83";
+}
+
+.icon-address:before {
+  content: "\e610";
+}
+
+.icon-goout:before {
+  content: "\e71f";
+}
+
+.icon-exchange:before {
+  content: "\e67d";
+}
+
+.icon-nightwatch:before {
+  content: "\e600";
+}
+
+.icon-nurse:before {
+  content: "\e881";
+}
+
+.icon-record:before {
+  content: "\e60b";
+}
+
+.icon-spectaculars:before {
+  content: "\e617";
+}
+
+.icon-task:before {
+  content: "\e626";
+}
+

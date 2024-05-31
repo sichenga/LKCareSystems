@@ -25,7 +25,7 @@
     <el-dropdown class="setting-item" trigger="click">
       <div class="flex-center h100% p10px">
         <img
-          :src="userStore.user.avatar + '?imageView2/1/w/80/h/80'"
+          :src="upload + userStore.user.model?.photo"
           class="rounded-full mr-10px w24px w24px"
         />
         <span>{{ userStore.user.username }}</span>
@@ -33,12 +33,12 @@
       <template #dropdown>
         <el-dropdown-menu>
           <a
-            target="_blank"
             href="https://gitee.com/youlaiorg/vue3-element-admin"
+            target="_blank"
           >
             <el-dropdown-item>{{ $t("navbar.gitee") }}</el-dropdown-item>
           </a>
-          <a target="_blank" href="https://juejin.cn/post/7228990409909108793">
+          <a href="https://juejin.cn/post/7228990409909108793" target="_blank">
             <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click="logout">
@@ -56,7 +56,7 @@
     </template>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import {
   useAppStore,
   useTagsViewStore,
@@ -66,6 +66,7 @@ import {
 import defaultSettings from "@/settings";
 import { DeviceEnum } from "@/enums/DeviceEnum";
 
+const upload = import.meta.env.VITE_APP_API_URL + "/";
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();
 const userStore = useUserStore();

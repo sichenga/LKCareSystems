@@ -1,0 +1,86 @@
+{
+  "id": "4564477",
+  "name": "lkc",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "643280",
+      "name": "血糖",
+      "font_class": "iconxt",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "643281",
+      "name": "血压",
+      "font_class": "iconxy",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "1418247",
+      "name": "资讯",
+      "font_class": "zixun",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "2823943",
+      "name": "市场销售",
+      "font_class": "shichangxiaoshou",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "11443185",
+      "name": "楼层管理",
+      "font_class": "loucengguanli",
+      "unicode": "e768",
+      "unicode_decimal": 59240
+    },
+    {
+      "icon_id": "16372246",
+      "name": "采购申请",
+      "font_class": "caigoushenqing",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "19998864",
+      "name": "护工",
+      "font_class": "hugong",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "20482282",
+      "name": "出院管理",
+      "font_class": "chuyuanguanli",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "21971772",
+      "name": "房间管理",
+      "font_class": "fangjianguanli",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "28567772",
+      "name": "护理服务",
+      "font_class": "a-hulifuwu2x",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "39612521",
+      "name": "体温计",
+      "font_class": "Thermometer",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    }
+  ]
+}

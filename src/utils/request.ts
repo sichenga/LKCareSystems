@@ -1,70 +1,100 @@
-import axios, { InternalAxiosRequestConfig, AxiosResponse } from "axios";
-import { useUserStoreHook } from "@/store/modules/user";
-import { ResultEnum } from "@/enums/ResultEnum";
+import axios from "axios";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+// 引入pinia userStore模块
+import { useUserStore, useApperStore } from "@/store";
+// 引入element-plus
+import { ElMessage } from "element-plus";
+// 令牌
 import { TOKEN_KEY } from "@/enums/CacheEnum";
+interface McAxiosRequestConfig extends AxiosRequestConfig {
+  extraConfig?: {
+    tokenRetryCount: number; // 标记当前请求的csrf token重试次数
+  };
+}
 
-// 创建 axios 实例
-const service = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_API,
-  timeout: 50000,
-  headers: { "Content-Type": "application/json;charset=utf-8" },
-});
-
+const timeout = 60000; // 请求超时时间和延迟请求超时时间统一设置
+const config: McAxiosRequestConfig = {
+  baseURL: import.meta.env.VITE_APP_API_URL,
+  timeout,
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+const instance = axios.create(config);
 // 请求拦截器
-service.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
-    const accessToken = localStorage.getItem(TOKEN_KEY);
-    if (accessToken) {
-      config.headers.Authorization = accessToken;
-    }
-    return config;
-  },
-  (error: any) => {
-    return Promise.reject(error);
+instance.interceptors.request.use(async (config: any) => {
+  const userStore = useUserStore();
+  const userAppStore = useApperStore();
+  if (!config.extraConfig?.tokenRetryCount) {
+    config.extraConfig = {
+      tokenRetryCount: 0,
+    };
   }
-);
-
+  (config.headers as any)["Authorization"] =
+    localStorage.getItem(TOKEN_KEY) || "";
+  if (config.url === "/api/upload/add") {
+    (config.headers as any)["Content-Type"] = "multipart/form-data";
+  }
+  userAppStore.isLoading = true;
+  return config;
+});
 // 响应拦截器
-service.interceptors.response.use(
-  (response: AxiosResponse) => {
-    // 检查配置的响应类型是否为二进制类型（'blob' 或 'arraybuffer'）, 如果是，直接返回响应对象
-    if (
-      response.config.responseType === "blob" ||
-      response.config.responseType === "arraybuffer"
-    ) {
-      return response;
-    }
-
-    const { code, data, msg } = response.data;
-    if (code === ResultEnum.SUCCESS) {
-      return data;
-    }
-
-    ElMessage.error(msg || "系统出错");
-    return Promise.reject(new Error(msg || "Error"));
+instance.interceptors.response.use(
+  (response) => {
+    const userAppStore = useApperStore();
+    userAppStore.isLoading = false;
+    return response.data;
   },
-  (error: any) => {
-    // 异常处理
-    if (error.response.data) {
-      const { code, msg } = error.response.data;
-      if (code === ResultEnum.TOKEN_INVALID) {
-        ElMessageBox.confirm("当前页面已失效，请重新登录", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning",
-        }).then(() => {
-          const userStore = useUserStoreHook();
-          userStore.resetToken().then(() => {
-            location.reload();
-          });
-        });
-      } else {
-        ElMessage.error(msg || "系统出错");
+  async (err: any) => {
+    const userAppStore = useApperStore();
+    if (axios.isCancel(err)) {
+      // 取消的请求，不报错
+      return;
+    }
+
+    if (err.message === "Network Error") {
+      console.log("Network Error");
+      ElMessage.error("网络异常");
+      return;
+    }
+    if (err.message.includes("timeout")) {
+      return;
+    }
+    if (err.response?.status >= 500) {
+      return;
+    }
+
+    const { data: responseData } = err.response || {};
+    const { status } = responseData || {};
+    if (status) {
+      switch (parseInt(status)) {
+        case 4001:
+          break;
+        default:
+          break;
       }
     }
-    return Promise.reject(error.message);
+    console.log(11111, (userAppStore.isLoading = false));
+    userAppStore.isLoading = false;
+    return err.response;
   }
 );
 
-// 导出 axios 实例
-export default service;
+const get = (url: string, params?: any): Promise<AxiosResponse<any>> => {
+  return instance.get(url, { params });
+};
+const post = (
+  url: string,
+  data?: any,
+  config?: any
+): Promise<AxiosResponse<any>> => {
+  return instance.post(url, data, config);
+};
+const del = (url: string, params?: any): Promise<AxiosResponse<any>> => {
+  return instance.delete(url, { params });
+};
+const put = (url: string, data?: any): Promise<AxiosResponse<any>> => {
+  return instance.put(url, data);
+};
+
+export { get, post, del, put };

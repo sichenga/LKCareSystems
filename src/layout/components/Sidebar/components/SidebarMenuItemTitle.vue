@@ -1,9 +1,10 @@
 <template>
-  <el-icon v-if="icon && icon.startsWith('el-icon')" class="sub-el-icon">
+  <!-- <el-icon v-if="icon && icon.startsWith('el-icon')" class="sub-el-icon">
     <component :is="icon.replace('el-icon-', '')" />
-  </el-icon>
-  <svg-icon v-else-if="icon" :icon-class="icon" />
-  <svg-icon v-else icon-class="menu" />
+  </el-icon> -->
+  <!--  <svg-icon v-else-if="icon" :icon-class="icon" />-->
+  <!--  <svg-icon v-else icon-class="menu" />-->
+  <i :class="{ iconfont: true, [icon]: true, 'sub-el-icon': true }"></i>
   <span v-if="title" class="ml-1">{{ translateRouteTitle(title) }}</span>
 </template>
 
@@ -23,6 +24,9 @@ defineProps({
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/leftmenu_icon2/iconfont.css";
+@import "@/assets/leftMenu_icon/iconfont.css";
+
 .sub-el-icon {
   width: 14px !important;
   margin-right: 0 !important;

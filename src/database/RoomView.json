@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "rooms": "401",
+    "floor": "4",
+    "roomtype": "包间",
+    "bed": "1/1",
+    "checkin": "张三",
+    "addtime": "2020-02-02 16:00",
+    "founder": "张三"
+  },
+  {
+    "id": "2",
+    "rooms": "402",
+    "floor": "4",
+    "roomtype": "三人间",
+    "bed": "3/3",
+    "checkin": "李四、王五、张海",
+    "addtime": "2020-02-02 16:00",
+    "founder": "李四"
+  },
+  {
+    "id": "3",
+    "rooms": "403",
+    "floor": "4",
+    "roomtype": "双人间",
+    "bed": "2/3",
+    "checkin": "王五、李四",
+    "addtime": "2020-02-02 16:00",
+    "founder": "王五"
+  },
+  {
+    "id": "4",
+    "rooms": "404",
+    "floor": "4",
+    "roomtype": "家庭房",
+    "bed": "1/1",
+    "checkin": "张三",
+    "addtime": "2020-02-02 16:00",
+    "founder": "李白"
+  },
+  {
+    "id": "5",
+    "rooms": "401",
+    "floor": "4",
+    "roomtype": "包间",
+    "bed": "1/1",
+    "checkin": "张三",
+    "addtime": "2020-02-02 16:00",
+    "founder": "张三"
+  }
+]
