@@ -3,11 +3,12 @@ import App from "./App.vue";
 import router from "@/router";
 import { setupStore } from "@/store";
 import { setupDirective } from "@/directive";
+import "default-passive-events";
 import { setupElIcons, setupI18n, setupPermission } from "@/plugins";
 import "default-passive-events";
 // 本地SVG图标
 import "virtual:svg-icons-register";
-
+import "@/utils/browserPatch";
 // 样式
 import "element-plus/theme-chalk/dark/css-vars.css";
 import "@/styles/index.scss";
