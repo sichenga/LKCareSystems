@@ -101,7 +101,7 @@ const addlist = async () => {
       } else {
         ElMessage.success("添加成功");
       }
-      router.push("/system/role");
+      router.push("/systems/role");
     }
   }
 };
@@ -123,7 +123,7 @@ const edit = async () => {
 };
 // 返回
 const closeDialog = () => {
-  router.push("/system/role");
+  router.push("/systems/role");
 };
 
 onMounted(() => {

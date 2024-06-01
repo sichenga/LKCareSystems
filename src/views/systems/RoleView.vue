@@ -99,7 +99,7 @@ const del = async (id: number) => {
 //新增
 const addRole = () => {
   router.push({
-    path: "/system/role-add",
+    path: "/systems/role-add",
   });
 };
 // 编辑

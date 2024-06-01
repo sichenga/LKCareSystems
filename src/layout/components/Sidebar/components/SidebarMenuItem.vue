@@ -67,7 +67,7 @@ const props = defineProps({
   },
 
   /**
-   * 父层级完整路由路径(eg:/system)
+   * 父层级完整路由路径(eg:/systems)
    */
   basePath: {
     type: String,
@@ -133,7 +133,7 @@ function resolvePath(routePath: string) {
     return props.basePath;
   }
 
-  // 完整路径(/system/user) = 父级路径(/system) + 路由路径(user)
+  // 完整路径(/systems/user) = 父级路径(/systems) + 路由路径(user)
   const fullPath = path.resolve(props.basePath, routePath);
   return fullPath;
 }
