@@ -47,7 +47,7 @@ import {
 import type { ComponentSize, FormInstance } from "element-plus";
 import { FoodList } from "@/service/food/FoodApi";
 import type { Supplier } from "@/service/food/FoodType";
-import { useUserStore } from "@/stores/index";
+import { useUserStore } from "@/store";
 const useUser = useUserStore();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")

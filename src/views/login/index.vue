@@ -69,7 +69,7 @@
 
 <script lang="ts" setup>
 import { useUserStore } from "@/store";
-import { LoginData } from "@/api/auth/model";
+
 import type { FormInstance } from "element-plus";
 import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
@@ -87,7 +87,7 @@ const loading = ref(false); // 按钮loading
 // const isCapslock = ref(false); // 是否大写锁定
 const loginFormRef = ref<FormInstance>(); // 登录表单ref
 const { height } = useWindowSize();
-const loginData = ref<LoginData>({
+const loginData = ref<any>({
   username: "admin",
   pwd: "admin",
 });

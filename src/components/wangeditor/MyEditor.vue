@@ -4,7 +4,7 @@
       :defaultConfig="toolbarConfig"
       :editor="editorRef"
       :mode="mode"
-      style=" height: 120px;border-bottom: 1px solid #ccc"
+      style="height: 120px; border-bottom: 1px solid #ccc"
     />
     <Editor
       v-model="valueHtml"

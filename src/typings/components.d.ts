@@ -77,7 +77,6 @@ declare module "vue" {
     IEpUploadFilled: (typeof import("~icons/ep/upload-filled"))["default"];
     LangSelect: (typeof import("./../components/LangSelect/index.vue"))["default"];
     LayoutSelect: (typeof import("./../layout/components/Settings/components/LayoutSelect.vue"))["default"];
-    MultiUpload: (typeof import("./../components/Upload/MultiUpload.vue"))["default"];
     NavBar: (typeof import("./../layout/components/NavBar/index.vue"))["default"];
     NavbarLeft: (typeof import("./../layout/components/NavBar/components/NavbarLeft.vue"))["default"];
     NavbarRight: (typeof import("./../layout/components/NavBar/components/NavbarRight.vue"))["default"];
@@ -102,7 +101,7 @@ declare module "vue" {
     TableSelect: (typeof import("./../components/TableSelect/index.vue"))["default"];
     TagsView: (typeof import("./../layout/components/TagsView/index.vue"))["default"];
     ThemeColorPicker: (typeof import("./../layout/components/Settings/components/ThemeColorPicker.vue"))["default"];
-    WangEditor: (typeof import("@/components/wangeditor/index.vue"))["default"];
+    WangEditor: (typeof import("./../components/WangEditor/index.vue"))["default"];
   }
   export interface ComponentCustomProperties {
     vLoading: (typeof import("element-plus/es"))["ElLoadingDirective"];
