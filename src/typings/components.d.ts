@@ -102,7 +102,7 @@ declare module "vue" {
     TableSelect: (typeof import("./../components/TableSelect/index.vue"))["default"];
     TagsView: (typeof import("./../layout/components/TagsView/index.vue"))["default"];
     ThemeColorPicker: (typeof import("./../layout/components/Settings/components/ThemeColorPicker.vue"))["default"];
-    WangEditor: (typeof import("./../components/WangEditor/index.vue"))["default"];
+    WangEditor: (typeof import("@/components/wangeditor/index.vue"))["default"];
   }
   export interface ComponentCustomProperties {
     vLoading: (typeof import("element-plus/es"))["ElLoadingDirective"];
