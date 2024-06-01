@@ -38,7 +38,7 @@
       <el-form-item label="密码">
         <el-input class="custom-pass" v-model="ruleForm.pwd" />
         <span
-          style=" padding-left: 20px; font-size: 12px;color: #75a5ea"
+          style="padding-left: 20px; font-size: 12px; color: #75a5ea"
           @click="isdialog = true"
           >修改密码</span
         >

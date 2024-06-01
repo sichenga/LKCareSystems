@@ -57,7 +57,7 @@ function resolvePath(routePath: string) {
     return props.basePath;
   }
 
-  // 完整绝对路径 = 父级路径(/systems) + 路由路径(/user)
+  // 完整绝对路径 = 父级路径(/system) + 路由路径(/user)
   const fullPath = path.resolve(props.basePath, routePath);
   return fullPath;
 }

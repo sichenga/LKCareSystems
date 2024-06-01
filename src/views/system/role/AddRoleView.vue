@@ -117,7 +117,7 @@ const edit = async () => {
 };
 
 const closeDialog = () => {
-  router.push("/systems/role");
+  router.push("/system/role");
 };
 
 onMounted(() => {
