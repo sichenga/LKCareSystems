@@ -2,7 +2,6 @@ import { RouteRecordRaw } from "vue-router";
 import { constantRoutes } from "@/router";
 import { store } from "@/store";
 
-import { RouteVO } from "@/api/menu/model";
 import { getList } from "@/service/role/RoleApi";
 import { convertToTree } from "@/utils/utils";
 
@@ -17,9 +16,9 @@ const Layout = () => import("@/layout/index.vue");
  * @returns 返回用户有权限的动态路由
  * @url 路径
  */
-const filterAsyncRoutes = (routes: RouteVO[], url: string = "") => {
+const filterAsyncRoutes = (routes: any, url: string = "") => {
   const asyncRoutes: RouteRecordRaw[] = [];
-  routes.forEach((route) => {
+  routes.forEach((route: any) => {
     const tmpRoute = { ...route } as RouteRecordRaw; // 深拷贝 route 对象 避免污染
     // 如果是顶级目录，替换为 Layout 组件
     if (tmpRoute.component?.toString() == "Layout") {

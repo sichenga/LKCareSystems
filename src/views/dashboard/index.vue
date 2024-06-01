@@ -233,6 +233,7 @@ const cardData = ref<CardProp[]>([
   },
 ]);
 // 图表数据
+const mobile = import.meta.glob("./views/");
 const chartData = ref(["BarChart", "PieChart", "RadarChart"]);
 const chartComponent = (item: string) => {
   return defineAsyncComponent(() => import(`./components/${item}.vue`));
