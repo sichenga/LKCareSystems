@@ -11,9 +11,9 @@ declare module "vue" {
     AppMain: (typeof import("./../layout/components/AppMain/index.vue"))["default"];
     BarChart: (typeof import("./../views/dashboard/components/BarChart.vue"))["default"];
     Breadcrumb: (typeof import("./../components/Breadcrumb/index.vue"))["default"];
-    DeptTree: (typeof import("./../views/system/user/components/dept-tree.vue"))["default"];
+    DeptTree: (typeof import("@/views/system/user/components/dept-tree.vue"))["default"];
     Dictionary: (typeof import("./../components/Dictionary/index.vue"))["default"];
-    DictItem: (typeof import("./../views/system/dict/components/dict-item.vue"))["default"];
+    DictItem: (typeof import("@/views/system/dict/components/dict-item.vue"))["default"];
     ElBreadcrumb: (typeof import("element-plus/es"))["ElBreadcrumb"];
     ElBreadcrumbItem: (typeof import("element-plus/es"))["ElBreadcrumbItem"];
     ElButton: (typeof import("element-plus/es"))["ElButton"];
@@ -77,7 +77,6 @@ declare module "vue" {
     IEpUploadFilled: (typeof import("~icons/ep/upload-filled"))["default"];
     LangSelect: (typeof import("./../components/LangSelect/index.vue"))["default"];
     LayoutSelect: (typeof import("./../layout/components/Settings/components/LayoutSelect.vue"))["default"];
-    MultiUpload: (typeof import("./../components/Upload/MultiUpload.vue"))["default"];
     NavBar: (typeof import("./../layout/components/NavBar/index.vue"))["default"];
     NavbarLeft: (typeof import("./../layout/components/NavBar/components/NavbarLeft.vue"))["default"];
     NavbarRight: (typeof import("./../layout/components/NavBar/components/NavbarRight.vue"))["default"];
