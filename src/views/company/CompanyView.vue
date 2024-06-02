@@ -1,58 +1,61 @@
 <template>
-  <!-- 分机构列表 -->
-  <el-card>
-    <el-form :inline="true" :model="params" class="demo-form-inline">
-      <el-form-item label="机构名称：">
-        <el-input v-model="params.key" placeholder="请输入" clearable />
-      </el-form-item>
-      <el-form-item label="管理姓名">
-        <el-input v-model="params.name" placeholder="请输入" clearable />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="serch">查询</el-button>
-        <el-button>重置</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
-  <el-card style="margin-top: 15px">
-    <div style="margin: 10px 0">
-      <el-button type="primary" @click="SondAdd">新增</el-button>
-      <organizationDialog @close="close" v-if="isdialog" :id="editId" />
-    </div>
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="scope">
-        <el-button type="primary" text>进入系统</el-button>
-        <el-button type="primary" text @click="amend(scope.data.id)"
-          >修改</el-button
-        >
-        <el-button type="primary" text @click="del(scope.data.id)"
-          >删除</el-button
-        >
+  <div class="app-container">
+    <!-- 分机构列表 -->
+    <el-card style="margin-top: 15px">
+      <template #header>
+        <el-form :inline="true" :model="params" class="demo-form-inline">
+          <el-form-item label="机构名称：">
+            <el-input v-model="params.key" clearable placeholder="请输入" />
+          </el-form-item>
+          <el-form-item label="管理姓名">
+            <el-input v-model="params.name" clearable placeholder="请输入" />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="serch">查询</el-button>
+            <el-button>重置</el-button>
+          </el-form-item>
+        </el-form>
       </template>
-    </MayTable>
-    <Pagination
-      :total="data.total"
-      @page="page"
-      @psize="psize"
-      :page="params.page"
-      :pszie="params.page"
-    />
-  </el-card>
+      <div style="margin: 10px 0">
+        <el-button type="primary" @click="SondAdd">新增</el-button>
+        <organizationDialog v-if="isdialog" :id="editId" @close="close" />
+      </div>
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="scope">
+          <el-button text type="primary">进入系统</el-button>
+          <el-button text type="primary" @click="amend(scope.data.id)"
+            >修改
+          </el-button>
+          <el-button text type="primary" @click="del(scope.data.id)"
+            >删除
+          </el-button>
+        </template>
+      </MayTable>
+      <Pagination
+        :page="params.page"
+        :pszie="params.page"
+        :total="data.total"
+        @page="page"
+        @psize="psize"
+      />
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import type { companylistParams } from "@/service/Organization/OrganizationType";
 import {
-  companylist,
   companydelete,
   companyget,
+  companylist,
 } from "@/service/Organization/OrganizationApi";
 import { useUserStore } from "@/store";
 import organizationDialog from "@/components/dialog/company/organizationDialog.vue";
+
 const userStore = useUserStore();
 const isdialog = ref(false);
 const router = useRouter();
