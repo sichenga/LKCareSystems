@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- dialog写在market文件夹下 -->
     <!-- 预定登记 -->
     <el-card style="max-width: 100%">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <div class="content-sizes">
       <div class="font-sizes">
         <span class="color-size">▋</span>

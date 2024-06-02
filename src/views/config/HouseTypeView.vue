@@ -1,6 +1,7 @@
 <template>
   <!-- 房型管理 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-button type="primary" @click="add">新增房间类型</el-button>
     <ManageDialog @close="close" v-if="isdialog" :dataget="dataget" />
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
@@ -26,6 +27,8 @@
       @psize="getpsize"
     />
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

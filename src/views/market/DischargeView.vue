@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- <div>出院管理</div> -->
     <el-card style="max-width: 100%">
       <el-form

@@ -1,7 +1,8 @@
 <template>
   <!-- dialog写在market文件夹下 -->
   <!-- 潜在客户详情 -->
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <div class="title">
       <div><i>▋</i> 老人信息</div>
       <div>
@@ -47,6 +48,8 @@
   <div class="back">
     <el-button @click="back">返回</el-button>
   </div>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

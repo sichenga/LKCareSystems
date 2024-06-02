@@ -1,6 +1,7 @@
 <template>
   <!-- 床位管理 -->
-  <div class="card-container">
+  <div class="app-container">
+    <div class="card-container">
     <el-card class="left-card" style="max-width: 15%">
       <div class="room-list">
         <p>房间列表</p>
@@ -39,6 +40,8 @@
       />
     </el-card>
   </div>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

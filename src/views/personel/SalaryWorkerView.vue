@@ -1,7 +1,8 @@
 <template>
   <!--  护工薪资管理 -->
   <!-- 查询 -->
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="护工姓名：">
         <el-input v-model="formInline.user" placeholder="请输入" clearable />
@@ -42,6 +43,8 @@
     <!-- 标记已结算 -->
     <WelfareDialog @close="close" v-if="isdialog" />
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

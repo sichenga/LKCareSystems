@@ -1,5 +1,6 @@
 <template>
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <!-- 护理项目  /  配置服务 -->
     <el-form :model="form" label-width="auto" style="max-width: 600px">
       <el-form-item label="项目名称:">
@@ -61,6 +62,8 @@
       </el-form-item>
     </div>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

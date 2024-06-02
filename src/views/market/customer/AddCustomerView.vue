@@ -1,6 +1,7 @@
 <template>
   <!-- 新增潜在客户 -->
-  <el-card style="max-width: 100%">
+  <div  class="app-container">
+    <el-card style="max-width: 100%">
     <div class="header"><span>▋</span> 老人信息</div>
     <el-form
       ref="ruleFormRef"
@@ -74,6 +75,8 @@
       </div>
     </el-form>
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";

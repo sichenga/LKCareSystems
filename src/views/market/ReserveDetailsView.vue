@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <el-card>
       <!-- 预定详情 -->
       <div class="user_content">

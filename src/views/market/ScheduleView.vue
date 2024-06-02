@@ -1,6 +1,7 @@
 <template>
   <!-- dialog写在market文件夹下 -->
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <div>计划任务</div>
     <el-radio-group v-model="form.type">
       <el-radio
@@ -21,6 +22,8 @@
       />
     </div>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

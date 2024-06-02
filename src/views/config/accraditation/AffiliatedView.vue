@@ -1,5 +1,6 @@
 <template>
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="机构名称：">
         <el-input v-model="formInline.user" placeholder="请输入" clearable />
@@ -28,6 +29,8 @@
     </MayTable>
     <Pagination :total="50" />
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
