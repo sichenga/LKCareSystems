@@ -1,36 +1,38 @@
 <template>
   <!-- 供应商管理 -->
-  <div class="box">
-    <el-button type="primary" @click="onAdd">新增</el-button>
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="scope">
-        <el-button
-          type="primary"
-          size="small"
-          link
-          @click="handleEdit(scope.data.id)"
-          >编辑</el-button
-        >
-        <el-button
-          type="primary"
-          size="small"
-          link
-          @click="handleDelete(scope.data.id)"
-          >删除</el-button
-        >
-      </template>
-    </MayTable>
-    <!-- 分页 -->
-    <Pagination
-      @page="page"
-      @psize="psize"
-      :total="data.total"
-      :page="params.page"
-      :psize="params.pageSize"
-    />
-    <!-- 弹出框 -->
-    <SupplierDialog @close="close" :id="editId" v-if="isdialog" />
+  <div class="app-container">
+    <div class="box">
+      <el-button type="primary" @click="onAdd">新增</el-button>
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="scope">
+          <el-button
+            type="primary"
+            size="small"
+            link
+            @click="handleEdit(scope.data.id)"
+            >编辑</el-button
+          >
+          <el-button
+            type="primary"
+            size="small"
+            link
+            @click="handleDelete(scope.data.id)"
+            >删除</el-button
+          >
+        </template>
+      </MayTable>
+      <!-- 分页 -->
+      <Pagination
+        @page="page"
+        @psize="psize"
+        :total="data.total"
+        :page="params.page"
+        :psize="params.pageSize"
+      />
+      <!-- 弹出框 -->
+      <SupplierDialog @close="close" :id="editId" v-if="isdialog" />
+    </div>
   </div>
 </template>
 

@@ -1,48 +1,54 @@
 <template>
   <!-- 食材管理 -->
-  <div class="box">
-    <el-button type="primary" @click="isdialog = true">新增</el-button>
-    <FoodDialog @close="close" v-if="isdialog" :foodid="foodid" />
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="{ data }">
-        <el-button type="primary" size="small" link @click="handleEdit(data.id)"
-          >编辑</el-button
-        >
-        <el-button
-          type="primary"
-          size="small"
-          link
-          @click="handleDelete(data.id)"
-          >删除</el-button
-        >
-        <el-button
-          type="primary"
-          size="small"
-          link
-          @click="priceUpdate(data.id)"
-          >价格更新</el-button
-        >
-        <el-button
-          type="primary"
-          size="small"
-          link
-          @click="priceAnalysis(data.id)"
-          >价格分析</el-button
-        >
-      </template>
-    </MayTable>
-    <!-- 分页 -->
-    <Pagination
-      :total="total"
-      :page="params.page"
-      :psize="params.pageSize"
-      @page="getpage"
-      @psize="getpsize"
-    />
+  <div class="app-container">
+    <div class="box">
+      <el-button type="primary" @click="isdialog = true">新增</el-button>
+      <FoodDialog @close="close" v-if="isdialog" :foodid="foodid" />
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="{ data }">
+          <el-button
+            type="primary"
+            size="small"
+            link
+            @click="handleEdit(data.id)"
+            >编辑</el-button
+          >
+          <el-button
+            type="primary"
+            size="small"
+            link
+            @click="handleDelete(data.id)"
+            >删除</el-button
+          >
+          <el-button
+            type="primary"
+            size="small"
+            link
+            @click="priceUpdate(data.id)"
+            >价格更新</el-button
+          >
+          <el-button
+            type="primary"
+            size="small"
+            link
+            @click="priceAnalysis(data.id)"
+            >价格分析</el-button
+          >
+        </template>
+      </MayTable>
+      <!-- 分页 -->
+      <Pagination
+        :total="total"
+        :page="params.page"
+        :psize="params.pageSize"
+        @page="getpage"
+        @psize="getpsize"
+      />
 
-    <!-- 价格更新 -->
-    <PriceDialog @close="close" v-if="isprice" :priceid="priceid" />
+      <!-- 价格更新 -->
+      <PriceDialog @close="close" v-if="isprice" :priceid="priceid" />
+    </div>
   </div>
 </template>
 

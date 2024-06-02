@@ -2,64 +2,66 @@ w
 <template>
   <!-- 采购申请 -->
   <!-- 查询 -->
-  <el-card>
-    <el-form
-      ref="Refform"
-      :inline="true"
-      :model="params"
-      class="demo-form-inline"
-    >
-      <el-form-item label="机构名称：" prop="name">
-        <el-select v-model="params.companyId" clearable placeholder="请选择">
-          <el-option
-            v-for="(item, index) in data.companyId"
-            :key="index"
-            :label="item.name"
-            :value="item.id"
+  <div class="app-container">
+    <el-card>
+      <el-form
+        ref="Refform"
+        :inline="true"
+        :model="params"
+        class="demo-form-inline"
+      >
+        <el-form-item label="机构名称：" prop="name">
+          <el-select v-model="params.companyId" clearable placeholder="请选择">
+            <el-option
+              v-for="(item, index) in data.companyId"
+              :key="index"
+              :label="item.name"
+              :value="item.id"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="期望到货日期：" prop="beginDate">
+          <MayDateTimePicker
+            :end-time="params.endDate"
+            :isrange="true"
+            :start-time="params.beginDate"
+            @change="timeChange"
           />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="期望到货日期：" prop="beginDate">
-        <MayDateTimePicker
-          :end-time="params.endDate"
-          :isrange="true"
-          :start-time="params.beginDate"
-          @change="timeChange"
-        />
-      </el-form-item>
-      <el-form-item label="状态：">
-        <el-select v-model="params.state" clearable placeholder="请选择">
-          <el-option label="已经发货" value="已经发货" />
-          <el-option label="未发货" value="未发货" />
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">查询</el-button>
-        <el-button @click="onReset">重置</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
-  <el-card class="table">
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="{ data }">
-        <el-button link size="small" type="primary" @click="deliver"
-          >发货</el-button
-        >
-        <el-button link size="small" type="primary" @click="details(data.id)"
-          >查看详情</el-button
-        >
-      </template>
-    </MayTable>
-    <!-- 分页 -->
-    <Pagination
-      :page="params.page"
-      :psize="params.pageSize"
-      :total="data.total"
-      @page="page"
-      @psize="psize"
-    />
-  </el-card>
+        </el-form-item>
+        <el-form-item label="状态：">
+          <el-select v-model="params.state" clearable placeholder="请选择">
+            <el-option label="已经发货" value="已经发货" />
+            <el-option label="未发货" value="未发货" />
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button @click="onReset">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card class="table">
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="{ data }">
+          <el-button link size="small" type="primary" @click="deliver"
+            >发货</el-button
+          >
+          <el-button link size="small" type="primary" @click="details(data.id)"
+            >查看详情</el-button
+          >
+        </template>
+      </MayTable>
+      <!-- 分页 -->
+      <Pagination
+        :page="params.page"
+        :psize="params.pageSize"
+        :total="data.total"
+        @page="page"
+        @psize="psize"
+      />
+    </el-card>
+  </div>
 </template>
 
 <script lang="ts" setup>
