@@ -1,59 +1,67 @@
 <template>
   <!-- 编辑采购申请 -->
-  <el-card style="margin-top: 15px">
-    <div style="margin: 10px 0">
-      <el-button type="primary" @click="ingredient">选择食材</el-button>
-      <div class="quantity">1</div>
-    </div>
-    <!-- 表格 -->
-    <MayTable
-      :tableData="data.AddData.foods"
-      :tableItem="data.tableItem"
-      :label="'采购数量'"
-      v-if="isProxy"
-    >
-      <template #custom="data">
-        <el-input v-model="data.data.creators" style="width: 130px" />
-      </template>
-      <template #operate="{ data }">
-        <el-button type="primary" text @click="del(data.id)">删除</el-button>
-      </template>
-    </MayTable>
-    <div class="title-image">
-      <div>
-        合计：采购品种数{{ data.print }}，采购总成本：{{ data.totalPrices }} 元
+  <div class="app-container">
+    <el-card>
+      <div style="margin: 10px 0">
+        <el-button type="primary" @click="ingredient">选择食材</el-button>
+        <div class="quantity">1</div>
       </div>
-      <div class="image">
-        <el-form :model="data.AddData" label-width="auto">
-          <el-form-item
-            class="item-form"
-            label="请输入备注："
-            style="width: 400px; height: 100px"
-          >
-            <el-input
-              v-model="data.AddData.remarks"
-              type="textarea"
-              placeholder="请输入"
-            />
-          </el-form-item>
-          <el-form-item label="期望到货日期" style="width: 300px; height: 80px">
-            <MayTimePicker @change="hoaldChange" />
-          </el-form-item>
-        </el-form>
+      <!-- 表格 -->
+      <MayTable
+        :tableData="data.AddData.foods"
+        :tableItem="data.tableItem"
+        :label="'采购数量'"
+        v-if="isProxy"
+      >
+        <template #custom="data">
+          <el-input v-model="data.data.creators" style="width: 130px" />
+        </template>
+        <template #operate="{ data }">
+          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+        </template>
+      </MayTable>
+      <div class="title-image">
+        <div>
+          合计：采购品种数{{ data.print }}，采购总成本：{{ data.totalPrices }}
+          元
+        </div>
+        <div class="image">
+          <el-form :model="data.AddData" label-width="auto">
+            <el-form-item
+              class="item-form"
+              label="请输入备注："
+              style="width: 400px; height: 100px"
+            >
+              <el-input
+                v-model="data.AddData.remarks"
+                type="textarea"
+                placeholder="请输入"
+              />
+            </el-form-item>
+            <el-form-item
+              label="期望到货日期"
+              style="width: 300px; height: 80px"
+            >
+              <MayTimePicker @change="hoaldChange" />
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
+    </el-card>
+    <AddIngredient
+      v-if="dialogVisible"
+      @close="haoldclose"
+      @ingredient="hoaldIngredient"
+    />
+    <div class="button-body">
+      <el-button class="btn-body" @click="back">返回</el-button>
+      <el-button type="primary" class="btn-body" @click="confirm"
+        >保存</el-button
+      >
+      <el-button type="primary" class="primary" @click="save"
+        >保存并提交</el-button
+      >
     </div>
-  </el-card>
-  <AddIngredient
-    v-if="dialogVisible"
-    @close="haoldclose"
-    @ingredient="hoaldIngredient"
-  />
-  <div class="button-body">
-    <el-button class="btn-body" @click="back">返回</el-button>
-    <el-button type="primary" class="btn-body" @click="confirm">保存</el-button>
-    <el-button type="primary" class="primary" @click="save"
-      >保存并提交</el-button
-    >
   </div>
 </template>
 <script lang="ts" setup>

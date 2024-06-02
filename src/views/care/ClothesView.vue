@@ -1,6 +1,6 @@
 <template>
   <!-- 洗衣错衣 -->
-  <div>
+  <div class="app-container">
     <el-card>
       <el-form
         ref="Refclothes"

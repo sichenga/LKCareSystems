@@ -1,6 +1,6 @@
 <template>
   <!-- 院内活动 -->
-  <div>
+  <div class="app-container">
     <el-card>
       <ActDialog v-if="isdialog" @close="close" :id="infoId" />
       <el-form :inline="true" :model="params" class="demo-form-inline">

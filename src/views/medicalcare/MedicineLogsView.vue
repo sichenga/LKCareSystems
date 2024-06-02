@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 用药登记 -->
     <el-card>
       <el-form
@@ -35,6 +35,7 @@
       </div>
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        // eslint-disable-next-line vue/no-template-shadow
         <template #operate="{ data }">
           <el-button type="primary" text @click="details(data.elderlyId)"
             >查看详情</el-button
@@ -126,7 +127,7 @@ const getlist = async () => {
   }
 };
 // 用药登记
-const registerinfo = (id: number) => {
+const registerinfo = () => {
   // router.push({
   //   path: '/medicalcare/medicinelogs/add',
   //   query:{id}

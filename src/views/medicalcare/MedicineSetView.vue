@@ -1,32 +1,34 @@
 <template>
   <!-- 用药计划设置 -->
-  <el-card>
-    <ProjectInfoDialog
-      v-if="isdialog"
-      :isinfo="isinfo"
-      @close="close"
-      :drugId="drugId"
-    />
-    <el-form label-width="auto">
-      <el-form-item label="老人"> {{ data.oldinfo?.name }} </el-form-item>
-      <el-form-item label="床位">{{ data.oldinfo?.begName }} </el-form-item>
-      <el-form-item>
-        <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-          <template #operate="{ data }">
-            <el-button type="primary" text @click="getinfo(data.id)"
-              >设置</el-button
-            >
-            <el-button type="primary" text @click="stop(data.id)"
-              >停止用药</el-button
-            >
-          </template>
-        </MayTable>
-      </el-form-item>
-    </el-form>
-    <div class="button">
-      <el-button @click="goback">返回</el-button>
-    </div>
-  </el-card>
+  <div class="app-container">
+    <el-card>
+      <ProjectInfoDialog
+        v-if="isdialog"
+        :isinfo="isinfo"
+        @close="close"
+        :drugId="drugId"
+      />
+      <el-form label-width="auto">
+        <el-form-item label="老人"> {{ data.oldinfo?.name }} </el-form-item>
+        <el-form-item label="床位">{{ data.oldinfo?.begName }} </el-form-item>
+        <el-form-item>
+          <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+            <template #operate="{ data }">
+              <el-button type="primary" text @click="getinfo(data.id)"
+                >设置</el-button
+              >
+              <el-button type="primary" text @click="stop(data.id)"
+                >停止用药</el-button
+              >
+            </template>
+          </MayTable>
+        </el-form-item>
+      </el-form>
+      <div class="button">
+        <el-button @click="goback">返回</el-button>
+      </div>
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";

@@ -1,19 +1,21 @@
 <template>
   <!-- dialog写在medicalcare文件夹下 -->
-  <el-card>
-    <el-form :model="form" label-width="130px" label-position="left">
-      <el-form-item label="登记日期："> 2020-03-03 </el-form-item>
-      <el-form-item label="家属姓名：" class="formitem">张三 </el-form-item>
-      <el-form-item label="经办人：" class="formitem">李四 </el-form-item>
-      <el-form-item label="药品：" class="formitem">
-        <MayTable
-          :tableData="data.tableData"
-          :tableItem="data.tableItem"
-          :isoperate="false"
-        />
-      </el-form-item>
-    </el-form>
-  </el-card>
+  <div class="app-container">
+    <el-card>
+      <el-form :model="form" label-width="130px" label-position="left">
+        <el-form-item label="登记日期："> 2020-03-03 </el-form-item>
+        <el-form-item label="家属姓名：" class="formitem">张三 </el-form-item>
+        <el-form-item label="经办人：" class="formitem">李四 </el-form-item>
+        <el-form-item label="药品：" class="formitem">
+          <MayTable
+            :tableData="data.tableData"
+            :tableItem="data.tableItem"
+            :isoperate="false"
+          />
+        </el-form-item>
+      </el-form>
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { reactive, onMounted, defineAsyncComponent } from "vue";

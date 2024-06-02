@@ -1,48 +1,50 @@
 <template>
   <!-- 采购申请 -->
-  <el-card style="margin-top: 15px">
-    <div style="margin: 10px 0">
-      <el-button type="primary" @click="sond">创建采购申请</el-button>
-    </div>
-    <!-- 表格 -->
-    <MayTable
-      :tableData="data.tableData"
-      :tableItem="data.tableItem"
-      autoWidth="350px"
-    >
-      <template #operate="{ data }">
-        <el-button type="primary" text @click="del">删除</el-button>
-        <el-button
-          type="primary"
-          text
-          v-if="data.state === '待提交'"
-          @click="delivery(data.id)"
-          >提交</el-button
-        >
-        <el-button
-          type="primary"
-          text
-          v-if="data.state !== '已经发货'"
-          @click="delivery(data.id)"
-          >收货验货</el-button
-        >
-        <el-button
-          type="primary"
-          text
-          v-if="data.state === '已经发货'"
-          @click="getifno(data.id)"
-          >查看详情</el-button
-        >
-      </template>
-    </MayTable>
-    <Pagination
-      @page="pageChenge"
-      @psize="pageSizeChenge"
-      :page="states.page"
-      :psize="states.pageSize"
-      :total="states.total"
-    />
-  </el-card>
+  <div class="app-container">
+    <el-card>
+      <div style="margin: 10px 0">
+        <el-button type="primary" @click="sond">创建采购申请</el-button>
+      </div>
+      <!-- 表格 -->
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="350px"
+      >
+        <template #operate="{ data }">
+          <el-button type="primary" text @click="del">删除</el-button>
+          <el-button
+            type="primary"
+            text
+            v-if="data.state === '待提交'"
+            @click="delivery(data.id)"
+            >提交</el-button
+          >
+          <el-button
+            type="primary"
+            text
+            v-if="data.state !== '已经发货'"
+            @click="delivery(data.id)"
+            >收货验货</el-button
+          >
+          <el-button
+            type="primary"
+            text
+            v-if="data.state === '已经发货'"
+            @click="getifno(data.id)"
+            >查看详情</el-button
+          >
+        </template>
+      </MayTable>
+      <Pagination
+        @page="pageChenge"
+        @psize="pageSizeChenge"
+        :page="states.page"
+        :psize="states.pageSize"
+        :total="states.total"
+      />
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";

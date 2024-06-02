@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 床位更换 -->
     <el-card>
       <el-form :inline="true" :model="formInline" class="demo-form-inline">

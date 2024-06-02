@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 体温记录 -->
     <!-- dialog写在medicalcare文件夹下 -->
     <el-card style="max-width: 100%">
@@ -35,13 +35,13 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-button type="primary" style="margin-top: 20px" @click="add"
-      >新增体温</el-button
-    >
 
     <TemperatureDialog v-if="dialogVisible" @close="close" :data="datas" />
 
     <el-card style="max-width: 100%" class="card">
+      <el-button type="primary" style="margin-bottom: 20px" @click="add"
+        >新增体温</el-button
+      >
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">

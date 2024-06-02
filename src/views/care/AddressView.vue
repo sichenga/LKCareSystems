@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 地址管理 -->
     <LocationDialog v-if="isdialog" @close="close" :data="addressdata" />
-    <el-card style="margin-top: 15px">
+    <el-card>
       <div style="margin: 10px 0">
         <el-button type="primary" @click="add">新增地址</el-button>
       </div>
@@ -81,6 +81,7 @@ const close = (isclose: boolean) => {
 // 新增
 const add = () => {
   isdialog.value = true;
+  addressdata.value = {};
 };
 // 编辑
 const edit = (data: any) => {
