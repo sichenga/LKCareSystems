@@ -8,18 +8,18 @@
   >
     <el-form
       ref="ruleFormRef"
+      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      :size="formSize"
-      class="demo-ruleForm"
       label-width="auto"
+      class="demo-ruleForm"
+      :size="formSize"
       status-icon
-      style="max-width: 600px"
     >
       <el-form-item label="老人：">
-        <div v-if="oldName" @click="select">{{ oldName?.name }}</div>
+        <div v-if="oldName" @click="select">{{ oldName }}</div>
         <div v-else>
-          <el-button style="margin-right: 30px" type="primary" @click="select"
+          <el-button type="primary" @click="select" style="margin-right: 30px"
             >请选择</el-button
           >
         </div>
@@ -30,9 +30,9 @@
       <el-form-item label="预计时间：" prop="expectDate">
         <MayTimePicker
           :format="'YYYY-MM-DD'"
-          :remtime="time"
           :valueFormat="'YYYY-MM-DD'"
           @change="handlchange"
+          :remtime="time"
         />
       </el-form-item>
     </el-form>
@@ -46,7 +46,7 @@
     </template>
   </el-dialog>
   <!-- 老人 -->
-  <OldSelectDialog v-if="olddialog" @close="closes" @id="getid" />
+  <OldSelectDialog v-if="olddialog" @id="getid" @close="closes" />
 </template>
 <script lang="ts" setup>
 import { ref, reactive, defineEmits, onMounted, defineProps } from "vue";
@@ -60,9 +60,7 @@ import {
 import { ElMessage } from "element-plus";
 import type { dischargeAddParams } from "@/service/market/DischargeType";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
-
 const formSize = ref<ComponentSize>("default");
 const props = defineProps(["id"]);
 const ruleFormRef = ref<FormInstance>();
@@ -109,7 +107,7 @@ const select = () => {
 };
 
 // 选择老人
-const oldName = ref<any>({});
+const oldName = ref<string>("");
 const getid = async (id: number) => {
   ElMessage.success("选择成功");
 
@@ -132,16 +130,16 @@ const getData = async () => {
     if (res.code == 10000) {
       Object.assign(ruleForm, res.data);
       time.value = ruleForm.expectDate;
-      await listold(ruleForm.elderlyId);
+      listold(ruleForm.elderlyId);
     }
     console.log(ruleForm);
   }
 };
 const listold = async (id: any) => {
-  const res: any = await getElderly(id).catch();
+  const res: any = await getElderly(id);
   console.log("单条老人", res);
   if (res.code == 10000) {
-    oldName.value = res.data?.name;
+    oldName.value = res.data.name;
   }
 };
 

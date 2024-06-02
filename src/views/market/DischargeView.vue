@@ -1,63 +1,57 @@
 <template>
-  <div class="app-container">
-    <!-- <div>出院管理</div> -->
-    <el-card style="max-width: 100%">
-      <el-form
-        ref="Refdischarge"
-        :inline="true"
-        :model="formInline"
-        class="demo-form-inline"
-      >
-        <el-form-item label="老人姓名" prop="name">
-          <el-input v-model="formInline.name" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="身份证号码" prop="idCard">
-          <el-input
-            v-model="formInline.idCard"
-            placeholder="请输入"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="状态" prop="state">
-          <el-select v-model="formInline.state" placeholder="请选择" clearable>
-            <el-option :label="'待出院'" :value="0" />
-            <el-option :label="'已出院'" :value="1" />
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="searcher">查询</el-button>
-          <el-button @click="reset">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-    <el-card style="max-width: 100%" class="card">
-      <!-- 新增 -->
-      <el-button type="primary" @click="add" style="margin-bottom: 20px"
-        >新增出院申请</el-button
-      >
-      <!-- 表格 -->
-      <MayTable
-        :identifier="identifier"
-        :tableData="data.tableData"
-        :tableItem="data.tableItem"
-      >
-        <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-          <el-button type="primary" text @click="leave">确认出院</el-button>
-        </template>
-      </MayTable>
-      <Pagination
-        @page="pageChenge"
-        @psize="pageSizeChenge"
-        :page="formInline.page"
-        :psize="formInline.pageSize"
-        :total="data.total"
-      />
-      <!-- 新增 -->
-      <DischargeDialog v-if="isdialog" :id="idetit" @close="close" />
-    </el-card>
-  </div>
+  <!-- <div>出院管理</div> -->
+  <el-card style="max-width: 100%">
+    <el-form
+      ref="Refdischarge"
+      :inline="true"
+      :model="formInline"
+      class="demo-form-inline"
+    >
+      <el-form-item label="老人姓名" prop="name">
+        <el-input v-model="formInline.name" placeholder="请输入" clearable />
+      </el-form-item>
+      <el-form-item label="身份证号码" prop="idCard">
+        <el-input v-model="formInline.idCard" placeholder="请输入" clearable />
+      </el-form-item>
+      <el-form-item label="状态" prop="state">
+        <el-select v-model="formInline.state" placeholder="请选择" clearable>
+          <el-option :label="'待出院'" :value="0" />
+          <el-option :label="'已出院'" :value="1" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="searcher">查询</el-button>
+        <el-button @click="reset">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </el-card>
+  <el-card style="max-width: 100%" class="card">
+    <!-- 新增 -->
+    <el-button type="primary" @click="add" style="margin-bottom: 20px"
+      >新增出院申请</el-button
+    >
+    <!-- 表格 -->
+    <MayTable
+      :identifier="identifier"
+      :tableData="data.tableData"
+      :tableItem="data.tableItem"
+    >
+      <template #operate="{ data }">
+        <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
+        <el-button type="primary" text @click="del(data.id)">删除</el-button>
+        <el-button type="primary" text @click="leave">确认出院</el-button>
+      </template>
+    </MayTable>
+    <Pagination
+      @page="pageChenge"
+      @psize="pageSizeChenge"
+      :page="formInline.page"
+      :psize="formInline.pageSize"
+      :total="data.total"
+    />
+    <!-- 新增 -->
+    <DischargeDialog v-if="isdialog" :id="idetit" @close="close" />
+  </el-card>
 </template>
 
 <script lang="ts" setup>
