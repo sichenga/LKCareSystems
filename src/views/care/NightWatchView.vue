@@ -64,11 +64,7 @@
         <el-button @click="location">地址管理</el-button>
       </div>
       <!-- 表格 -->
-      <MayTable
-        :tableData="data.tableData"
-        :tableItem="data.tableItem"
-        class="table-container"
-      >
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
           <el-button text type="primary" @click="del(data.id)">删除</el-button>
         </template>
