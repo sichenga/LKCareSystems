@@ -37,9 +37,7 @@
         <NavBar v-if="layout === 'left'" />
         <TagsView v-if="showTagsView" />
       </div>
-     
         <AppMain />
-     
 
       <Settings v-if="defaultSettings.showSettings" />
     </div>
@@ -250,6 +248,10 @@ watch(route, () => {
     }
   }
 }
+
+// .app-main{
+//   margin-top: 1%;
+// }
 
 .hideSidebar {
   .fixed-header {

@@ -1,6 +1,7 @@
 <template>
   <!-- 岗位管理 -->
-  <div class="box">
+  <div class="app-container">
+    <div class="box">
     <el-button style="margin-bottom: 30px" type="primary" @click="add"
       >新增岗位</el-button
     >
@@ -28,6 +29,8 @@
       @psize="getpsize"
     />
   </div>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

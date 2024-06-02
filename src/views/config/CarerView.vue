@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- 护工管理 -->
-    <el-card style="max-width: 100%">
+    <div class="app-container">
+      <el-card style="max-width: 100%">
       <el-form
         ref="Refcarer"
         :inline="true"
@@ -58,6 +59,8 @@
         @psize="getpsize"
       />
     </el-card>
+    </div>
+    
   </div>
 </template>
 

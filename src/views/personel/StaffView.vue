@@ -2,7 +2,8 @@
   <div>
     <!-- 员工管理 -->
     <!-- 查询 -->
-    <el-card>
+    <div class="app-container">
+      <el-card>
       <el-form
         ref="Refstaff"
         :inline="true"
@@ -107,6 +108,8 @@
         :total="total"
       />
     </el-card>
+  </div>
+    
   </div>
 </template>
 

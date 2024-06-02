@@ -1,6 +1,7 @@
 <template>
   <!-- 部门管理 -->
-  <el-card class="box-card">
+  <div class="app-container">
+    <el-card class="box-card">
     <el-button type="primary" @click="add">添加部门</el-button>
     <DepartmentTree
       v-if="isdialog"
@@ -35,6 +36,8 @@
       </template>
     </el-tree>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

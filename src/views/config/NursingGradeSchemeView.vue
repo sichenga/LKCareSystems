@@ -1,6 +1,7 @@
 <template>
   <!-- 配置护理方案 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <div class="header">护理等级:<span>重度护理</span></div>
     <div class="title">▋<span>护理服务</span></div>
     <el-form
@@ -57,6 +58,8 @@
       <el-button type="primary" @click="confirm">确定</el-button>
     </el-form-item>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

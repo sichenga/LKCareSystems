@@ -1,6 +1,7 @@
 <template>
   <!--任务奖励设置 -->
-  <div class="box">
+  <div class="app-container">
+    <div class="box">
     <div class="s1">
       <span><i>▋</i>任务奖励积分设置</span>
     </div>
@@ -18,6 +19,8 @@
       <el-button type="primary">保存设置</el-button>
     </div>
   </div>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

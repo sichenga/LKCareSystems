@@ -1,54 +1,56 @@
 <template>
   <!-- 账号设置 -->
-  <el-card style="max-width: 100%">
-    <div class="headbox">
-      <el-form-item label="头像" class="title">
-        <div class="header">
-          <div>
-            <img :src="Image + img" alt="" />
+  <div class="app-container">
+    <el-card style="max-width: 100%">
+      <div class="headbox">
+        <el-form-item label="头像" class="title">
+          <div class="header">
+            <div>
+              <img :src="Image + img" alt="" />
+            </div>
+            <div class="image-title">
+              <UploadImg
+                :texts="true"
+                @upload="Imgupload"
+                :showlist="false"
+                :text="'更换头像'"
+              />
+            </div>
           </div>
-          <div class="image-title">
-            <UploadImg
-              :texts="true"
-              @upload="Imgupload"
-              :showlist="false"
-              :text="'更换头像'"
-            />
-          </div>
-        </div>
-      </el-form-item>
-    </div>
-    <el-form
-      ref="ruleFormRef"
-      :model="ruleForm"
-      label-width="auto"
-      class="demo-ruleForm"
-      style="width: 300px"
-      status-icon
-    >
-      <el-form-item label="姓名">
-        <el-input class="custom-input" v-model="ruleForm.name" />
-      </el-form-item>
-      <el-form-item label="手机号">
-        <el-input class="custom-input" v-model="ruleForm.mobile" />
-      </el-form-item>
-      <el-form-item label="账号">
-        <el-input class="custom-input" v-model="ruleForm.username" />
-      </el-form-item>
-      <el-form-item label="密码">
-        <el-input class="custom-pass" v-model="ruleForm.pwd" />
-        <span
-          style="padding-left: 20px; font-size: 12px; color: #75a5ea"
-          @click="isdialog = true"
-          >修改密码</span
-        >
-        <PassDialog @close="close" v-if="isdialog" />
-      </el-form-item>
-      <el-form-item label="所属角色">
-        <el-input class="custom-input" v-model="ruleForm.roleIds" />
-      </el-form-item>
-    </el-form>
-  </el-card>
+        </el-form-item>
+      </div>
+      <el-form
+        ref="ruleFormRef"
+        :model="ruleForm"
+        label-width="auto"
+        class="demo-ruleForm"
+        style="width: 300px"
+        status-icon
+      >
+        <el-form-item label="姓名">
+          <el-input class="custom-input" v-model="ruleForm.name" />
+        </el-form-item>
+        <el-form-item label="手机号">
+          <el-input class="custom-input" v-model="ruleForm.mobile" />
+        </el-form-item>
+        <el-form-item label="账号">
+          <el-input class="custom-input" v-model="ruleForm.username" />
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input class="custom-pass" v-model="ruleForm.pwd" />
+          <span
+            style="padding-left: 20px; font-size: 12px; color: #75a5ea"
+            @click="isdialog = true"
+            >修改密码</span
+          >
+          <PassDialog @close="close" v-if="isdialog" />
+        </el-form-item>
+        <el-form-item label="所属角色">
+          <el-input class="custom-input" v-model="ruleForm.roleIds" />
+        </el-form-item>
+      </el-form>
+    </el-card>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -92,8 +94,6 @@ const getList = async () => {
 };
 //更改头像
 const Imgupload = async (val: any) => {
-  console.log(1111, val);
-
   if (val) {
     let res: any = await updatePhoto(val);
     if (res?.code == 10000) {

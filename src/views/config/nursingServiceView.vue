@@ -1,6 +1,7 @@
 <template>
   <!-- 护理服务 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-button type="primary" @click="add()">新增服务</el-button>
     <ServeDialog @close="close" v-if="isdialog" :data="servicedata" />
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
@@ -17,6 +18,8 @@
       @psize="getpsize"
     />
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, defineAsyncComponent, onMounted } from "vue";

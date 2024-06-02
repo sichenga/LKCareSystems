@@ -1,6 +1,6 @@
 <template>
   <!-- <div>入院管理</div> -->
-  <div>
+  <div class="app-container">
     <el-card style="max-width: 100%">
       <el-form
         ref="Hospitalised"

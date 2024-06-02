@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 档案管理 -->
     <el-card>
       <!-- dialog写在market文件夹下 -->

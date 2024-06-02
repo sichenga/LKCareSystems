@@ -1,6 +1,7 @@
 <template>
   <!-- 新增岗位 -->
-  <div class="box">
+  <div class="app-container">
+    <div class="box">
     <el-form
       ref="ruleFormRef"
       style="max-width: 600px"
@@ -33,6 +34,8 @@
       确定
     </el-button>
   </div>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

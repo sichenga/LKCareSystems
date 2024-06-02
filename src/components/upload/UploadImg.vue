@@ -12,7 +12,7 @@
     :show-file-list="props.showlist"
   >
     <template #trigger>
-      <el-button type="primary">{{ props.title }}</el-button>
+      <el-button type="primary" :text="texts">{{ props.title }}</el-button>
     </template>
   </el-upload>
 </template>
@@ -41,6 +41,10 @@ const props = defineProps({
   files: {
     type: Object,
     default: () => {},
+  },
+  texts: {
+    type: Boolean,
+    default: false,
   },
 });
 const fileList = ref<any>([]);

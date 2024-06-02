@@ -1,6 +1,7 @@
 <template>
   <!-- 护理项目 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-button type="primary" @click="isdialog = true">新增护理项目</el-button>
     <ProjectDialog @close="close" v-if="isdialog" />
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
@@ -11,6 +12,8 @@
       </template>
     </MayTable>
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, defineAsyncComponent, onMounted } from "vue";

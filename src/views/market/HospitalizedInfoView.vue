@@ -1,5 +1,6 @@
 <template>
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <div class="content-sizes">
       <div class="font-sizes">
         <span class="color-size">▋</span>
@@ -141,6 +142,8 @@
     </div>
     <el-button class="bot" @click="$router.go(-1)">返回</el-button>
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";

@@ -1,7 +1,8 @@
 <template>
   <!-- 审批设置 -->
   <!-- dialog写在config文件夹下 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
       <template #operate>
         <el-button type="primary" text @click="stream">配置审批流</el-button>
@@ -9,6 +10,8 @@
     </MayTable>
     <Pagination :total="50" />
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

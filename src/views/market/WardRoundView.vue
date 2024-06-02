@@ -1,6 +1,7 @@
 <template>
   <!-- <div>行政查房</div> -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="查房人">
         <el-input v-model="formInline.user" placeholder="请输入" clearable />
@@ -22,6 +23,8 @@
     </MayTable>
     <Pagination :total="50" />
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { reactive, onMounted, defineAsyncComponent } from "vue";

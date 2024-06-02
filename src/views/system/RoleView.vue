@@ -1,24 +1,26 @@
 <template>
   <!-- 角色管理 -->
-  <el-card style="margin-top: 15px">
-    <div style="margin: 10px 0">
-      <el-button type="primary" @click="addRole">新增</el-button>
-    </div>
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="{ data }">
-        <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-        <el-button type="primary" text @click="del(data.id)">删除</el-button>
-      </template>
-    </MayTable>
-    <Pagination
-      :total="counts"
-      @page="page"
-      @psize="psize"
-      :page="params.page"
-      :psize="params.pageSize"
-    />
-  </el-card>
+  <div class="app-container">
+    <el-card style="margin-top: 15px">
+      <div style="margin: 10px 0">
+        <el-button type="primary" @click="addRole">新增</el-button>
+      </div>
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="{ data }">
+          <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
+          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+        </template>
+      </MayTable>
+      <Pagination
+        :total="counts"
+        @page="page"
+        @psize="psize"
+        :page="params.page"
+        :psize="params.pageSize"
+      />
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";

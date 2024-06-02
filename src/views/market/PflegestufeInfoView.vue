@@ -1,6 +1,7 @@
 <template>
   <!-- 床位更换申请审批 /  详情 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <div class="title">
       <span><span style="color: #00b1ff">▋</span>老人信息</span>
       <span style=" font-size: 18px;color: #ccc">待审批</span>
@@ -89,6 +90,8 @@
       <el-button>返回</el-button>
     </el-form-item>
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive } from "vue";

@@ -1,6 +1,7 @@
 <template>
   <!-- 配置审批流 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <div class="header">审批流名称：<span>床位变更申请审批</span></div>
     <el-button type="primary" @click="isdialog = true">新增审批人 </el-button>
     <DeployDialog @close="close" v-if="isdialog" />
@@ -17,6 +18,8 @@
     </MayTable>
     <Pagination :total="50" />
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>
