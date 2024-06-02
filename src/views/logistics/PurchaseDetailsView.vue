@@ -1,46 +1,48 @@
 <template>
-  <el-card style="margin-top: 15px">
-    <div class="body-size">
-      <div>
-        <div>创建时间：</div>
-        <div>{{ data.titleData.addTime }}</div>
+  <div class="app-container">
+    <el-card style="margin-top: 15px">
+      <div class="body-size">
+        <div>
+          <div>创建时间：</div>
+          <div>{{ data.titleData.addTime }}</div>
+        </div>
+        <div>
+          <div>申请人：</div>
+          <div>{{ data.titleData.addAccountName }}</div>
+        </div>
+        <div>
+          <div>品种数：</div>
+          <div>{{ data.titleData.counts }}</div>
+        </div>
+        <div>
+          <div>实际采购成本：</div>
+          <div>{{ data.titleData.addAccountId }}</div>
+        </div>
       </div>
-      <div>
-        <div>申请人：</div>
-        <div>{{ data.titleData.addAccountName }}</div>
+      <!-- 表格 -->
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        :label="'采购实际数量'"
+        :isoperate="isshou"
+      >
+        <template #custom="{ data }">
+          <el-input v-model="data.receiveCounts" style="width: 130px" />
+        </template>
+      </MayTable>
+      <div class="title-image">
+        <div>到货凭证</div>
+        <div class="image">
+          <AvatarUpload @upload="uploadImage" />
+        </div>
       </div>
-      <div>
-        <div>品种数：</div>
-        <div>{{ data.titleData.counts }}</div>
-      </div>
-      <div>
-        <div>实际采购成本：</div>
-        <div>{{ data.titleData.addAccountId }}</div>
-      </div>
+    </el-card>
+    <div class="button-body">
+      <el-button class="btn-body" @click="goback">返回</el-button>
+      <el-button type="primary" class="primary" @click="confirm"
+        >确定验收</el-button
+      >
     </div>
-    <!-- 表格 -->
-    <MayTable
-      :tableData="data.tableData"
-      :tableItem="data.tableItem"
-      :label="'采购实际数量'"
-      :isoperate="isshou"
-    >
-      <template #custom="{ data }">
-        <el-input v-model="data.receiveCounts" style="width: 130px" />
-      </template>
-    </MayTable>
-    <div class="title-image">
-      <div>到货凭证</div>
-      <div class="image">
-        <AvatarUpload @upload="uploadImage" />
-      </div>
-    </div>
-  </el-card>
-  <div class="button-body">
-    <el-button class="btn-body" @click="goback">返回</el-button>
-    <el-button type="primary" class="primary" @click="confirm"
-      >确定验收</el-button
-    >
   </div>
 </template>
 <script lang="ts" setup>

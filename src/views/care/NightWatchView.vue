@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 夜巡管理 -->
     <el-card>
       <AddNightDialog v-if="isdialog" @close="close" />
@@ -64,7 +64,11 @@
         <el-button @click="location">地址管理</el-button>
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        class="table-container"
+      >
         <template #operate="{ data }">
           <el-button text type="primary" @click="del(data.id)">删除</el-button>
         </template>

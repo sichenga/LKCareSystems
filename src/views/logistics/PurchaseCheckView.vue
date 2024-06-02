@@ -1,54 +1,56 @@
 <template>
   <!-- 收货验收 -->
-  <el-card style="margin-top: 15px">
-    <div class="body-top">
-      <div class="body-size">
-        <div>
-          <div>创建时间：</div>
-          <div>{{ data.TatleData.addTime }}</div>
+  <div class="app-container">
+    <el-card style="margin-top: 15px">
+      <div class="body-top">
+        <div class="body-size">
+          <div>
+            <div>创建时间：</div>
+            <div>{{ data.TatleData.addTime }}</div>
+          </div>
+          <div>
+            <div>申请人：</div>
+            <div>{{ data.TatleData.addAccountName }}</div>
+          </div>
+          <div>
+            <div>品种数：</div>
+            <div>{{ data.TatleData.counts }}</div>
+          </div>
+          <div>
+            <div>实际采购成本：</div>
+            <div>{{ data.TatleData.addAccountId }}</div>
+          </div>
         </div>
-        <div>
-          <div>申请人：</div>
-          <div>{{ data.TatleData.addAccountName }}</div>
-        </div>
-        <div>
-          <div>品种数：</div>
-          <div>{{ data.TatleData.counts }}</div>
-        </div>
-        <div>
-          <div>实际采购成本：</div>
-          <div>{{ data.TatleData.addAccountId }}</div>
+        <div class="size-ok">
+          {{ data.TatleData.state }}
         </div>
       </div>
-      <div class="size-ok">
-        {{ data.TatleData.state }}
-      </div>
-    </div>
 
-    <!-- 表格 -->
-    <MayTable
-      :tableData="data.tableData"
-      :tableItem="data.tableItem"
-      :isoperate="isshou"
-    />
+      <!-- 表格 -->
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        :isoperate="isshou"
+      />
 
-    <div class="title-image">
-      <div>到货凭证</div>
-      <div class="image">
-        <el-image
-          style="width: 100px; height: 100px"
-          :src="
-            data.TatleData.picture ? ImageUrls + data.TatleData.picture : ''
-          "
-          fit="cover"
-        />
+      <div class="title-image">
+        <div>到货凭证</div>
+        <div class="image">
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="
+              data.TatleData.picture ? ImageUrls + data.TatleData.picture : ''
+            "
+            fit="cover"
+          />
+        </div>
       </div>
+    </el-card>
+    <div class="button-body">
+      <el-button class="btn-body" @click="router.push('/logistics/purchase')"
+        >返回</el-button
+      >
     </div>
-  </el-card>
-  <div class="button-body">
-    <el-button class="btn-body" @click="router.push('/logistics/purchase')"
-      >返回</el-button
-    >
   </div>
 </template>
 <script lang="ts" setup>

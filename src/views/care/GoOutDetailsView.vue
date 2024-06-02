@@ -3,7 +3,7 @@
   <el-card style="max-width: 100%">
     <div class="title">
       <span><span style="color: #00b1ff">▋</span>老人信息</span>
-      <span style=" font-size: 18px;color: #ccc">待审批</span>
+      <span style="font-size: 18px; color: #ccc">待审批</span>
     </div>
     <el-form
       :model="form"
@@ -86,7 +86,7 @@
       <div class="box"></div>
     </el-steps>
     <el-button
-      style=" display: block;margin: 0 auto"
+      style="display: block; margin: 0 auto"
       @click="router.push('/care/goout')"
       >返回</el-button
     >

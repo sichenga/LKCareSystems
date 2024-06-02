@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 用药计划 -->
     <!-- dialog写在medicalcare文件夹下 -->
     <el-card>

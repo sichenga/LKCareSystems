@@ -1,19 +1,21 @@
 <template>
-  <!-- 健康档案管理 -->
-  <el-tabs type="card" class="demo-tabs">
-    <el-tab-pane label="健康档案" name="first">
-      <RecordAdmin />
-    </el-tab-pane>
-    <el-tab-pane label="入院记录" name="second">
-      <OutRecord />
-    </el-tab-pane>
-    <el-tab-pane label="出院记录" name="third">
-      <OutRecord />
-    </el-tab-pane>
-    <el-tab-pane label="体检报告" name="fourth">
-      <MedicalInfo />
-    </el-tab-pane>
-  </el-tabs>
+  <div class="app-container">
+    <!-- 健康档案管理 -->
+    <el-tabs type="card" class="demo-tabs">
+      <el-tab-pane label="健康档案" name="first">
+        <RecordAdmin />
+      </el-tab-pane>
+      <el-tab-pane label="入院记录" name="second">
+        <OutRecord />
+      </el-tab-pane>
+      <el-tab-pane label="出院记录" name="third">
+        <OutRecord />
+      </el-tab-pane>
+      <el-tab-pane label="体检报告" name="fourth">
+        <MedicalInfo />
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 <script lang="ts" setup>
 import { defineAsyncComponent } from "vue";

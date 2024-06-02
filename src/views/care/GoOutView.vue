@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 外出申请  外出登记-->
     <el-card>
       <el-form

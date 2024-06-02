@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 健康档案 -->
     <!-- dialog写在medicalcare文件夹下 -->
     <el-card style="max-width: 100%">

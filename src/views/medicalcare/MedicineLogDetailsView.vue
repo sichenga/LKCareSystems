@@ -1,6 +1,6 @@
 <!-- 用药登记详情 -->
 <template>
-  <div>
+  <div class="app-container">
     <el-card>
       <AddRegInfoDialog
         :remdata="remdata"

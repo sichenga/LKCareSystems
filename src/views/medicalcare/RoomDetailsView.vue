@@ -1,7 +1,7 @@
 <!-- dialog写在medicalcare文件夹下 -->
 <!-- 医生查房记录详情 -->
 <template>
-  <div>
+  <div class="app-container">
     <el-card>
       <div class="user_content">
         <!-- 头像 -->

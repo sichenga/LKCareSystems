@@ -1,64 +1,66 @@
 <template>
   <!-- 新增外出 -->
-  <el-card>
-    <el-form
-      ref="ruleFormRef"
-      style="max-width: 400px"
-      :model="ruleForm"
-      label-width="auto"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
-      <el-form-item label="选择外出老人">
-        <el-input v-model="data.oldlist" disabled />
-      </el-form-item>
-      <el-form-item label="外出时间">
-        <DateTimePicke
-          style="width: 300px"
-          @change="handlChange"
-          :statetime="times[0]"
-          :endtime="times[1]"
-        />
-      </el-form-item>
-      <el-form-item label="陪同人员类型">
-        <el-select
-          v-model="ruleForm.relation"
-          clearable
-          placeholder="请选择"
-          style="width: 300px"
-        >
-          <el-option
-            v-for="item in typelist"
-            :key="item"
-            :label="item"
-            :value="item"
+  <div class="app-container">
+    <el-card>
+      <el-form
+        ref="ruleFormRef"
+        style="max-width: 400px"
+        :model="ruleForm"
+        label-width="auto"
+        class="demo-ruleForm"
+        :size="formSize"
+        status-icon
+      >
+        <el-form-item label="选择外出老人">
+          <el-input v-model="data.oldlist" disabled />
+        </el-form-item>
+        <el-form-item label="外出时间">
+          <DateTimePicke
+            style="width: 300px"
+            @change="handlChange"
+            :statetime="times[0]"
+            :endtime="times[1]"
           />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="陪同人员姓名">
-        <el-input v-model="ruleForm.name" placeholder="请输入" />
-      </el-form-item>
-      <el-form-item label="陪同人员电话">
-        <el-input v-model="ruleForm.mobile" placeholder="请输入" />
-      </el-form-item>
-      <el-form-item label="陪同人员地址">
-        <el-input v-model="ruleForm.address" placeholder="请输入" />
-      </el-form-item>
-      <el-form-item label="外出原因">
-        <el-input
-          v-model="ruleForm.content"
-          :rows="2"
-          placeholder="请输入原因"
-          type="textarea"
-          style="width: 300px"
-        />
-      </el-form-item>
-    </el-form>
-  </el-card>
-  <div class="submit">
-    <el-button @click="cancel">取消</el-button>
-    <el-button type="primary" @click="add">保存</el-button>
+        </el-form-item>
+        <el-form-item label="陪同人员类型">
+          <el-select
+            v-model="ruleForm.relation"
+            clearable
+            placeholder="请选择"
+            style="width: 300px"
+          >
+            <el-option
+              v-for="item in typelist"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="陪同人员姓名">
+          <el-input v-model="ruleForm.name" placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="陪同人员电话">
+          <el-input v-model="ruleForm.mobile" placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="陪同人员地址">
+          <el-input v-model="ruleForm.address" placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="外出原因">
+          <el-input
+            v-model="ruleForm.content"
+            :rows="2"
+            placeholder="请输入原因"
+            type="textarea"
+            style="width: 300px"
+          />
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <div class="submit">
+      <!-- <el-button @click="cancel">取消</el-button> -->
+      <el-button type="primary" @click="add">保存</el-button>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

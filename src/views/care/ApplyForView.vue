@@ -1,6 +1,6 @@
 <template>
   <!--外出登记  -->
-  <div>
+  <div class="app-container">
     <el-card>
       <RegDialog v-if="isdialog" @close="close" />
       <el-form :inline="true" :model="formInline" class="demo-form-inline">

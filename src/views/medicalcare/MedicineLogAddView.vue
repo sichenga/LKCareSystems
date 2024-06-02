@@ -1,53 +1,55 @@
 <template>
   <!-- 新增用药登记 -->
-  <el-card style="margin-top: 15px">
-    <AddRegInfoDialog
-      v-if="isdialog"
-      @close="close"
-      :remdata="remdata"
-      @regdata="regdata"
-    />
-    <el-form
-      :model="formInline"
-      class="demo-form-inline"
-      :rules="rules"
-      ref="ruleFormRef"
-    >
-      <el-form-item label="登记日期：" prop="addTime">
-        <TimePicker
-          @click="selectTime"
-          :remtime="date"
-          :valueFormat="format"
-          :format="format"
-        />
-      </el-form-item>
-
-      <el-form-item label="家属姓名：" prop="familyName">
-        <el-input
-          v-model="formInline.familyName"
-          placeholder="请输入"
-          clearable
-        />
-      </el-form-item>
-    </el-form>
-    <div style="margin: 20px 0">
-      <div>药品：</div>
-      <el-button type="primary" @click="add">新增</el-button>
-    </div>
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="{ data, index }">
-        <el-button type="primary" text @click="edit(data)">编辑</el-button>
-        <el-button type="primary" text @click="del(index)">删除</el-button>
-      </template>
-    </MayTable>
-    <div class="button">
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >保存</el-button
+  <div class="app-container">
+    <el-card>
+      <AddRegInfoDialog
+        v-if="isdialog"
+        @close="close"
+        :remdata="remdata"
+        @regdata="regdata"
+      />
+      <el-form
+        :model="formInline"
+        class="demo-form-inline"
+        :rules="rules"
+        ref="ruleFormRef"
       >
-      <el-button @click="getback">取消</el-button>
-    </div>
-  </el-card>
+        <el-form-item label="登记日期：" prop="addTime">
+          <TimePicker
+            @click="selectTime"
+            :remtime="date"
+            :valueFormat="format"
+            :format="format"
+          />
+        </el-form-item>
+
+        <el-form-item label="家属姓名：" prop="familyName">
+          <el-input
+            v-model="formInline.familyName"
+            placeholder="请输入"
+            clearable
+          />
+        </el-form-item>
+      </el-form>
+      <div style="margin: 20px 0">
+        <div>药品：</div>
+        <el-button type="primary" @click="add">新增</el-button>
+      </div>
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="{ data, index }">
+          <el-button type="primary" text @click="edit(data)">编辑</el-button>
+          <el-button type="primary" text @click="del(index)">删除</el-button>
+        </template>
+      </MayTable>
+      <div class="button">
+        <el-button type="primary" @click="submitForm(ruleFormRef)"
+          >保存</el-button
+        >
+        <el-button @click="getback">取消</el-button>
+      </div>
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref, reactive, defineAsyncComponent, provide } from "vue";
@@ -196,10 +198,12 @@ provide("tableData", data.tableData);
   width: 220px;
   height: 40px;
 }
+
 .el-button {
   height: 40px;
   line-height: 40px;
 }
+
 .button {
   width: 100%;
   margin-top: 60px;

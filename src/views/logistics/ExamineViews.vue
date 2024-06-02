@@ -1,52 +1,54 @@
 <template>
-  <el-card style="margin-top: 15px">
-    <div class="body-size">
-      <div>
-        <div>创建时间：</div>
-        <div>{{ data.TatleData.addTime }}</div>
+  <div class="app-container">
+    <el-card>
+      <div class="body-size">
+        <div>
+          <div>创建时间：</div>
+          <div>{{ data.TatleData.addTime }}</div>
+        </div>
+        <div>
+          <div>申请人：</div>
+          <div>{{ data.TatleData.addAccountName }}</div>
+        </div>
+        <div>
+          <div>品种数：</div>
+          <div>{{ data.TatleData.counts }}</div>
+        </div>
+        <div>
+          <div>实际采购成本：</div>
+          <div>{{ data.TatleData.addAccountId }}</div>
+        </div>
       </div>
-      <div>
-        <div>申请人：</div>
-        <div>{{ data.TatleData.addAccountName }}</div>
-      </div>
-      <div>
-        <div>品种数：</div>
-        <div>{{ data.TatleData.counts }}</div>
-      </div>
-      <div>
-        <div>实际采购成本：</div>
-        <div>{{ data.TatleData.addAccountId }}</div>
-      </div>
-    </div>
-    <!-- 表格 -->
+      <!-- 表格 -->
 
-    <MayTable
-      :tableData="data.tableData"
-      :tableItem="data.tableItem"
-      :label="'采购实际数量'"
-      :isoperate="isshou"
-    >
-      <template #custom="data">
-        <el-input v-model="data.data.creators" style="width: 130px" />
-      </template>
-    </MayTable>
-    <div class="title-image">
-      <div>到货凭证</div>
-      <div class="image">
-        <el-image
-          style="width: 100px; height: 100px"
-          :src="data.TatleData.picture"
-          fit="cover"
-        />
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        :label="'采购实际数量'"
+        :isoperate="isshou"
+      >
+        <template #custom="data">
+          <el-input v-model="data.data.creators" style="width: 130px" />
+        </template>
+      </MayTable>
+      <div class="title-image">
+        <div>到货凭证</div>
+        <div class="image">
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="data.TatleData.picture"
+            fit="cover"
+          />
+        </div>
       </div>
-    </div>
-  </el-card>
+    </el-card>
 
-  <div class="button-body">
-    <el-button class="btn-body" @click="goback">返回</el-button>
-    <el-button type="primary" class="primary" @click="confirm"
-      >确定验收</el-button
-    >
+    <div class="button-body">
+      <el-button class="btn-body" @click="goback">返回</el-button>
+      <el-button type="primary" class="primary" @click="confirm"
+        >确定验收</el-button
+      >
+    </div>
   </div>
 </template>
 <script lang="ts" setup>

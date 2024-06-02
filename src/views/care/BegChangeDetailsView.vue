@@ -1,82 +1,86 @@
 <template>
   <!-- 床位更换申请审批 -->
-  <el-card style="max-width: 100%">
-    <div class="title">
-      <span><span style="color: #00b1ff">▋</span>老人信息</span>
-      <span style=" font-size: 18px;color: #ccc">待审批</span>
-    </div>
-    <el-form
-      :model="form"
-      label-position="left"
-      label-width="130px"
-      style="max-width: 100%; margin-top: 30px"
-    >
-      <el-form-item label="*老人信息" style="align-items: flex-start">
-        <div class="oldinfo">
-          <el-form
-            :inline="true"
-            label-position="left"
-            label-width="auto"
-            class="demo-form-inline"
-            style="width: 60%"
-          >
-            <el-form-item label="头像：">
-              <el-avatar :size="20" :src="circleUrl" />
-            </el-form-item>
-            <el-form-item label="身份证号："> 293923019912 </el-form-item>
-            <el-form-item label="房间号："> 1楼501室 </el-form-item>
-            <el-form-item label="姓名：" class="gray"> 张武 </el-form-item>
-            <el-form-item label="联系电话："> 1882783923 </el-form-item>
-            <el-form-item label="床位号："> 501-1 </el-form-item>
-            <el-form-item label="性别：" class="gray"> 男 </el-form-item>
-            <el-form-item label="家庭地址："> 上海市普陀区1000号 </el-form-item>
-          </el-form>
-        </div>
-      </el-form-item>
-      <el-form-item label="*更换床位为"> 605-02 </el-form-item>
-      <el-form-item label="*更换原因">
-        605-02室友睡觉打呼噜，严重影响睡眠质量，需要更换房间！
-      </el-form-item>
-    </el-form>
-    <div class="title top">
-      <span><span style="color: #00b1ff">▋</span>审批流</span>
-    </div>
-    <el-steps class="mb-4 steps" style="margin-top: 30px" :space="200" simple>
-      <el-step title="张晓雅">
-        <template #icon>
-          <el-avatar :size="30" :src="circleUrl" />
-        </template>
-      </el-step>
-      <el-step title="李梅">
-        <template #icon>
-          <el-avatar :size="30" :src="circleUrl" />
-        </template>
-      </el-step>
-      <el-step title="汪峰" :icon="Picture">
-        <template #icon>
-          <el-avatar :size="30" :src="circleUrl" />
-        </template>
-      </el-step>
-    </el-steps>
-    <div class="title top">
-      <span><span style="color: #00b1ff">▋</span>日志</span>
-    </div>
+  <div class="app-container">
+    <el-card style="max-width: 100%">
+      <div class="title">
+        <span><span style="color: #00b1ff">▋</span>老人信息</span>
+        <span style="font-size: 18px; color: #ccc">待审批</span>
+      </div>
+      <el-form
+        :model="form"
+        label-position="left"
+        label-width="130px"
+        style="max-width: 100%; margin-top: 30px"
+      >
+        <el-form-item label="*老人信息" style="align-items: flex-start">
+          <div class="oldinfo">
+            <el-form
+              :inline="true"
+              label-position="left"
+              label-width="auto"
+              class="demo-form-inline"
+              style="width: 60%"
+            >
+              <el-form-item label="头像：">
+                <el-avatar :size="20" :src="circleUrl" />
+              </el-form-item>
+              <el-form-item label="身份证号："> 293923019912 </el-form-item>
+              <el-form-item label="房间号："> 1楼501室 </el-form-item>
+              <el-form-item label="姓名：" class="gray"> 张武 </el-form-item>
+              <el-form-item label="联系电话："> 1882783923 </el-form-item>
+              <el-form-item label="床位号："> 501-1 </el-form-item>
+              <el-form-item label="性别：" class="gray"> 男 </el-form-item>
+              <el-form-item label="家庭地址：">
+                上海市普陀区1000号
+              </el-form-item>
+            </el-form>
+          </div>
+        </el-form-item>
+        <el-form-item label="*更换床位为"> 605-02 </el-form-item>
+        <el-form-item label="*更换原因">
+          605-02室友睡觉打呼噜，严重影响睡眠质量，需要更换房间！
+        </el-form-item>
+      </el-form>
+      <div class="title top">
+        <span><span style="color: #00b1ff">▋</span>审批流</span>
+      </div>
+      <el-steps class="mb-4 steps" style="margin-top: 30px" :space="200" simple>
+        <el-step title="张晓雅">
+          <template #icon>
+            <el-avatar :size="30" :src="circleUrl" />
+          </template>
+        </el-step>
+        <el-step title="李梅">
+          <template #icon>
+            <el-avatar :size="30" :src="circleUrl" />
+          </template>
+        </el-step>
+        <el-step title="汪峰" :icon="Picture">
+          <template #icon>
+            <el-avatar :size="30" :src="circleUrl" />
+          </template>
+        </el-step>
+      </el-steps>
+      <div class="title top">
+        <span><span style="color: #00b1ff">▋</span>日志</span>
+      </div>
 
-    <el-steps direction="vertical" class="stp">
-      <el-step>
-        <template #icon>
-          <el-avatar :size="24" :src="circleUrl" />
-        </template>
-        <template #description>
-          <div>20200303</div>
-          <div>张三 提交了床位更换申请</div>
-        </template>
-      </el-step>
-      <el-step title="Step 2" />
-      <el-step title="Step 3" />
-    </el-steps>
-    <el-button style=" display: block;margin: 0 auto">返回</el-button>
-  </el-card>
+      <el-steps direction="vertical" class="stp">
+        <el-step>
+          <template #icon>
+            <el-avatar :size="24" :src="circleUrl" />
+          </template>
+          <template #description>
+            <div>20200303</div>
+            <div>张三 提交了床位更换申请</div>
+          </template>
+        </el-step>
+        <el-step title="Step 2" />
+        <el-step title="Step 3" />
+      </el-steps>
+      <el-button style="display: block; margin: 0 auto">返回</el-button>
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref, reactive } from "vue";

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <!-- 新增外出 -->
     <el-card>
       <el-form
