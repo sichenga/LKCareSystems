@@ -1,7 +1,8 @@
 <template>
   <!-- 推荐人管理 -->
   <!-- dialog写在market文件夹下 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="姓名:">
         <el-input v-model="formInline.user" placeholder="请输入" clearable />
@@ -45,6 +46,8 @@
     <!-- 积分奖励 -->
     <RewarDialog @close="close" v-if="isdshow" />
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

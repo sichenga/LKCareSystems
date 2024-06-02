@@ -1,6 +1,6 @@
 <template>
   <!-- dialog写在market文件夹下 -->
-  <div>
+  <div class="app-container">
     <el-card>
       <el-steps
         style="max-width: 200px; margin: 20px auto"

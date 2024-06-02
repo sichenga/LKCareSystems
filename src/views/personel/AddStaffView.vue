@@ -1,6 +1,7 @@
 <template>
   <!-- 新增员工 编辑 -->
-  <div class="box">
+  <div class="app-container">
+    <div class="box">
     <el-form
       ref="ruleFormRef"
       style="max-width: 600px"
@@ -68,6 +69,8 @@
       确定
     </el-button>
   </div>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { reactive, ref, onMounted, defineAsyncComponent } from "vue";

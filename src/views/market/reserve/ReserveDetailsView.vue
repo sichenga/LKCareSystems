@@ -1,6 +1,7 @@
 <!-- 预定详情 -->
 <template>
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <div class="user_content">
       <!-- 头像 -->
       <div class="form">
@@ -78,6 +79,8 @@
       <el-button @click="back">返回</el-button>
     </div>
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted } from "vue";

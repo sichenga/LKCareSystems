@@ -1,6 +1,7 @@
 <template>
   <!-- 新增预定 -->
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <div class="title">
       <div><i>▋</i> 预定信息</div>
     </div>
@@ -78,6 +79,8 @@
       <el-button @click="cancel">取消</el-button>
     </div>
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";

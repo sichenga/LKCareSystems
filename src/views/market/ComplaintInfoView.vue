@@ -1,7 +1,8 @@
 <template>
   <!-- dialog写在market文件夹下 -->
   <!-- 投诉建议详情 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <div class="header"><span>▋</span> 投诉建议信息</div>
     <div class="complaint-info">
       <ul>
@@ -43,6 +44,8 @@
       </el-steps>
     </div>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup></script>

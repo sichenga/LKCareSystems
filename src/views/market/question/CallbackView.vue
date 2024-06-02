@@ -1,7 +1,8 @@
 <template>
   <!-- //回访记录 -->
   <!-- dialog写在market文件夹下 -->
-  <el-card style="margin-top: 15px" class="section">
+  <div class="app-container">
+    <el-card style="margin-top: 15px" class="section">
     <div class="body">
       <div class="body-title">
         <div>咨询类型：{{ params.type }}</div>
@@ -54,6 +55,8 @@
   </div>
   <!-- 新增回访记录 -->
   <CallbackDlalog v-if="dialogVisible" @close="handlClose" :datas="datas" />
+  </div>
+
 </template>
 <script lang="ts" setup>
 import { onMounted, reactive, defineAsyncComponent, ref } from "vue";

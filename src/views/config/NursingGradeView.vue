@@ -1,6 +1,7 @@
 <template>
   <!-- 护理等级 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-button type="primary" @click="isdialog = true">新增护理等级</el-button>
     <AddedlevelDialog @close="close" v-if="isdialog" />
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
@@ -13,6 +14,8 @@
       </template>
     </MayTable>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

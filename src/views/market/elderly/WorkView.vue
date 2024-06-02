@@ -1,6 +1,7 @@
 <template>
   <!-- dialog写在market文件夹下 -->
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <div class="body-top">
       <div>
         <el-image
@@ -36,6 +37,8 @@
       @close="close"
     />
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, provide } from "vue";

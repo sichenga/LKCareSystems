@@ -1,6 +1,7 @@
 <template>
   <!-- 档案管理 -->
-  <el-card>
+  <div class="app-container">
+    <el-card>
     <!-- dialog写在market文件夹下 -->
     <div class="body-top">
       <div>
@@ -36,6 +37,8 @@
     </MayTable>
     <Pagination :total="50" />
   </el-card>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { reactive, onMounted, defineAsyncComponent } from "vue";

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-container">
     <el-card>
       <!-- 潜在客户 -->
       <el-form

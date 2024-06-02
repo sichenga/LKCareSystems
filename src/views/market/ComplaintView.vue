@@ -1,7 +1,8 @@
 <template>
   <!-- 投诉建议 -->
   <!-- dialog写在market文件夹下 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
       <el-form-item label="标题">
         <el-input v-model="formInline.user" placeholder="请输入" clearable />
@@ -35,6 +36,8 @@
     </MayTable>
     <Pagination :total="50" />
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

@@ -1,6 +1,6 @@
 <template>
   <!--新增老人  -->
-  <div>
+  <div class="app-container">
     <el-tabs v-model="activeName" type="card" class="demo-tabs">
       <el-card>
         <!--        {{ ruleForm }}-->

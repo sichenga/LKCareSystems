@@ -1,6 +1,7 @@
 <template>
   <!-- 楼层管理 -->
-  <el-card style="max-width: 100%">
+  <div class="app-container">
+    <el-card style="max-width: 100%">
     <el-button type="primary" @click="addBuild">新增楼层</el-button>
     <FloorDialog
       @close="close"
@@ -39,6 +40,8 @@
       </template>
     </el-tree>
   </el-card>
+  </div>
+  
 </template>
 
 <script lang="ts" setup>

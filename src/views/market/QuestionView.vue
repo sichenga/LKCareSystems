@@ -1,6 +1,6 @@
 <template>
   <!-- 资讯登记 -->
-  <div>
+  <div class="app-container">
     <el-card style="margin-top: 15px" class="section">
       <el-form
         ref="Refquestion"

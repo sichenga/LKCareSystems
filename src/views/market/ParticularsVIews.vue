@@ -1,6 +1,7 @@
 <template>
   <!-- dialog写在market文件夹下 -->
-  <el-card style="margin-top: 15px" class="section">
+  <div class="app-container">
+    <el-card style="margin-top: 15px" class="section">
     <div class="title">
       <div class="title-box">
         <div class="title-text">
@@ -58,6 +59,8 @@
   <div class="title-btn">
     <el-button>取消</el-button>
   </div>
+  </div>
+  
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
