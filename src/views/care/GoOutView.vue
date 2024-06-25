@@ -9,7 +9,7 @@
         class="demo-form-inline"
       >
         <el-form-item label="老人姓名：" prop="name">
-          <el-input v-model="params.name" placeholder="请输入" clearable />
+          <el-input v-model="params.name" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="审批状态：" prop="state">
           <el-select
@@ -28,9 +28,9 @@
         </el-form-item>
         <el-form-item label="创建时间：" prop="beginDate">
           <MayDateTimePicker
-            @change="timeSelect"
-            :statetime="params.beginDate"
             :endtime="params.endDate"
+            :statetime="params.beginDate"
+            @change="timeSelect"
           />
         </el-form-item>
         <el-form-item>
@@ -44,46 +44,48 @@
         <el-button type="primary" @click="add">新增外出</el-button>
         <OldSelectDialog
           v-if="dialogVisible"
-          @close="handClose"
           :toPath="topath"
+          @close="handClose"
         />
-        <AffDialog @close="close" v-if="isdialog" />
+        <AffDialog v-if="isdialog" @close="close" />
       </div>
       <!-- 表格 -->
       <MayTable
+        :identifier="identifier"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        :identifier="identifier"
       >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="compile(data.id)"
+          <el-button text type="primary" @click="compile(data.id)"
             >编辑</el-button
           >
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-          <el-button type="primary" text @click="btn(data.id)"
+          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text type="primary" @click="btn(data.id)"
             >查看详情</el-button
           >
         </template>
       </MayTable>
       <Pagination
-        @page="handlPage"
-        @pszie="handlPsize"
         :page="params.page"
         :psize="params.pageSize"
         :total="total"
+        @page="handlPage"
+        @pszie="handlPsize"
       />
     </el-card>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import AffDialog from "@/components/dialog/care/AffDialog.vue";
 import { useRouter } from "vue-router";
-import { getList, DelgetList } from "@/service/care/gooutApi";
+import { DelgetList, getList } from "@/service/care/gooutApi";
 import type { Goout } from "@/service/care/gooutType";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
+import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
+
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -92,7 +94,6 @@ const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
 const topath = ref("/care/add");
-import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
 const Refgoout = ref();
 const identifier = "GoOut";
 const isdialog = ref(false);
@@ -186,7 +187,7 @@ const compile = (id: number) => {
 // 详情
 const btn = (id: number) => {
   router.push({
-    path: "/care/goout/details/id",
+    path: "/care/details/id",
     query: {
       id: id,
     },

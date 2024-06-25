@@ -2,12 +2,12 @@
 <template>
   <el-form
     ref="ruleFormRef"
-    style="max-width: 500px"
     :model="ruleForm"
     :rules="rules"
-    label-width="auto"
     class="demo-ruleForm"
+    label-width="auto"
     status-icon
+    style="max-width: 500px"
   >
     <div>
       <el-form-item label="老人姓名：" prop="name">
@@ -20,13 +20,12 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="出生日期：" prop="birthday">
-        {{ ruleForm.birthday }}
         <MayTimePicker
-          style="width: 100%"
-          @change="selecttime"
+          :format="'YYYY-MM-DD'"
           :remtime="ruleForm.birthday"
           :value-format="'YYYY-MM-DD'"
-          :format="'YYYY-MM-DD'"
+          style="width: 100%"
+          @change="selecttime"
         />
       </el-form-item>
       <el-form-item label="籍贯：" prop="nativePlace">
@@ -105,29 +104,23 @@
     </div>
     <div class="images">
       <UploadPictures
+        :editdata="ruleForm.photo"
         :style="{ width: '150px', height: '150px' }"
         @upload="(val) => (ruleForm.photo = val)"
-        :editdata="ruleForm.photo"
       />
     </div>
   </el-form>
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
-  onMounted,
   defineAsyncComponent,
   defineExpose,
   inject,
+  onMounted,
+  reactive,
+  ref,
 } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-const UploadPictures = defineAsyncComponent(
-  () => import("@/components/upload/AvatarUpload.vue")
-);
-const MayTimePicker = defineAsyncComponent(
-  () => import("@/components/timepicker/MayTimePicker.vue")
-);
 // 民族数据
 import nation from "@/database/nation/nation.json";
 // 籍贯数据 nativePlace
@@ -137,6 +130,13 @@ import politics from "@/database/politics/politics.json";
 // 最高学历数据
 import eduLevel from "@/database/eduLevel/eduLevel.json";
 import type { AddElderlyRequest } from "@/service/old/OldType";
+
+const UploadPictures = defineAsyncComponent(
+  () => import("@/components/upload/AvatarUpload.vue")
+);
+const MayTimePicker = defineAsyncComponent(
+  () => import("@/components/timepicker/MayTimePicker.vue")
+);
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = inject<AddElderlyRequest>("ruleForm")!;
 const rules = reactive<FormRules<any>>({

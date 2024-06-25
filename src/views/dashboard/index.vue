@@ -8,8 +8,9 @@
         <el-col :span="18" :xs="24">
           <div class="flex h-full items-center">
             <img
+              :src="baseurl + '/' + userStore.user.model.photo"
+              alt=""
               class="w-20 h-20 mr-5 rounded-full"
-              :src="userStore.user.avatar + '?imageView2/1/w/80/h/80'"
             />
             <div>
               <p>{{ greetings }}</p>
@@ -43,11 +44,11 @@
     <!-- 数据卡片 -->
     <el-row :gutter="10" class="mt-3">
       <el-col
-        :xs="24"
-        :sm="12"
-        :lg="6"
         v-for="(item, index) in cardData"
         :key="index"
+        :lg="6"
+        :sm="12"
+        :xs="24"
       >
         <el-card shadow="never">
           <template #header>
@@ -81,34 +82,34 @@
     <!-- Echarts 图表 -->
     <el-row :gutter="10" class="mt-3">
       <el-col
-        :xs="24"
-        :sm="12"
-        :lg="8"
-        class="mb-2"
         v-for="item in chartData"
         :key="item"
+        :lg="8"
+        :sm="12"
+        :xs="24"
+        class="mb-2"
       >
         <component
           :is="chartComponent(item)"
           :id="item"
+          class="bg-[var(--el-bg-color-overlay)]"
           height="400px"
           width="100%"
-          class="bg-[var(--el-bg-color-overlay)]"
         />
       </el-col>
     </el-row>
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { EpPropMergeType } from "element-plus/es/utils/vue/props/types";
+import { useUserStore } from "@/store/modules/user";
+import { TransitionPresets, useTransition } from "@vueuse/core";
+
 defineOptions({
   name: "Dashboard",
   inheritAttrs: false,
 });
-
-import { useUserStore } from "@/store/modules/user";
-import { useTransition, TransitionPresets } from "@vueuse/core";
 
 const userStore = useUserStore();
 const date: Date = new Date();
@@ -118,18 +119,19 @@ const greetings = computed(() => {
   if (hours >= 6 && hours < 8) {
     return "晨起披衣出草堂，轩窗已自喜微凉🌅！";
   } else if (hours >= 8 && hours < 12) {
-    return "上午好，" + userStore.user.nickname + "！";
+    return "上午好，" + userStore.user.model.username + "！";
   } else if (hours >= 12 && hours < 18) {
-    return "下午好，" + userStore.user.nickname + "！";
+    return "下午好，" + userStore.user.model.username + "！";
   } else if (hours >= 18 && hours < 24) {
-    return "晚上好，" + userStore.user.nickname + "！";
+    return "晚上好，" + userStore.user.model.username + "！";
   } else {
     return "偷偷向银河要了一把碎星，只等你闭上眼睛撒入你的梦中，晚安🌛！";
   }
 });
 
 const duration = 5000;
-
+// 图片根路径
+const baseurl = import.meta.env.VITE_BASE_URL;
 // 销售额
 const amount = ref(0);
 const amountOutput = useTransition(amount, {
@@ -197,6 +199,7 @@ interface CardProp {
   dataDesc: string;
   iconClass: string;
 }
+
 // 卡片数量
 const cardData = ref<CardProp[]>([
   {
@@ -241,6 +244,10 @@ const chartComponent = (item: string) => {
 </script>
 
 <style lang="scss" scoped>
+.el-form-item {
+  align-content: center !important;
+}
+
 .dashboard-container {
   position: relative;
   padding: 24px;

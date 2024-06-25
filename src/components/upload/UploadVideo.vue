@@ -1,31 +1,32 @@
 <template>
   <el-upload
     v-model:file-list="fileList"
-    class="upload-demo"
-    :headers="headers"
     :action="action"
-    multiple
-    :on-success="handleSuccess"
-    :on-remove="handleRemove"
     :before-remove="beforeRemove"
+    :headers="headers"
     :limit="limit"
     :on-exceed="handleExceed"
+    :on-remove="handleRemove"
+    :on-success="handleSuccess"
+    class="upload-demo"
+    multiple
   >
     <el-button type="primary">{{ props.text }}</el-button>
   </el-upload>
 </template>
 <script lang="ts" setup>
-import { ref, defineEmits, watch, defineProps } from "vue";
-import { ElMessage, ElMessageBox } from "element-plus";
 import type { PropType } from "vue";
-const emit = defineEmits(["upload", "uploadrem"]);
+import { defineEmits, defineProps, ref, watch } from "vue";
+import type { UploadProps, UploadUserFile } from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 import { useUserStore } from "@/store";
+
+const emit = defineEmits(["upload", "uploadrem"]);
 const userStore = useUserStore();
 const action = import.meta.env.VITE_BASE_UPLOAD_ADD || "";
 const headers = {
   Authorization: userStore.token || "",
 };
-import type { UploadProps, UploadUserFile } from "element-plus";
 const props = defineProps({
   showlist: {
     type: Array as PropType<UploadUserFile[]>,
@@ -48,7 +49,7 @@ const props = defineProps({
 watch(
   () => props.showlist,
   (newval: UploadUserFile[]) => {
-    console.log("视频", newval);
+    console.log("文件上传", newval);
 
     fileList.value = newval;
   },
@@ -59,7 +60,7 @@ watch(
   () => props.delete,
   (newval: boolean) => {
     console.log(6666, newval);
-    if (newval == false) {
+    if (!newval) {
       fileList.value = [];
     }
   },

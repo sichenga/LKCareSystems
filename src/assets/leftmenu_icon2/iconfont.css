@@ -1,25 +1,25 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-  font-family: 'iconfont'; /* Project id 4564477 */
-  src:
-    url('//at.alicdn.com/t/c/font_4564477_96y89n1kvr8.woff2?t=1716869165003') format('woff2'),
-    url('//at.alicdn.com/t/c/font_4564477_96y89n1kvr8.woff?t=1716869165003') format('woff'),
-    url('//at.alicdn.com/t/c/font_4564477_96y89n1kvr8.ttf?t=1716869165003') format('truetype');
+  font-family: 'iconfont';
+  /* Project id 4564477 */
+  src: url('//at.alicdn.com/t/c/font_4564477_01vrvbijmu9e.woff2?t=1718899630440') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4564477_01vrvbijmu9e.woff?t=1718899630440') format('woff'),
+    url('//at.alicdn.com/t/c/font_4564477_01vrvbijmu9e.ttf?t=1718899630440') format('truetype');
 }
 
 .iconfont {
-  font-family: 'iconfont' !important;
+  font-family: 'iconfont', serif !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-iconxt:before {
+.icon-sugar:before {
   content: '\e60e';
 }
 
-.icon-iconxy:before {
+.icon-blood:before {
   content: '\e60f';
 }
 
@@ -55,9 +55,18 @@
   content: '\e636';
 }
 
-.icon-Thermometer:before {
+.icon-temperature:before {
   content: '\e68f';
 }
+
 .icon-config::before {
   content: '\e61c';
+}
+
+.icon-goout:before {
+  content: "\e63f";
+}
+
+.inco-laundry:before {
+  content: "\e65b"
 }

@@ -38,11 +38,11 @@ export interface AddElderlyRequest {
   idCard: string;
   politics: string;
   socialCard: string;
-  marriage: null;
-  eduLevel: null;
-  education: null;
-  resident: null;
-  address: null;
+  marriage: undefined;
+  eduLevel: undefined;
+  education: undefined;
+  resident: undefined;
+  address: undefined;
   begId: number | undefined;
   state: number | undefined;
   health: Health;

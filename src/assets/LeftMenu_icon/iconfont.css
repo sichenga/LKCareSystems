@@ -1,13 +1,14 @@
 /* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
-  font-family: 'iconfont';  /* Project id 4543128 */
+  font-family: 'iconfont';
+  /* Project id 4543128 */
   src: url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.woff2?t=1715507018555') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.woff?t=1715507018555') format('woff'),
-       url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.ttf?t=1715507018555') format('truetype');
+    url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.woff?t=1715507018555') format('woff'),
+    url('//at.alicdn.com/t/c/font_4543128_wegqfw9qqgc.ttf?t=1715507018555') format('truetype');
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: "iconfont", serif !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -262,9 +263,6 @@
   content: "\e610";
 }
 
-.icon-goout:before {
-  content: "\e71f";
-}
 
 .icon-exchange:before {
   content: "\e67d";
@@ -289,4 +287,3 @@
 .icon-task:before {
   content: "\e626";
 }
-

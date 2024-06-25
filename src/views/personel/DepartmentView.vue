@@ -2,51 +2,59 @@
   <!-- 部门管理 -->
   <div class="app-container">
     <el-card class="box-card">
-    <el-button type="primary" @click="add">添加部门</el-button>
-    <DepartmentTree
-      v-if="isdialog"
-      @close="close"
-      :deppid="deppid"
-      :depid="depid"
-      :depname="depname"
-    />
-    <el-tree
-      class="tree"
-      style="max-width: 400px"
-      :data="dataSource"
-      show-checkbox
-      node-key="id"
-      :expand-on-click-node="false"
-      :props="{ children: 'children', label: 'name' }"
-    >
-      <template #default="{ node, data }">
-        <span class="custom-tree-node">
-          <span>{{ node.label }}</span>
-          <span>
-            <el-button type="success" @click="add(data)" :icon="Plus" circle />
-            <el-button type="primary" @click="emit(data)" :icon="Edit" circle />
-            <el-button
-              type="danger"
-              @click="remove(data)"
-              :icon="Delete"
-              circle
-            />
+      <el-button type="primary" @click="add">添加部门</el-button>
+      <DepartmentTree
+        v-if="isdialog"
+        :depid="depid"
+        :depname="depname"
+        :deppid="deppid"
+        @close="close"
+      />
+      <el-tree
+        :data="dataSource"
+        :expand-on-click-node="false"
+        :props="{ children: 'children', label: 'name' }"
+        class="tree"
+        node-key="id"
+        show-checkbox
+        style="max-width: 400px"
+      >
+        <template #default="{ node, data }">
+          <span class="custom-tree-node">
+            <span>{{ node.label }}</span>
+            <span>
+              <el-button
+                :icon="Plus"
+                circle
+                type="success"
+                @click="add(data)"
+              />
+              <el-button
+                :icon="Edit"
+                circle
+                type="primary"
+                @click="emit(data)"
+              />
+              <el-button
+                :icon="Delete"
+                circle
+                type="danger"
+                @click="remove(data)"
+              />
+            </span>
           </span>
-        </span>
-      </template>
-    </el-tree>
-  </el-card>
+        </template>
+      </el-tree>
+    </el-card>
   </div>
-  
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, ref } from "vue";
 import { Delete, Edit, Plus } from "@element-plus/icons-vue";
-import { TreeData } from "@/utils/utils";
+import { getMessageBox, TreeData } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-import { getMessageBox } from "@/utils/utils";
-import { departmentList, delDepartment } from "@/service/staff/StaffApi";
+import { delDepartment, departmentList } from "@/service/staff/StaffApi";
 import type { DepartmentListParams } from "@/service/staff/StaffType";
 
 const DepartmentTree = defineAsyncComponent(
@@ -69,7 +77,7 @@ onMounted(() => {
   getlist();
 });
 // 增加部门
-const add = (data: DepartmentListParams) => {
+const add = (data?: any) => {
   console.log(1111, data);
 
   if (data?.id) {
@@ -115,7 +123,7 @@ const remove = async (data: DepartmentListParams) => {
 };
 // 关闭弹窗
 const close = (isrefresh: boolean) => {
-  if (isrefresh === true) {
+  if (isrefresh) {
     getlist();
   }
   depid.value = 0;
@@ -125,7 +133,7 @@ const close = (isrefresh: boolean) => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .box-card {
   width: 100%;
   height: 100%;
@@ -144,5 +152,9 @@ const close = (isrefresh: boolean) => {
   span:last-child {
     margin-left: 15px;
   }
+}
+:deep(.el-tree-node__content) {
+  height: 33px;
+  margin-bottom: 5px;
 }
 </style>

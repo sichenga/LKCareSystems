@@ -2,52 +2,56 @@
   <!-- 楼层管理 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-    <el-button type="primary" @click="addBuild">新增楼层</el-button>
-    <FloorDialog
-      @close="close"
-      v-if="isdialog"
-      :list="list"
-      :pid="pid"
-      :id="id"
-    />
-    <el-tree
-      style="max-width: 600px"
-      :data="dataSource"
-      show-checkbox
-      node-key="id"
-      :expand-on-click-node="false"
-      :props="{ label: 'name', children: 'children' }"
-    >
-      <template #default="{ node, data }">
-        <span class="custom-tree-node">
-          <span>{{ node.label }}</span>
-          <span>
-            <el-button type="success" @click="add(data)" :icon="Plus" circle />
-            <el-button
-              type="primary"
-              @click="modification(data)"
-              :icon="Edit"
-              circle
-            />
-            <el-button
-              type="danger"
-              @click="del(data.id)"
-              :icon="Delete"
-              circle
-            />
+      <el-button type="primary" @click="addBuild">新增楼层</el-button>
+      <FloorDialog
+        v-if="isdialog"
+        :id="id"
+        :list="list"
+        :pid="pid"
+        @close="close"
+      />
+      <el-tree
+        :data="dataSource"
+        :expand-on-click-node="false"
+        :props="{ label: 'name', children: 'children' }"
+        node-key="id"
+        show-checkbox
+        style="max-width: 600px"
+      >
+        <template #default="{ node, data }">
+          <span class="custom-tree-node">
+            <span>{{ node.label }}</span>
+            <span>
+              <el-button
+                :icon="Plus"
+                circle
+                type="success"
+                @click="add(data)"
+              />
+              <el-button
+                :icon="Edit"
+                circle
+                type="primary"
+                @click="modification(data)"
+              />
+              <el-button
+                :icon="Delete"
+                circle
+                type="danger"
+                @click="del(data.id)"
+              />
+            </span>
           </span>
-        </span>
-      </template>
-    </el-tree>
-  </el-card>
+        </template>
+      </el-tree>
+    </el-card>
   </div>
-  
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import FloorDialog from "@/components/dialog/config/FloorDialog.vue";
-import { Plus, Delete, Edit } from "@element-plus/icons-vue";
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { ConfigBuildingList, delBuilding } from "@/service/config/ConfigApi";
@@ -67,7 +71,7 @@ const buildingList = async () => {
 //弹出框
 const isdialog = ref(false);
 const close = (val: boolean) => {
-  if (val == true) {
+  if (val) {
     buildingList();
   }
   isdialog.value = false;
@@ -128,5 +132,9 @@ onMounted(() => {
   justify-content: space-between;
   font-size: 14px;
   padding-right: 8px;
+}
+:deep(.el-tree-node__content) {
+  height: 33px;
+  margin-bottom: 5px;
 }
 </style>

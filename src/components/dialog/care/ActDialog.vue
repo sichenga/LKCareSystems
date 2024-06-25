@@ -5,7 +5,7 @@
     width="500"
     @close="close"
   >
-    <el-form label-width="130px" label-position="left" style="max-width: 600px">
+    <el-form label-position="left" label-width="130px" style="max-width: 600px">
       <el-form-item
         v-for="item in states.elderly"
         :key="item.id"
@@ -13,23 +13,23 @@
       >
         {{ item.elderlyName }}
       </el-form-item>
-      <el-form-item label="精神慰籍内容：" class="formitem">
-        <div class="content">
-          {{ states.content }}
-        </div>
+      <el-form-item class="formitem" label="精神慰籍内容：">
+        <div class="content" v-html="states.content"></div>
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">关闭</el-button>
+        <el-button @click="close(false)">关闭</el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, ref } from "vue";
 import { PlayList } from "@/service/care/gooutApi";
+
+// eslint-disable-next-line vue/require-prop-types
 const props = defineProps(["id"]);
 const emit = defineEmits(["close"]);
 const dialogVisible = ref(true);
@@ -54,6 +54,9 @@ onMounted(() => {
 .content {
   width: 80%;
   white-space: normal;
+  :deep(p) {
+    margin: 0 !important;
+  }
 }
 .formitem {
   align-items: flex-start;
