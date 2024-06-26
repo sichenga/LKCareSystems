@@ -1,15 +1,13 @@
 import { resetRouter } from "@/router";
 import { store } from "@/store";
 import { adminLogin } from "@/service/admin/AdminApi";
-import { LoginData } from "@/api/auth/model";
-import { UserInfo } from "@/api/user/model";
 import { TOKEN_KEY } from "@/enums/CacheEnum";
 import { getList } from "@/service/role/RoleApi";
 
 export const useUserStore = defineStore(
   "user",
   () => {
-    const user = ref<UserInfo>({
+    const user = ref<any>({
       roles: [],
       perms: [],
       model: {},
@@ -27,7 +25,7 @@ export const useUserStore = defineStore(
      * @returns
      * @param loginData
      */
-    function login(loginData: LoginData) {
+    function login(loginData: any) {
       return new Promise<void>((resolve, reject) => {
         adminLogin(loginData)
           .then((data: any) => {
@@ -49,11 +47,9 @@ export const useUserStore = defineStore(
 
     // 获取信息(权限集合)
     function getUserInfo() {
-      console.log("权限");
-      return new Promise<UserInfo>((resolve, reject) => {
+      return new Promise<any>((resolve, reject) => {
         getList()
           .then((data: any) => {
-            console.log(11333, data);
             if (!data) {
               reject("Verification failed, please Login again.");
               return;
