@@ -2,50 +2,50 @@
   <!-- 新增岗位 -->
   <div class="app-container">
     <div class="box">
-    <el-form
-      ref="ruleFormRef"
-      style="max-width: 600px"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
-      <el-form-item label="岗位名称:" prop="name">
-        <el-input v-model="ruleForm.name" placeholder="请输入" />
-      </el-form-item>
-      <el-form-item label="权限配置:" prop="name" class="tree">
-        <el-tree
-          style="max-width: 600px"
-          :data="data.tableData"
-          show-checkbox
-          node-key="id"
-          :expand-on-click-node="false"
-          :props="{ label: 'name' }"
-          ref="treeRef"
-        />
-      </el-form-item>
-    </el-form>
+      <el-form
+        ref="ruleFormRef"
+        :model="ruleForm"
+        :rules="rules"
+        :size="formSize"
+        class="demo-ruleForm"
+        label-width="auto"
+        status-icon
+        style="max-width: 600px"
+      >
+        <el-form-item label="岗位名称:" prop="name">
+          <el-input v-model="ruleForm.name" placeholder="请输入" />
+        </el-form-item>
+        <el-form-item class="tree" label="权限配置:" prop="name">
+          <el-tree
+            ref="treeRef"
+            :data="data.tableData"
+            :expand-on-click-node="false"
+            :props="{ label: 'name' }"
+            node-key="id"
+            show-checkbox
+            style="max-width: 600px"
+          />
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="button">
+      <el-button @click="resetForm()">取消</el-button>
+      <el-button type="primary" @click="submitForm(ruleFormRef)">
+        确定
+      </el-button>
+    </div>
   </div>
-  <div class="button">
-    <el-button @click="resetForm()">取消</el-button>
-    <el-button type="primary" @click="submitForm(ruleFormRef)">
-      确定
-    </el-button>
-  </div>
-  </div>
-  
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, watch } from "vue";
+import { onMounted, reactive, ref, watch } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-import { ElTree, ElMessage } from "element-plus";
-import { getList, Addroles, Rolesget } from "@/service/role/RoleApi";
+import { ElMessage, ElTree } from "element-plus";
+import { Addroles, getList, Rolesget } from "@/service/role/RoleApi";
 import type { Addrole, RoleList } from "@/service/role/Roletype";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { TreeData } from "@/utils/utils";
+
 const router = useRouter();
 const route = useRoute();
 const treeRef = ref<InstanceType<typeof ElTree>>();
@@ -129,7 +129,7 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .box {
   background-color: #fff;
   padding: 20px;
@@ -149,6 +149,7 @@ onMounted(() => {
   height: 178px;
   display: block;
 }
+
 .tree {
   align-items: flex-start;
 }

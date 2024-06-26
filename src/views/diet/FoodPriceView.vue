@@ -1,7 +1,7 @@
 <template>
   <!-- 价格分析 -->
   <!-- 详情 -->
-  <PriceDialog @close="close" v-if="isdialog" :pricedata="pricedata" />
+  <PriceDialog v-if="isdialog" :pricedata="pricedata" @close="close" />
   <div class="details">
     <div class="left">
       <div class="l">
@@ -12,17 +12,17 @@
         <div>当前采购价：</div>
       </div>
       <div class="r">
-        <div>{{ state.foodinfo.name }}</div>
-        <div>{{ state.foodinfo.supplierName }}</div>
-        <div>{{ state.foodinfo.wholePrice }}</div>
-        <div>{{ state.foodinfo.sellPrice }}</div>
-        <div>{{ state.foodinfo.purchasePrice }}</div>
+        <div>{{ state.foodinfo?.name }}</div>
+        <div>{{ state.foodinfo?.supplierName }}</div>
+        <div>{{ state.foodinfo?.wholePrice }}</div>
+        <div>{{ state.foodinfo?.sellPrice }}</div>
+        <div>{{ state.foodinfo?.purchasePrice }}</div>
       </div>
     </div>
     <div class="right">
       <span
         >价格更新于：{{
-          moment(state.foodinfo.updateTime).format("YYYY-MM-DD HH:mm")
+          moment(state.foodinfo?.updateTime).format("YYYY-MM-DD HH:mm")
         }}</span
       >
     </div>
@@ -31,10 +31,10 @@
   <div class="chart">
     <div>价格趋势</div>
     <ECharts
-      :timelist="state.timelist"
-      :sellPricelist="state.sellPricelist"
-      :wholePricelist="state.wholePricelist"
       :purchasePricelist="state.purchasePricelist"
+      :sellPricelist="state.sellPricelist"
+      :timelist="state.timelist"
+      :wholePricelist="state.wholePricelist"
     />
   </div>
   <div class="table">
@@ -46,8 +46,8 @@
           <el-form-item>
             <el-select
               v-model="formInline.region"
-              placeholder="请选择"
               clearable
+              placeholder="请选择"
             >
               <el-option label="Zone one" value="shanghai" />
               <el-option label="Zone two" value="beijing" />
@@ -59,7 +59,7 @@
     <!-- 表格 -->
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
       <template #operate="{ data }">
-        <el-button type="primary" size="small" link @click="priceUpdate(data)"
+        <el-button link size="small" type="primary" @click="priceUpdate(data)"
           >编辑</el-button
         >
       </template>
@@ -72,12 +72,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, defineAsyncComponent } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { Foodget, foodpricelist } from "@/service/food/FoodApi";
 import PriceDialog from "@/components/dialog/diet/PriceDialog.vue";
 import type { FoodDetail } from "@/service/food/FoodType";
 import moment from "moment";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -189,7 +190,7 @@ const close = (isrefresh: boolean) => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .details {
   height: 200px;
   display: flex;

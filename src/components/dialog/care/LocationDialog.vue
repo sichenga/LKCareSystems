@@ -7,27 +7,27 @@
   >
     <el-form
       :model="form"
-      label-width="100px"
       label-position="left"
+      label-width="100px"
       style="max-width: 600px"
     >
       <el-form-item label="地址名称：">
         <el-input v-model="form.name" @input="createQRCode" />
       </el-form-item>
       <el-form-item label="地址二维码：">
-        <el-image style="width: 80px; height: 80px" :src="codedata" />
+        <el-image :src="codedata" style="width: 80px; height: 80px" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="add"> 确认 </el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, defineProps, watch } from "vue";
+import { defineEmits, defineProps, reactive, ref, watch } from "vue";
 import { addressadd, addressupdate } from "@/service/address/AddressApi";
 import { uploadImage } from "@/service/upload/UploadApi";
 import type { AddressAdd } from "@/service/address/AddressType";
@@ -35,6 +35,7 @@ import { dataURLtoFile } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 // 二维码
 import qrcode from "qrcode";
+
 const emit = defineEmits(["close"]);
 const dialogVisible = ref(true);
 const upload = import.meta.env.VITE_BASE_URL;
@@ -66,8 +67,8 @@ watch(
 // 新增地址
 const add = async () => {
   let res: any;
+  form.qrcode = await uploadcode();
   if (!form.id) {
-    form.qrcode = await uploadcode();
     res = await addressadd(form);
   } else {
     res = await addressupdate(form);

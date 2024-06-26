@@ -1,4 +1,3 @@
-w
 <template>
   <!-- 采购申请 -->
   <!-- 查询 -->
@@ -65,7 +64,7 @@ w
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { PurchaseList } from "@/service/food/FoodApi";
 import type { Purchase } from "@/service/food/FoodType";
@@ -190,15 +189,7 @@ const psize = (val: number) => {
 }
 </style>
 <style>
-.demo-form-inline .el-input {
+.demo-form-inline {
   --el-input-width: 220px;
-}
-
-.demo-form-inline .el-select {
-  --el-select-width: 220px;
-}
-
-.el-card {
-  width: 100%;
 }
 </style>

@@ -2,94 +2,98 @@
   <!-- 新增预定 -->
   <div class="app-container">
     <el-card>
-    <div class="title">
-      <div><i>▋</i> 预定信息</div>
-    </div>
-    <el-form
-      :inline="true"
-      label-position="top"
-      ref="ruleFormRef"
-      :model="params"
-      :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
-      <el-form-item label="预定人姓名：" prop="name">
-        <el-input v-model="params.name" placeholder="请输入姓名" />
-      </el-form-item>
-      <el-form-item label="预定人电话:" prop="mobile">
-        <el-input v-model="params.mobile" placeholder="请输入预定人电话" />
-      </el-form-item>
-      <el-form-item label="与老人关系:" prop="relation">
-        <el-select v-model="params.relation" placeholder="请选择">
-          <el-option label="父子关系" value="父子关系" />
-          <el-option label="父女关系" value="父女关系" />
-          <el-option label="母子关系" value="母子关系" />
-          <el-option label="母女关系" value="母女关系" />
-          <el-option label="其他" value="其他" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="预定床位:" prop="begId">
-        <el-cascader
-          v-model="params.begId"
-          style="width: 499px"
-          :options="options"
-          :props="props"
-          @change="handleChange"
-        />
-      </el-form-item>
-      <el-form-item label="开始日期:" prop="startDate">
-        <MayTimePicker
-          @change="change"
-          :remtime="remtime"
-          :format="'YYYY-MM-DD'"
-          :valueFormat="'YYYY-MM-DD'"
-          style="width: 479px"
-        />
-      </el-form-item>
-      <el-form-item label="预定时长（天）:" prop="day">
-        <el-input v-model="params.day" placeholder="请输入预定时长" />
-      </el-form-item>
-      <el-form-item label="定金应收:" prop="amount">
-        <el-input v-model="params.amount" placeholder="请输入定金应收" />
-      </el-form-item>
-    </el-form>
-    <div class="title" style="margin-top: 20px">
-      <div><i>▋</i> 预定协议</div>
-    </div>
-    <div class="box">
-      <UploadVideo
-        :text="'上传协议'"
-        :limit="3"
-        :showlist="getUploadPictures"
-        class="uploadpic"
-        @upload="pictureupload"
-        @uploadrem="picturerem"
-      />
-      <el-button class="download">下载预定协议</el-button>
-    </div>
-    <!-- 按钮 -->
-    <div class="btn">
-      <el-button type="primary" @click="save">保存暂不提交</el-button>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >保存并提交</el-button
+      <div class="title">
+        <div><i>▋</i> 预定信息</div>
+      </div>
+      <el-form
+        ref="ruleFormRef"
+        :inline="true"
+        :model="params"
+        :rules="rules"
+        :size="formSize"
+        class="demo-ruleForm"
+        label-position="top"
+        label-width="auto"
+        status-icon
       >
-      <el-button @click="cancel">取消</el-button>
-    </div>
-  </el-card>
+        <el-form-item label="预定人姓名：" prop="name">
+          <el-input v-model="params.name" placeholder="请输入姓名" />
+        </el-form-item>
+        <el-form-item label="预定人电话:" prop="mobile">
+          <el-input v-model="params.mobile" placeholder="请输入预定人电话" />
+        </el-form-item>
+        <el-form-item label="与老人关系:" prop="relation">
+          <el-select v-model="params.relation" placeholder="请选择">
+            <el-option label="父子关系" value="父子关系" />
+            <el-option label="父女关系" value="父女关系" />
+            <el-option label="母子关系" value="母子关系" />
+            <el-option label="母女关系" value="母女关系" />
+            <el-option label="其他" value="其他" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="预定床位:" prop="begId">
+          <el-cascader
+            v-model="params.begId"
+            :options="options"
+            :props="props"
+            style="width: 499px"
+            @change="handleChange"
+          />
+        </el-form-item>
+        <el-form-item label="开始日期:" prop="startDate">
+          <MayTimePicker
+            :format="'YYYY-MM-DD'"
+            :remtime="remtime"
+            :valueFormat="'YYYY-MM-DD'"
+            style="width: 479px"
+            @change="change"
+          />
+        </el-form-item>
+        <el-form-item label="预定时长（天）:" prop="day">
+          <el-input v-model="params.day" placeholder="请输入预定时长" />
+        </el-form-item>
+        <el-form-item label="定金应收:" prop="amount">
+          <el-input v-model="params.amount" placeholder="请输入定金应收" />
+        </el-form-item>
+      </el-form>
+      <div class="title" style="margin-top: 20px">
+        <div><i>▋</i> 预定协议</div>
+      </div>
+      <div class="box">
+        <UploadVideo
+          :limit="3"
+          :showlist="getUploadPictures"
+          :text="'上传协议'"
+          class="uploadpic"
+          @upload="pictureupload"
+          @uploadrem="picturerem"
+        />
+        <el-button class="download">下载预定协议</el-button>
+      </div>
+      <!-- 按钮 -->
+      <div class="btn">
+        <el-button type="primary" @click="save">保存暂不提交</el-button>
+        <el-button type="primary" @click="submitForm(ruleFormRef)"
+          >保存并提交
+        </el-button>
+        <el-button @click="cancel">取消</el-button>
+      </div>
+    </el-card>
   </div>
-  
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
+import type {
+  ComponentSize,
+  FormInstance,
+  FormRules,
+  UploadUserFile,
+} from "element-plus";
 import { ElMessage } from "element-plus";
-import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import {
   ConfigBuildingList,
-  getHouseList,
   getBedsList,
+  getHouseList,
 } from "@/service/config/ConfigApi";
 import {
   reservationAdd,
@@ -97,9 +101,9 @@ import {
   reservationUpdate,
 } from "@/service/market/ReserveApi";
 import type { ReservationAddParams } from "@/service/market/Reservetype";
-import type { UploadUserFile } from "element-plus";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import MayTimePicker from "@/components/timepicker/MayTimePicker.vue";
+
 const router = useRouter();
 const route = useRoute();
 const getUploadPictures = ref<UploadUserFile[]>([]);
@@ -281,6 +285,7 @@ const reserve = async () => {
       children: convertToTree(flatData, node.id),
     }));
   }
+
   // let tree =
   // console.log('数据', tree);
   options.value = convertToTree(building, 0);
@@ -351,6 +356,7 @@ onMounted(() => {
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
 .uploadpic {
   margin-left: 5px;
 }

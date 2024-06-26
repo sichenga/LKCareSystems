@@ -210,7 +210,7 @@ const del = async (id: number) => {
   if (res) {
     let _res: any = await getDeleteList(id);
     if (_res.code == 10000) {
-      getlist(); //院内活动列表
+      await getlist(); //院内活动列表
       ElMessage.success("删除成功");
     }
   } else {

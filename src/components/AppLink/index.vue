@@ -4,13 +4,13 @@
   </component>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 defineOptions({
   name: "AppLink",
   inheritAttrs: false,
 });
 
-import { isExternal } from "@/utils/index";
+import { isExternal } from "@/utils";
 
 const props = defineProps({
   to: {
