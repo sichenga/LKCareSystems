@@ -54,7 +54,7 @@ export const useBuildStroke = defineStore(
               .map((chItem: any) => ({
                 id: chItem.id,
                 name: chItem.name,
-                pid: chItem.houseIde,
+                pid: chItem.houseId,
               }))
               .filter((FItem: any) => FItem.pid === item.id),
           }))

@@ -21,7 +21,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">关闭</el-button>
+        <el-button @click="close(false)">关闭</el-button>
       </div>
     </template>
   </el-dialog>
@@ -30,6 +30,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, defineEmits, defineProps } from "vue";
 import { PlayList } from "@/service/care/gooutApi";
+// eslint-disable-next-line vue/require-prop-types
 const props = defineProps(["id"]);
 const emit = defineEmits(["close"]);
 const dialogVisible = ref(true);
