@@ -162,8 +162,6 @@ const isProxy = ref(false);
 // 选择食材
 const hoaldIngredient = (val: any) => {
   if (val) {
-    console.log(1111, val);
-
     isProxy.value = true;
 
     data.AddData.foods = val.map((item: any) => {
