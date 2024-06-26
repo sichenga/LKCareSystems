@@ -28,7 +28,6 @@
 <script lang="ts" setup>
 import { defineEmits, defineProps, onMounted, ref } from "vue";
 import { PlayList } from "@/service/care/gooutApi";
-
 // eslint-disable-next-line vue/require-prop-types
 const props = defineProps(["id"]);
 const emit = defineEmits(["close"]);

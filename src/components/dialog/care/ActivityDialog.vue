@@ -166,7 +166,7 @@ const OldName = ref<string[]>([]);
 const serveList = (val: any) => {
   console.log(1111, val);
   OldName.value = [
-    ...OldName.value,
+    // ...OldName.value,
     ...val
       .filter((item: any) => !OldName.value.includes(item.name))
       .map((item: any) => item.name),

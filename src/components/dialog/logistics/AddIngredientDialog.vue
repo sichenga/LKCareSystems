@@ -49,6 +49,8 @@ import { FoodList } from "@/service/food/FoodApi";
 import type { Supplier } from "@/service/food/FoodType";
 import { useUserStore } from "@/store";
 const useUser = useUserStore();
+console.log(2222222, useUser);
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -110,13 +112,6 @@ const close = (close: boolean = false) => {
   emit("close", close);
 };
 
-// 提交表单
-const submitForm = async () => {
-  useUser.ingredients(multipleSelection.value);
-  emit("ingredient", useUser.ingredient);
-  close(true);
-};
-
 // 分页
 const handlePsize = (val: any) => {
   params.pageSize = val;
@@ -132,6 +127,14 @@ const multipleSelection = ref<any[]>([]);
 const handleSelectionChange = (val: any[]) => {
   multipleSelection.value = val;
 };
+// 提交表单
+const submitForm = async () => {
+  console.log(3333, multipleSelection.value);
+  useUser.ingredients(multipleSelection.value);
+  emit("ingredient", useUser.ingredient);
+  close(true);
+};
+
 //获取食材
 const gerFoodList = async () => {
   let res: any = await FoodList(params);

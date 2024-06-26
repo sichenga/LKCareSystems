@@ -15,6 +15,12 @@ export const useUserStore = defineStore(
       model: {},
     });
 
+    //选择食材数据
+    const ingredient = ref([]);
+    const ingredients = (val: any) => {
+      ingredient.value = val;
+    };
+
     /**
      * 登录
      *
@@ -85,9 +91,11 @@ export const useUserStore = defineStore(
     return {
       user,
       login,
+      ingredient,
       getUserInfo,
       logout,
       resetToken,
+      ingredients,
     };
   },
   {

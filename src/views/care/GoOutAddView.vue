@@ -11,7 +11,7 @@
         :size="formSize"
         status-icon
       >
-        <el-form-item label="选择外出老人">
+        <el-form-item label="选择外出老人123">
           <el-input v-model="data.oldlist" disabled />
         </el-form-item>
         <el-form-item label="外出时间">
@@ -73,6 +73,7 @@ import { getElderly } from "@/service/old/OldApi";
 import type { AddGoout } from "@/service/care/gooutType";
 const router = useRouter();
 const route = useRoute();
+console.log(222222222222, route.params.id);
 
 const DateTimePicke = defineAsyncComponent(
   () => import("@/components/timepicker/MayDateTimePicker.vue")
@@ -131,24 +132,23 @@ const cancel = () => {
 // 提交表单
 const add = async () => {
   let res: any;
-  if (route.query.id) {
+  if (route.params.id) {
     res = await UpdateGoout(ruleForm);
   } else {
     res = await AddGooutList(ruleForm);
   }
-
   if (res?.code == 10000) {
     router.push("/care/goout");
-    ElMessage.success(route.query.id ? "修改成功" : "添加成功");
+    ElMessage.success(route.params.id ? "修改成功" : "添加成功");
   }
 };
 
+//老人列表
 const getOldList = async () => {
   if (route.query.oldId) {
     let oldId = Number(route.query.oldId);
     ruleForm.elderlyId = oldId;
     let res: any = await getElderly(oldId);
-
     if (res?.code == 10000) {
       data.oldlist = res.data.name;
     }
