@@ -115,20 +115,17 @@ onMounted(async () => {
   height: 50px;
   display: flex;
   margin-top: 30px;
-
   .header {
     width: 50px;
     height: 50px;
     margin-left: 20px;
     border-radius: 50%;
-
     img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
     }
   }
-
   .replece {
     color: #75a5ea;
     line-height: 50px;
@@ -156,11 +153,13 @@ onMounted(async () => {
 }
 
 .title {
+  position: relative;
   margin-left: 30px;
 }
 
 .image-title {
-  margin-top: -55px;
-  margin-left: 60px;
+  position: absolute;
+  top: 10px;
+  left: 80px;
 }
 </style>
