@@ -7,16 +7,16 @@
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="scope">
           <el-button
-            type="primary"
-            size="small"
             link
+            size="small"
+            type="primary"
             @click="handleEdit(scope.data.id)"
             >编辑</el-button
           >
           <el-button
-            type="primary"
-            size="small"
             link
+            size="small"
+            type="primary"
             @click="handleDelete(scope.data.id)"
             >删除</el-button
           >
@@ -24,25 +24,26 @@
       </MayTable>
       <!-- 分页 -->
       <Pagination
-        @page="page"
-        @psize="psize"
-        :total="data.total"
         :page="params.page"
         :psize="params.pageSize"
+        :total="data.total"
+        @page="page"
+        @psize="psize"
       />
       <!-- 弹出框 -->
-      <SupplierDialog @close="close" :id="editId" v-if="isdialog" />
+      <SupplierDialog v-if="isdialog" :id="editId" @close="close" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import SupplierDialog from "@/components/dialog/diet/SupplierDialog.vue";
-import { SupplierList, Supplierdelete } from "@/service/food/FoodApi";
+import { Supplierdelete, SupplierList } from "@/service/food/FoodApi";
 import type { Supplier } from "@/service/food/FoodType";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -139,7 +140,7 @@ const handleDelete = async (id: any) => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .box {
   padding: 20px;
   background-color: #fff;
@@ -154,5 +155,8 @@ const handleDelete = async (id: any) => {
     margin-top: 30px;
     margin-bottom: 20px;
   }
+}
+.el-button {
+  margin-bottom: 15px;
 }
 </style>

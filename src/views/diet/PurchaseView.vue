@@ -192,4 +192,12 @@ const psize = (val: number) => {
 .demo-form-inline {
   --el-input-width: 220px;
 }
+
+.el-select {
+  width: 180px;
+}
+
+.el-card {
+  width: 100%;
+}
 </style>

@@ -3,62 +3,65 @@
   <div class="app-container">
     <div class="box">
       <el-button type="primary" @click="isdialog = true">新增</el-button>
-      <FoodDialog @close="close" v-if="isdialog" :foodid="foodid" />
+      <FoodDialog v-if="isdialog" :foodid="foodid" @close="close" />
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
           <el-button
-            type="primary"
-            size="small"
             link
+            size="small"
+            type="primary"
             @click="handleEdit(data.id)"
-            >编辑</el-button
-          >
+            >编辑
+          </el-button>
           <el-button
-            type="primary"
-            size="small"
             link
+            size="small"
+            type="primary"
             @click="handleDelete(data.id)"
-            >删除</el-button
-          >
+            >删除
+          </el-button>
           <el-button
-            type="primary"
-            size="small"
             link
+            size="small"
+            type="primary"
             @click="priceUpdate(data.id)"
-            >价格更新</el-button
-          >
+            >价格更新
+          </el-button>
           <el-button
-            type="primary"
-            size="small"
             link
+            size="small"
+            type="primary"
             @click="priceAnalysis(data.id)"
-            >价格分析</el-button
-          >
+            >价格分析
+          </el-button>
         </template>
       </MayTable>
       <!-- 分页 -->
       <Pagination
-        :total="total"
         :page="params.page"
         :psize="params.pageSize"
+        :total="total"
         @page="getpage"
         @psize="getpsize"
       />
 
       <!-- 价格更新 -->
-      <PriceDialog @close="close" v-if="isprice" :priceid="priceid" />
+      <PriceDialog v-if="isprice" :priceid="priceid" @close="close" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import FoodDialog from "@/components/dialog/FoodDialog.vue";
 import PriceDialog from "@/components/dialog/diet/PriceDialog.vue";
 import { useRouter } from "vue-router";
+import { Fooddelete, FoodList } from "@/service/food/FoodApi";
+import type { Supplier } from "@/service/food/FoodType";
+
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -66,8 +69,6 @@ const MayTable = defineAsyncComponent(
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-import { FoodList, Fooddelete } from "@/service/food/FoodApi";
-import type { Supplier } from "@/service/food/FoodType";
 const isdialog = ref(false);
 const isprice = ref(false);
 const total = ref(0);
@@ -186,7 +187,7 @@ const getpsize = (val: number) => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .box {
   padding: 20px;
   background-color: #fff;
@@ -194,5 +195,9 @@ const getpsize = (val: number) => {
   .el-table {
     margin-top: 40px;
   }
+}
+
+.el-button {
+  margin-bottom: 15px;
 }
 </style>
