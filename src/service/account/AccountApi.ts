@@ -1,11 +1,14 @@
-import { get, post, del, put } from "@/utils/request";
+import { del, get, post, put } from "@/utils/request";
 import type { AccountList, AddAccount, RoleList } from "./AccountType";
+import { UnwrapNestedRefs } from "vue";
+import { AccountAdd } from "@/service/admin/AdminType";
 // 账号列表 /api/account/list
 const accountlist = (data: AccountList) => get("/api/account/list", data);
 // 添加账号 /api/account/add
 const accountadd = (data: AddAccount) => post("/api/account/add", data);
 // 修改账号 /api/account/update
-const accountupdate = (data: AddAccount) => put("/api/account/update", data);
+const accountupdate = (data: UnwrapNestedRefs<AccountAdd>) =>
+  put("/api/account/update", data);
 // 根据账号ID获取账号信息 /api/account/get/50
 const accountinfo = (id: number) => get(`/api/account/get/${id}`);
 // 根据账号id获取角色列表 /api/role/listForAccount/51

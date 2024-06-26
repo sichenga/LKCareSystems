@@ -1,20 +1,20 @@
 <template>
   <el-upload
-    class="avatar-uploader"
     :action="action"
     :headers="headers"
-    :show-file-list="false"
     :on-success="handleAvatarSuccess"
+    :show-file-list="false"
     :style="style"
+    class="avatar-uploader"
   >
-    <img v-if="imageUrl" :src="ImageUrls + imageUrl" class="avatar" />
+    <img v-if="imageUrl" :src="ImageUrls + imageUrl" alt="" class="avatar" />
     <el-icon v-else class="avatar-uploader-icon">
       <Plus />
     </el-icon>
   </el-upload>
 </template>
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, watch } from "vue";
+import { defineEmits, defineProps, ref, watch } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import type { UploadProps } from "element-plus";
 
