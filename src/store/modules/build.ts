@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import {
   ConfigBuildingList,
-  getHouseList,
   getBedsList,
+  getHouseList,
 } from "@/service/config/ConfigApi";
 
 export const useBuildStroke = defineStore(

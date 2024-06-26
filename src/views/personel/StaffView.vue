@@ -4,112 +4,119 @@
     <!-- 查询 -->
     <div class="app-container">
       <el-card>
-      <el-form
-        ref="Refstaff"
-        :inline="true"
-        :model="states"
-        class="demo-form-inline"
-      >
-        <el-form-item label="员工姓名：" prop="name">
-          <el-input
-            v-model="states.name"
-            placeholder="请输入员工姓名"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="联系方式:" prop="mobile">
-          <el-input
-            v-model="states.mobile"
-            placeholder="请输入联系方式"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="身份证号：" prop="idCard">
-          <el-input
-            v-model="states.idCard"
-            placeholder="请输入身份证号"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="所属部门：" prop="departmentId">
-          <el-select
-            v-model="states.departmentId"
-            placeholder="请选择所属部门"
-            clearable
-          >
-            <el-option
-              v-for="item in departmentData"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
+        <el-form
+          ref="Refstaff"
+          :inline="true"
+          :model="states"
+          class="demo-form-inline"
+        >
+          <el-form-item label="员工姓名：" prop="name">
+            <el-input
+              v-model="states.name"
+              placeholder="请输入员工姓名"
+              clearable
             />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="所属岗位：" prop="roleId">
-          <el-select
-            v-model="states.roleId"
-            placeholder="请选择所属岗位"
-            clearable
-          >
-            <el-option
-              v-for="item in Roles"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
+          </el-form-item>
+          <el-form-item label="联系方式:" prop="mobile">
+            <el-input
+              v-model="states.mobile"
+              placeholder="请输入联系方式"
+              clearable
             />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="状态：" prop="enable">
-          <el-select v-model="states.enable" placeholder="请选择状态" clearable>
-            <el-option label="是" :value="1" />
-            <el-option label="否" :value="2" />
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button @click="reset">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-    <el-card class="table">
-      <el-button style="margin-bottom: 20px" type="primary" @click="add"
-        >新增</el-button
-      >
-      <!-- 表格 -->
-      <MayTable
-        :tableData="data.tableData"
-        :tableItem="data.tableItem"
-        :identifier="identifier"
-      >
-        <template #operate="{ data }">
-          <el-button type="primary" size="small" link @click="handleEdit(data)"
-            >编辑</el-button
-          >
-          <el-button type="primary" size="small" link>
-            <span @click="enable(data, data.enable ? 0 : 1)">{{
-              !data.enable ? "启用" : "禁用"
-            }}</span>
-          </el-button>
-          <el-button
-            type="primary"
-            size="small"
-            link
-            @click="handleDelete(data.id)"
-            >删除</el-button
-          >
-        </template>
-      </MayTable>
-      <!-- 分页 -->
-      <Pagination
-        @page="Holdepage"
-        @psize="Holdepsize"
-        :page="states.page"
-        :psize="states.pageSize"
-        :total="total"
-      />
-    </el-card>
-  </div>
-    
+          </el-form-item>
+          <el-form-item label="身份证号：" prop="idCard">
+            <el-input
+              v-model="states.idCard"
+              placeholder="请输入身份证号"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="所属部门：" prop="departmentId">
+            <el-select
+              v-model="states.departmentId"
+              placeholder="请选择所属部门"
+              clearable
+            >
+              <el-option
+                v-for="item in departmentData"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="所属岗位：" prop="roleId">
+            <el-select
+              v-model="states.roleId"
+              placeholder="请选择所属岗位"
+              clearable
+            >
+              <el-option
+                v-for="item in Roles"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="状态：" prop="enable">
+            <el-select
+              v-model="states.enable"
+              placeholder="请选择状态"
+              clearable
+            >
+              <el-option label="是" :value="1" />
+              <el-option label="否" :value="2" />
+            </el-select>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button @click="reset">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+      <el-card class="table">
+        <el-button style="margin-bottom: 20px" type="primary" @click="add"
+          >新增</el-button
+        >
+        <!-- 表格 -->
+        <MayTable
+          :tableData="data.tableData"
+          :tableItem="data.tableItem"
+          :identifier="identifier"
+        >
+          <template #operate="{ data }">
+            <el-button
+              type="primary"
+              size="small"
+              link
+              @click="handleEdit(data)"
+              >编辑</el-button
+            >
+            <el-button type="primary" size="small" link>
+              <span @click="enable(data, data.enable ? 0 : 1)">{{
+                !data.enable ? "启用" : "禁用"
+              }}</span>
+            </el-button>
+            <el-button
+              type="primary"
+              size="small"
+              link
+              @click="handleDelete(data.id)"
+              >删除</el-button
+            >
+          </template>
+        </MayTable>
+        <!-- 分页 -->
+        <Pagination
+          @page="Holdepage"
+          @psize="Holdepsize"
+          :page="states.page"
+          :psize="states.pageSize"
+          :total="total"
+        />
+      </el-card>
+    </div>
   </div>
 </template>
 
@@ -215,15 +222,12 @@ const Holdepage = (val: any) => {
 };
 // 添加
 const add = () => {
-  router.push("/personel/staff/add");
+  router.push("/personel/staff-add");
 };
 // 编辑
 const handleEdit = (data: any) => {
   router.push({
-    path: "/personel/staff/add",
-    query: {
-      id: data.id,
-    },
+    path: `/personel/staff-edit/${data.id}`,
   });
 };
 

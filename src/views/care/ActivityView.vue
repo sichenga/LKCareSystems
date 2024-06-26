@@ -2,10 +2,10 @@
   <!-- 院内活动 -->
   <div class="app-container">
     <el-card>
-      <ActDialog v-if="isdialog" @close="close" :id="infoId" />
+      <ActDialog v-if="isdialog" :id="infoId" @close="close" />
       <el-form :inline="true" :model="params" class="demo-form-inline">
         <el-form-item label="分类" style="width: 250px">
-          <el-select v-model="params.type" placeholder="请选择" clearable>
+          <el-select v-model="params.type" clearable placeholder="请选择">
             <el-option
               v-for="item in TypeList"
               :key="item.id"
@@ -15,16 +15,16 @@
           </el-select>
         </el-form-item>
         <el-form-item label="老人姓名：">
-          <el-input v-model="params.name" placeholder="请输入" clearable />
+          <el-input v-model="params.name" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="关键字：">
-          <el-input v-model="params.key" placeholder="请输入标题" clearable />
+          <el-input v-model="params.key" clearable placeholder="请输入标题" />
         </el-form-item>
         <el-form-item label="上报时间：">
           <MayDateTimePicker
-            @change="handChange"
-            :statetime="params.beginDate"
             :endtime="params.endDate"
+            :statetime="params.beginDate"
+            @change="handChange"
           />
         </el-form-item>
         <el-form-item>
@@ -34,11 +34,11 @@
       </el-form>
     </el-card>
 
-    <ActivityDialog v-if="dialogVisible" @close="handClose" :id="ids" />
+    <ActivityDialog v-if="dialogVisible" :id="ids" @close="handClose" />
     <el-card style="margin-top: 15px">
       <el-button
-        type="primary"
         style="margin-top: 10px; margin-bottom: 10px"
+        type="primary"
         @click="add"
         >添加老人活动</el-button
       >
@@ -46,36 +46,37 @@
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button type="primary" text @click="getinfo(data.id)"
+          <el-button text type="primary" @click="getinfo(data.id)"
             >查看详情</el-button
           >
-          <el-button type="primary" text @click="compile(data.id)"
+          <el-button text type="primary" @click="compile(data.id)"
             >编辑</el-button
           >
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+          <el-button text type="primary" @click="del(data.id)">删除</el-button>
         </template>
       </MayTable>
       <Pagination
+        :page="params.page"
+        :psize="params.pageSize"
         :total="counts"
         @page="handPage"
         @psize="handPsize"
-        :page="params.page"
-        :psize="params.pageSize"
       />
     </el-card>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import {
+  getDeleteList,
   getPlayList,
   getPlayTypeList,
-  getDeleteList,
 } from "@/service/care/gooutApi";
 import type { playList } from "@/service/care/gooutType";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import ActivityDialog from "@/components/dialog/care/ActivityDialog.vue";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -126,7 +127,7 @@ const params = reactive<playList>({
   name: "", //老人姓名
   beginDate: "", //开始时间yyyy-MM-dd
   endDate: "", //结束时间yyyy-MM-dd
-  type: null, //分类ID
+  type: undefined, //分类ID
   key: "", //关键子
 });
 //院内活动列表
@@ -209,7 +210,7 @@ const del = async (id: number) => {
   if (res) {
     let _res: any = await getDeleteList(id);
     if (_res.code == 10000) {
-      getlist(); //院内活动列表
+      await getlist(); //院内活动列表
       ElMessage.success("删除成功");
     }
   } else {
@@ -223,7 +224,7 @@ const delde = () => {
   params.name = "";
   params.beginDate = "";
   params.endDate = "";
-  params.type = null;
+  params.type = undefined;
   params.key = "";
   getlist(); //院内活动列表
 };

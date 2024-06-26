@@ -1,29 +1,30 @@
 <template>
   <el-upload
-    v-model:file-list="fileList"
     ref="upload"
-    class="upload-demo"
+    v-model:file-list="fileList"
     :action="action"
     :headers="headers"
     :limit="3"
     :on-exceed="handleExceed"
-    :on-success="handleAvatarSuccess"
     :on-remove="handleRemove"
+    :on-success="handleAvatarSuccess"
     :show-file-list="props.showlist"
+    class="upload-demo"
   >
     <template #trigger>
-      <el-button type="primary" :text="texts">{{ props.title }}</el-button>
+      <el-button :text="texts" type="primary">{{ props.title }}</el-button>
     </template>
   </el-upload>
 </template>
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, watch } from "vue";
-const action = import.meta.env.VITE_BASE_UPLOAD_ADD || "";
-
-import { genFileId } from "element-plus";
+import { defineEmits, defineProps, ref, watch } from "vue";
 import type { UploadInstance, UploadProps, UploadRawFile } from "element-plus";
+import { genFileId } from "element-plus";
 import { useUserStore } from "@/store";
 import { TOKEN_KEY } from "@/enums/CacheEnum";
+
+const action = import.meta.env.VITE_BASE_UPLOAD_ADD || "";
+
 const emits = defineEmits(["upload", "uploadFile"]);
 const userStore = useUserStore();
 const headers = {
@@ -87,5 +88,8 @@ const handleRemove: UploadProps["onRemove"] = (uploadFile: any) => {
   width: 100px;
   height: 100px;
   margin-top: 60px;
+}
+.el-upload {
+  align-items: center;
 }
 </style>

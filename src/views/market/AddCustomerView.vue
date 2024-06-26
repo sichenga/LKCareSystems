@@ -2,86 +2,104 @@
   <!-- 新增潜在客户 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-    <div class="header"><span>▋</span> 老人信息</div>
-    <el-form
-      ref="ruleFormRef"
-      style="margin-top: 20px"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
-      <el-form-item label="老人姓名" prop="name">
-        <el-input v-model="ruleForm.name" placeholder="请输入老人姓名" />
-      </el-form-item>
-      <el-form-item label="老人性别" prop="gender">
-        <el-select v-model="ruleForm.gender" placeholder="请选择">
-          <el-option label="男" :value="1" />
-          <el-option label="女" :value="0" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="身份证号" prop="idCard">
-        <el-input v-model="ruleForm.idCard" placeholder="请输入老人身份证号" />
-      </el-form-item>
-      <el-form-item label="老人状况" prop="status">
-        <el-input
-          v-model="ruleForm.status"
-          type="textarea"
-          placeholder="请输入老人状况"
-        />
-      </el-form-item>
-      <div class="family"><span>▋</span> 家属信息</div>
-      <el-button type="primary" @click="addRelation" style="margin-bottom: 20px"
-        >新增家属</el-button
+      <div class="header"><span>▋</span> 老人信息</div>
+      <el-form
+        ref="ruleFormRef"
+        :model="ruleForm"
+        :rules="rules"
+        :size="formSize"
+        class="demo-ruleForm"
+        label-width="auto"
+        status-icon
+        style="margin-top: 20px"
       >
-      <AddRelation
-        :formData="data.formData"
-        @update-family-member="updateFamilyMember"
-        @add-family-member="addFamilyMember"
-        :sign="data.sign"
-        v-if="dialogVisible"
-        @close="Holedclose"
-      />
-      <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-        <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-        </template>
-      </MayTable>
-      <Pagination :total="data.token" />
-      <div class="family"><span>▋</span>需求总结</div>
-      <el-form-item label="房间需求" prop="roomRequire">
-        <el-input
-          v-model="ruleForm.roomRequire"
-          type="textarea"
-          placeholder="请输入房间需求"
+        <el-form-item label="老人姓名" prop="name">
+          <el-input v-model="ruleForm.name" placeholder="请输入老人姓名" />
+        </el-form-item>
+        <el-form-item label="老人性别" prop="gender">
+          <el-select v-model="ruleForm.gender" placeholder="请选择">
+            <el-option :value="1" label="男" />
+            <el-option :value="0" label="女" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="身份证号" prop="idCard">
+          <el-input
+            v-model="ruleForm.idCard"
+            placeholder="请输入老人身份证号"
+          />
+        </el-form-item>
+        <el-form-item label="老人状况" prop="status">
+          <el-input
+            v-model="ruleForm.status"
+            placeholder="请输入老人状况"
+            type="textarea"
+          />
+        </el-form-item>
+        <div class="family"><span>▋</span> 家属信息</div>
+        <el-button
+          style="margin-bottom: 20px"
+          type="primary"
+          @click="addRelation"
+          >新增家属
+        </el-button>
+        <AddRelation
+          v-if="dialogVisible"
+          :formData="data.formData"
+          :sign="data.sign"
+          @close="Holedclose"
+          @update-family-member="updateFamilyMember"
+          @add-family-member="addFamilyMember"
         />
-      </el-form-item>
-      <el-form-item label="意向描述" prop="content">
-        <el-input
-          v-model="ruleForm.content"
-          type="textarea"
-          placeholder="请输入意向描述"
-        />
-      </el-form-item>
-      <div class="btn">
-        <el-button @click="back">取消</el-button>
-        <el-button type="primary" @click="submitForm(ruleFormRef)"
-          >保存</el-button
-        >
-      </div>
-    </el-form>
-  </el-card>
+        <!-- 表格 -->
+        <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+          <template #operate="{ data }">
+            <el-button text type="primary" @click="edit(data)">编辑</el-button>
+            <el-button text type="primary" @click="del(data.id)"
+              >删除</el-button
+            >
+          </template>
+        </MayTable>
+        <Pagination :total="data.token" />
+        <div class="family"><span>▋</span>需求总结</div>
+        <el-form-item label="房间需求" prop="roomRequire">
+          <el-input
+            v-model="ruleForm.roomRequire"
+            placeholder="请输入房间需求"
+            type="textarea"
+          />
+        </el-form-item>
+        <el-form-item label="意向描述" prop="content">
+          <el-input
+            v-model="ruleForm.content"
+            placeholder="请输入意向描述"
+            type="textarea"
+          />
+        </el-form-item>
+        <div class="btn">
+          <el-button @click="back">取消</el-button>
+          <el-button type="primary" @click="submitForm(ruleFormRef)"
+            >保存
+          </el-button>
+        </div>
+      </el-form>
+    </el-card>
   </div>
-  
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
+//表单
+import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
+//潜在客户添加
+import {
+  CustomerAdd,
+  Customerget,
+  Customerupdate,
+} from "@/service/market/CustomerApi";
+import type { CustomerAddType } from "@/service/market/CustomerType";
+import { useRoute, useRouter } from "vue-router";
+
 const AddRelation = defineAsyncComponent(
   () => import("@/components/dialog/market/AddRelation.vue")
 );
@@ -91,13 +109,7 @@ const MayTable = defineAsyncComponent(
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-//表单
-import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-//潜在客户添加
-import { CustomerAdd, Customerupdate } from "@/service/market/CustomerApi";
-import type { CustomerAddType } from "@/service/market/CustomerType";
-import { Customerget } from "@/service/market/CustomerApi";
-import { useRouter, useRoute } from "vue-router";
+
 const router = useRouter();
 const route = useRoute();
 const formSize = ref<ComponentSize>("default");

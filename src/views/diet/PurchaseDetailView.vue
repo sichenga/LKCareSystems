@@ -14,7 +14,7 @@
           {{ data.Dataget?.counts }}
         </el-form-item>
         <el-form-item label="实际采购成本：">
-          <!--                     {{ data.Dataget?.receiveTime }}-->
+          {{ data.Dataget?.receiveTime }}
         </el-form-item>
       </el-form>
       <div class="right">
@@ -45,17 +45,12 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, onMounted, defineAsyncComponent } from "vue";
-import {
-  purchase,
-  purchaseFoodslist,
-  Purchaseget,
-} from "@/service/food/FoodApi";
+import { defineAsyncComponent, onMounted, reactive } from "vue";
+import { purchaseFoodslist, Purchaseget } from "@/service/food/FoodApi";
 import type { ImageProps } from "element-plus";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const router = useRouter();
-import { useRoute } from "vue-router";
 
 const route = useRoute();
 const MayTable = defineAsyncComponent(

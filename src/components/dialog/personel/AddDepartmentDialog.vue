@@ -5,15 +5,14 @@
     width="500"
     @close="handleClose"
   >
-    {{ ruleForm }}
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="部门名称" prop="name">
         <el-input v-model="ruleForm.name" />
@@ -21,7 +20,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleClose"> 取消 </el-button>
+        <el-button @click="handleClose(false)"> 取消 </el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)"
           >确定</el-button
         >
@@ -30,9 +29,9 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineProps } from "vue";
-import { ElMessage } from "element-plus";
+import { defineProps, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import type { AddDepartmentParams } from "@/service/staff/StaffType";
 import { addDepartment, updateDepartment } from "@/service/staff/StaffApi";
 // 父传子

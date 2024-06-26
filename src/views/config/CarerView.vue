@@ -3,77 +3,79 @@
     <!-- 护工管理 -->
     <div class="app-container">
       <el-card style="max-width: 100%">
-      <el-form
-        ref="Refcarer"
-        :inline="true"
-        :model="states"
-        class="demo-form-inline"
-      >
-        <el-form-item label="护工姓名:" prop="name">
-          <el-input v-model="states.name" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="联系方式:" prop="mobile">
-          <el-input v-model="states.mobile" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="所属岗位:" prop="roleId">
-          <el-select
-            v-model="states.roleId"
-            placeholder="请选择"
-            style="width: 240px"
-          >
-            <el-option
-              v-for="item in options"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="老人姓名:" prop="name">
-          <el-input v-model="states.name" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
-          <el-button @click="reset">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-    <el-card style="max-width: 100%" class="card">
-      <el-button type="primary" @click="isdialog = true">新增</el-button>
-      <WorkersDialog @close="close" v-if="isdialog" />
+        <el-form
+          ref="Refcarer"
+          :inline="true"
+          :model="states"
+          class="demo-form-inline"
+        >
+          <el-form-item label="护工姓名:" prop="name">
+            <el-input v-model="states.name" clearable placeholder="请输入" />
+          </el-form-item>
+          <el-form-item label="联系方式:" prop="mobile">
+            <el-input v-model="states.mobile" clearable placeholder="请输入" />
+          </el-form-item>
+          <el-form-item label="所属岗位:" prop="roleId">
+            <el-select
+              v-model="states.roleId"
+              placeholder="请选择"
+              style="width: 240px"
+            >
+              <el-option
+                v-for="item in options"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="老人姓名:" prop="name">
+            <el-input v-model="states.name" clearable placeholder="请输入" />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="search">查询</el-button>
+            <el-button @click="reset">重置</el-button>
+          </el-form-item>
+        </el-form>
+      </el-card>
+      <el-card class="card" style="max-width: 100%">
+        <el-button type="primary" @click="isdialog = true">新增</el-button>
+        <WorkersDialog v-if="isdialog" @close="close" />
 
-      <MayTable
-        :tableData="data.tableData"
-        :tableItem="data.tableItem"
-        :identifier="identifier"
-      >
-        <template #operate="{ data }">
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-        </template>
-      </MayTable>
-      <Pagination
-        :total="data.total"
-        :page="states.page"
-        :psize="states.pageSize"
-        @page="getpage"
-        @psize="getpsize"
-      />
-    </el-card>
+        <MayTable
+          :identifier="identifier"
+          :tableData="data.tableData"
+          :tableItem="data.tableItem"
+        >
+          <template #operate="{ data }">
+            <el-button text type="primary" @click="del(data.id)"
+              >删除</el-button
+            >
+          </template>
+        </MayTable>
+        <Pagination
+          :page="states.page"
+          :psize="states.pageSize"
+          :total="data.total"
+          @page="getpage"
+          @psize="getpsize"
+        />
+      </el-card>
     </div>
-    
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, defineAsyncComponent, onMounted } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 
-import { staffList, carerDelete } from "@/service/staff/StaffApi";
+import { carerDelete, staffList } from "@/service/staff/StaffApi";
 import { RoleList } from "@/service/role/RoleApi";
 import type { StaffListParams } from "@/service/staff/StaffType";
 import WorkersDialog from "@/components/dialog/config/WorkersDialog.vue";
 
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
