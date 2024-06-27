@@ -7,21 +7,21 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      label-position="left"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="left"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <template v-if="props.isinfo">
         <MayTable
-          :tableData="ruleForm.plans"
-          :tableItem="data.tableItem"
           :auto-width="'100px'"
           :identifier="'planset'"
+          :tableData="ruleForm.plans"
+          :tableItem="data.tableItem"
           ><template #header>
             <el-button type="primary" @click="add">
               <el-icon><Plus /></el-icon>
@@ -45,7 +45,7 @@
 
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -55,26 +55,27 @@
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
-  defineEmits,
   defineAsyncComponent,
+  defineEmits,
   defineProps,
+  reactive,
+  ref,
 } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
-import { Plus, Minus } from "@element-plus/icons-vue";
+import { Minus, Plus } from "@element-plus/icons-vue";
+import {
+  DrugPlanAdd,
+  DrugPlanUpdateEndDate,
+} from "@/service/medicalcare/MedicalcareApi";
+import type { DrugsPlanAddParams } from "@/service/medicalcare/MedicalcareType";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
 const TimePicker = defineAsyncComponent(
   () => import("@/components/timepicker/MayTimePicker.vue")
 );
-import {
-  DrugPlanAdd,
-  DrugPlanUpdateEndDate,
-} from "@/service/medicalcare/MedicalcareApi";
-import type { DrugsPlanAddParams } from "@/service/medicalcare/MedicalcareType";
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();
 

@@ -7,13 +7,13 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="更新日期:"> {{ ruleForm.updateTime }} </el-form-item>
       <el-form-item label="批发价:" prop="wholePrice">
@@ -28,7 +28,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -37,12 +37,13 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, defineProps, watch } from "vue";
+import { defineEmits, defineProps, reactive, ref, watch } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 import { foodpriceadd, foodpriceupdate } from "@/service/food/FoodApi";
 import type { AddFoodPrice } from "@/service/food/FoodType";
 import moment from "moment";
+
 const mons = moment;
 const props = defineProps({
   priceid: {

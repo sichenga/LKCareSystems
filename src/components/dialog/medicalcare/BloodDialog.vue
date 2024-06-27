@@ -7,32 +7,32 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      label-position="left"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="right"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
-      <el-form-item label="选择老人：" prop="elderlyId">
+      <el-form-item label="选择老人:" prop="elderlyId">
         <div v-if="OldName" @click="select">
           {{ OldName }}
         </div>
         <el-button v-else type="primary" @click="select">选择老人</el-button>
-        <OldSelectDialog v-if="idOld" @id="oldid" @close="oldclose" />
+        <OldSelectDialog v-if="idOld" @close="oldclose" @id="oldid" />
       </el-form-item>
-      <el-form-item label="血压：" prop="bloodPressure">
+      <el-form-item label="血压:" prop="bloodPressure">
         <el-input v-model="ruleForm.bloodPressure" placeholder="请输入血压" />
       </el-form-item>
-      <el-form-item label="脉搏：" prop="pulse">
+      <el-form-item label="脉搏:" prop="pulse">
         <el-input v-model="ruleForm.pulse" placeholder="请输入脉搏" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -41,9 +41,8 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, defineProps, onMounted } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-
 import { ElMessage } from "element-plus";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
 import {

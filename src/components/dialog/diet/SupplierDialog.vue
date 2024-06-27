@@ -7,13 +7,13 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="供应商名称:" prop="name">
         <el-input v-model="ruleForm.name" placeholder="请输入供应商名称" />
@@ -27,7 +27,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -36,15 +36,16 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, onMounted, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import {
   SupplierAdd,
   Supplierget,
   SupplierUpdate,
 } from "@/service/food/FoodApi";
-import { ElMessage } from "element-plus";
 import type { Supplieradd } from "@/service/food/FoodType";
+
 const props = defineProps(["id"]);
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();

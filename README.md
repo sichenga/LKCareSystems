@@ -4,7 +4,7 @@
     <img src="https://img.shields.io/badge/Element Plus-2.7.3-blue.svg"/>
     <img src="https://img.shields.io/badge/license-MIT-green.svg"/>
     <a href="https://gitee.com/youlaiorg" target="_blank">
-        <img src="https://img.shields.io/badge/Author-有来开源组织-orange.svg"/>
+        <img src="https://img.shields.io/badge/Author-乐康养老-orange.svg"/>
     </a>
     <div align="center"> 中文 | <a href="./README.en-US.md">English </a></div>
 </div>

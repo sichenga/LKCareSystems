@@ -15,7 +15,11 @@
         <el-input v-model="form.name" @input="createQRCode" />
       </el-form-item>
       <el-form-item label="地址二维码：">
-        <el-image :src="codedata" style="width: 80px; height: 80px" />
+        <el-image
+          v-if="codedata"
+          :src="codedata"
+          style="width: 80px; height: 80px"
+        />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -57,8 +61,10 @@ watch(
   (newval) => {
     if (newval) {
       console.log("newval", newval);
-      Object.assign(form, newval);
-      codedata.value = upload + "/" + form.qrcode;
+      if (newval?.id) {
+        Object.assign(form, newval);
+        codedata.value = upload + "/" + form.qrcode;
+      }
     }
   },
   { immediate: true }

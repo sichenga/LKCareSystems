@@ -7,13 +7,13 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="姓名：" prop="name">
         <el-input v-model="ruleForm.name" placeholder="请输入姓名" />
@@ -30,9 +30,9 @@
       <el-form-item label="所属角色" prop="roleIds">
         <el-select
           v-model="ruleForm.roleIds"
+          multiple
           placeholder="请选择"
           style="width: 300px"
-          multiple
           @change="rolechange"
         >
           <el-option
@@ -46,7 +46,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -55,17 +55,18 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, onMounted, defineProps, watch } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref, watch } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import {
   accountadd,
-  rolelist,
   accountinfo,
-  rolelistForAccount,
   accountupdate,
+  rolelist,
+  rolelistForAccount,
 } from "@/service/account/AccountApi";
 import type { AddAccount, Role } from "@/service/account/AccountType";
-import { ElMessage } from "element-plus";
+
 const props = defineProps({
   editid: {
     type: Number,

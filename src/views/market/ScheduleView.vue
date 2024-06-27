@@ -2,38 +2,38 @@
   <!-- dialog写在market文件夹下 -->
   <div class="app-container">
     <el-card>
-    <div>计划任务</div>
-    <el-radio-group v-model="form.type">
-      <el-radio
-        v-for="item in typedata"
-        :key="item"
-        :value="item"
-        @change="selectdata"
-        >{{ item }}</el-radio
-      >
-    </el-radio-group>
-    <div style="margin-top: 30px">
+      <div>计划任务</div>
+      <el-radio-group v-model="form.type" style="margin: 10px 0">
+        <el-radio
+          v-for="item in typedata"
+          :key="item"
+          :value="item"
+          border
+          @change="selectdata"
+          >{{ item }}
+        </el-radio>
+      </el-radio-group>
+
       <MayTable
+        :identifier="'schedule'"
+        :isShowHeader="form.type !== '日循环'"
+        :isoperate="false"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        :isoperate="false"
-        :isShowHeader="form.type !== '日循环' ? true : false"
-        :identifier="'schedule'"
       />
-    </div>
-  </el-card>
+    </el-card>
   </div>
-  
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, provide } from "vue";
+import { onMounted, provide, reactive, ref } from "vue";
 import { useRoute } from "vue-router";
 import { elderlyTaskgetTask } from "@/service/old/elderlytask/ElderlyTaskApi";
 import MayTable from "@/components/table/MayTable.vue";
 import times from "@/database/date/time.json";
 import month from "@/database/date/month.json";
 import week from "@/database/date/week.json";
+
 const route = useRoute();
 let schid = route.query?.id;
 const typedata = ["日循环", "周循环", "月循环"];
@@ -54,32 +54,12 @@ const data = reactive({
     { label: "", prop: "task" },
   ] as any,
 });
-// 处理小时
-// const gettime = () => {
-//   for (let i = 0; i < 24; i++) {
-//     time.value[i] = i > 12 ? `下午${i}时` : `上午${i}时`
-//   }
-//   console.log(time)
-// }
-// 处理月
-// const getmonth = () => {
-//   for (let i = 0; i < 30; i++) {
-//     date.month[i] = i + 1 + '号'
-//   }
-//   console.log(date.month)
-// }
+
 // 任务数据
 const getlist = async (typedata: any = "") => {
   let res: any = await elderlyTaskgetTask(Number(schid));
   console.log("任务列表", res);
   if (res?.code == 10000) {
-    // oldName.tableData = time.value.map((item: any, index: number) => ({
-    //   time: item,
-    //   task: res.oldName.list.find(
-    //     (item1: any) =>
-    //       item1.type == form.type && item1.startTime.split(':')[0] == disposetime(String(index))
-    //   )
-    // }))
     let arr: any = [];
     console.log(4444, form[typedata]);
     console.log(time.value);
@@ -112,7 +92,7 @@ const getlist = async (typedata: any = "") => {
   }
 };
 // 选择类型
-const selectdata = (val: string) => {
+const selectdata = (val: any) => {
   console.log(val);
   // let str = ''
   let obj = { label: "", prop: "time", width: "100px" };
@@ -159,7 +139,6 @@ provide("schtype", form);
 :deep(.el-table) {
   --el-fill-color-light: none;
 }
-
 // 设置position 使得 子元素不与其产生新的层叠关系
 :deep(.el-table) {
   th.el-table__cell,
@@ -168,6 +147,7 @@ provide("schtype", form);
     padding: 0;
   }
 }
+
 :deep(.el-table) {
   .cell {
     position: relative;

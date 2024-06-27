@@ -7,14 +7,14 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      label-position="left"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="left"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="选择老人：" prop="elderlyId">
         <div v-if="OldName" @click="select">
@@ -62,7 +62,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -71,16 +71,17 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, defineProps, onMounted } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-import { getElderly } from "@/service/old/OldApi";
 import { ElMessage } from "element-plus";
+import { getElderly } from "@/service/old/OldApi";
 import {
   CheckRoomAdd,
   CheckRoomUpdate,
 } from "@/service/medicalcare/MedicalcareApi";
 import type { CheckRoomAddParams } from "@/service/medicalcare/MedicalcareType";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
+
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<CheckRoomAddParams>({

@@ -4,17 +4,18 @@
   </div> -->
   <el-date-picker
     v-model="times"
-    type="datetime"
-    placeholder="请选择"
     :format="props.format"
+    :size="props.size as any"
     :value-format="valueFormat"
     editable
-    :size="props.size"
+    placeholder="请选择"
+    type="datetime"
     @change="handleChange"
   />
 </template>
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, watch } from "vue";
+import { defineEmits, defineProps, ref, watch } from "vue";
+
 const props = defineProps({
   size: {
     type: String,

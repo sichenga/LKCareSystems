@@ -8,18 +8,10 @@
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="handleEdit(data.id)"
+          <el-button link type="primary" @click="handleEdit(data.id)"
             >编辑</el-button
           >
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="handleDelete(data.id)"
+          <el-button link type="primary" @click="handleDelete(data.id)"
             >删除</el-button
           >
         </template>

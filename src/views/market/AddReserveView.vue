@@ -346,8 +346,8 @@ onMounted(() => {
 
   .download {
     position: absolute;
-    top: -0.1px;
-    left: 120px;
+    top: 0;
+    left: 0;
   }
 }
 

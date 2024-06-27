@@ -72,6 +72,7 @@ export const useUserStore = defineStore(
     function logout() {
       localStorage.setItem(TOKEN_KEY, "");
       location.reload(); // 清空路由
+      return true;
     }
 
     // remove token

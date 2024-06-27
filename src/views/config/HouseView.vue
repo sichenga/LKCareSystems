@@ -1,26 +1,25 @@
 <template>
-  
   <div class="app-container">
     <!-- 房间管理 -->
     <el-card style="max-width: 100%">
       <el-form
+        ref="refForm"
         :inline="true"
         :model="params"
         class="demo-form-inline"
-        ref="refForm"
       >
         <el-form-item label="房间号" prop="name">
           <el-input
             v-model="params.name"
-            placeholder="请输入房间号"
             clearable
+            placeholder="请输入房间号"
           />
         </el-form-item>
         <el-form-item label="楼栋">
           <MayCascader
+            :emitid="params.buildingId"
             :options="options"
             @change="houseselect"
-            :emitid="params.buildingId"
           />
         </el-form-item>
         <el-form-item>
@@ -30,48 +29,51 @@
       </el-form>
     </el-card>
     <el-card style="max-width: 100%; margin-top: 20px">
-      <el-button type="primary" @click="add" class="btn">新增房间</el-button>
-      <RoomDialog @close="close" v-if="isdialog" :datail="datail" />
+      <el-button class="btn" type="primary" @click="add">新增房间</el-button>
+      <RoomDialog v-if="isdialog" :datail="datail" @close="close" />
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button type="primary" text @click="handleEdit(data)"
-            >编辑</el-button
-          >
-          <el-button type="primary" text @click="handleDelete(data.id)"
-            >删除</el-button
-          >
+          <el-button text type="primary" @click="handleEdit(data)"
+            >编辑
+          </el-button>
+          <el-button text type="primary" @click="handleDelete(data.id)"
+            >删除
+          </el-button>
         </template>
       </MayTable>
       <Pagination
+        :page="params.page"
+        :pszie="params.page"
         :total="data.total"
         @page="page"
         @psize="psize"
-        :page="params.page"
-        :pszie="params.page"
       />
     </el-card>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, defineAsyncComponent, onMounted } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import RoomDialog from "@/components/dialog/config/RoomDialog.vue";
 import type { FormInstance } from "element-plus";
+import { ElMessage } from "element-plus";
+//房间列表
+import {
+  buildingList,
+  deleteHouse,
+  getHouseList,
+} from "@/service/config/ConfigApi";
+import type { HouseViewType } from "@/service/config/ConfigType";
+import MayCascader from "@/components/cascader/MayCascader.vue";
+//删除
+import { getMessageBox, TreeData } from "@/utils/utils";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-//房间列表
-import {
-  getHouseList,
-  deleteHouse,
-  buildingList,
-} from "@/service/config/ConfigApi";
-import type { HouseViewType } from "@/service/config/ConfigType";
-import MayCascader from "@/components/cascader/MayCascader.vue";
-import { TreeData } from "@/utils/utils";
 // 获取楼栋列表
 const getbuildingList = async () => {
   let res: any = await buildingList().catch(() => {});
@@ -130,9 +132,7 @@ const close = (val: any) => {
     getHouselist();
   }
 };
-//删除
-import { getMessageBox } from "@/utils/utils";
-import { ElMessage } from "element-plus";
+
 const handleDelete = async (id: number) => {
   console.log("删除", id);
   let res = await getMessageBox("是否确认删除该房屋", "删除后将不可恢复");

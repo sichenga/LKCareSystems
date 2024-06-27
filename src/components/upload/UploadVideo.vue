@@ -25,7 +25,7 @@ const emit = defineEmits(["upload", "uploadrem"]);
 const userStore = useUserStore();
 const action = import.meta.env.VITE_BASE_UPLOAD_ADD || "";
 const headers = {
-  Authorization: userStore.token || "",
+  Authorization: userStore.user.token || "",
 };
 const props = defineProps({
   showlist: {

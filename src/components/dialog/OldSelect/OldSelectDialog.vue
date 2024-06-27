@@ -3,16 +3,16 @@
   <el-dialog
     v-model="dialogVisible"
     title="选择老人"
-    width="50%"
+    width="680px"
     @close="close"
   >
     <el-form :inline="true" :model="states" class="demo-form-inline">
       <div class="form-size">
         <el-form-item label="姓名:">
-          <el-input v-model="states.name" placeholder="请输入" clearable />
+          <el-input v-model="states.name" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="身份证号码:">
-          <el-input v-model="states.idCard" placeholder="请输入" clearable />
+          <el-input v-model="states.idCard" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="search">查询</el-button>
@@ -20,25 +20,28 @@
         </el-form-item>
       </div>
     </el-form>
-    <MayTable
-      @serve-list-is="serveListIs"
-      :tableData="data.tableData"
-      :tableItem="data.tableItem"
-      :isoperate="isoperate"
-      :identifier="identifier"
-      :isMultiple="porps.isMultiple"
-    >
-      <template #operate="{ data }">
-        <el-button type="primary" @click="select(data.id)">选择</el-button>
-      </template>
-    </MayTable>
+    <div class="table-container">
+      <MayTable
+        :identifier="identifier"
+        :isMultiple="porps.isMultiple"
+        :isoperate="isoperate"
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="100px"
+        @serve-list-is="serveListIs"
+      >
+        <template #operate="{ data }">
+          <el-button type="primary" @click="select(data.id)">选择</el-button>
+        </template>
+      </MayTable>
+    </div>
     <div style="height: 30px"></div>
     <Pagination
-      @page="handlPage"
-      @pszie="handlPsize"
       :page="states.page"
       :psize="states.pageSize"
       :total="total"
+      @page="handlPage"
+      @pszie="handlPsize"
     />
     <template #footer>
       <div class="dialog-footer">
@@ -50,24 +53,24 @@
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
-  onMounted,
-  defineProps,
-  defineEmits,
   defineAsyncComponent,
+  defineEmits,
+  defineProps,
+  onMounted,
+  reactive,
+  ref,
 } from "vue";
+import { getElderlyList } from "@/service/old/OldApi";
+import { useRouter } from "vue-router";
+import type { ListElderlyRequest } from "@/service/old/OldType";
 
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
-import { getElderlyList } from "@/service/old/OldApi";
-import { useRouter } from "vue-router";
 
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-import type { ListElderlyRequest } from "@/service/old/OldType";
 
 const router = useRouter();
 const dialogVisible = ref(true);
@@ -191,5 +194,8 @@ onMounted(() => {
 
 .form-size {
   display: flex;
+}
+.table-container {
+  margin-top: 30px;
 }
 </style>

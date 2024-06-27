@@ -6,14 +6,10 @@
       <ManageDialog v-if="isdialog" :dataget="dataget" @close="close" />
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button link size="small" type="primary" @click="handleEdit(data)"
+          <el-button link type="primary" @click="handleEdit(data)"
             >编辑
           </el-button>
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="handleDelete(data.id)"
+          <el-button link type="primary" @click="handleDelete(data.id)"
             >删除
           </el-button>
         </template>
@@ -98,7 +94,7 @@ const handleDelete = async (id: number) => {
     console.log("删除", del);
     if (del?.code === 10000) {
       ElMessage.success("删除成功");
-      getlist();
+      await getlist();
     }
   } else {
     ElMessage.info("取消删除");

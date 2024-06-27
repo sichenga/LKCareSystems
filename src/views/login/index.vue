@@ -1,19 +1,15 @@
 <template>
-  <el-container>
-    <el-header>
-      <el-image :src="logo" style="width: 300px; height: 70px" />
-    </el-header>
-    <el-main>
-      <el-card class="card">
+  <div class="container">
+    <div class="header">
+      <el-image :src="logo" style="width: 300px; height: 100%" />
+    </div>
+    <div class="main">
+      <div class="card">
         <el-image :src="loginback" style="width: 70%; height: 100%" />
         <div class="right">
           <div class="title">
             <span>账号登录</span>
-            <el-image
-              :src="code"
-              class="code"
-              style="width: 100px; height: 100px"
-            />
+            <el-image :src="code" class="code" fit="cover" />
           </div>
           <el-form
             ref="loginFormRef"
@@ -59,12 +55,12 @@
             </el-form-item>
           </el-form>
         </div>
-      </el-card>
-    </el-main>
-    <el-footer>
+      </div>
+    </div>
+    <div class="footer">
       <span>Copyright @ 乐康养老 京ICP备15048223号-1</span>
-    </el-footer>
-  </el-container>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -73,9 +69,9 @@ import { useUserStore } from "@/store";
 import type { FormInstance } from "element-plus";
 import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
+import { code, loginback, logo } from "@/utils/images";
+import { Lock, User } from "@element-plus/icons-vue";
 // import {ThemeEnum} from "@/enums/ThemeEnum";
-import { logo, loginback, code } from "@/utils/images";
-import { Lock } from "@element-plus/icons-vue";
 // Stores
 const userStore = useUserStore();
 // const settingsStore = useSettingsStore();
@@ -187,82 +183,92 @@ watchEffect(() => {
 </script>
 
 <style lang="less" scoped>
-.el-container {
+.container {
   width: 100%;
   height: 100%;
-}
-
-.el-header {
-  height: 100px;
   display: flex;
+  flex-direction: column;
+  max-width: 100%;
   align-items: center;
 }
 
-.el-main {
-  height: 70%;
+.header {
+  width: 100%;
+  height: 90px;
   display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+.main {
+  width: 100%;
+  background-color: #eeeeee1a;
+  flex: 1;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  background-color: #eeeeee;
+  box-shadow: inset 0 0 15px 9px #e7e6e6;
+}
 
-  .card {
-    width: 80%;
-    height: 550px;
+.card {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  box-shadow: 0 0 20px 10px #ccc;
+  //
+  .right {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding-bottom: 110px;
+    box-sizing: border-box;
 
-    :deep(.el-card__body) {
-      width: 100%;
+    .el-form {
+      width: 80%;
       height: 100%;
-      padding: 0 !important;
-      display: flex;
-      align-items: center;
+      box-sizing: border-box;
+      margin-top: 15px;
+      .el-input {
+        height: 50px;
+      }
     }
 
-    .right {
-      width: 30%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .title {
+      width: 100%;
+      height: 100px;
+      line-height: 100px;
+      text-align: center;
+      position: relative;
+      margin-bottom: 20px;
 
-      .el-form {
-        width: 80%;
-
-        .el-input {
-          height: 45px;
-        }
+      .code {
+        position: absolute;
+        right: 5px;
+        top: 5px;
       }
 
-      .title {
-        width: 100%;
-        height: 100px;
-        line-height: 100px;
-        text-align: center;
-        position: relative;
-        margin-bottom: 20px;
-
-        .code {
-          position: absolute;
-          right: 5px;
-          top: 5px;
-        }
-
-        span {
-          font-size: 20px;
-          font-weight: bold;
-        }
+      span {
+        font-size: 20px;
+        font-weight: bold;
       }
     }
   }
 }
 
-.el-footer {
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+//
+.footer {
+  width: 100%;
+  height: 90px;
+  text-align: center;
+  line-height: 90px;
   font-size: 16px;
 }
 
+//
 .btn {
   :deep(.el-form-item__content) {
     width: 100%;

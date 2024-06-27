@@ -6,12 +6,12 @@
         <!-- 头像 -->
         <div class="form">
           <el-image
-            style=" width: 50px; height: 50px;margin-top: 5px"
             :src="imageUrl"
+            style="width: 50px; height: 50px; margin-top: 5px"
           />
           <el-form
-            label-width="120px"
             label-position="left"
+            label-width="120px"
             style="max-width: 600px; margin-left: 30px"
           >
             <div class="box">
@@ -19,12 +19,12 @@
                 <el-form-item label="老人姓名："
                   >{{ data.list.elderlyName }}
                 </el-form-item>
-                <el-form-item label="身份证/护照号：">{{
-                  data.list.elderlyIdCard
-                }}</el-form-item>
-                <el-form-item label="床位号：">{{
-                  data.list.begName
-                }}</el-form-item>
+                <el-form-item label="身份证/护照号："
+                  >{{ data.list.elderlyIdCard }}
+                </el-form-item>
+                <el-form-item label="床位号："
+                  >{{ data.list.begName }}
+                </el-form-item>
               </div>
             </div>
           </el-form>
@@ -70,9 +70,9 @@
       </div>
       <span v-for="(item, index) in url" :key="index" style="">
         <el-image
-          style="width: 150px; height: 200px; margin-left: 40px"
           :src="upload + '/' + item.file"
           fit="fill"
+          style="width: 150px; height: 200px; margin-left: 40px"
         />
       </span>
       <div style="margin-top: 20px; text-align: center">
@@ -82,9 +82,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { reservationget } from "@/service/market/ReserveApi";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+
 const router = useRouter();
 const route = useRoute();
 const upload = import.meta.env.VITE_BASE_URL;

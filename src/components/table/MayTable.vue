@@ -4,29 +4,29 @@
   <!-- 任务管理 -->
   <AddSchedule
     v-if="isschedule"
-    @close="close"
     :schdata="Scheduledata"
     :startTime="startTime"
+    @close="close"
   />
   <el-table
-    :data="props.tableData"
-    border
     v-loading="appStore.isLoading"
+    :data="props.tableData"
     :header-cell-style="{
       background: '#f9f9f9',
       color: '#000000',
       height: '50px',
     }"
+    :row-style="cellstyle as any"
     :show-header="props.isShowHeader"
-    :row-style="cellstyle"
+    border
     @selection-change="handleSelectionChange"
   >
-    <el-table-column type="selection" width="55" v-if="isMultiple" />
+    <el-table-column v-if="isMultiple" type="selection" width="55" />
     <el-table-column
       v-for="(item, index) in props.tableItem"
       :key="index"
-      :prop="item.prop"
       :label="item.label"
+      :prop="item.prop"
       :width="item.width"
     >
       <template
@@ -38,9 +38,9 @@
         #default="{ row }"
       >
         <el-image
-          style="width: 50px; height: 50px"
           v-if="row.photo || row.qrcode || row.elderlyPhoto"
           :src="upload + (row.photo || row.qrcode || row.elderlyPhoto)"
+          style="width: 50px; height: 50px"
         />
       </template>
 
@@ -56,9 +56,9 @@
         #default="{ row }"
       >
         <el-image
-          style="width: 50px; height: 50px"
           :src="upload + row.image"
           fit="cover"
+          style="width: 50px; height: 50px"
         />
       </template>
       <!-- 入院管理 -->
@@ -69,9 +69,9 @@
         #default="{ row }"
       >
         <el-image
-          style="width: 50px; height: 50px"
           :src="upload + row.elderlyPhoto"
           fit="cover"
+          style="width: 50px; height: 50px"
         />
       </template>
 
@@ -83,9 +83,9 @@
         <el-image
           v-for="item in row.image"
           :key="item"
-          style="width: 40px; height: 40px"
           :src="item"
           fit="cover"
+          style="width: 40px; height: 40px"
         />
       </template>
       <!-- 入院老人订单合计 -->
@@ -144,10 +144,10 @@
       </template>
       <template v-else-if="item.prop == 'picture'" #default="{ row }">
         <el-image
-          class="picture"
           v-for="(pic, index) in row?.picture"
           :key="index"
           :src="upload + pic"
+          class="picture"
         />
       </template>
       <!-- 排班管理 -->
@@ -157,15 +157,17 @@
       >
         <div
           v-if="row[item.prop]"
-          @click="changetab(row, item.prop)"
           class="week"
+          @click="changetab(row, item.prop)"
         >
-          <div class="item" v-for="item in row[item.prop]" :key="item.id">
+          <div v-for="item in row[item.prop]" :key="item.id" class="item">
             <el-avatar :size="30" :src="upload + item.staffPhoto" />
             <span>{{ item.staffName }}</span>
-            <el-icon class="close" @click.stop="del(item.id)">
-              <CloseBold />
-            </el-icon>
+            <div class="close">
+              <el-icon class="del" @click.stop="del(item.id)">
+                <CloseBold />
+              </el-icon>
+            </div>
           </div>
         </div>
         <div v-else>
@@ -184,8 +186,8 @@
       >
         <div
           v-if="row[item.prop]"
-          class="schitem"
           :style="getstyle(row[item.prop])"
+          class="schitem"
         >
           <span
             >{{ row[item.prop].startTime }}~{{ row[item.prop].endTime }}</span
@@ -208,12 +210,12 @@
         #default="{ row }"
       >
         <MayTimeSelect
+          style="width: 100%"
           @change="
             (val) => {
               row.time = val;
             }
           "
-          style="width: 100%"
         />
       </template>
       <!-- 用药剂量 -->
@@ -230,49 +232,50 @@
       </template>
     </el-table-column>
 
-    <el-table-column :label="props.label" v-if="props.label">
+    <el-table-column v-if="props.label" :label="props.label">
       <template #default="scope">
-        <slot name="custom" :data="scope.row"></slot>
+        <slot :data="scope.row" name="custom"></slot>
       </template>
     </el-table-column>
 
     <el-table-column
-      label="操作"
       v-if="props.isoperate"
       :width="props.autoWidth"
+      label="操作"
     >
       <template #header>
         <slot name="header"></slot>
       </template>
       <template #default="scope">
-        <slot name="operate" :data="scope.row" :index="scope.$index"></slot>
+        <slot :data="scope.row" :index="scope.$index" name="operate"></slot>
       </template>
     </el-table-column>
   </el-table>
 </template>
 <script lang="ts" setup>
-import { defineProps, ref, defineEmits, defineAsyncComponent } from "vue";
 import type { PropType } from "vue";
+import { defineAsyncComponent, defineEmits, defineProps, ref } from "vue";
 import type { TableItem } from "@/Type/table";
 import month from "@/database/date/month.json";
 import week from "@/database/date/week.json";
 import moment from "moment";
+import { useApperStore } from "@/store";
+import { CloseBold } from "@element-plus/icons-vue";
+import AddWork from "@/components/dialog/old/elderly/AddWork.vue";
+import AddSchedule from "@/components/dialog/old/elderly/AddSchedule.vue";
+import { deleteSchedule } from "@/service/old/schedule/ScheduleApi";
+import { ElMessage } from "element-plus";
+
 const Emits = defineEmits(["serveListIs", "close"]);
 const upload = import.meta.env.VITE_BASE_URL + "/";
 const mons = moment;
 // 周
 const weekdata = week;
 const monthdata = month;
-import { useApperStore } from "@/store";
 const appStore = useApperStore();
-import { CloseBold } from "@element-plus/icons-vue";
-import AddWork from "@/components/dialog/old/elderly/AddWork.vue";
-import AddSchedule from "@/components/dialog/old/elderly/AddSchedule.vue";
 const MayTimeSelect = defineAsyncComponent(
   () => import("@/components/timepicker/MayTimeSelect.vue")
 );
-import { deleteSchedule } from "@/service/old/schedule/ScheduleApi";
-import { ElMessage } from "element-plus";
 const iswodk = ref(false);
 const isschedule = ref(false);
 const props = defineProps({
@@ -416,10 +419,21 @@ const handleSelectionChange = (val: any[]) => {
 
 .close {
   position: absolute;
-  top: -2px;
+  top: -1px;
   left: 25px;
-
+  background-color: #ccc;
+  //width: 15px;
+  //height: 15px;
+  border-radius: 50%;
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 2px;
+  .del {
+    font-size: 12px;
+  }
 }
 
 .schitem {

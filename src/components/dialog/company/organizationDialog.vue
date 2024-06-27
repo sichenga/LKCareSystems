@@ -7,13 +7,13 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 400px"
       :model="params"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 400px"
     >
       <el-form-item label="机构名称" prop="name">
         <el-input v-model="params.name" placeholder="请输入机构名称" />
@@ -39,7 +39,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submit(ruleFormRef)">确定</el-button>
       </div>
     </template>
@@ -47,11 +47,12 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import { companyadd, companyget } from "@/service/Organization/OrganizationApi";
 import type { companyaddParams } from "@/service/Organization/OrganizationType";
-import { ElMessage } from "element-plus";
+
 const props = defineProps(["id"]);
 
 const formSize = ref<ComponentSize>("default");

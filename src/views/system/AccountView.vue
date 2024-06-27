@@ -1,17 +1,19 @@
 <template>
   <!-- 账号管理 -->
-  <el-card style="max-width: 100%">
-    <el-button type="primary" @click="isdialog = true">新增</el-button>
-    <ManagementDialog v-if="isdialog" :id="deitID" @close="close" />
-    <!-- 表格 -->
-    <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-      <template #operate="{ data }">
-        <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-        <el-button text type="primary" @click="del(data.id)">删除</el-button>
-      </template>
-    </MayTable>
-    <Pagination :total="total" @page="getpage" @psize="getpsize" />
-  </el-card>
+  <div class="app-container">
+    <el-card style="max-width: 100%">
+      <el-button type="primary" @click="isdialog = true">新增</el-button>
+      <ManagementDialog v-if="isdialog" :id="deitID" @close="close" />
+      <!-- 表格 -->
+      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <template #operate="{ data }">
+          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
+          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+        </template>
+      </MayTable>
+      <Pagination :total="total" @page="getpage" @psize="getpsize" />
+    </el-card>
+  </div>
 </template>
 
 <script lang="ts" setup>

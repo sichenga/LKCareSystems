@@ -9,13 +9,13 @@
     {{ schtype }}
     <el-form
       ref="ruleFormRef"
-      style="max-width: 100%"
       :model="ruleForm"
-      label-width="auto"
-      label-position="left"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="left"
+      label-width="auto"
       status-icon
+      style="max-width: 100%"
     >
       <el-form-item label="服务项目:">
         <el-select
@@ -35,30 +35,30 @@
       <el-form-item label="任务时间：">
         <MayTimeSelect
           :isrange="true"
-          @change="timechange"
-          style="width: 200px"
           :start-placeholder="props.startTime"
+          style="width: 200px"
+          @change="timechange"
         />
       </el-form-item>
     </el-form>
     <template #footer>
-      <el-button @click="close">取消</el-button>
+      <el-button @click="close(false)">取消</el-button>
       <el-button type="primary" @click="submitForm">确认</el-button>
     </template>
   </el-dialog>
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
   defineEmits,
   defineProps,
   inject,
   onMounted,
+  reactive,
+  ref,
 } from "vue";
 import type { ComponentSize, FormInstance } from "element-plus";
-import { useRoute } from "vue-router";
 import { ElMessage } from "element-plus";
+import { useRoute } from "vue-router";
 import { elderlyTaskadd } from "@/service/old/elderlytask/ElderlyTaskApi";
 import type {
   AddElderlyTaskDto,
@@ -66,6 +66,7 @@ import type {
 } from "@/service/old/elderlytask/ElderlyTaskType";
 import MayTimeSelect from "@/components/timepicker/MayTimeSelect.vue";
 import { ConfigNursingServiceList } from "@/service/config/ConfigApi";
+
 const route = useRoute();
 const props = defineProps({
   editid: {

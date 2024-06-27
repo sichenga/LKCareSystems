@@ -2,51 +2,64 @@
   <!-- 床位管理 -->
   <div class="app-container">
     <div class="card-container">
-    <el-card class="left-card" style="max-width: 15%">
-      <div class="room-list">
-        <p>房间列表</p>
-        <el-tree
-          style="max-width: 600px"
-          :data="treedata"
-          :props="defaultProps"
-          @node-click="handleNodeClick"
+      <el-card class="left-card" style="max-width: 15%">
+        <div class="room-list">
+          <p>房间列表</p>
+          <el-tree
+            :data="treedata"
+            :props="defaultProps"
+            style="max-width: 600px"
+            @node-click="handleNodeClick"
+          />
+        </div>
+      </el-card>
+      <el-card class="right-card" style="max-width: 84%">
+        <el-button type="primary" @click="add" style="margin-bottom: 15px"
+          >新增床位</el-button
+        >
+        <BerthDialog
+          v-if="isdialog"
+          :emitdata="emitbeddata"
+          :housedata="berdata"
+          @close="close"
         />
-      </div>
-    </el-card>
-    <el-card class="right-card" style="max-width: 84%">
-      <el-button type="primary" @click="add">新增床位</el-button>
-      <BerthDialog
-        @close="close"
-        v-if="isdialog"
-        :housedata="berdata"
-        :emitdata="emitbeddata"
-      />
-      <MayTable
-        :tableData="data.tableData"
-        :tableItem="data.tableItem"
-        :identifier="identifier"
-      >
-        <template #operate="{ data }">
-          <el-button type="primary" text @click="emit(data)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-        </template>
-      </MayTable>
-      <Pagination
-        :total="total"
-        :page="params.page"
-        :psize="params.pageSize"
-        @page="getpage"
-        @psize="getpsize"
-      />
-    </el-card>
+        <MayTable
+          :identifier="identifier"
+          :tableData="data.tableData"
+          :tableItem="data.tableItem"
+        >
+          <template #operate="{ data }">
+            <el-button text type="primary" @click="emit(data)">编辑</el-button>
+            <el-button text type="primary" @click="del(data.id)"
+              >删除</el-button
+            >
+          </template>
+        </MayTable>
+        <Pagination
+          :page="params.page"
+          :psize="params.pageSize"
+          :total="total"
+          @page="getpage"
+          @psize="getpsize"
+        />
+      </el-card>
+    </div>
   </div>
-  </div>
-  
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, defineAsyncComponent, onMounted } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import BerthDialog from "@/components/dialog/config/BerthDialog.vue";
+import {
+  buildingList,
+  delBeds,
+  getBedsList,
+  getHouseList,
+} from "@/service/config/ConfigApi";
+import { getMessageBox, TreeData } from "@/utils/utils";
+import { ElMessage } from "element-plus";
+import type { BedsList, HouseList } from "@/service/config/ConfigType";
+
 const identifier = "Workers";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -54,15 +67,7 @@ const MayTable = defineAsyncComponent(
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-import {
-  getHouseList,
-  getBedsList,
-  buildingList,
-  delBeds,
-} from "@/service/config/ConfigApi";
-import { getMessageBox, TreeData } from "@/utils/utils";
-import { ElMessage } from "element-plus";
-import type { BedsList, HouseList } from "@/service/config/ConfigType";
+
 const defaultProps = {
   children: "children",
   label: "name",
@@ -248,9 +253,11 @@ onMounted(async () => {
 .room-list ul li span {
   font-weight: bold;
 }
+
 .el-card {
   height: 100%;
 }
+
 .el-button {
   margin-bottom: 0;
 }

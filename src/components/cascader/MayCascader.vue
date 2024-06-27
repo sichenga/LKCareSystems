@@ -1,15 +1,16 @@
 <template>
   <el-cascader
-    :options="props.options"
-    clearable
-    :props="CascaderProps"
     v-model="value"
+    :options="props.options as any"
+    :props="CascaderProps"
+    clearable
     @change="change"
     @close="close"
   />
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineProps, defineEmits, watch } from "vue";
+import { defineEmits, defineProps, reactive, ref, watch } from "vue";
+
 const props = defineProps({
   // 数据
   options: {

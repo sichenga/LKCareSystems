@@ -7,24 +7,20 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 368px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
       class="demo-ruleForm"
-      size
+      label-position="right"
+      label-width="auto"
       status-icon
+      style="max-width: 368px"
     >
-      <el-form-item
-        label="请选择测量体温的老人"
-        prop="elderlyId"
-        class="Special_line"
-      >
+      <el-form-item class="Special_line" label="老人姓名" prop="elderlyId">
         <div v-if="OldName" @click="select">
           {{ OldName }}
         </div>
         <el-button v-else type="primary" @click="select">选择老人</el-button>
-        <OldSelectDialog v-if="idOld" @id="oldid" @close="oldclose" />
+        <OldSelectDialog v-if="idOld" @close="oldclose" @id="oldid" />
       </el-form-item>
       <el-form-item label="老人体温" prop="val">
         <el-input v-model="ruleForm.val" />
@@ -39,14 +35,14 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import { getElderly } from "@/service/old/OldApi";
 import {
   TemperatureAdd,
   TemperatureUpdate,
 } from "@/service/medicalcare/MedicalcareApi";
-import { ElMessage } from "element-plus";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
 
 const ruleFormRef = ref<FormInstance>();

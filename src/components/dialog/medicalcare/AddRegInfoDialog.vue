@@ -7,19 +7,19 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 368px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
-      status-icon
+      class="demo-ruleForm"
       label-position="left"
+      label-width="auto"
+      status-icon
+      style="max-width: 368px"
     >
       <el-form-item label="药品名称:" prop="name">
         <el-input v-model="ruleForm.name" />
       </el-form-item>
-      <el-form-item label="数量:" prop="counts" class="Special_line">
+      <el-form-item class="Special_line" label="数量:" prop="counts">
         <el-input v-model="ruleForm.counts" />
         <el-select v-model="ruleForm.unit" placeholder="请选择">
           <el-option
@@ -32,14 +32,14 @@
       </el-form-item>
       <el-form-item label="有效期:">
         <TimePicker
-          @change="timeSelect"
-          style="width: 287px"
           :format="format"
-          :value-format="format"
           :remtime="ruleForm.expTime"
+          :value-format="format"
+          style="width: 287px"
+          @change="timeSelect"
         />
       </el-form-item>
-      <el-form-item label="剂量:" class="Special_line">
+      <el-form-item class="Special_line" label="剂量:">
         <el-input v-model="ruleForm.sum" />
         <el-select v-model="ruleForm.norms" placeholder="请选择">
           <el-option
@@ -53,16 +53,16 @@
       <el-form-item label="服法:">
         <el-input
           v-model="ruleForm.remarks"
-          style="width: 300px"
           :rows="2"
-          type="textarea"
           placeholder="Please input"
+          style="width: 300px"
+          type="textarea"
         />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -72,12 +72,12 @@
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
-  defineEmits,
   defineAsyncComponent,
+  defineEmits,
   defineProps,
   onMounted,
+  reactive,
+  ref,
 } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import type { DrugsAddDrugsParams } from "@/service/medicalcare/MedicalcareType";

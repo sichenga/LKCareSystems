@@ -8,13 +8,13 @@
     <!-- {{ ruleForm }} -->
     <el-form
       ref="ruleFormRef"
-      style="max-width: 295px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 295px"
     >
       <el-form-item label="房间号" prop="name">
         <el-input v-model="ruleForm.name" placeholder="请输入房间号" />
@@ -35,21 +35,21 @@
       </el-form-item>
       <el-form-item label="所属楼层" prop="buildingId">
         <MayCascader
+          :emitid="ruleForm.buildingId"
           :options="options"
           @change="houseselect"
-          :emitid="ruleForm.buildingId"
         />
       </el-form-item>
       <el-form-item label="床位数" prop="beds">
         <el-input v-model="ruleForm.beds" placeholder="请输入床位数" />
       </el-form-item>
       <el-form-item label="房间图片" prop="picture">
-        <AvatarUpload @upload="uploadimg" :editdata="emitUpload" />
+        <AvatarUpload :editdata="emitUpload" @upload="uploadimg" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)"
           >确定</el-button
         >
@@ -59,20 +59,23 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, defineAsyncComponent, onMounted } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-const AvatarUpload = defineAsyncComponent(
-  () => import("@/components/upload/AvatarUpload.vue")
-);
+//添加
+import { ElMessage } from "element-plus";
 import MayCascader from "@/components/cascader/MayCascader.vue";
 import { convertToTree } from "@/utils/treeUtils";
 import {
   addHouse,
-  HouseTypeList,
   buildingList,
+  HouseTypeList,
   houseupdate,
 } from "@/service/config/ConfigApi";
-import type { houseaddType, getHouseType } from "@/service/config/ConfigType";
+import type { getHouseType, houseaddType } from "@/service/config/ConfigType";
+
+const AvatarUpload = defineAsyncComponent(
+  () => import("@/components/upload/AvatarUpload.vue")
+);
 const upload = import.meta.env.VITE_BASE_URL + "/";
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();
@@ -130,8 +133,6 @@ const getHouseTypelist = async () => {
     state.getHouseTypelist = res.data.list;
   }
 };
-//添加
-import { ElMessage } from "element-plus";
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   await formEl.validate(async (valid) => {

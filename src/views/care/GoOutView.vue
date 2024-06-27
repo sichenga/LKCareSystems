@@ -13,9 +13,8 @@
         </el-form-item>
         <el-form-item label="审批状态：" prop="state">
           <el-select
-            v-model="params.state"
+            v-model="params.state as number"
             placeholder="请选择"
-            size="large"
             style="width: 240px"
           >
             <el-option
@@ -231,10 +230,6 @@ onMounted(() => {
 });
 </script>
 <style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
 .el-button {
   height: 40px;
   line-height: 40px;

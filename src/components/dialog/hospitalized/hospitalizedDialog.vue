@@ -6,33 +6,34 @@
     @close="close"
   >
     <MayTable
+      :isMultiple="true"
+      :isoperate="false"
       :tableData="data.tableData"
       :tableItem="data.tableItem"
-      :isoperate="false"
-      :isMultiple="true"
       @serve-list-is="serveLists"
     />
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="close(false)">取消</el-button>
-        <el-button type="primary" @click="confirm"> 确定 </el-button>
+        <el-button type="primary" @click="confirm"> 确定</el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
+  defineAsyncComponent,
   defineEmits,
   onMounted,
-  defineAsyncComponent,
+  reactive,
+  ref,
 } from "vue";
+import { ConfigNursingServiceList } from "@/service/config/ConfigApi";
+import type { NursingServiceList } from "@/service/config/ConfigType";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
-import { ConfigNursingServiceList } from "@/service/config/ConfigApi";
-import type { NursingServiceList } from "@/service/config/ConfigType";
 const dialogVisible = ref(true);
 const emit = defineEmits(["close", "serveList"]);
 // 关闭弹框
@@ -45,12 +46,10 @@ const data = reactive({
     {
       prop: "name",
       label: "服务名称",
-      width: "150px",
     },
     {
       prop: "content",
       label: "服务描述",
-      width: "150px",
     },
   ],
 });
@@ -83,8 +82,4 @@ onMounted(() => {
   getlist(); //护理列表
 });
 </script>
-<style lang="less" scoped>
-.el-input {
-  width: 300px;
-}
-</style>
+<style lang="less" scoped></style>

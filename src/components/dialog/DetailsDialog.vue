@@ -9,7 +9,7 @@
     <MassUpload />
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="close(true)">确定</el-button>
       </div>
     </template>
@@ -17,7 +17,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, ref } from "vue";
+
 const MassUpload = defineAsyncComponent(
   () => import("@/components/upload/MassUpload.vue")
 );

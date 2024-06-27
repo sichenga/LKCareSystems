@@ -4,9 +4,9 @@
       <div>
         <div class="content-size">
           <el-image
-            style="width: 50px; height: 50px; border-radius: 50%"
             :src="Image + DataElder.photo"
             fit="cover"
+            style="width: 50px; height: 50px; border-radius: 50%"
           />
           <div class="size-cont">
             <div>
@@ -25,9 +25,9 @@
           <div class="family">家属信息：</div>
           <div>
             <MayTable
+              :isoperate="false"
               :tableData="data.tableData"
               :tableItem="data.tableItem"
-              :isoperate="false"
             />
           </div>
         </div>
@@ -36,13 +36,12 @@
     <div class="content-sizes">
       <el-form
         ref="ruleFormRef"
-        style="max-width: 400px"
         :model="ruleForm"
         :rules="rules"
-        label-width="auto"
         class="demo-ruleForm"
-        size
+        label-width="auto"
         status-icon
+        style="max-width: 400px"
       >
         <div class="font-sizes">
           <span class="color-size">▋</span>
@@ -52,34 +51,34 @@
         <div class="margin-size">
           <el-form-item label="选择床位:" prop="begId">
             <MayCascader
+              :emitid="ruleForm.begId ? Number(ruleForm.begId) : 0"
               :options="DataBedsList"
               @change="bedselect"
-              :emitid="ruleForm.begId ? Number(ruleForm.begId) : 0"
             />
           </el-form-item>
           <el-form-item label="床位单价:" prop="begPrice">
             <el-input-number
-              controls-position="right"
               v-model="ruleForm.begPrice"
-              :min="0"
               :max="10000000000"
+              :min="0"
+              controls-position="right"
               placeholder="200/天"
             />
           </el-form-item>
           <el-form-item label="入住天数:" prop="days">
             <el-input-number
-              controls-position="right"
               v-model="ruleForm.days"
-              :min="0"
               :max="10000000000"
+              :min="0"
+              controls-position="right"
               placeholder="请输入"
             />
           </el-form-item>
           <el-form-item label="入住日期:" prop="startDate">
             <MayTimePicker
-              @change="handlChange"
               :remtime="params.startDate"
               :valueFormat="'YYYY-MM-DD'"
+              @change="handlChange"
             />
           </el-form-item>
         </div>
@@ -91,10 +90,10 @@
         <div class="margin-size">
           <el-form-item label="套餐单价:" prop="foodPrice">
             <el-input-number
-              controls-position="right"
-              :min="0"
-              :max="10000000000"
               v-model="ruleForm.foodPrice"
+              :max="10000000000"
+              :min="0"
+              controls-position="right"
               placeholder="25/天"
             />
           </el-form-item>
@@ -107,14 +106,14 @@
         <div class="margin-size">
           <el-form-item label="护理费:" prop="servicePrice">
             <el-input-number
-              controls-position="right"
               v-model="ruleForm.servicePrice"
-              placeholder="100/天"
-              :min="1"
               :max="10000000000"
+              :min="1"
+              controls-position="right"
+              placeholder="100/天"
             />
           </el-form-item>
-          <el-button type="primary" style="margin-bottom: 20px" @click="add"
+          <el-button style="margin-bottom: 20px" type="primary" @click="add"
             >添加服务</el-button
           >
 
@@ -125,9 +124,9 @@
           />
 
           <MayTable
+            :isoperate="false"
             :tableData="data.tableDatas"
             :tableItem="data.tableItems"
-            :isoperate="false"
           />
         </div>
         <div class="font-sizes">
@@ -137,20 +136,20 @@
         <div class="margin-size">
           <el-form-item label="押金:" prop="cashPledge">
             <el-input-number
-              controls-position="right"
               v-model="ruleForm.cashPledge"
-              placeholder="请输入"
-              :min="0"
               :max="10000000000"
+              :min="0"
+              controls-position="right"
+              placeholder="请输入"
             />
           </el-form-item>
           <el-form-item label="一次性生活费 :" prop="livingPrice">
             <el-input-number
-              controls-position="right"
               v-model="ruleForm.livingPrice"
-              placeholder="请输入"
-              :min="0"
               :max="10000000000"
+              :min="0"
+              controls-position="right"
+              placeholder="请输入"
             />
           </el-form-item>
         </div>
@@ -161,8 +160,8 @@
         <div class="margin-size">
           <el-form-item label="入院费用核定天数:" prop="payDays">
             <el-input-number
-              controls-position="right"
               v-model="ruleForm.payDays"
+              controls-position="right"
               placeholder="请输入"
             />
           </el-form-item>
@@ -179,12 +178,12 @@
 </template>
 <script lang="ts" setup>
 import {
-  ref,
-  reactive,
-  onMounted,
   defineAsyncComponent,
   defineEmits,
   inject,
+  onMounted,
+  reactive,
+  ref,
 } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import { getElderly } from "@/service/old/OldApi";
@@ -193,13 +192,14 @@ import type { BedsList } from "@/service/config/ConfigType";
 import { orderGet } from "@/service/market/marketApi";
 import type { orderAdds } from "@/service/market/marketType";
 import hospitalizedDialog from "@/components/dialog/hospitalized/hospitalizedDialog.vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useBuildStroke } from "@/store";
+
 const buildstore = useBuildStroke();
 const Image = import.meta.env.VITE_BASE_URL + "/";
 const router = useRouter();
 const route = useRoute();
-const ruleForm = inject<orderAdds>("ruleForm")!;
+const ruleForm = inject<any>("ruleForm")!;
 
 const emits = defineEmits(["isshou"]);
 const MayTable = defineAsyncComponent(

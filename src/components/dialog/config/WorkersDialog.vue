@@ -2,16 +2,16 @@
   <el-dialog
     v-model="dialogVisible"
     title="新增护工"
-    width="700"
+    width="800"
     @close="close"
   >
     <el-form :inline="true" :model="states" class="demo-form-inline">
       <el-form-item label="姓名">
-        <el-input v-model="states.name" placeholder="请输入" clearable />
+        <el-input v-model="states.name" clearable placeholder="请输入" />
       </el-form-item>
       <el-form-item label="所属岗位">
         <el-select
-          v-model="states.roleId"
+          v-model="states.roleId as number"
           placeholder="请选择"
           style="width: 240px"
         >
@@ -29,22 +29,22 @@
       </el-form-item>
     </el-form>
     <MayTable
+      :identifier="identifier"
       :tableData="data.tableData"
       :tableItem="data.tableItem"
-      :identifier="identifier"
     >
       <template #operate="{ data }">
-        <el-button type="primary" v-if="data.isCarer == 0" @click="select(data)"
-          >选择</el-button
-        >
-        <el-button type="danger" v-else @click="select(data)"
-          >取消选择</el-button
-        >
+        <el-button v-if="data.isCarer == 0" type="primary" @click="select(data)"
+          >选择
+        </el-button>
+        <el-button v-else type="danger" @click="select(data)"
+          >取消选择
+        </el-button>
       </template>
     </MayTable>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="add">确定</el-button>
       </div>
     </template>
@@ -52,11 +52,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, defineAsyncComponent, onMounted } from "vue";
-import { staffList, careradd, updateList } from "@/service/staff/StaffApi";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
+import { careradd, staffList, updateList } from "@/service/staff/StaffApi";
 import type { StaffListParams } from "@/service/staff/StaffType";
 import { RoleList } from "@/service/role/RoleApi";
 import { ElMessage } from "element-plus";
+
 const identifier = "Workers";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")

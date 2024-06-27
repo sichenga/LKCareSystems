@@ -3,17 +3,17 @@
   <div class="app-container">
     <el-card style="max-width: 100%">
       <div class="headbox">
-        <el-form-item label="头像" class="title">
+        <el-form-item class="title" label="头像">
           <div class="header">
             <div>
               <img :src="Image + img" alt="" />
             </div>
             <div class="image-title">
               <UploadImg
-                :texts="true"
-                @upload="Imgupload"
                 :showlist="false"
                 :text="'更换头像'"
+                :texts="true"
+                @upload="Imgupload"
               />
             </div>
           </div>
@@ -22,31 +22,31 @@
       <el-form
         ref="ruleFormRef"
         :model="ruleForm"
-        label-width="auto"
         class="demo-ruleForm"
-        style="width: 300px"
+        label-width="auto"
         status-icon
+        style="width: 300px"
       >
         <el-form-item label="姓名">
-          <el-input class="custom-input" v-model="ruleForm.name" />
+          <el-input v-model="ruleForm.name" class="custom-input" disabled />
         </el-form-item>
         <el-form-item label="手机号">
-          <el-input class="custom-input" v-model="ruleForm.mobile" />
+          <el-input v-model="ruleForm.mobile" class="custom-input" disabled />
         </el-form-item>
         <el-form-item label="账号">
-          <el-input class="custom-input" v-model="ruleForm.username" />
+          <el-input v-model="ruleForm.username" class="custom-input" disabled />
         </el-form-item>
         <el-form-item label="密码">
-          <el-input class="custom-pass" v-model="ruleForm.pwd" />
+          <el-input v-model="ruleForm.pwd" class="custom-pass" disabled />
           <span
             style="padding-left: 20px; font-size: 12px; color: #75a5ea"
             @click="isdialog = true"
             >修改密码</span
           >
-          <PassDialog @close="close" v-if="isdialog" />
+          <PassDialog v-if="isdialog" @close="close" />
         </el-form-item>
         <el-form-item label="所属角色">
-          <el-input class="custom-input" v-model="ruleForm.roleIds" />
+          <el-input v-model="ruleForm.roleIds" class="custom-input" disabled />
         </el-form-item>
       </el-form>
     </el-card>
@@ -54,14 +54,15 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from "vue";
-import type { ComponentSize, FormInstance } from "element-plus";
+import { onMounted, reactive, ref } from "vue";
+import type { FormInstance } from "element-plus";
+import { ElMessage } from "element-plus";
 import PassDialog from "@/components/dialog/config/PassDialog.vue";
 import type { RuleForm } from "@/service/system/SystemType";
 import { getUserInfo, updatePhoto } from "@/service/system/SystemApi";
 import UploadImg from "@/components/upload/UploadImg.vue";
-import { ElMessage } from "element-plus";
 import { useUserStore } from "@/store";
+
 const userStore = useUserStore();
 const Image = import.meta.env.VITE_BASE_URL + "/";
 

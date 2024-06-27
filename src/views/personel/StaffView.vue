@@ -13,29 +13,29 @@
           <el-form-item label="员工姓名：" prop="name">
             <el-input
               v-model="states.name"
-              placeholder="请输入员工姓名"
               clearable
+              placeholder="请输入员工姓名"
             />
           </el-form-item>
           <el-form-item label="联系方式:" prop="mobile">
             <el-input
               v-model="states.mobile"
-              placeholder="请输入联系方式"
               clearable
+              placeholder="请输入联系方式"
             />
           </el-form-item>
           <el-form-item label="身份证号：" prop="idCard">
             <el-input
               v-model="states.idCard"
-              placeholder="请输入身份证号"
               clearable
+              placeholder="请输入身份证号"
             />
           </el-form-item>
           <el-form-item label="所属部门：" prop="departmentId">
             <el-select
-              v-model="states.departmentId"
-              placeholder="请选择所属部门"
+              v-model="states.departmentId as number"
               clearable
+              placeholder="请选择所属部门"
             >
               <el-option
                 v-for="item in departmentData"
@@ -47,9 +47,9 @@
           </el-form-item>
           <el-form-item label="所属岗位：" prop="roleId">
             <el-select
-              v-model="states.roleId"
-              placeholder="请选择所属岗位"
+              v-model="states.roleId as number"
               clearable
+              placeholder="请选择所属岗位"
             >
               <el-option
                 v-for="item in Roles"
@@ -61,12 +61,12 @@
           </el-form-item>
           <el-form-item label="状态：" prop="enable">
             <el-select
-              v-model="states.enable"
-              placeholder="请选择状态"
+              v-model="states.enable as number"
               clearable
+              placeholder="请选择状态"
             >
-              <el-option label="是" :value="1" />
-              <el-option label="否" :value="2" />
+              <el-option :value="1" label="是" />
+              <el-option :value="2" label="否" />
             </el-select>
           </el-form-item>
           <el-form-item>
@@ -77,43 +77,35 @@
       </el-card>
       <el-card class="table">
         <el-button style="margin-bottom: 20px" type="primary" @click="add"
-          >新增</el-button
-        >
+          >新增
+        </el-button>
         <!-- 表格 -->
         <MayTable
+          :identifier="identifier"
           :tableData="data.tableData"
           :tableItem="data.tableItem"
-          :identifier="identifier"
         >
           <template #operate="{ data }">
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="handleEdit(data)"
-              >编辑</el-button
-            >
-            <el-button type="primary" size="small" link>
+            <el-button link type="primary" @click="handleEdit(data)"
+              >编辑
+            </el-button>
+            <el-button link type="primary">
               <span @click="enable(data, data.enable ? 0 : 1)">{{
                 !data.enable ? "启用" : "禁用"
               }}</span>
             </el-button>
-            <el-button
-              type="primary"
-              size="small"
-              link
-              @click="handleDelete(data.id)"
-              >删除</el-button
-            >
+            <el-button link type="primary" @click="handleDelete(data.id)"
+              >删除
+            </el-button>
           </template>
         </MayTable>
         <!-- 分页 -->
         <Pagination
-          @page="Holdepage"
-          @psize="Holdepsize"
           :page="states.page"
           :psize="states.pageSize"
           :total="total"
+          @page="Holdepage"
+          @psize="Holdepsize"
         />
       </el-card>
     </div>
@@ -121,18 +113,19 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import {
-  staffList,
   delstaff,
   departmentList,
+  staffList,
   updateList,
 } from "@/service/staff/StaffApi";
 import type { StaffListParams } from "@/service/staff/StaffType";
 import { RoleList } from "@/service/role/RoleApi";
+
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -304,13 +297,15 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .el-form {
   margin-top: 15px;
 }
+
 .el-card {
   width: 100%;
 }
+
 .table {
   margin-top: 20px;
 }

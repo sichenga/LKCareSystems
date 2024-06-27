@@ -3,12 +3,11 @@
   <el-dialog v-model="dialogVisibles" title="详情" width="500" @close="close">
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
-      label-width="auto"
       class="demo-ruleForm"
-      size
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="咨询类型:" prop="name">
         <div>
@@ -65,10 +64,11 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineEmits, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
 import { getquestionlist } from "@/service/market/marketApi";
 import moment from "moment";
+
 const mons = moment;
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<any>({});

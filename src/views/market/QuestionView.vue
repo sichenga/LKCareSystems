@@ -1,7 +1,7 @@
 <template>
   <!-- 资讯登记 -->
   <div class="app-container">
-    <el-card style="margin-top: 15px" class="section">
+    <el-card class="section" style="margin-top: 15px">
       <el-form
         ref="Refquestion"
         :model="states"
@@ -11,25 +11,25 @@
         <el-form-item label="咨询人姓名：" prop="name">
           <el-input
             v-model="states.name"
-            style="width: 180px"
             placeholder="请输入咨询人姓名"
+            style="width: 180px"
           />
         </el-form-item>
         <el-form-item label="老人姓名：" prop="customerName">
           <el-input
             v-model="states.customerName"
-            style="width: 180px"
             placeholder="请输入老人姓名"
+            style="width: 180px"
           />
         </el-form-item>
         <el-form-item label="回访状态：" prop="state">
           <el-select
-            v-model="states.state"
-            style="width: 180px"
+            v-model="states.state as number"
             placeholder="请选择"
+            style="width: 180px"
           >
-            <el-option label="待回访" :value="0" />
-            <el-option label="已回访" :value="1" />
+            <el-option :value="0" label="待回访" />
+            <el-option :value="1" label="已回访" />
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -38,7 +38,7 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card style="margin-top: 15px" class="section">
+    <el-card class="section" style="margin-top: 15px">
       <div style="margin: 10px 0">
         <el-button type="primary" @click="addRelation">新增咨询</el-button>
       </div>
@@ -49,22 +49,22 @@
         auto-width="380px"
       >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-          <el-button type="primary" text @click="particulars(data.id)"
+          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
+          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text type="primary" @click="particulars(data.id)"
             >详情</el-button
           >
-          <el-button type="primary" text @click="record(data.id)"
+          <el-button text type="primary" @click="record(data.id)"
             >回访记录</el-button
           >
         </template>
       </MayTable>
       <Pagination
-        @page="holedpage"
-        @pszie="holedpsize"
-        :total="total"
         :page="states.page"
         :psize="states.pageSize"
+        :total="total"
+        @page="holedpage"
+        @pszie="holedpsize"
       />
     </el-card>
     <div class="title-btn">
@@ -72,21 +72,22 @@
     </div>
     <AddRelation
       v-if="dialogVisible"
-      @close="Holedclose"
-      :ids="ids"
       :customerId="customerId"
+      :ids="ids"
+      @close="Holedclose"
     />
 
-    <Particulars v-if="dialogVisibles" @close="Holedcloses" :editId="editId" />
+    <Particulars v-if="dialogVisibles" :editId="editId" @close="Holedcloses" />
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { useRoute, useRouter } from "vue-router";
-import { getMarketList, deleteMarket } from "@/service/market/marketApi";
+import { deleteMarket, getMarketList } from "@/service/market/marketApi";
 import type { market } from "@/service/market/marketType";
+
 const route = useRoute();
 const customerId = ref<any>(null);
 customerId.value = route.query.id;

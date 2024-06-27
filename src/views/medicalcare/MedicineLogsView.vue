@@ -9,13 +9,13 @@
         class="demo-form-inline"
       >
         <el-form-item label="老人：" prop="name">
-          <el-input v-model="formInline.name" placeholder="请输入" clearable />
+          <el-input v-model="formInline.name" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="登记时间：">
           <MayDateTimePicker
-            @change="timeSelect"
-            :statetime="formInline.beginDate"
             :endtime="formInline.endDate"
+            :statetime="formInline.beginDate"
+            @change="timeSelect"
           />
         </el-form-item>
         <el-form-item>
@@ -29,26 +29,26 @@
         <el-button type="primary" @click="registerinfo">用药登记</el-button>
         <OldSelectDialog
           v-if="isdialog"
-          @close="close"
           :toPath="'/medicalcare/add'"
+          @close="close"
         />
       </div>
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         // eslint-disable-next-line vue/no-template-shadow
         <template #operate="{ data }">
-          <el-button type="primary" text @click="details(data.elderlyId)"
+          <el-button text type="primary" @click="details(data.elderlyId)"
             >查看详情</el-button
           >
-          <el-button type="primary" text @click="project(data.elderlyId)"
+          <el-button text type="primary" @click="project(data.elderlyId)"
             >用药计划</el-button
           >
         </template>
       </MayTable>
       <Pagination
-        :total="total"
         :page="formInline.page"
         :pageSize="formInline.pageSize"
+        :total="total"
         @page="getpage"
         @psize="getpsize"
       />
@@ -56,8 +56,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { DrugsList } from "@/service/medicalcare/MedicalcareApi";
+import type { DrugsParams } from "@/service/medicalcare/MedicalcareType";
+import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
+
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -68,9 +72,6 @@ const Pagination = defineAsyncComponent(
 const MayDateTimePicker = defineAsyncComponent(
   () => import("@/components/timepicker/MayDateTimePicker.vue")
 );
-import { DrugsList } from "@/service/medicalcare/MedicalcareApi";
-import type { DrugsParams } from "@/service/medicalcare/MedicalcareType";
-import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
 const total = ref(0);
 const isdialog = ref(false);
 const Refmedicinelogs = ref();
@@ -176,13 +177,4 @@ onMounted(() => {
   getlist();
 });
 </script>
-<style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-</style>
+<style lang="less" scoped></style>

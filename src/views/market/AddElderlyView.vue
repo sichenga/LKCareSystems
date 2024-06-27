@@ -1,7 +1,7 @@
 <template>
   <!--新增老人  -->
   <div class="app-container">
-    <el-tabs v-model="activeName" type="card" class="demo-tabs">
+    <el-tabs v-model="activeName" class="demo-tabs" type="card">
       <el-card>
         <!--        {{ ruleForm }}-->
         <el-tab-pane label="基本信息" name="first">
@@ -24,9 +24,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineAsyncComponent, provide, onMounted } from "vue";
+import { defineAsyncComponent, onMounted, provide, reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { addElderly, getElderly, updateElderly } from "@/service/old/OldApi";
+import type { AddElderlyRequest } from "@/service/old/OldType";
+
 const OldMessage = defineAsyncComponent(
   () => import("@/components/addold/OldMessage.vue")
 );
@@ -36,8 +39,6 @@ const OldRelation = defineAsyncComponent(
 const OldHealth = defineAsyncComponent(
   () => import("@/components/addold/OldHealth.vue")
 );
-import { addElderly, getElderly, updateElderly } from "@/service/old/OldApi";
-import type { AddElderlyRequest } from "@/service/old/OldType";
 const route = useRoute();
 const router = useRouter();
 const activeName = ref("first");
@@ -53,11 +54,11 @@ const ruleForm = reactive<AddElderlyRequest>({
   idCard: "",
   politics: "",
   socialCard: "",
-  marriage: null,
-  eduLevel: null,
-  education: null,
-  resident: null,
-  address: null,
+  marriage: undefined,
+  eduLevel: undefined,
+  education: undefined,
+  resident: undefined,
+  address: undefined,
   begId: undefined,
   state: undefined,
   health: {

@@ -17,7 +17,6 @@
             v-model="formInline.address"
             clearable
             placeholder="请选择"
-            size="large"
             style="width: 240px"
           >
             <el-option
@@ -40,7 +39,6 @@
             v-model="formInline.state"
             clearable
             placeholder="请选择"
-            size="large"
             style="width: 240px"
           >
             <el-option
@@ -80,11 +78,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { patrolList, patrolDelete } from "@/service/patrol/PatrolApi";
+import { patrolDelete, patrolList } from "@/service/patrol/PatrolApi";
 import { addresslist } from "@/service/address/AddressApi";
-import type { PatrolList, AddressSelect } from "@/service/patrol/PatrolType";
+import type { AddressSelect, PatrolList } from "@/service/patrol/PatrolType";
 import { getMessageBox } from "@/utils/utils";
 import { useRouter } from "vue-router";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
@@ -229,10 +227,6 @@ onMounted(() => {
 });
 </script>
 <style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
 .el-button {
   height: 40px;
   line-height: 40px;

@@ -7,15 +7,16 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="right"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
-      <el-form-item label="输入新密码" prop="pass" class="inpt">
+      <el-form-item class="inpt" label="输入新密码" prop="pass">
         <el-input v-model="ruleForm.pass" placeholder="请输入新密码" />
       </el-form-item>
       <el-form-item label="再次输入新密码" prop="newpass">
@@ -24,15 +25,16 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="close(true)"> 确定 </el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits } from "vue";
+import { defineEmits, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+
 interface RuleForm {
   pass: string;
   newpass: string;
@@ -69,7 +71,7 @@ const close = (close: boolean = false) => {
 .is-required {
   margin-bottom: 20px;
 }
-.inpt {
-  margin-left: 25px;
-}
+//.inpt {
+//  margin-left: 25px;
+//}
 </style>

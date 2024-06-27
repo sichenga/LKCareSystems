@@ -30,7 +30,7 @@
           />
         </el-form-item>
         <el-form-item label="状态:" prop="state" style="width: 240px">
-          <el-select v-model="formInline.state" placeholder="请选择">
+          <el-select v-model="formInline.state as number" placeholder="请选择">
             <el-option
               v-for="item in data.tables"
               :key="item.id"
@@ -83,11 +83,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import AffDialog from "@/components/dialog/care/AffDialog.vue";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
 import { getMessageBox } from "@/utils/utils";
-import { CustomerList, CustomerDelete } from "@/service/market/CustomerApi";
+import { CustomerDelete, CustomerList } from "@/service/market/CustomerApi";
 import type { CustomerParams } from "@/service/market/CustomerType";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
@@ -233,13 +233,4 @@ onMounted(() => {
   getlist();
 });
 </script>
-<style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-</style>
+<style lang="less" scoped></style>

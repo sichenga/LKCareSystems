@@ -26,6 +26,7 @@
       <div class="flex-center h100% p10px">
         <img
           :src="upload + userStore.user.model?.photo"
+          alt=""
           class="rounded-full mr-10px w24px w24px"
         />
         <span>{{ userStore.user.username }}</span>
@@ -59,9 +60,9 @@
 <script lang="ts" setup>
 import {
   useAppStore,
+  useSettingsStore,
   useTagsViewStore,
   useUserStore,
-  useSettingsStore,
 } from "@/store";
 import defaultSettings from "@/settings";
 import { DeviceEnum } from "@/enums/DeviceEnum";

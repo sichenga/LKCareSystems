@@ -17,7 +17,7 @@
           </el-form-item>
           <el-form-item label="所属岗位:" prop="roleId">
             <el-select
-              v-model="states.roleId"
+              v-model="states.roleId as number"
               placeholder="请选择"
               style="width: 240px"
             >
@@ -39,7 +39,12 @@
         </el-form>
       </el-card>
       <el-card class="card" style="max-width: 100%">
-        <el-button type="primary" @click="isdialog = true">新增</el-button>
+        <el-button
+          style="margin-bottom: 15px"
+          type="primary"
+          @click="isdialog = true"
+          >新增
+        </el-button>
         <WorkersDialog v-if="isdialog" @close="close" />
 
         <MayTable
@@ -49,8 +54,8 @@
         >
           <template #operate="{ data }">
             <el-button text type="primary" @click="del(data.id)"
-              >删除</el-button
-            >
+              >删除
+            </el-button>
           </template>
         </MayTable>
         <Pagination
@@ -197,10 +202,6 @@ onMounted(() => {
 <style lang="less" scoped>
 .card {
   margin-top: 20px;
-}
-
-.el-button {
-  margin-bottom: 20px;
 }
 
 .demo-form-inline .el-input {

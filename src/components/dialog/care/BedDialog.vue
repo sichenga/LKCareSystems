@@ -7,13 +7,13 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
       <el-form-item label="老人：" prop="name">
         <el-select
@@ -49,24 +49,25 @@
       <el-form-item label="变更原因：" prop="name">
         <el-input
           v-model="ruleForm.name"
-          style="width: 300px"
           :rows="2"
-          type="textarea"
           placeholder="Please input"
+          style="width: 300px"
+          type="textarea"
         />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="close(true)"> 确定 </el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits } from "vue";
+import { defineEmits, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<any>({});

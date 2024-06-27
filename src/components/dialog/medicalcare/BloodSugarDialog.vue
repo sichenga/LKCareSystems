@@ -6,31 +6,31 @@
     width="500"
     @close="close"
   >
-    <el-form-item label="老人姓名：" prop="elderlyId">
-      <div v-if="OldName" @click="select">
-        {{ OldName }}
-      </div>
-      <el-button v-else type="primary" @click="select">选择老人</el-button>
-      <OldSelectDialog v-if="idOld" @close="closes" @id="oldid" />
-    </el-form-item>
-
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="right"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
-      <el-form-item label="血糖" prop="val">
+      <el-form-item label="老人姓名:" prop="elderlyId">
+        <div v-if="OldName" @click="select">
+          {{ OldName }}
+        </div>
+        <el-button v-else type="primary" @click="select">选择老人</el-button>
+        <OldSelectDialog v-if="idOld" @close="closes" @id="oldid" />
+      </el-form-item>
+      <el-form-item label="血糖:" prop="val">
         <el-input v-model="ruleForm.val" placeholder="请输入血糖" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="submitForm(ruleFormRef)">
           确定
         </el-button>
@@ -39,16 +39,17 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, onMounted, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+import { ElMessage } from "element-plus";
 import {
   BloodSugarAdd,
   BloodSugarUpdate,
 } from "@/service/medicalcare/MedicalcareApi";
-import { ElMessage } from "element-plus";
 import { getElderly } from "@/service/old/OldApi";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
 import type { Temperature } from "@/service/medicalcare/MedicalcareType";
+
 const props = defineProps(["data"]);
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();

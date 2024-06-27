@@ -2,7 +2,9 @@
   <!-- 楼层管理 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-      <el-button type="primary" @click="addBuild">新增楼层</el-button>
+      <el-button type="primary" @click="addBuild" style="margin-bottom: 15px"
+        >新增楼层</el-button
+      >
       <FloorDialog
         v-if="isdialog"
         :id="id"

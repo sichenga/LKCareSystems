@@ -1,5 +1,5 @@
 import router from "@/router";
-import { useUserStore, usePermissionStore } from "@/store";
+import { usePermissionStore, useUserStore } from "@/store";
 import NProgress from "@/utils/nprogress";
 import { RouteRecordRaw } from "vue-router";
 import { TOKEN_KEY } from "@/enums/CacheEnum";
@@ -17,7 +17,7 @@ export function hasAuth(
   const auths = type === "button" ? perms : roles;
   return typeof value === "string"
     ? auths.includes(value)
-    : auths.some((perm) => {
+    : auths.some((perm: any) => {
         return value.includes(perm);
       });
 }

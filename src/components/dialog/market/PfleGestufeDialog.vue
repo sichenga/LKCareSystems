@@ -27,14 +27,14 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="close">取消</el-button>
+        <el-button @click="close(false)">取消</el-button>
         <el-button type="primary" @click="close(true)"> 确定 </el-button>
       </div>
     </template>
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits } from "vue";
+import { defineEmits, reactive, ref } from "vue";
 
 const form = reactive({
   name: "",

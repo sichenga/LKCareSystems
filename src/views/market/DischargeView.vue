@@ -1,64 +1,72 @@
 <template>
   <!-- <div>出院管理</div> -->
-  <el-card style="max-width: 100%">
-    <el-form
-      ref="Refdischarge"
-      :inline="true"
-      :model="formInline"
-      class="demo-form-inline"
-    >
-      <el-form-item label="老人姓名" prop="name">
-        <el-input v-model="formInline.name" placeholder="请输入" clearable />
-      </el-form-item>
-      <el-form-item label="身份证号码" prop="idCard">
-        <el-input v-model="formInline.idCard" placeholder="请输入" clearable />
-      </el-form-item>
-      <el-form-item label="状态" prop="state">
-        <el-select v-model="formInline.state" placeholder="请选择" clearable>
-          <el-option :label="'待出院'" :value="0" />
-          <el-option :label="'已出院'" :value="1" />
-        </el-select>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="searcher">查询</el-button>
-        <el-button @click="reset">重置</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
-  <el-card style="max-width: 100%" class="card">
-    <!-- 新增 -->
-    <el-button type="primary" @click="add" style="margin-bottom: 20px"
-      >新增出院申请</el-button
-    >
-    <!-- 表格 -->
-    <MayTable
-      :identifier="identifier"
-      :tableData="data.tableData"
-      :tableItem="data.tableItem"
-    >
-      <template #operate="{ data }">
-        <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-        <el-button type="primary" text @click="del(data.id)">删除</el-button>
-        <el-button type="primary" text @click="leave">确认出院</el-button>
-      </template>
-    </MayTable>
-    <Pagination
-      @page="pageChenge"
-      @psize="pageSizeChenge"
-      :page="formInline.page"
-      :psize="formInline.pageSize"
-      :total="data.total"
-    />
-    <!-- 新增 -->
-    <DischargeDialog v-if="isdialog" :id="idetit" @close="close" />
-  </el-card>
+  <div>
+    <el-card style="max-width: 100%">
+      <el-form
+        ref="Refdischarge"
+        :inline="true"
+        :model="formInline"
+        class="demo-form-inline"
+      >
+        <el-form-item label="老人姓名" prop="name">
+          <el-input v-model="formInline.name" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="身份证号码" prop="idCard">
+          <el-input
+            v-model="formInline.idCard"
+            clearable
+            placeholder="请输入"
+          />
+        </el-form-item>
+        <el-form-item label="状态" prop="state">
+          <el-select v-model="formInline.state" clearable placeholder="请选择">
+            <el-option :label="'待出院'" :value="0" />
+            <el-option :label="'已出院'" :value="1" />
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="searcher">查询</el-button>
+          <el-button @click="reset">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card class="card" style="max-width: 100%">
+      <!-- 新增 -->
+      <el-button style="margin-bottom: 20px" type="primary" @click="add"
+        >新增出院申请</el-button
+      >
+      <!-- 表格 -->
+      <MayTable
+        :identifier="identifier"
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+      >
+        <template #operate="{ data }">
+          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
+          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text type="primary" @click="leave">确认出院</el-button>
+        </template>
+      </MayTable>
+      <Pagination
+        :page="formInline.page"
+        :psize="formInline.pageSize"
+        :total="data.total"
+        @page="pageChenge"
+        @psize="pageSizeChenge"
+      />
+      <!-- 新增 -->
+      <DischargeDialog v-if="isdialog" :id="idetit" @close="close" />
+    </el-card>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
-import { dischargeList, dischargeDelete } from "@/service/market/DischargeApi";
+import { dischargeDelete, dischargeList } from "@/service/market/DischargeApi";
 import type { dischargeListParams } from "@/service/market/DischargeType";
+import { getMessageBox } from "@/utils/utils";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -68,7 +76,6 @@ const Pagination = defineAsyncComponent(
 const DischargeDialog = defineAsyncComponent(
   () => import("@/components/dialog/market/DischargeDialog.vue")
 );
-import { getMessageBox } from "@/utils/utils";
 const identifier = "Discharge";
 const formInline = reactive<dischargeListParams>({
   page: 1,

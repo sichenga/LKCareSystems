@@ -10,23 +10,23 @@
         class="demo-form-inline"
       >
         <el-form-item label="老人:" prop="name">
-          <el-input v-model="params.name" placeholder="请输入" clearable />
+          <el-input v-model="params.name" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item label="床位:" prop="begId">
           <!-- <el-select  placeholder="请选择">
             <el-cascader v-model="params.begId" :options="options" @change="handleChange" />
         </el-select> -->
           <MayCascader
+            :emitid="Number(params.begId)"
             :options="data.beddata"
             @change="bedselect"
-            :emitid="Number(params.begId)"
           />
         </el-form-item>
         <el-form-item label="日期:" prop="beginDate">
           <MayDateTimePicker
-            @change="timeSelect"
-            :statetime="params.beginDate"
             :endtime="params.endDate"
+            :statetime="params.beginDate"
+            @change="timeSelect"
           />
         </el-form-item>
         <el-form-item>
@@ -36,53 +36,55 @@
       </el-form>
     </el-card>
 
-    <TemperatureDialog v-if="dialogVisible" @close="close" :data="datas" />
+    <TemperatureDialog v-if="dialogVisible" :data="datas" @close="close" />
 
-    <el-card style="max-width: 100%" class="card">
-      <el-button type="primary" style="margin-bottom: 20px" @click="add"
-        >新增体温</el-button
-      >
+    <el-card class="card" style="max-width: 100%">
+      <el-button style="margin-bottom: 20px" type="primary" @click="add"
+        >新增体温
+      </el-button>
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button type="primary" size="small" text @click="del(data.id)"
-            >删除</el-button
-          >
-          <el-button type="primary" size="small" text @click="record(data)"
-            >编辑</el-button
-          >
+          <el-button size="small" text type="primary" @click="record(data)"
+            >编辑
+          </el-button>
+          <el-button size="small" text type="primary" @click="del(data.id)"
+            >删除
+          </el-button>
         </template>
       </MayTable>
       <Pagination
-        @page="handlPage"
-        @p-size="handlpSize"
         :page="params.page"
         :psize="params.pageSize"
         :total="counts"
+        @page="handlPage"
+        @p-size="handlpSize"
       />
     </el-card>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, defineAsyncComponent } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import {
-  TemperatureList,
   TemperatureDelete,
+  TemperatureList,
 } from "@/service/medicalcare/MedicalcareApi";
 import type { MedicalcareParams } from "@/service/medicalcare/MedicalcareType";
 import TemperatureDialog from "@/components/dialog/medicalcare/TemperatureDialog.vue";
+import MayCascader from "@/components/cascader/MayCascader.vue";
+import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
+import { useBuildStroke } from "@/store";
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-import MayCascader from "@/components/cascader/MayCascader.vue";
-import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
-import { useBuildStroke } from "@/store";
+
 const getUserInfo = useBuildStroke();
 const data = reactive({
   tableData: [] as any,

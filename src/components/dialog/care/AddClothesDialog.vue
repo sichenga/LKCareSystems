@@ -8,47 +8,50 @@
     <OldDialog v-if="idOld" @closes="closes" @id="oldid" />
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-position="right"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
-      <el-form-item label="老人姓名：" prop="elderlyId">
+      <el-form-item label="老人姓名:" prop="elderlyId">
         <div v-if="OldName" @click="select">
           {{ OldName }}
         </div>
         <el-button v-else type="primary" @click="select">选择老人</el-button>
       </el-form-item>
 
-      <el-form-item label="标题" prop="title">
+      <el-form-item label="标题:" prop="title">
         <el-input v-model="ruleForm.title" />
       </el-form-item>
-      <el-form-item label="类型" prop="type">
+      <el-form-item label="类型:" prop="type">
         <el-select v-model="ruleForm.type" placeholder="请选择">
-          <el-option label="缺衣" value="缺衣" />
-          <el-option label="错衣" value="错衣" />
+          <el-option label="缺衣:" value="缺衣" />
+          <el-option label="错衣:" value="错衣" />
         </el-select>
       </el-form-item>
-      <el-form-item label="状态" prop="state">
+      <el-form-item label="状态:" prop="state">
         <el-select v-model="ruleForm.state" placeholder="请选择">
-          <el-option label="未解决" value="未解决" />
-          <el-option label="已解决" value="已解决" />
+          <el-option label="未解决:" value="未解决" />
+          <el-option label="已解决:" value="已解决" />
         </el-select>
       </el-form-item>
-      <el-form-item label="内容" prop="content">
+      <el-form-item label="内容:" prop="content">
         <el-input v-model="ruleForm.content" type="textarea" />
       </el-form-item>
       <el-form-item>
         <!-- 图片上传 -->
-        <UploadPictures
-          :limit="3"
-          @upload="pictureupload"
-          @uploadrem="picturerem"
-          :showlist="getUploadPictures"
-        />
+        <div style="margin-left: 80px">
+          <UploadPictures
+            :limit="3"
+            :showlist="getUploadPictures"
+            @upload="pictureupload"
+            @uploadrem="picturerem"
+          />
+        </div>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -62,19 +65,24 @@
   </el-dialog>
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, onMounted, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import OldDialog from "./OldDialog.vue";
+import type {
+  ComponentSize,
+  FormInstance,
+  FormRules,
+  UploadUserFile,
+} from "element-plus";
 import { ElMessage } from "element-plus";
 import { getElderly } from "@/service/old/OldApi";
 import UploadPictures from "@/components/upload/UploadPictures.vue";
 import {
   clothesAdd,
-  clothesUpdate,
   clothesget,
+  clothesUpdate,
 } from "@/service/care/ClothesApi";
 import type { ClothesAddParams } from "@/service/care/ClothesType";
-import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-import type { UploadUserFile } from "element-plus";
+
 const upload = import.meta.env.VITE_BASE_URL;
 const props = defineProps(["id"]);
 const getUploadPictures = ref<UploadUserFile[]>([]);

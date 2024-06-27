@@ -8,31 +8,31 @@
   >
     <el-form
       ref="ruleFormRef"
-      style="max-width: 600px"
       :model="ruleForm"
       :rules="rules"
-      label-width="auto"
-      class="demo-ruleForm"
       :size="formSize"
+      class="demo-ruleForm"
+      label-width="auto"
       status-icon
+      style="max-width: 600px"
     >
-      <el-form-item label="老人：">
+      <el-form-item label="老人:">
         <div v-if="oldName" @click="select">{{ oldName }}</div>
         <div v-else>
-          <el-button type="primary" @click="select" style="margin-right: 30px"
+          <el-button style="margin-right: 30px" type="primary" @click="select"
             >请选择</el-button
           >
         </div>
       </el-form-item>
-      <el-form-item label="出院原因：" prop="reason">
+      <el-form-item label="出院原因:" prop="reason">
         <el-input v-model="ruleForm.reason" type="textarea" />
       </el-form-item>
-      <el-form-item label="预计时间：" prop="expectDate">
+      <el-form-item label="预计时间:" prop="expectDate">
         <MayTimePicker
           :format="'YYYY-MM-DD'"
+          :remtime="time"
           :valueFormat="'YYYY-MM-DD'"
           @change="handlchange"
-          :remtime="time"
         />
       </el-form-item>
     </el-form>
@@ -46,10 +46,10 @@
     </template>
   </el-dialog>
   <!-- 老人 -->
-  <OldSelectDialog v-if="olddialog" @id="getid" @close="closes" />
+  <OldSelectDialog v-if="olddialog" @close="closes" @id="getid" />
 </template>
 <script lang="ts" setup>
-import { ref, reactive, defineEmits, onMounted, defineProps } from "vue";
+import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
 import MayTimePicker from "@/components/timepicker/MayTimePicker.vue";
 import { getElderly } from "@/service/old/OldApi";
 import {
@@ -57,10 +57,11 @@ import {
   dischargeGet,
   dischargeUpdate,
 } from "@/service/market/DischargeApi";
+import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
 import type { dischargeAddParams } from "@/service/market/DischargeType";
-import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
+
 const formSize = ref<ComponentSize>("default");
 const props = defineProps(["id"]);
 const ruleFormRef = ref<FormInstance>();

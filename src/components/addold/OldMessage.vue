@@ -280,16 +280,20 @@ defineExpose({
 
 .demo-ruleForm-but {
   margin-left: 460px;
+
   .el-button {
     width: 100px;
     height: 40px;
   }
 }
+
 .el-input {
   height: 40px;
 }
+
 .el-select {
   height: 40px;
+
   :deep(.el-select__wrapper) {
     height: 100%;
   }
