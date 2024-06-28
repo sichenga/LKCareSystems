@@ -85,6 +85,7 @@ import {
 } from "@/service/staff/StaffApi";
 import { RoleList } from "@/service/role/RoleApi";
 const route = useRoute();
+
 const getUploadPictures = ref<any>("");
 const router = useRouter();
 const AvatarUpload = defineAsyncComponent(
@@ -179,7 +180,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         roles: ruleForm.roles.map((item: any) => ({ id: item })),
       };
       let res: any;
-      if (route.query?.id) {
+      if (route.params?.id) {
         //修改员工
         res = await updateList(obj);
         console.log(res);
@@ -191,7 +192,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         router.push({
           path: "/personel/staff",
         });
-        ElMessage.success(route.query?.id ? "修改成功" : "添加成功");
+        ElMessage.success(route.params?.id ? "修改成功" : "添加成功");
       } else {
         ElMessage.error(res?.msg);
       }

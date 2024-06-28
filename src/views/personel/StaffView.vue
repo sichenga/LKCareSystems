@@ -219,6 +219,7 @@ const add = () => {
 };
 // 编辑
 const handleEdit = (data: any) => {
+  console.log(33333333, data);
   router.push({
     path: `/personel/staff-edit/${data.id}`,
   });
