@@ -42,10 +42,8 @@
     <el-card class="table">
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button link size="small" type="primary" @click="deliver"
-            >发货</el-button
-          >
           <el-button link size="small" type="primary" @click="details(data.id)"
             >查看详情</el-button
           >
@@ -66,11 +64,10 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { PurchaseList } from "@/service/food/FoodApi";
+import { PurchaseList, purchase } from "@/service/food/FoodApi";
 import type { Purchase } from "@/service/food/FoodType";
 import { companylist } from "@/service/Organization/OrganizationApi";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
-
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -142,10 +139,7 @@ onMounted(() => {
   getlist();
   getdata();
 });
-// 发货
-const deliver = () => {
-  console.log("发货");
-};
+
 // 查看详情
 const details = (id: number) => {
   console.log("查看详情");

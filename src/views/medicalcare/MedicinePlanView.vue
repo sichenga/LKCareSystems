@@ -28,7 +28,7 @@
 </template>
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive } from "vue";
-// import AffiliatedView from "@/database/AffiliatedView.json";
+
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
@@ -64,9 +64,7 @@ const data = reactive({
   ],
 });
 const getlist = () => {
-  setTimeout(() => {
-    // data.tableData = AffiliatedView;
-  }, 1000);
+  console.log(11);
 };
 
 // 用药计划设置
