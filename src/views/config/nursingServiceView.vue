@@ -2,7 +2,9 @@
   <!-- 护理服务 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-      <el-button type="primary" @click="add()">新增服务</el-button>
+      <el-button type="primary" @click="add()" style="margin-bottom: 15px"
+        >新增服务</el-button
+      >
       <ServeDialog v-if="isdialog" :data="servicedata" @close="close" />
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
@@ -126,8 +128,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
-.el-button {
-  margin-bottom: 20px;
-}
-</style>
+<style lang="less" scoped></style>

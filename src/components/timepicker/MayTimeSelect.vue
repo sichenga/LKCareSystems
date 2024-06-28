@@ -1,18 +1,19 @@
 <template>
   <el-time-picker
     v-model="value"
+    :end-placeholder="props.endPlaceholder"
+    :format="props.valueformat"
     :is-range="props.isrange"
+    :placeholder="props.placeholder"
     :range-separator="props.rangeSeparator"
     :start-placeholder="props.startPlaceholder"
-    :end-placeholder="props.endPlaceholder"
     :value-format="props.valueformat"
-    :format="props.valueformat"
-    placeholder="选择时间"
     @change="timeselect"
   />
 </template>
 <script lang="ts" setup>
-import { ref, defineProps, defineEmits, watch } from "vue";
+import { defineEmits, defineProps, ref, watch } from "vue";
+
 const emit = defineEmits(["change"]);
 const props = defineProps({
   isrange: {
@@ -30,6 +31,10 @@ const props = defineProps({
   endPlaceholder: {
     type: String,
     default: "结束时间",
+  },
+  placeholder: {
+    type: String,
+    default: "选择时间",
   },
   valueformat: {
     type: String,

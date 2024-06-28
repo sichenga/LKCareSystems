@@ -293,4 +293,7 @@ onMounted(() => {
   width: 92px;
   height: 40px;
 }
+.el-form-item {
+  margin-bottom: 0;
+}
 </style>

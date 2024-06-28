@@ -35,13 +35,14 @@
         </template>
       </MayTable>
     </div>
-    <div style="height: 30px"></div>
+    <!-- <div style="height: 30px"></div> -->
     <Pagination
       :page="states.page"
       :psize="states.pageSize"
       :total="total"
       @page="handlPage"
       @pszie="handlPsize"
+      layout="total, prev, pager, next,sizes"
     />
     <template #footer>
       <div class="dialog-footer">
@@ -124,7 +125,7 @@ const close = (close: boolean = false) => {
 };
 const states = reactive<ListElderlyRequest>({
   page: 1,
-  pageSize: 10,
+  pageSize: 5,
   begId: undefined,
   state: undefined,
   name: "", //老人姓名

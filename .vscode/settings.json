@@ -76,5 +76,10 @@
   ],
   "i18n-ally.localesPaths": [
     "src/lang"
-  ]
+  ],
+  "i18n-ally.extract.ignoredByFiles": {
+    "src\\components\\dialog\\care\\AddClothesDialog.vue": [
+      "ruleForm.id == 0 ? '添加洗衣错衣' : '编辑洗衣错衣'"
+    ]
+  }
 }

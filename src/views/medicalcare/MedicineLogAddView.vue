@@ -32,14 +32,17 @@
         </el-form-item>
       </el-form>
       <div style="margin: 20px 0">
-        <div>药品：</div>
-        <el-button type="primary" @click="add">新增</el-button>
+        <el-button type="primary" @click="add">新增药品</el-button>
       </div>
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
-        <template #operate="{ data, index }">
-          <el-button type="primary" text @click="edit(data)">编辑</el-button>
-          <el-button type="primary" text @click="del(index)">删除</el-button>
+        <template #operate="scope">
+          <el-button type="primary" text @click="edit(scope.data)"
+            >编辑</el-button
+          >
+          <el-button type="primary" text @click="del(scope.index)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <div class="button">
@@ -209,5 +212,8 @@ provide("tableData", data.tableData);
   margin-top: 60px;
   display: flex;
   justify-content: center;
+}
+.el-form-item {
+  margin-bottom: 20px !important;
 }
 </style>

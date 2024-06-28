@@ -9,13 +9,12 @@ export const constantRoutes: RouteRecordRaw[] = [
     component: Layout,
     meta: { hidden: true },
     children: [
-      {
-        path: "/redirect/:path(.*)",
-        component: () => import("@/views/redirect/index.vue"),
-      },
+      // {
+      //   path: "/redirect/:path(.*)",
+      //   component: () => import("@/views/redirect/index.vue"),
+      // },
     ],
   },
-
   {
     path: "/login",
     component: () => import("@/views/login/index.vue"),
@@ -52,6 +51,10 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { hidden: true },
       },
     ],
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/views/redirect/index.vue"),
   },
 
   // 外部链接

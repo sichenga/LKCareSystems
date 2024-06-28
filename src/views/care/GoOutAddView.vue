@@ -11,18 +11,19 @@
         :size="formSize"
         status-icon
       >
-        <el-form-item label="选择外出老人123">
+        <el-form-item label="选择外出老人:">
           <el-input v-model="data.oldlist" disabled />
         </el-form-item>
-        <el-form-item label="外出时间">
+        <el-form-item label="外出时间:">
           <DateTimePicke
-            style="width: 300px"
             @change="handlChange"
+            :valueformat="'YYYY-MM-DD HH:mm:ss'"
+            :format="'YYYY-MM-DD HH:mm'"
             :statetime="times[0]"
             :endtime="times[1]"
           />
         </el-form-item>
-        <el-form-item label="陪同人员类型">
+        <el-form-item label="陪同人员类型:">
           <el-select
             v-model="ruleForm.relation"
             clearable
@@ -37,30 +38,29 @@
             />
           </el-select>
         </el-form-item>
-        <el-form-item label="陪同人员姓名">
+        <el-form-item label="陪同人员姓名:">
           <el-input v-model="ruleForm.name" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="陪同人员电话">
+        <el-form-item label="陪同人员电话:">
           <el-input v-model="ruleForm.mobile" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="陪同人员地址">
+        <el-form-item label="陪同人员地址:">
           <el-input v-model="ruleForm.address" placeholder="请输入" />
         </el-form-item>
-        <el-form-item label="外出原因">
+        <el-form-item label="外出原因:">
           <el-input
             v-model="ruleForm.content"
-            :rows="2"
             placeholder="请输入原因"
             type="textarea"
             style="width: 300px"
           />
         </el-form-item>
       </el-form>
+      <div class="submit">
+        <el-button @click="cancel">取消</el-button>
+        <el-button type="primary" @click="add">保存</el-button>
+      </div>
     </el-card>
-    <div class="submit">
-      <el-button @click="cancel">取消</el-button>
-      <el-button type="primary" @click="add">保存</el-button>
-    </div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -73,8 +73,6 @@ import { getElderly } from "@/service/old/OldApi";
 import type { AddGoout } from "@/service/care/gooutType";
 const router = useRouter();
 const route = useRoute();
-console.log(222222222222, route.params.id);
-
 const DateTimePicke = defineAsyncComponent(
   () => import("@/components/timepicker/MayDateTimePicker.vue")
 );
@@ -169,5 +167,9 @@ onMounted(() => {
   display: flex;
   // justify-content: center;
   margin-top: 20px;
+}
+// width: 419px
+.el-form-item {
+  width: 419px;
 }
 </style>

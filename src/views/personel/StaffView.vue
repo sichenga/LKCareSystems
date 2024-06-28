@@ -298,10 +298,6 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.el-form {
-  margin-top: 15px;
-}
-
 .el-card {
   width: 100%;
 }
@@ -312,10 +308,10 @@ onMounted(() => {
 </style>
 <style>
 .demo-form-inline .el-input {
-  --el-input-width: 220px;
+  --el-input-width: 140px;
 }
 
 .demo-form-inline .el-select {
-  --el-select-width: 220px;
+  --el-select-width: 150px;
 }
 </style>

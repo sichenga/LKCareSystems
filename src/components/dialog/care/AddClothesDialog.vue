@@ -18,10 +18,9 @@
       style="max-width: 600px"
     >
       <el-form-item label="老人姓名:" prop="elderlyId">
-        <div v-if="OldName" @click="select">
-          {{ OldName }}
-        </div>
-        <el-button v-else type="primary" @click="select">选择老人</el-button>
+        <el-button text bg :type="OldName ? '' : 'primary'" @click="select">{{
+          OldName ? OldName : "选择老人"
+        }}</el-button>
       </el-form-item>
 
       <el-form-item label="标题:" prop="title">

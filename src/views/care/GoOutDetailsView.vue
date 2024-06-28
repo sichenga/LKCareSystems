@@ -7,15 +7,13 @@
     </div>
     <el-form
       :model="form"
-      label-position="left"
       label-width="130px"
       style="max-width: 100%; margin-top: 30px"
     >
-      <el-form-item label="*老人信息" style="align-items: flex-start">
+      <el-form-item label="老人信息:" style="align-items: flex-start">
         <div class="oldinfo">
           <el-form
             :inline="true"
-            label-position="left"
             label-width="auto"
             class="demo-form-inline"
             style="width: 67%"

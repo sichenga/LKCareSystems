@@ -8,14 +8,14 @@
         :model="params"
         class="demo-form-inline"
       >
-        <el-form-item label="房间号" prop="name">
+        <el-form-item label="房间号:" prop="name">
           <el-input
             v-model="params.name"
             clearable
             placeholder="请输入房间号"
           />
         </el-form-item>
-        <el-form-item label="楼栋">
+        <el-form-item label="楼栋:">
           <MayCascader
             :emitid="params.buildingId"
             :options="options"

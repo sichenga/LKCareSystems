@@ -192,7 +192,9 @@
           <span
             >{{ row[item.prop].startTime }}~{{ row[item.prop].endTime }}</span
           >
-          <span>{{ row[item.prop].serviceName }}</span>
+          <span style="margin-left: 30px; color: #575cf9">{{
+            row[item.prop].serviceName
+          }}</span>
         </div>
         <div v-else class="schsel">
           <span @click="selectsch(item.prop, row)">+请选择</span>
@@ -431,6 +433,7 @@ const handleSelectionChange = (val: any[]) => {
   justify-content: center;
   box-sizing: border-box;
   padding: 2px;
+
   .del {
     font-size: 12px;
   }
@@ -444,8 +447,8 @@ const handleSelectionChange = (val: any[]) => {
   position: absolute;
   top: 0;
   left: 0;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
   padding-left: 5px;
   z-index: 999;
 

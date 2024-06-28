@@ -75,8 +75,10 @@ import {
 import type { playList } from "@/service/care/gooutType";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-import ActivityDialog from "@/components/dialog/care/ActivityDialog.vue";
 
+const ActivityDialog = defineAsyncComponent(
+  () => import("@/components/dialog/care/ActivityDialog.vue")
+);
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );

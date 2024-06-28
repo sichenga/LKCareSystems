@@ -27,7 +27,6 @@
             v-model="formInline.type"
             placeholder="请选择"
             style="width: 240px"
-            size="large"
           >
             <el-option :label="'缺衣'" :value="'缺衣'" />
             <el-option :label="'错衣'" :value="'错衣'" />
@@ -38,7 +37,6 @@
             v-model="formInline.state"
             placeholder="请选择"
             style="width: 240px"
-            size="large"
           >
             <el-option :label="'已解决'" :value="'已解决'" />
             <el-option :label="'未解决'" :value="'未解决'" />
@@ -230,13 +228,4 @@ onMounted(() => {
   getlist();
 });
 </script>
-<style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-</style>
+<style lang="less" scoped></style>

@@ -12,16 +12,16 @@
         </div>
       </div>
       <el-form :model="form" label-width="auto" style="max-width: 600px">
-        <el-form-item label="老人姓名：">
+        <el-form-item label="老人姓名:">
           {{ data.list.name }}
         </el-form-item>
-        <el-form-item label="老人性别：">
+        <el-form-item label="老人性别:">
           {{ data.list.gender == 1 ? "男" : "女" }}
         </el-form-item>
-        <el-form-item label="身份证号：">
+        <el-form-item label="身份证号:">
           {{ data.list.idCard }}
         </el-form-item>
-        <el-form-item label="老人状况：">
+        <el-form-item label="老人状况:">
           {{ data.list.source }}
         </el-form-item>
       </el-form>
@@ -37,10 +37,10 @@
       <div class="title" style="margin-top: 30px">
         <div><i>▋</i> 需求信息</div>
       </div>
-      <el-form-item label="房间需求">
+      <el-form-item label="房间需求:">
         {{ data.list.roomRequire }}
       </el-form-item>
-      <el-form-item label="意向需求">
+      <el-form-item label="意向需求:">
         {{ data.list.content }}
       </el-form-item>
       <div class="back">

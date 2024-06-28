@@ -31,7 +31,7 @@
           <el-form :model="data.AddData" label-width="auto">
             <el-form-item
               class="item-form"
-              label="请输入备注："
+              label="请输入备注:"
               style="width: 400px; height: 100px"
             >
               <el-input
@@ -41,7 +41,7 @@
               />
             </el-form-item>
             <el-form-item
-              label="期望到货日期"
+              label="期望到货日期:"
               style="width: 300px; height: 80px"
             >
               <MayTimePicker @change="hoaldChange" />
@@ -252,5 +252,8 @@ onMounted(() => {});
     width: 220px;
     height: 40px;
   }
+}
+:deep(.el-form-item__content) {
+  align-items: flex-start;
 }
 </style>

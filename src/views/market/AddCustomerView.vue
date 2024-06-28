@@ -13,25 +13,25 @@
         status-icon
         style="margin-top: 20px"
       >
-        <el-form-item label="老人姓名" prop="name">
+        <el-form-item label="老人姓名:" prop="name">
           <el-input v-model="ruleForm.name" placeholder="请输入老人姓名" />
         </el-form-item>
-        <el-form-item label="老人性别" prop="gender">
+        <el-form-item label="老人性别:" prop="gender">
           <el-select v-model="ruleForm.gender" placeholder="请选择">
             <el-option :value="1" label="男" />
             <el-option :value="0" label="女" />
           </el-select>
         </el-form-item>
-        <el-form-item label="身份证号" prop="idCard">
+        <el-form-item label="身份证号:" prop="idCard">
           <el-input
             v-model="ruleForm.idCard"
-            placeholder="请输入老人身份证号"
+            placeholder="请输入老人身份证号:"
           />
         </el-form-item>
-        <el-form-item label="老人状况" prop="status">
+        <el-form-item label="老人状况:" prop="status">
           <el-input
             v-model="ruleForm.status"
-            placeholder="请输入老人状况"
+            placeholder="请输入老人状况:"
             type="textarea"
           />
         </el-form-item>
@@ -61,17 +61,17 @@
         </MayTable>
         <Pagination :total="data.token" />
         <div class="family"><span>▋</span>需求总结</div>
-        <el-form-item label="房间需求" prop="roomRequire">
+        <el-form-item label="房间需求:" prop="roomRequire">
           <el-input
             v-model="ruleForm.roomRequire"
-            placeholder="请输入房间需求"
+            placeholder="请输入房间需求:"
             type="textarea"
           />
         </el-form-item>
-        <el-form-item label="意向描述" prop="content">
+        <el-form-item label="意向描述:" prop="content">
           <el-input
             v-model="ruleForm.content"
-            placeholder="请输入意向描述"
+            placeholder="请输入意向描述:"
             type="textarea"
           />
         </el-form-item>

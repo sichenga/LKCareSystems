@@ -1,8 +1,8 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="新增/编辑药品"
     width="500"
+    :title="(!remdata.id ? '新增' : '编辑') + '药品'"
     @close="close"
   >
     <el-form
@@ -145,5 +145,14 @@ onMounted(() => {
   width: 300px;
 }
 .Special_line {
+  :deep(.el-form-item__content) {
+    justify-content: space-between;
+    .el-input {
+      width: 140px;
+    }
+    .el-select {
+      width: 140px;
+    }
+  }
 }
 </style>

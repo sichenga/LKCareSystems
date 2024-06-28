@@ -28,9 +28,6 @@
 import { ref, reactive, defineEmits, defineProps, onMounted } from "vue";
 import { clothesget } from "@/service/care/ClothesApi";
 const props = defineProps(["id"]);
-const url = ref(
-  "https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-);
 const upload = import.meta.env.VITE_BASE_URL;
 const data = reactive({
   list: [] as any,

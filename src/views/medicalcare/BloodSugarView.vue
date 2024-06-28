@@ -33,7 +33,7 @@
       </el-form>
     </el-card>
     <el-card style="max-width: 100%" class="card">
-      <el-button type="primary" @click="add" style="margin-bottom: 30px"
+      <el-button type="primary" @click="add" style="margin-bottom: 20px"
         >添加血糖记录</el-button
       >
       <!-- 表格 -->

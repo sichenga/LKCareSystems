@@ -36,7 +36,17 @@ const fontColor = computed(() => {
 </script>
 
 <style lang="less">
-.el-form-item {
-  align-items: center;
+.demo-form-inline {
+  .el-form-item {
+    align-items: center;
+    margin-bottom: unset !important;
+  }
+}
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .demo-form-inline {
+    .el-form-item {
+      margin-bottom: 10px !important;
+    }
+  }
 }
 </style>

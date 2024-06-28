@@ -42,7 +42,6 @@
         <el-button v-else type="primary" @click="oldAdd">选择老人</el-button>
       </el-form-item>
       <el-form-item label="精神慰藉内容：">
-        <!-- <el-input v-model="ruleForm.content" /> -->
         <div class="Editor">
           <MyEditor @change="change" :content="content" />
         </div>
@@ -52,6 +51,7 @@
           @upload="upload"
           @upload-file="uploadFile"
           :files="files"
+          :title="'选择文件'"
         />
       </el-form-item>
     </el-form>

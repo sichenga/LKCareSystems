@@ -6,7 +6,7 @@
       :page-sizes="[5, 10, 15, 20]"
       :small="false"
       :background="true"
-      :layout="'total,  prev, pager, next,jumper,sizes'"
+      :layout="props.layout"
       :total="data.total"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -36,6 +36,10 @@ const props = defineProps({
   total: {
     type: Number,
     default: 0,
+  },
+  layout: {
+    type: String,
+    default: "total,  prev, pager, next,jumper,sizes",
   },
 });
 

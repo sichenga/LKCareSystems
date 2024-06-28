@@ -17,12 +17,9 @@
       style="max-width: 600px"
     >
       <el-form-item label="老人:">
-        <div v-if="oldName" @click="select">{{ oldName }}</div>
-        <div v-else>
-          <el-button style="margin-right: 30px" type="primary" @click="select"
-            >请选择</el-button
-          >
-        </div>
+        <el-button :type="!oldName ? 'primary' : ''" @click="select" text bg>{{
+          !oldName ? "选择老人" : oldName
+        }}</el-button>
       </el-form-item>
       <el-form-item label="出院原因:" prop="reason">
         <el-input v-model="ruleForm.reason" type="textarea" />

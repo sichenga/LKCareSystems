@@ -5,7 +5,6 @@ import { setupStore } from "@/store";
 import { setupDirective } from "@/directive";
 import "default-passive-events";
 import { setupElIcons, setupI18n, setupPermission } from "@/plugins";
-import "default-passive-events";
 // 本地SVG图标
 import "virtual:svg-icons-register";
 import "@/utils/browserPatch";

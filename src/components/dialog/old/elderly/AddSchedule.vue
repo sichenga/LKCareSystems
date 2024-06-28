@@ -5,8 +5,6 @@
     width="20%"
     @close="close"
   >
-    {{ ruleForm }}
-    {{ schtype }}
     <el-form
       ref="ruleFormRef"
       :model="ruleForm"
@@ -34,8 +32,8 @@
       </el-form-item>
       <el-form-item label="任务时间：">
         <MayTimeSelect
-          :isrange="true"
-          :start-placeholder="props.startTime"
+          :isrange="false"
+          :placeholder="'选择结束时间'"
           style="width: 200px"
           @change="timechange"
         />
@@ -90,7 +88,7 @@ const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<AddElderlyTaskDto>({
   elderlyId: Number(route.query?.id) || 0,
   serviceId: undefined,
-  startTime: "",
+  startTime: props.startTime,
   endTime: "",
   week: props.schdata,
   day: "",
@@ -125,8 +123,9 @@ const submitForm = async () => {
 };
 // 获取时间
 const timechange = (val: any) => {
-  ruleForm.startTime = val[0];
-  ruleForm.endTime = val[1];
+  console.log(111, val);
+  // ruleForm.startTime = val[0];
+  ruleForm.endTime = val;
 };
 
 onMounted(() => {
@@ -136,7 +135,5 @@ onMounted(() => {
 <style lang="less" scoped>
 .el-input {
   width: 300px;
-}
-.reset {
 }
 </style>

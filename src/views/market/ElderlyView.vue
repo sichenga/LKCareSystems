@@ -226,17 +226,4 @@ onMounted(() => {
   bedlist();
 });
 </script>
-<style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-
-.el-form--inline .el-form-item {
-  width: 270px;
-}
-</style>
+<style lang="less" scoped></style>

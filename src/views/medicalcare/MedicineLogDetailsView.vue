@@ -15,7 +15,6 @@
           :src="upload + oldInfo?.photo"
         />
         <el-form
-          label-width="120px"
           label-position="left"
           style="max-width: 600px; margin-left: 30px"
         >
@@ -26,9 +25,6 @@
       </div>
     </el-card>
     <el-card style="margin-top: 15px">
-      <!-- <div style="margin: 10px 0">
-      <el-button type="primary" @click="add">新增</el-button>
-    </div> -->
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
@@ -50,8 +46,7 @@
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-import { useRouter, useRoute } from "vue-router";
-const router = useRouter();
+import { useRoute } from "vue-router";
 const route = useRoute();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -131,7 +126,6 @@ const getlist = async () => {
       (params.page - 1) * params.pageSize,
       params.page * params.pageSize
     );
-    // getPagination(res.oldName.list)
   }
 };
 // 分页

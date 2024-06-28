@@ -16,10 +16,9 @@
       style="max-width: 368px"
     >
       <el-form-item class="Special_line" label="老人姓名" prop="elderlyId">
-        <div v-if="OldName" @click="select">
-          {{ OldName }}
-        </div>
-        <el-button v-else type="primary" @click="select">选择老人</el-button>
+        <el-button :type="!OldName ? 'primary' : ''" @click="select" text bg>{{
+          !OldName ? "选择老人" : OldName
+        }}</el-button>
         <OldSelectDialog v-if="idOld" @close="oldclose" @id="oldid" />
       </el-form-item>
       <el-form-item label="老人体温" prop="val">
