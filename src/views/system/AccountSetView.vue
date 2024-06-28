@@ -46,7 +46,11 @@
           <PassDialog v-if="isdialog" @close="close" />
         </el-form-item>
         <el-form-item label="所属角色">
-          <el-input v-model="ruleForm.roleIds" class="custom-input" disabled />
+          <el-input
+            :model-value="roleData.toString()"
+            class="custom-input"
+            disabled
+          />
         </el-form-item>
       </el-form>
     </el-card>
@@ -62,6 +66,7 @@ import type { RuleForm } from "@/service/system/SystemType";
 import { getUserInfo, updatePhoto } from "@/service/system/SystemApi";
 import UploadImg from "@/components/upload/UploadImg.vue";
 import { useUserStore } from "@/store";
+import { rolelistForAccount } from "@/service/admin/AdminApi";
 
 const userStore = useUserStore();
 const Image = import.meta.env.VITE_BASE_URL + "/";
@@ -84,6 +89,14 @@ const close = (val: any) => {
     getList();
   }
 };
+// 角色数据
+const roleData = ref<any>([]);
+// 获取角色权限数据
+const getRoleData = async (id: number) => {
+  const res: any = await rolelistForAccount(id);
+  console.log("角色", res);
+  roleData.value = res.data.list.map((item: any) => item.name);
+};
 const img = ref("");
 const getList = async () => {
   let res: any = await getUserInfo().catch(() => {});
@@ -91,6 +104,7 @@ const getList = async () => {
   if (res?.code == 10000) {
     img.value = res.data.photo;
     Object.assign(ruleForm, res.data);
+    await getRoleData(res.data.id);
   }
 };
 //更改头像
