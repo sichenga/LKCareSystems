@@ -67,7 +67,7 @@
         @pszie="holedpsize"
       />
     </el-card>
-    <div class="title-btn">
+    <div class="title-btn" v-if="customerId">
       <el-button @click="$router.go(-1)">返回</el-button>
     </div>
     <AddRelation
@@ -90,8 +90,8 @@ import type { market } from "@/service/market/marketType";
 
 const route = useRoute();
 
-const customerId = ref<any>(null);
-customerId.value = route.query.id;
+const customerId = ref<any>(route.query?.id);
+// customerId.value = route.query.id;
 const Refquestion = ref();
 const router = useRouter();
 const AddRelation = defineAsyncComponent(
