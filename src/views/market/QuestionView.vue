@@ -89,6 +89,7 @@ import { deleteMarket, getMarketList } from "@/service/market/marketApi";
 import type { market } from "@/service/market/marketType";
 
 const route = useRoute();
+
 const customerId = ref<any>(null);
 customerId.value = route.query.id;
 const Refquestion = ref();
@@ -159,7 +160,7 @@ const states = reactive<market>({
   customerName: "", //老人姓名
   mobile: "", //手机号
   state: null, //0:待回访,1:已回访
-  customerId: null, //潜在客户id
+  customerId: route.query?.id ? Number(route.query?.id) : null, //潜在客户id
 });
 // 重置
 const reset = () => {
