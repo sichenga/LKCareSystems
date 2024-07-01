@@ -19,6 +19,14 @@ export const useUserStore = defineStore(
       ingredient.value = val;
     };
 
+    // 选择食材保存在缓存中
+    const Saveingredients = ref<any>([]);
+
+    const SetSaveingredients = (val: any) => {
+      console.log(88888, val);
+
+      Saveingredients.value = val;
+    };
     /**
      * 登录
      *
@@ -93,6 +101,8 @@ export const useUserStore = defineStore(
       logout,
       resetToken,
       ingredients,
+      Saveingredients,
+      SetSaveingredients,
     };
   },
   {

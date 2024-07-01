@@ -11,7 +11,7 @@
         :tableData="data.AddData.foods"
         :tableItem="data.tableItem"
         :label="'采购数量'"
-        v-if="isProxy"
+        v-if="data.AddData.foods.length"
       >
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #custom="data">
@@ -44,7 +44,7 @@
               label="期望到货日期:"
               style="width: 300px; height: 80px"
             >
-              <MayTimePicker @change="hoaldChange" />
+              <MayTimePicker @change="hoaldChange" :remtime="remtime" />
             </el-form-item>
           </el-form>
         </div>
@@ -73,6 +73,9 @@ import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { postInspection } from "@/service/purchase/PurchaseApi";
 import type { IUserList } from "@/service/purchase/PurchaseType";
+import { useUserStore } from "@/store";
+const useUser = useUserStore();
+
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -131,9 +134,6 @@ const del = async (id: any) => {
     data.AddData.foods = data.AddData.foods.filter(
       (item: any) => item.id !== id
     );
-    if (data.AddData.foods.length === 0) {
-      isProxy.value = false;
-    }
     countsprice(data.AddData.foods);
     ElMessage.success("删除成功");
   } else {
@@ -142,11 +142,40 @@ const del = async (id: any) => {
 };
 // 返回
 const back = () => {
+  useUser.SetSaveingredients([]);
   router.push("/logistics/purchase");
 };
 // 保存
+const getSaveingredients = ref<any>();
 const confirm = () => {
-  router.push("/logistics/purchase");
+  console.log(
+    "选择",
+    data.AddData.foods,
+    data.AddData.remarks,
+    data.AddData.receiveTime
+  );
+  if (!data.AddData.foods?.length) {
+    ElMessage.error({
+      message: "请选择食材",
+    });
+  } else if (!data.AddData.remarks?.length) {
+    ElMessage.error({
+      message: "请输入备注",
+    });
+  } else if (!data.AddData.receiveTime?.length) {
+    ElMessage.error({
+      message: "请选择日期",
+    });
+  } else {
+    getSaveingredients.value = {
+      foods: data.AddData.foods,
+      remarks: data.AddData.remarks,
+      receiveTime: data.AddData.receiveTime,
+    };
+
+    useUser.SetSaveingredients(getSaveingredients.value);
+    router.push("/logistics/purchase");
+  }
 };
 
 const dialogVisible = ref(false);
@@ -160,12 +189,10 @@ const haoldclose = (val: boolean) => {
     dialogVisible.value = false;
   }
 };
-const isProxy = ref(false);
+
 // 选择食材
 const hoaldIngredient = (val: any) => {
   if (val) {
-    isProxy.value = true;
-
     data.AddData.foods = val.map((item: any) => {
       let obj = {
         foodName: item.name,
@@ -197,7 +224,7 @@ const save = async () => {
   if (data.AddData.foods.length >= 1) {
     let res: any = await postInspection(data.AddData);
     if (res.code == 10000) {
-      router.push("/logistics/details/" + res.data.id);
+      router.push("/logistics/purchase");
     }
   } else {
     ElMessage.error({
@@ -206,7 +233,25 @@ const save = async () => {
   }
 };
 
-onMounted(() => {});
+// 保存的数据
+const remtime = ref<string>(""); //时间
+const Saveingredients = () => {
+  if (
+    useUser.Saveingredients.foods?.length &&
+    useUser.Saveingredients.receiveTime?.length &&
+    useUser.Saveingredients.remarks?.length
+  ) {
+    data.AddData.foods = useUser.Saveingredients.foods;
+    countsprice(useUser.Saveingredients.foods);
+    data.AddData.receiveTime = useUser.Saveingredients.receiveTime;
+    data.AddData.remarks = useUser.Saveingredients.remarks;
+    remtime.value = useUser.Saveingredients.receiveTime;
+  }
+};
+
+onMounted(() => {
+  Saveingredients();
+});
 </script>
 <style lang="less" scoped>
 .el-button {
@@ -253,6 +298,7 @@ onMounted(() => {});
     height: 40px;
   }
 }
+
 :deep(.el-form-item__content) {
   align-items: flex-start;
 }
