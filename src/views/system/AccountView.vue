@@ -1,5 +1,5 @@
 <template>
-  <!-- 账号管理 -->
+  <!-- 账号列表-->
   <div class="app-container">
     <el-card style="max-width: 100%">
       <el-button type="primary" @click="isdialog = true">新增</el-button>

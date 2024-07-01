@@ -144,7 +144,7 @@ const close = (val: any) => {
 // 查看记录
 const record = (id: any) => {
   console.log("查看记录", id);
-  router.push(`/medicalcare/check-room/details/${id}`);
+  router.push(`/medicalcare/check-room-details/${id}`);
 };
 
 // 分页
