@@ -157,12 +157,12 @@ import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
 const upload = import.meta.env.VITE_BASE_URL;
-// const MassUpload = defineAsyncComponent(
-//   () => import("@/components/upload/MassUpload.vue")
-// );
-// const UploadPictures = defineAsyncComponent(
-//   () => import("@/components/upload/UploadPictures.vue")
-// );
+const MassUpload = defineAsyncComponent(
+  () => import("@/components/upload/MassUpload.vue")
+);
+const UploadPictures = defineAsyncComponent(
+  () => import("@/components/upload/UploadPictures.vue")
+);
 const imgdelete = ref(true);
 const route = useRoute();
 const router = useRouter();

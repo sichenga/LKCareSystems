@@ -26,6 +26,7 @@
         :label="'采购实际数量'"
         :isoperate="isshou"
       >
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #custom="{ data }">
           <el-input v-model="data.receiveCounts" style="width: 130px" />
         </template>

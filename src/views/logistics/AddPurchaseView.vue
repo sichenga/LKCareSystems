@@ -4,7 +4,7 @@
     <el-card>
       <div style="margin: 10px 0">
         <el-button type="primary" @click="ingredient">选择食材</el-button>
-        <div class="quantity">1</div>
+        <div class="quantity">{{ data.AddData.foods.length }}</div>
       </div>
       <!-- 表格 -->
       <MayTable

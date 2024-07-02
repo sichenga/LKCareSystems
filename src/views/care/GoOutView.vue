@@ -229,9 +229,4 @@ onMounted(() => {
   getlistData(); //外出登记列表
 });
 </script>
-<style lang="less" scoped>
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-</style>
+<style lang="less" scoped></style>

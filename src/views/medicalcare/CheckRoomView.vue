@@ -45,9 +45,6 @@
         <template #operate="{ data }">
           <el-button type="primary" text @click="emit(data)">编辑</el-button>
           <el-button type="primary" text @click="del(data.id)">删除</el-button>
-          <el-button type="primary" text @click="record(data.id)"
-            >查看记录</el-button
-          >
         </template>
       </MayTable>
       <Pagination
@@ -142,10 +139,10 @@ const close = (val: any) => {
   isdshow.value = false;
 };
 // 查看记录
-const record = (id: any) => {
-  console.log("查看记录", id);
-  router.push(`/medicalcare/check-room-details/${id}`);
-};
+// const record = (id: any) => {
+//   console.log("查看记录", id);
+//   router.push(`/medicalcare/check-room/details/${id}`);
+// };
 
 // 分页
 const getpage = (val: any) => {
