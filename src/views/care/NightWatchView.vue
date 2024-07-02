@@ -226,9 +226,4 @@ onMounted(() => {
   getlist();
 });
 </script>
-<style lang="less" scoped>
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-</style>
+<style lang="less" scoped></style>

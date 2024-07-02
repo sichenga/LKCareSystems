@@ -37,7 +37,12 @@
           <el-input v-model="ruleForm.username" class="custom-input" disabled />
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="ruleForm.pwd" class="custom-pass" disabled />
+          <el-input
+            v-model="ruleForm.pwd"
+            class="custom-pass"
+            disabled
+            show-password
+          />
           <span
             style="padding-left: 20px; font-size: 12px; color: #75a5ea"
             @click="isdialog = true"
