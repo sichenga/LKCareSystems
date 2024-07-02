@@ -49,7 +49,7 @@
               <el-button
                 style="width: 100%; height: 45px"
                 type="success"
-                @click="handleLogin"
+                @click="login"
                 >登录
               </el-button>
             </el-form-item>
@@ -65,7 +65,7 @@
 
 <script lang="ts" setup>
 import { useUserStore } from "@/store";
-
+import { debounce } from "lodash-es";
 import type { FormInstance } from "element-plus";
 import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
@@ -124,6 +124,8 @@ const loginRules = computed(() => {
 
 /** 登录 */
 const route = useRoute();
+
+const login = debounce(handleLogin, 300);
 
 function handleLogin() {
   console.log(2222);

@@ -5,7 +5,7 @@
     width="500"
     @close="close"
   >
-    <OldDialog v-if="idOld" @closes="closes" @id="oldid" />
+    <OldDialog v-if="idOld" @close="closes" @id="oldid" />
     <el-form
       ref="ruleFormRef"
       :model="ruleForm"
@@ -65,7 +65,7 @@
 </template>
 <script lang="ts" setup>
 import { defineEmits, defineProps, onMounted, reactive, ref } from "vue";
-import OldDialog from "./OldDialog.vue";
+import OldDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
 import type {
   ComponentSize,
   FormInstance,
