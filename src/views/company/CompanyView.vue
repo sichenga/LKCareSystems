@@ -23,7 +23,6 @@
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="scope">
-          <el-button text type="primary">进入系统</el-button>
           <el-button text type="primary" @click="amend(scope.data.id)"
             >修改
           </el-button>

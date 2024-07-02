@@ -60,12 +60,6 @@
           <el-button type="primary" text @click="details(data.id)"
             >详情</el-button
           >
-          <el-button type="primary" v-if="data.state == 0" text
-            >提交入院</el-button
-          >
-          <el-button type="primary" v-else @click="cancel" text
-            >取消入院</el-button
-          >
         </template>
       </MayTable>
       <Pagination
@@ -186,13 +180,6 @@ const sonds = () => {
 // 关闭弹窗
 const close = () => {
   isdialog.value = false;
-};
-//取消入院
-const cancel = async () => {
-  let res = await getMessageBox("是否确认取消此入住申请？", "删除后将不可恢复");
-  if (res) {
-    ElMessage.success("取消入院成功");
-  }
 };
 // 删除
 const del = async (id: number) => {

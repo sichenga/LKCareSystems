@@ -58,15 +58,13 @@
         :identifier="identifier"
         :autoWidth="'530px'"
       >
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
           <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-          <el-button type="primary" text>提交预定</el-button>
-          <el-button type="primary" text>取消预定</el-button>
           <el-button type="primary" text @click="del(data.id)">删除</el-button>
           <el-button type="primary" text @click="details(data.id)"
             >详情</el-button
           >
-          <el-button type="primary" text>转入院</el-button>
         </template>
       </MayTable>
       <Pagination
