@@ -11,15 +11,9 @@
         :tableItem="data.tableItem"
         autoWidth="350px"
       >
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
           <el-button type="primary" text @click="del">删除</el-button>
-          <el-button
-            type="primary"
-            text
-            v-if="data.state === '待提交'"
-            @click="delivery(data.id)"
-            >提交</el-button
-          >
           <el-button
             type="primary"
             text
