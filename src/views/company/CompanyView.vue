@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <!-- 分机构列表 -->
+    <!-- 机构列表 -->
     <el-card style="margin-top: 15px">
       <template #header>
         <el-form :inline="true" :model="params" class="demo-form-inline">
@@ -23,7 +23,6 @@
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="scope">
-          <el-button text type="primary">进入系统</el-button>
           <el-button text type="primary" @click="amend(scope.data.id)"
             >修改
           </el-button>

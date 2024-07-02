@@ -1,5 +1,5 @@
 <template>
-  <!-- 新增分机构 -->
+  <!-- 添加机构 -->
   <el-card style="max-width: 100%">
     <div class="title">
       <div class="title-text">
