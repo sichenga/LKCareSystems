@@ -41,10 +41,10 @@
         :tableData="data.tableData"
         :tableItem="data.tableItem"
       >
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
           <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
           <el-button text type="primary" @click="del(data.id)">删除</el-button>
-          <el-button text type="primary" @click="leave">确认出院</el-button>
         </template>
       </MayTable>
       <Pagination
@@ -184,23 +184,6 @@ const del = async (id: number) => {
 const searcher = () => {
   formInline.page = 1;
   getlist();
-};
-
-// 确认出院
-const leave = () => {
-  ElMessageBox.confirm("是否确认出院？,出院后将不可恢复?", "出院确认")
-    .then(() => {
-      ElMessage({
-        type: "success",
-        message: "确认出院",
-      });
-    })
-    .catch(() => {
-      ElMessage({
-        type: "info",
-        message: "取消出院",
-      });
-    });
 };
 
 // 分页

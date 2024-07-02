@@ -1,8 +1,7 @@
 <template>
   <div>
     <div class="size"><span>▋</span> 老人自理情况</div>
-    {{ state.tableData }}
-    <!-- {{ ruleForm.checkups }} -->
+
     <MatTable
       :tableData="state.tableData"
       :tableItem="state.tableItem"

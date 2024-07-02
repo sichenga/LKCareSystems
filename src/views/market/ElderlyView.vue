@@ -26,8 +26,8 @@
             :emitid="Number(formInline.begId)"
           />
         </el-form-item>
-        <el-form-item label="入住状况:" prop="state">
-          <el-select v-model="formInline.state">
+        <el-form-item label="入住状况:" prop="state" style>
+          <el-select v-model="formInline.state" style="width: 180px">
             <el-option label="未签约" :value="1" />
             <el-option label="预定中" :value="2" />
             <el-option label="已出院" :value="3" />

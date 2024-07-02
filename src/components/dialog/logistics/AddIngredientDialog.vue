@@ -49,7 +49,6 @@ import { FoodList } from "@/service/food/FoodApi";
 import type { Supplier } from "@/service/food/FoodType";
 import { useUserStore } from "@/store";
 const useUser = useUserStore();
-console.log(2222222, useUser);
 
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")

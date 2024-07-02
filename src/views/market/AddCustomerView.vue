@@ -314,6 +314,7 @@ onMounted(() => {
   span {
     line-height: 50px;
     color: #529bfd;
+    position: fixed;
   }
 }
 
