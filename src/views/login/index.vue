@@ -11,13 +11,7 @@
             <span>账号登录</span>
             <el-image :src="code" class="code" fit="cover" />
           </div>
-          <el-form
-            ref="loginFormRef"
-            :model="loginData"
-            :rules="loginRules"
-            class="demo-ruleForm"
-            status-icon
-          >
+          <el-form ref="loginFormRef" :model="loginData" :rules="loginRules" class="demo-ruleForm" status-icon>
             <el-form-item prop="username">
               <!--账号-->
               <el-input v-model="loginData.username" placeholder="请输入账号">
@@ -30,11 +24,7 @@
             </el-form-item>
             <!--密码-->
             <el-form-item prop="pwd">
-              <el-input
-                v-model="loginData.pwd"
-                placeholder="请输入密码"
-                show-password
-              >
+              <el-input v-model="loginData.pwd" placeholder="请输入密码" show-password>
                 <template #prefix>
                   <el-icon>
                     <Lock />
@@ -46,11 +36,7 @@
               <span>忘记密码?</span>
             </el-form-item>
             <el-form-item>
-              <el-button
-                style="width: 100%; height: 45px"
-                type="success"
-                @click="login"
-                >登录
+              <el-button style="width: 100%; height: 45px" type="success" @click="login">登录
               </el-button>
             </el-form-item>
           </el-form>
@@ -86,6 +72,8 @@ const { height } = useWindowSize();
 const loginData = ref<any>({
   username: "admin",
   pwd: "admin",
+  verifyCode: "rjxwa",
+  verifyCodeId: "f687818593f1437f9653119cb6bacb18",
 });
 console.log(import.meta.env.VITE_APP_API_URL);
 const loginRules = computed(() => {
@@ -218,6 +206,7 @@ watchEffect(() => {
   height: 80%;
   display: flex;
   box-shadow: 0 0 20px 10px #ccc;
+
   //
   .right {
     width: 30%;
@@ -234,6 +223,7 @@ watchEffect(() => {
       height: 100%;
       box-sizing: border-box;
       margin-top: 15px;
+
       .el-input {
         height: 50px;
       }
