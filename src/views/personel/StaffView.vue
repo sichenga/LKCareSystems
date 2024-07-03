@@ -70,8 +70,10 @@
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
-            <el-button @click="reset">重置</el-button>
+            <el-button class="submits" type="primary" @click="onSubmit"
+              >查询</el-button
+            >
+            <el-button class="submits" @click="reset">重置</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -314,5 +316,9 @@ onMounted(() => {
 
 .demo-form-inline .el-select {
   --el-select-width: 150px;
+}
+
+.submits {
+  margin-top: 10px;
 }
 </style>
