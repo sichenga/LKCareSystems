@@ -104,7 +104,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       } else if (res?.code == 14000) {
         ElMessage.error(res.msg);
       }
-      console.log("submit!");
     } else {
       console.log("error submit!", fields);
     }

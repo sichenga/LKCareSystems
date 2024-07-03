@@ -42,6 +42,25 @@
                 </template>
               </el-input>
             </el-form-item>
+            <el-form-item prop="verifyCode" class="verifyCode">
+              <el-input
+                v-model="loginData.verifyCode"
+                placeholder="请输入验证码"
+                style="width: 150px"
+              >
+                <template #prefix>
+                  <el-icon>
+                    <Lock />
+                  </el-icon>
+                </template>
+              </el-input>
+              <img
+                :src="codeImage"
+                alt=""
+                class="images-size"
+                @click="getCode"
+              />
+            </el-form-item>
             <el-form-item class="btn">
               <span>忘记密码?</span>
             </el-form-item>
@@ -64,6 +83,7 @@
 </template>
 
 <script lang="ts" setup>
+import { authCode } from "@/service/account/AccountApi";
 import { useUserStore } from "@/store";
 import { debounce } from "lodash-es";
 import type { FormInstance } from "element-plus";
@@ -86,8 +106,10 @@ const { height } = useWindowSize();
 const loginData = ref<any>({
   username: "admin",
   pwd: "admin",
+  verifyCode: "",
+  verifyCodeId: "",
 });
-console.log(import.meta.env.VITE_APP_API_URL);
+
 const loginRules = computed(() => {
   return {
     username: [
@@ -104,13 +126,13 @@ const loginRules = computed(() => {
         message: t("login.message.password.required"),
       },
     ],
-    //   captchaCode: [
-    //     {
-    //       required: true,
-    //       trigger: "blur",
-    //       message: t("login.message.captchaCode.required"),
-    //     },
-    //   ],
+    verifyCode: [
+      {
+        required: true,
+        trigger: "blur",
+        message: t("login.message.captchaCode.required"),
+      },
+    ],
   };
 });
 
@@ -179,9 +201,20 @@ watchEffect(() => {
 //   }
 // }
 
-// onMounted(() => {
-//   // getCaptcha();
-// });
+onMounted(() => {
+  getCode(); //获取验证码
+});
+
+// 获取验证码
+const codeImage = ref<string>("");
+const getCode = async () => {
+  const res: any = await authCode();
+  console.log(res);
+  if (res.code === 10000) {
+    codeImage.value = res.imageCode;
+    loginData.value.verifyCodeId = res.id;
+  }
+};
 </script>
 
 <style lang="less" scoped>
@@ -282,5 +315,16 @@ watchEffect(() => {
       color: #409eff;
     }
   }
+}
+.verifyCode {
+  position: relative;
+}
+.images-size {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
 }
 </style>

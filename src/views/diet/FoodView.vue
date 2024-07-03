@@ -6,6 +6,7 @@
       <FoodDialog v-if="isdialog" :foodid="foodid" @close="close" />
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
           <el-button
             link
