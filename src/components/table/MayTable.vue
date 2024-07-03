@@ -160,11 +160,11 @@
           class="week"
           @click="changetab(row, item.prop)"
         >
-          <div v-for="item in row[item.prop]" :key="item.id" class="item">
-            <el-avatar :size="30" :src="upload + item.staffPhoto" />
-            <span>{{ item.staffName }}</span>
+          <div v-for="items in row[item.prop]" :key="items.id" class="item">
+            <el-avatar :size="30" :src="upload + items.staffPhoto" />
+            <span>{{ items.staffName }}</span>
             <div class="close">
-              <el-icon class="del" @click.stop="del(item.id)">
+              <el-icon class="del" @click.stop="del(items.id)">
                 <CloseBold />
               </el-icon>
             </div>

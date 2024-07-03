@@ -1,15 +1,25 @@
 <template>
   <div class="container">
     <div class="header">
-      <el-image :src="logo" style="width: 300px; height: 100%" />
+      <img
+        src="../../assets/images/logo.png"
+        style="width: 300px; height: 100%"
+      />
     </div>
     <div class="main">
       <div class="card">
-        <el-image :src="loginback" style="width: 70%; height: 100%" />
+        <img
+          src="../../assets//images/index.jpg"
+          style="width: 70%; height: 100%"
+        />
         <div class="right">
           <div class="title">
             <span>账号登录</span>
-            <el-image :src="code" class="code" fit="cover" />
+            <img
+              src="../../assets/images/qrCode.png"
+              class="code"
+              fit="cover"
+            />
           </div>
           <el-form
             ref="loginFormRef"
@@ -42,6 +52,26 @@
                 </template>
               </el-input>
             </el-form-item>
+            <el-form-item prop="verifyCode" class="code">
+              <!--验证码-->
+              <el-input
+                v-model="loginData.verifyCode"
+                placeholder="请输入验证码"
+              >
+                <template #prefix>
+                  <el-icon>
+                    <Lock />
+                  </el-icon>
+                </template>
+              </el-input>
+              <el-image
+                style="width: 45%; height: 50px"
+                :src="codeData"
+                loading="eager"
+                v-loading="apperStore.isLoading"
+                @click="getCaptcha"
+              />
+            </el-form-item>
             <el-form-item class="btn">
               <span>忘记密码?</span>
             </el-form-item>
@@ -71,9 +101,14 @@ import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
 import { code, loginback, logo } from "@/utils/images";
 import { Lock, User } from "@element-plus/icons-vue";
+import { getCode } from "@/service/admin/AdminApi";
+import { useApperStore } from "@/store";
+
 // import {ThemeEnum} from "@/enums/ThemeEnum";
 // Stores
 const userStore = useUserStore();
+// 获取Loading效果
+const apperStore = useApperStore();
 // const settingsStore = useSettingsStore();
 // Internationalization
 const { t } = useI18n();
@@ -83,9 +118,12 @@ const loading = ref(false); // 按钮loading
 // const isCapslock = ref(false); // 是否大写锁定
 const loginFormRef = ref<FormInstance>(); // 登录表单ref
 const { height } = useWindowSize();
+const codeData = ref(""); //验证码
 const loginData = ref<any>({
-  username: "admin",
-  pwd: "admin",
+  username: "",
+  pwd: "",
+  verifyCode: "",
+  verifyCodeId: "",
 });
 console.log(import.meta.env.VITE_APP_API_URL);
 const loginRules = computed(() => {
@@ -104,23 +142,25 @@ const loginRules = computed(() => {
         message: t("login.message.password.required"),
       },
     ],
-    //   captchaCode: [
-    //     {
-    //       required: true,
-    //       trigger: "blur",
-    //       message: t("login.message.captchaCode.required"),
-    //     },
-    //   ],
+    verifyCode: [
+      {
+        required: true,
+        trigger: "blur",
+        message: t("login.message.captchaCode.required"),
+      },
+    ],
   };
 });
 
 /** 获取验证码 */
-// function getCaptcha() {
-//   AuthAPI.getCaptcha().then((data) => {
-//     loginData.value.captchaKey = data.captchaKey;
-//     captchaBase64.value = data.captchaBase64;
-//   });
-// }
+async function getCaptcha() {
+  const res: any = await getCode();
+  // console.log(1111, res);
+  if (res?.code === 10000) {
+    loginData.value.verifyCodeId = res.id;
+    codeData.value = res.imageCode;
+  }
+}
 
 /** 登录 */
 const route = useRoute();
@@ -179,9 +219,9 @@ watchEffect(() => {
 //   }
 // }
 
-// onMounted(() => {
-//   // getCaptcha();
-// });
+onMounted(() => {
+  getCaptcha();
+});
 </script>
 
 <style lang="less" scoped>
@@ -237,6 +277,9 @@ watchEffect(() => {
       .el-input {
         height: 50px;
       }
+      .el-form-item {
+        margin-bottom: 32px;
+      }
     }
 
     .title {
@@ -281,6 +324,19 @@ watchEffect(() => {
       cursor: pointer;
       color: #409eff;
     }
+  }
+}
+.code {
+  :deep(.el-form-item__content) {
+    display: flex;
+    justify-content: space-between;
+    .el-input {
+      width: 45%;
+    }
+  }
+  .el-image {
+    // 变小手
+    cursor: pointer;
   }
 }
 </style>

@@ -9,13 +9,14 @@ const adminList = (params: AccountList) => get("/api/account/list", params);
 const accountget = (id: number) => get(`/api/account/get/${id}`);
 // 添加账号 /api/account/add
 const accountadd = (data: AccountAdd) => post("/api/account/add", data);
-//修改账号 /api/account/update
-const accountupdate = (data: AccountAdd) => put("/api/account/update", data);
+
 // 删除账号 /api/account/delete/28
 const accountdelete = (id: number) => del(`/api/account/delete/${id}`);
 //根据账号id获取角色列表 /api/role/listForAccount/51
 const rolelistForAccount = (id: number) =>
   get(`/api/role/listForAccount/${id}`);
+// 获取图形验证码
+const getCode = () => get("/api/auth/authCode");
 export {
   adminLogin,
   adminList,
@@ -23,4 +24,5 @@ export {
   accountadd,
   accountdelete,
   rolelistForAccount,
+  getCode,
 };

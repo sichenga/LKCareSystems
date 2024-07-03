@@ -1,10 +1,9 @@
-/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 @font-face {
   font-family: 'iconfont';
   /* Project id 4564477 */
-  src: url('//at.alicdn.com/t/c/font_4564477_01vrvbijmu9e.woff2?t=1718899630440') format('woff2'),
-    url('//at.alicdn.com/t/c/font_4564477_01vrvbijmu9e.woff?t=1718899630440') format('woff'),
-    url('//at.alicdn.com/t/c/font_4564477_01vrvbijmu9e.ttf?t=1718899630440') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4564477_4wulfia64rx.woff2?t=1719995009056') format('woff2'),
+    url('//at.alicdn.com/t/c/font_4564477_4wulfia64rx.woff?t=1719995009056') format('woff'),
+    url('//at.alicdn.com/t/c/font_4564477_4wulfia64rx.ttf?t=1719995009056') format('truetype');
 }
 
 .iconfont {
@@ -59,7 +58,11 @@
   content: '\e68f';
 }
 
-.icon-config::before {
+.icon-nurse:before {
+  content: "\e675";
+}
+
+.icon-config:before {
   content: '\e61c';
 }
 
@@ -69,4 +72,12 @@
 
 .inco-laundry:before {
   content: "\e65b"
+}
+
+.icon-address:before {
+  content: "\e60b";
+}
+
+.icon-homepage:before {
+  content: "\e6c3";
 }

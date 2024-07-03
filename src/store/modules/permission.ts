@@ -6,6 +6,8 @@ import { getList } from "@/service/role/RoleApi";
 import { convertToTree } from "@/utils/utils";
 
 const modules = import.meta.glob("../../views/**/**.vue");
+console.log(11111, modules);
+
 const Layout = () => import("@/layout/index.vue");
 
 /**

@@ -1,8 +1,8 @@
 <template>
   <!-- 角色管理 -->
   <div class="app-container">
-    <el-card style="margin-top: 15px">
-      <div style="margin: 10px 0">
+    <el-card>
+      <div style="margin: 15px 0">
         <el-button type="primary" @click="addRole">新增</el-button>
       </div>
       <!-- 表格 -->
