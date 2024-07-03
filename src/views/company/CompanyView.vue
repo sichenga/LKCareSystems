@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <!-- 机构列表 -->
-    <el-card style="margin-top: 15px">
+    <!-- 分机构列表 -->
+    <el-card>
       <template #header>
         <el-form :inline="true" :model="params" class="demo-form-inline">
           <el-form-item label="机构名称：">

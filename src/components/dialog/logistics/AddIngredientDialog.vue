@@ -1,10 +1,5 @@
 <template>
-  <el-dialog
-    v-model="dialogVisible"
-    title="选择喜欢的食材"
-    width="1200"
-    @close="close"
-  >
+  <el-dialog v-model="dialogVisible" title="选择喜欢的食材" @close="close">
     <el-form
       ref="ruleFormRef"
       style="max-width: 1000px"

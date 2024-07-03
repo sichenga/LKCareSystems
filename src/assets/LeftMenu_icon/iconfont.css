@@ -252,16 +252,14 @@
 }
 
 .icon-comfort:before {
-  content: "\e630";
+  content: "\e81d";
 }
 
 .icon-entertainment:before {
   content: "\ec83";
 }
 
-.icon-address:before {
-  content: "\e610";
-}
+
 
 
 .icon-exchange:before {
@@ -272,13 +270,11 @@
   content: "\e600";
 }
 
-.icon-nurse:before {
-  content: "\e881";
-}
 
-.icon-record:before {
+
+/* .icon-record:before {
   content: "\e60b";
-}
+} */
 
 .icon-spectaculars:before {
   content: "\e617";
