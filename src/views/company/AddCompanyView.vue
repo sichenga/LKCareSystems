@@ -141,15 +141,16 @@
           class="demo-form-inline"
         >
           <el-form-item label="营业执照：">
-            <MassUpload
+            <!-- <MassUpload
               @upload="uploadimg"
               @uploadrem="uploadrem"
               :showlist="getMassUpload"
-            />
+            /> -->
+            <AvatarUpload @upload="uploadimg" :editdata="getMassUpload" />
           </el-form-item>
           <el-form-item label="机构图片:">
             <UploadPictures
-              :limit="5"
+              :limit="3"
               class="uploadpic"
               @upload="pictureupload"
               @uploadrem="picturerem"
@@ -178,6 +179,9 @@ const MassUpload = defineAsyncComponent(
 const UploadPictures = defineAsyncComponent(
   () => import("@/components/upload/UploadPictures.vue")
 );
+const AvatarUpload = defineAsyncComponent(
+  () => import("@/components/upload/AvatarUpload.vue")
+);
 const imgdelete = ref(true);
 const route = useRoute();
 const router = useRouter();
@@ -188,7 +192,7 @@ const oneRef = ref<FormInstance>();
 const data = reactive({
   id: " " as any,
 });
-const getMassUpload = ref<UploadUserFile[]>([]);
+const getMassUpload = ref<any>("");
 const getUploadPictures = ref<UploadUserFile[]>([]);
 const params = reactive<companyaddParams>({
   id: data.id,
@@ -211,7 +215,6 @@ const params = reactive<companyaddParams>({
 });
 // 添加营业执照
 const uploadimg = (val: any) => {
-  console.log("5555", val);
   params.certificate = val?.url;
 };
 
@@ -290,12 +293,7 @@ const getcompanyget = async () => {
     console.log("单条数据", res);
     Object.assign(params, res.data);
     if (res.data.certificate) {
-      getMassUpload.value = [
-        {
-          url: upload + "/" + res.data.certificate,
-          name: res.data.certificate,
-        },
-      ];
+      getMassUpload.value = upload + "/" + res.data.certificate;
     }
     // 图片回显
     if (res.data.picture) {
