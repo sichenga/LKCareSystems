@@ -5,6 +5,7 @@
     width="500"
     @close="close"
   >
+    <OldSelectDialog v-if="idOld" @close="closes" @id="oldid" />
     <el-form
       ref="ruleFormRef"
       style="max-width: 600px"
@@ -15,6 +16,12 @@
       :size="formSize"
       status-icon
     >
+      <el-form-item label="老人姓名:">
+        <el-button :type="!OldName ? 'primary' : ''" @click="select" text bg>{{
+          !OldName ? "选择老人" : OldName
+        }}</el-button>
+        <OldSelectDialog v-if="idOld" @close="closes" @id="oldid" />
+      </el-form-item>
       <el-form-item label="咨询类型:" prop="type">
         <el-select
           v-model="ruleForm.type"
@@ -74,6 +81,7 @@
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineEmits, defineProps } from "vue";
+import { useRoute } from "vue-router";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import MayTimePicker from "@/components/timepicker/MayTimePicker.vue";
 import {
@@ -83,11 +91,13 @@ import {
 } from "@/service/market/marketApi";
 import type { Addmarket } from "@/service/market/marketType";
 import { ElMessage } from "element-plus";
+import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
+import { getElderly } from "@/service/old/OldApi";
 const formSize = ref<ComponentSize>("default");
 const ruleFormRef = ref<FormInstance>();
 //编辑id
 const props = defineProps(["ids", "customerId"]);
-
+const route = useRoute();
 const time = ref("");
 //添加咨询
 const ruleForm = reactive<Addmarket>({
@@ -101,6 +111,27 @@ const ruleForm = reactive<Addmarket>({
   visitTime: "",
   content: "",
 });
+// 选择老人
+const idOld = ref(false);
+const select = () => {
+  idOld.value = true;
+};
+// 关闭弹窗
+const closes = (val: boolean) => {
+  idOld.value = val;
+};
+const OldName = ref(route.query?.name || "");
+const oldid = async (id: number) => {
+  console.log(id);
+  if (id) {
+    let res: any = await getElderly(id);
+    if (res?.code == 10000) {
+      OldName.value = res.data.name;
+    }
+    ruleForm.customerId = id;
+    ElMessage.success("选择老人成功");
+  }
+};
 
 const rules = reactive<FormRules<any>>({
   name: [{ required: true, message: "请输入资讯人", trigger: "blur" }],

@@ -157,7 +157,7 @@ const states = reactive<market>({
   page: 1,
   pageSize: 10,
   name: "", //资讯人姓名
-  customerName: "", //老人姓名
+  customerName: route.query?.name ? (route.query.name as string) : "", //老人姓名
   mobile: "", //手机号
   state: null, //0:待回访,1:已回访
   customerId: route.query?.id ? Number(route.query?.id) : null, //潜在客户id
@@ -166,6 +166,8 @@ const states = reactive<market>({
 const reset = () => {
   states.page = 1;
   Refquestion.value?.resetFields();
+  states.customerName = "";
+  states.customerId = null;
   getlist();
 };
 // 查询

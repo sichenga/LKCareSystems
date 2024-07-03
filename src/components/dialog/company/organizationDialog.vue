@@ -34,7 +34,11 @@
         />
       </el-form-item>
       <el-form-item label="管理员密码" prop="adminPwd">
-        <el-input v-model="params.adminPwd" placeholder="请输入管理员密码" />
+        <el-input
+          v-model="params.adminPwd"
+          show-password
+          placeholder="请输入管理员密码"
+        />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -93,43 +97,20 @@ const close = (close: boolean = false) => {
 };
 const submit = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  await formEl.validate(async (valid, fields) => {
+  await formEl.validate(async (valid) => {
     if (valid) {
-      if (params.id == 0) {
-        const res: any = await companyadd(params).catch(() => {});
-        console.log(res);
-        if (res.code === 10000) {
-          ruleFormRef.value && ruleFormRef.value.resetFields();
-          ElMessage({
-            message: res.msg,
-            type: "success",
-          });
-          emit("close", true);
-        } else {
-          ElMessage({
-            message: "添加失败",
-            type: "error",
-          });
-        }
+      const res: any = await companyadd(params).catch(() => {});
+      console.log(res);
+      if (res.code === 10000) {
+        ruleFormRef.value && ruleFormRef.value.resetFields();
+        ElMessage({
+          message: props.id ? "修改成功" : "新增成功",
+          type: "success",
+        });
+        emit("close", true);
       } else {
-        const res: any = await companyadd(params).catch(() => {});
-        console.log("修改", res);
-        if (res.code === 10000) {
-          ruleFormRef.value && ruleFormRef.value.resetFields();
-          ElMessage({
-            message: res.msg,
-            type: "success",
-          });
-          emit("close", true);
-        } else {
-          ElMessage({
-            message: "添加失败",
-            type: "error",
-          });
-        }
+        ElMessage.error(res.msg);
       }
-    } else {
-      console.log("error submit!", fields);
     }
   });
 };

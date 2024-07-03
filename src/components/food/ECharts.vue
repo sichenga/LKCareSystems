@@ -36,6 +36,7 @@ const initChart = () => {
     const option: echarts.EChartsOption = {
       xAxis: {
         type: "category",
+        boundaryGap: true,
         data: props.timelist as Array<string>,
       },
       yAxis: {

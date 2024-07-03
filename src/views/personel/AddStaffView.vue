@@ -39,7 +39,6 @@
             v-model="ruleForm.roles"
             multiple
             placeholder="请选择所属岗位"
-            style="width: 240px"
           >
             <el-option
               v-for="item in Roles"
