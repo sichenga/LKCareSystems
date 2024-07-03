@@ -34,7 +34,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         // https://cn.vuejs.org/guide/built-ins/keep-alive.html#include-exclude
         meta: {
           title: "dashboard",
-          icon: "homepage",
+          icon: "icon-homepage",
           affix: true,
           keepAlive: true,
           alwaysShow: false,

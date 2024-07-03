@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="编辑物料"
+    title="新增食材"
     width="500"
     @close="close"
   >

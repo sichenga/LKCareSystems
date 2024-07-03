@@ -42,7 +42,7 @@ const fontColor = computed(() => {
     margin-bottom: unset !important;
   }
 }
-@media screen and (min-width: 1200px) and (max-width: 1599px) {
+@media screen and (min-width: 1200px) and (max-width: 1600px) {
   .demo-form-inline {
     .el-form-item {
       margin-bottom: 10px !important;

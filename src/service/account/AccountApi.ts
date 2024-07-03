@@ -10,9 +10,6 @@ const accountadd = (data: AddAccount) => post("/api/account/add", data);
 const accountupdate = (data: UnwrapNestedRefs<AccountAdd>) =>
   put("/api/account/update", data);
 
-//获取验证 /api/auth/authCode
-const authCode = () => get("/api/auth/authCode");
-
 // 根据账号ID获取账号信息 /api/account/get/50
 const accountinfo = (id: number) => get(`/api/account/get/${id}`);
 // 根据账号id获取角色列表 /api/role/listForAccount/51

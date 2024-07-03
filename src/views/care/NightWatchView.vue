@@ -43,9 +43,9 @@
           >
             <el-option
               v-for="item in data.statelist"
-              :key="item.id"
-              :label="item.state"
-              :value="item.state"
+              :key="item"
+              :label="item"
+              :value="item"
             />
           </el-select>
         </el-form-item>
@@ -57,7 +57,6 @@
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="primary">EXCEL导出</el-button>
         <el-button type="primary" @click="add">增加</el-button>
         <el-button @click="location">地址管理</el-button>
       </div>
@@ -139,7 +138,12 @@ const data = reactive({
     },
   ],
   sitelist: [] as Array<AddressSelect>,
-  statelist: [] as any,
+  statelist: ["正常", "异常", "未巡检"] as any,
+});
+
+onMounted(() => {
+  getlist();
+  getaddresslist();
 });
 // 获取列表
 const getlist = async () => {
@@ -147,7 +151,7 @@ const getlist = async () => {
   console.log("夜巡列表", res);
   if (res?.code === 10000) {
     data.tableData = res.data.list;
-    data.statelist = res.data.list;
+    // data.statelist = res.data.list;
     data.total = res.data.counts;
   }
 };

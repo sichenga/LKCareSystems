@@ -1,150 +1,166 @@
 <template>
-  <!-- 新增分机构 -->
-  <el-card style="max-width: 100%">
-    <div class="title">
+  <div class="app-container">
+    <!-- 新增分机构 -->
+    <el-card style="max-width: 100%">
+      <div class="title">
+        <div class="title-text">
+          <span>▋</span>
+          基础信息
+        </div>
+        <div class="title-btn">
+          <el-button @click="cancel">取消</el-button>
+          <el-button type="primary" @click="save(oneRef)">保存</el-button>
+        </div>
+      </div>
+      <div class="form-size">
+        <el-form
+          ref="oneRef"
+          :inline="true"
+          :rules="rules"
+          label-position="top"
+          :model="params"
+          class="demo-form-inline"
+        >
+          <el-form-item label="机构名称:" prop="name">
+            <el-input v-model="params.name" placeholder="请输入" clearable />
+          </el-form-item>
+          <el-form-item label="地址:" prop="address">
+            <el-input v-model="params.address" laceholder="请输入" clearable />
+          </el-form-item>
+          <el-form-item label="对外服务电话:" prop="telephone">
+            <el-input
+              v-model="params.telephone"
+              placeholder="请输入"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="管理员姓名：" prop="adminName">
+            <el-input
+              v-model="params.adminName"
+              placeholder="请输入"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="联系方式：" prop="adminMobile">
+            <el-input
+              v-model="params.adminMobile"
+              placeholder="请输入"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="账号:" prop="adminUserName">
+            <el-input
+              v-model="params.adminUserName"
+              placeholder="请输入"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="密码:" prop="adminPwd">
+            <el-input
+              v-model="params.adminPwd"
+              show-password
+              placeholder="请输入"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="开业时间:" prop="startTime">
+            <MayTimePicker v-model="params.startTime" />
+          </el-form-item>
+        </el-form>
+      </div>
       <div class="title-text">
         <span>▋</span>
-        基础信息
+        经营信息
       </div>
-      <div class="title-btn">
-        <el-button @click="cancel">取消</el-button>
-        <el-button type="primary" @click="save(oneRef)">保存</el-button>
+      <div class="form-size">
+        <el-form
+          :inline="true"
+          :rules="rules"
+          label-position="top"
+          :model="params"
+          ref="ruleFormRef"
+          class="demo-form-inline"
+        >
+          <el-form-item label="法人代表：" prop="legalPerson">
+            <el-input
+              v-model="params.legalPerson"
+              placeholder="请输入法人"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="法人代表联系号码:" prop="mobile">
+            <el-input
+              v-model="params.mobile"
+              placeholder="请输入法人联系号码"
+              clearable
+            />
+          </el-form-item>
+          <el-form-item label="统一社会信用代码" prop="creditCode">
+            <el-input
+              v-model="params.creditCode"
+              placeholder="请输入统一社会信用码"
+              clearable
+            />
+          </el-form-item>
+        </el-form>
+        <el-form
+          :inline="true"
+          :rules="rules"
+          label-position="right"
+          :model="params"
+          ref="towRef"
+          class="demo-form-inline"
+        >
+          <el-form-item label="卫生许可证" prop="license">
+            <el-radio-group v-model="params.license">
+              <el-radio :value="0">是</el-radio>
+              <el-radio :value="1">否</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="是否具备医疗定点资格：" prop="medicalPoint">
+            <el-radio-group v-model="params.medicalPoint">
+              <el-radio :value="0">是</el-radio>
+              <el-radio :value="1">否</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="房屋性质：" prop="house">
+            <el-radio-group v-model="params.house">
+              <el-radio :value="0">自有产权</el-radio>
+              <el-radio :value="1">租赁</el-radio>
+              <el-radio :value="2">合作使用</el-radio>
+              <el-radio :value="3">其他</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </el-form>
+        <el-form
+          :inline="true"
+          :rules="rules"
+          label-position="top"
+          :model="params"
+          ref="threeRef"
+          class="demo-form-inline"
+        >
+          <el-form-item label="营业执照：">
+            <!-- <MassUpload
+              @upload="uploadimg"
+              @uploadrem="uploadrem"
+              :showlist="getMassUpload"
+            /> -->
+            <AvatarUpload @upload="uploadimg" :editdata="getMassUpload" />
+          </el-form-item>
+          <el-form-item label="机构图片:">
+            <UploadPictures
+              :limit="3"
+              class="uploadpic"
+              @upload="pictureupload"
+              @uploadrem="picturerem"
+              :showlist="getUploadPictures"
+            />
+          </el-form-item>
+        </el-form>
       </div>
-    </div>
-    <div class="form-size">
-      <el-form
-        ref="oneRef"
-        :inline="true"
-        :rules="rules"
-        label-position="top"
-        :model="params"
-        class="demo-form-inline"
-      >
-        <el-form-item label="机构名称:" prop="name">
-          <el-input v-model="params.name" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="地址:" prop="address">
-          <el-input v-model="params.address" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="对外服务电话:" prop="telephone">
-          <el-input v-model="params.telephone" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="管理员姓名：" prop="adminName">
-          <el-input v-model="params.adminName" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="联系方式：" prop="adminMobile">
-          <el-input
-            v-model="params.adminMobile"
-            placeholder="请输入"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="账号:" prop="adminUserName">
-          <el-input
-            v-model="params.adminUserName"
-            placeholder="请输入"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="密码:" prop="adminPwd">
-          <el-input v-model="params.adminPwd" placeholder="请输入" clearable />
-        </el-form-item>
-        <el-form-item label="开业时间:" prop="startTime">
-          <MayTimePicker v-model="params.startTime" />
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="title-text">
-      <span>▋</span>
-      经营信息
-    </div>
-    <div class="form-size">
-      <el-form
-        :inline="true"
-        :rules="rules"
-        label-position="top"
-        :model="params"
-        ref="ruleFormRef"
-        class="demo-form-inline"
-      >
-        <el-form-item label="法人代表：" prop="legalPerson">
-          <el-input
-            v-model="params.legalPerson"
-            placeholder="请输入法人"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="法人代表联系号码:" prop="mobile">
-          <el-input
-            v-model="params.mobile"
-            placeholder="请输入法人联系号码"
-            clearable
-          />
-        </el-form-item>
-        <el-form-item label="统一社会信用代码" prop="creditCode">
-          <el-input
-            v-model="params.creditCode"
-            placeholder="请输入统一社会信用码"
-            clearable
-          />
-        </el-form-item>
-      </el-form>
-      <el-form
-        :inline="true"
-        :rules="rules"
-        label-position="right"
-        :model="params"
-        ref="towRef"
-        class="demo-form-inline"
-      >
-        <el-form-item label="卫生许可证" prop="license">
-          <el-radio-group v-model="params.license">
-            <el-radio :value="0">是</el-radio>
-            <el-radio :value="1">否</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="是否具备医疗定点资格：" prop="medicalPoint">
-          <el-radio-group v-model="params.medicalPoint">
-            <el-radio :value="0">是</el-radio>
-            <el-radio :value="1">否</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="房屋性质：" prop="house">
-          <el-radio-group v-model="params.house">
-            <el-radio :value="0">自有产权</el-radio>
-            <el-radio :value="1">租赁</el-radio>
-            <el-radio :value="2">合作使用</el-radio>
-            <el-radio :value="3">其他</el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-form>
-      <el-form
-        :inline="true"
-        :rules="rules"
-        label-position="top"
-        :model="params"
-        ref="threeRef"
-        class="demo-form-inline"
-      >
-        <el-form-item label="营业执照：">
-          <MassUpload
-            @upload="uploadimg"
-            @uploadrem="uploadrem"
-            :showlist="getMassUpload"
-          />
-        </el-form-item>
-        <el-form-item label="机构图片:">
-          <UploadPictures
-            :limit="5"
-            class="uploadpic"
-            @upload="pictureupload"
-            @uploadrem="picturerem"
-            :showlist="getUploadPictures"
-          />
-        </el-form-item>
-      </el-form>
-    </div>
-  </el-card>
+    </el-card>
+  </div>
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
@@ -163,6 +179,9 @@ const MassUpload = defineAsyncComponent(
 const UploadPictures = defineAsyncComponent(
   () => import("@/components/upload/UploadPictures.vue")
 );
+const AvatarUpload = defineAsyncComponent(
+  () => import("@/components/upload/AvatarUpload.vue")
+);
 const imgdelete = ref(true);
 const route = useRoute();
 const router = useRouter();
@@ -173,7 +192,7 @@ const oneRef = ref<FormInstance>();
 const data = reactive({
   id: " " as any,
 });
-const getMassUpload = ref<UploadUserFile[]>([]);
+const getMassUpload = ref<any>("");
 const getUploadPictures = ref<UploadUserFile[]>([]);
 const params = reactive<companyaddParams>({
   id: data.id,
@@ -196,7 +215,6 @@ const params = reactive<companyaddParams>({
 });
 // 添加营业执照
 const uploadimg = (val: any) => {
-  console.log("5555", val);
   params.certificate = val?.url;
 };
 
@@ -275,12 +293,7 @@ const getcompanyget = async () => {
     console.log("单条数据", res);
     Object.assign(params, res.data);
     if (res.data.certificate) {
-      getMassUpload.value = [
-        {
-          url: upload + "/" + res.data.certificate,
-          name: res.data.certificate,
-        },
-      ];
+      getMassUpload.value = upload + "/" + res.data.certificate;
     }
     // 图片回显
     if (res.data.picture) {

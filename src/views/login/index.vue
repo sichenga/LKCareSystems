@@ -1,15 +1,25 @@
 <template>
   <div class="container">
     <div class="header">
-      <el-image :src="logo" style="width: 300px; height: 100%" />
+      <img
+        src="../../assets/images/logo.png"
+        style="width: 300px; height: 100%"
+      />
     </div>
     <div class="main">
       <div class="card">
-        <el-image :src="loginback" style="width: 70%; height: 100%" />
+        <img
+          src="../../assets//images/index.jpg"
+          style="width: 70%; height: 100%"
+        />
         <div class="right">
           <div class="title">
             <span>账号登录</span>
-            <el-image :src="code" class="code" fit="cover" />
+            <img
+              src="../../assets/images/qrCode.png"
+              class="code"
+              fit="cover"
+            />
           </div>
           <el-form
             ref="loginFormRef"
@@ -42,11 +52,11 @@
                 </template>
               </el-input>
             </el-form-item>
-            <el-form-item prop="verifyCode" class="verifyCode">
+            <el-form-item prop="verifyCode" class="code">
+              <!--验证码-->
               <el-input
                 v-model="loginData.verifyCode"
                 placeholder="请输入验证码"
-                style="width: 150px"
               >
                 <template #prefix>
                   <el-icon>
@@ -54,11 +64,12 @@
                   </el-icon>
                 </template>
               </el-input>
-              <img
-                :src="codeImage"
-                alt=""
-                class="images-size"
-                @click="getCode"
+              <el-image
+                style="width: 45%; height: 50px"
+                :src="codeData"
+                loading="eager"
+                v-loading="apperStore.isLoading"
+                @click="getCaptcha"
               />
             </el-form-item>
             <el-form-item class="btn">
@@ -83,7 +94,6 @@
 </template>
 
 <script lang="ts" setup>
-import { authCode } from "@/service/account/AccountApi";
 import { useUserStore } from "@/store";
 import { debounce } from "lodash-es";
 import type { FormInstance } from "element-plus";
@@ -91,9 +101,14 @@ import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
 import { code, loginback, logo } from "@/utils/images";
 import { Lock, User } from "@element-plus/icons-vue";
+import { getCode } from "@/service/admin/AdminApi";
+import { useApperStore } from "@/store";
+
 // import {ThemeEnum} from "@/enums/ThemeEnum";
 // Stores
 const userStore = useUserStore();
+// 获取Loading效果
+const apperStore = useApperStore();
 // const settingsStore = useSettingsStore();
 // Internationalization
 const { t } = useI18n();
@@ -103,9 +118,10 @@ const loading = ref(false); // 按钮loading
 // const isCapslock = ref(false); // 是否大写锁定
 const loginFormRef = ref<FormInstance>(); // 登录表单ref
 const { height } = useWindowSize();
+const codeData = ref(""); //验证码
 const loginData = ref<any>({
-  username: "admin",
-  pwd: "admin",
+  username: "",
+  pwd: "",
   verifyCode: "",
   verifyCodeId: "",
 });
@@ -137,12 +153,14 @@ const loginRules = computed(() => {
 });
 
 /** 获取验证码 */
-// function getCaptcha() {
-//   AuthAPI.getCaptcha().then((data) => {
-//     loginData.value.captchaKey = data.captchaKey;
-//     captchaBase64.value = data.captchaBase64;
-//   });
-// }
+async function getCaptcha() {
+  const res: any = await getCode();
+  // console.log(1111, res);
+  if (res?.code === 10000) {
+    loginData.value.verifyCodeId = res.id;
+    codeData.value = res.imageCode;
+  }
+}
 
 /** 登录 */
 const route = useRoute();
@@ -202,19 +220,8 @@ watchEffect(() => {
 // }
 
 onMounted(() => {
-  getCode(); //获取验证码
+  getCaptcha();
 });
-
-// 获取验证码
-const codeImage = ref<string>("");
-const getCode = async () => {
-  const res: any = await authCode();
-  console.log(res);
-  if (res.code === 10000) {
-    codeImage.value = res.imageCode;
-    loginData.value.verifyCodeId = res.id;
-  }
-};
 </script>
 
 <style lang="less" scoped>
@@ -270,6 +277,9 @@ const getCode = async () => {
       .el-input {
         height: 50px;
       }
+      .el-form-item {
+        margin-bottom: 32px;
+      }
     }
 
     .title {
@@ -316,15 +326,17 @@ const getCode = async () => {
     }
   }
 }
-.verifyCode {
-  position: relative;
-}
-.images-size {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100px;
-  height: 50px;
-  border-radius: 5px;
+.code {
+  :deep(.el-form-item__content) {
+    display: flex;
+    justify-content: space-between;
+    .el-input {
+      width: 45%;
+    }
+  }
+  .el-image {
+    // 变小手
+    cursor: pointer;
+  }
 }
 </style>
