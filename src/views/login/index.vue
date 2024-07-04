@@ -100,7 +100,6 @@ import { debounce } from "lodash-es";
 import type { FormInstance } from "element-plus";
 import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
-import { code, loginback, logo } from "@/utils/images";
 import { Lock, User } from "@element-plus/icons-vue";
 import { getCode } from "@/service/admin/AdminApi";
 import { useApperStore } from "@/store";
