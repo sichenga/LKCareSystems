@@ -207,6 +207,7 @@ const close = (isrefresh: boolean) => {
 }
 
 .table {
+  width: 100%;
   padding: 20px;
   background-color: #fff;
 

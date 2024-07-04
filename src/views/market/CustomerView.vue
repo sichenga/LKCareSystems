@@ -64,7 +64,10 @@
           <el-button text type="primary" @click="details(scope.data.id)"
             >详情</el-button
           >
-          <el-button text type="primary" @click="register(scope.data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="register(scope.data.id, scope.data.name)"
             >咨询登记</el-button
           >
           <el-button text type="primary" @click="handleDelete(scope.data.id)"
@@ -211,11 +214,12 @@ const handleDelete = async (id: any) => {
 };
 
 // 咨询登记
-const register = (id: number) => {
+const register = (id: number, name: string) => {
   router.push({
     path: "/market/question",
     query: {
-      id: id,
+      id,
+      name,
     },
   });
 };

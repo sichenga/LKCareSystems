@@ -2,38 +2,27 @@
   <!-- 食材管理 -->
   <div class="app-container">
     <div class="box">
-      <el-button type="primary" @click="isdialog = true">新增</el-button>
+      <el-button
+        type="primary"
+        @click="isdialog = true"
+        style="margin-bottom: 15px"
+        >新增</el-button
+      >
       <FoodDialog v-if="isdialog" :foodid="foodid" @close="close" />
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="handleEdit(data.id)"
+          <el-button link type="primary" @click="handleEdit(data.id)"
             >编辑
           </el-button>
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="handleDelete(data.id)"
+          <el-button link type="primary" @click="handleDelete(data.id)"
             >删除
           </el-button>
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="priceUpdate(data.id)"
+          <el-button link type="primary" @click="priceUpdate(data.id)"
             >价格更新
           </el-button>
-          <el-button
-            link
-            size="small"
-            type="primary"
-            @click="priceAnalysis(data.id)"
+          <el-button link type="primary" @click="priceAnalysis(data.id)"
             >价格分析
           </el-button>
         </template>
@@ -196,9 +185,5 @@ const getpsize = (val: number) => {
   .el-table {
     margin-top: 40px;
   }
-}
-
-.el-button {
-  margin-bottom: 15px;
 }
 </style>
