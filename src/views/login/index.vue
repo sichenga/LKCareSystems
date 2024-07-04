@@ -126,7 +126,7 @@ const loginData = ref<any>({
   verifyCode: "",
   verifyCodeId: "",
 });
-console.log(import.meta.env.VITE_APP_API_URL);
+
 const loginRules = computed(() => {
   return {
     username: [

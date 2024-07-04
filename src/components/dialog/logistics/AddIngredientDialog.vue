@@ -123,7 +123,7 @@ const handleSelectionChange = (val: any[]) => {
 };
 // 提交表单
 const submitForm = async () => {
-  console.log(3333, multipleSelection.value);
+  // console.log(3333, multipleSelection.value);
   useUser.ingredients(multipleSelection.value);
   emit("ingredient", useUser.ingredient);
   close(true);

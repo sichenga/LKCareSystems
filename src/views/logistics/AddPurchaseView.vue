@@ -10,13 +10,8 @@
       <MayTable
         :tableData="data.AddData.foods"
         :tableItem="data.tableItem"
-        :label="'采购数量'"
         v-if="data.AddData.foods.length"
       >
-        <!-- eslint-disable-next-line vue/no-template-shadow -->
-        <template #custom="data">
-          <el-input v-model="data.data.creators" style="width: 130px" />
-        </template>
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
           <el-button type="primary" text @click="del(data.id)">删除</el-button>

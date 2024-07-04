@@ -22,7 +22,7 @@
     <div class="right">
       <span
         >价格更新于：{{
-          moment(state.foodinfo?.updateTime).format("YYYY-MM-DD HH:mm")
+          moment(state.foodinfo?.updateTime).format("YYYY-MM-DD")
         }}</span
       >
     </div>
