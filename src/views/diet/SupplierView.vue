@@ -2,7 +2,9 @@
   <!-- 供应商管理 -->
   <div class="app-container">
     <div class="box">
-      <el-button type="primary" @click="onAdd">新增</el-button>
+      <el-button type="primary" @click="onAdd" style="margin: 15px 0"
+        >新增</el-button
+      >
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="scope">
@@ -155,8 +157,5 @@ const handleDelete = async (id: any) => {
     margin-top: 30px;
     margin-bottom: 20px;
   }
-}
-.el-button {
-  margin-bottom: 15px;
 }
 </style>

@@ -8,7 +8,11 @@
         <el-col :span="18" :xs="24">
           <div class="flex h-full items-center">
             <img
-              :src="baseurl + '/' + userStore.user.model.photo"
+              :src="
+                userStore.user.model.photo
+                  ? baseurl + '/' + userStore.user.model.photo
+                  : defImg
+              "
               alt=""
               class="w-20 h-20 mr-5 rounded-full"
             />
@@ -105,7 +109,7 @@
 import type { EpPropMergeType } from "element-plus/es/utils/vue/props/types";
 import { useUserStore } from "@/store/modules/user";
 import { TransitionPresets, useTransition } from "@vueuse/core";
-
+import defImg from "@/assets/images/lening.png";
 defineOptions({
   name: "Dashboard",
   inheritAttrs: false,

@@ -6,7 +6,7 @@
         <el-form-item class="title" label="头像">
           <div class="header">
             <div>
-              <img :src="Image + img" alt="" />
+              <img :src="img ? Image + img : defImg" alt="" />
             </div>
             <div class="image-title">
               <UploadImg
@@ -72,7 +72,7 @@ import { getUserInfo, updatePhoto } from "@/service/system/SystemApi";
 import UploadImg from "@/components/upload/UploadImg.vue";
 import { useUserStore } from "@/store";
 import { rolelistForAccount } from "@/service/admin/AdminApi";
-
+import defImg from "@/assets/images/lening.png";
 const userStore = useUserStore();
 const Image = import.meta.env.VITE_BASE_URL + "/";
 

@@ -16,3 +16,6 @@ export const Addroles = (data: Addrole) => post("/api/role/add", data);
 
 // 获取单条角色 /api/menu/getListForUser
 export const Rolesget = (id: number) => get("/api/role/get/" + id);
+
+// 获取所有权限列表 /api/menu/list
+export const getMenuList = () => get("/api/menu/list");

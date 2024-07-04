@@ -2,20 +2,20 @@
   <div class="app-container">
     <!-- 分机构列表 -->
     <el-card>
-      <template #header>
-        <el-form :inline="true" :model="params" class="demo-form-inline">
-          <el-form-item label="机构名称：">
-            <el-input v-model="params.key" clearable placeholder="请输入" />
-          </el-form-item>
-          <el-form-item label="管理姓名">
-            <el-input v-model="params.name" clearable placeholder="请输入" />
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="serch">查询</el-button>
-            <el-button>重置</el-button>
-          </el-form-item>
-        </el-form>
-      </template>
+      <el-form :inline="true" :model="params" class="demo-form-inline">
+        <el-form-item label="机构名称：">
+          <el-input v-model="params.key" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item label="管理姓名">
+          <el-input v-model="params.name" clearable placeholder="请输入" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="serch">查询</el-button>
+          <el-button>重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+    <el-card style="margin-top: 10px">
       <div style="margin: 10px 0">
         <el-button type="primary" @click="SondAdd">新增</el-button>
         <organizationDialog v-if="isdialog" :id="editId" @close="close" />

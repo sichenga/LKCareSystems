@@ -174,10 +174,6 @@ const psize = (val: number) => {
 </script>
 
 <style lang="less" scoped>
-.el-form {
-  margin-top: 15px;
-}
-
 .table {
   margin-top: 20px;
 }

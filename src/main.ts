@@ -10,6 +10,7 @@ import "virtual:svg-icons-register";
 import "@/utils/browserPatch";
 // 样式
 import "element-plus/theme-chalk/dark/css-vars.css";
+import "element-plus/dist/index.css";
 import "@/styles/index.scss";
 import "uno.css";
 import "animate.css";
