@@ -13,7 +13,7 @@ export interface AccountAdd {
   username: string;
   pwd: string;
   name: string;
-  photo: string;
+  photo: any;
   mobile: string;
   roleIds: number[];
 }

@@ -1,4 +1,4 @@
-import { resetRouter } from "@/router";
+import router, { resetRouter } from "@/router";
 import { store } from "@/store";
 import { adminLogin } from "@/service/admin/AdminApi";
 import { TOKEN_KEY } from "@/enums/CacheEnum";
@@ -79,8 +79,7 @@ export const useUserStore = defineStore(
     // user logout
     function logout() {
       localStorage.setItem(TOKEN_KEY, "");
-      location.reload(); // 清空路由
-      return true;
+      location.reload();
     }
 
     // remove token

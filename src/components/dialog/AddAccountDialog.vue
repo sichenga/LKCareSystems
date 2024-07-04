@@ -170,7 +170,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       res = await accountadd(ruleForm).catch(() => {});
       msg = "增加";
     } else {
-      res = await accountupdate(ruleForm).catch(() => {});
+      res = await accountupdate(ruleForm as any).catch(() => {});
       msg = "编辑";
     }
     console.log("增加账号", res);
