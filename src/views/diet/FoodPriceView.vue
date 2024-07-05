@@ -22,7 +22,7 @@
     <div class="right">
       <span
         >价格更新于：{{
-          moment(state.foodinfo?.updateTime).format("YYYY-MM-DD HH:mm")
+          moment(state.foodinfo?.updateTime).format("YYYY-MM-DD")
         }}</span
       >
     </div>
@@ -41,20 +41,6 @@
     <!-- 查询 -->
     <div class="demand">
       <div class="l">价格更新记录</div>
-      <div class="r">
-        <el-form :inline="true" :model="formInline" class="demo-form-inline">
-          <el-form-item>
-            <el-select
-              v-model="formInline.region"
-              clearable
-              placeholder="请选择"
-            >
-              <el-option label="Zone one" value="shanghai" />
-              <el-option label="Zone two" value="beijing" />
-            </el-select>
-          </el-form-item>
-        </el-form>
-      </div>
     </div>
     <!-- 表格 -->
     <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
@@ -221,6 +207,7 @@ const close = (isrefresh: boolean) => {
 }
 
 .table {
+  width: 100%;
   padding: 20px;
   background-color: #fff;
 

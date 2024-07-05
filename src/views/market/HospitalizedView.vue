@@ -149,7 +149,7 @@ const data = reactive({
 });
 const states = reactive<order>({
   page: 1,
-  pageSize: 10,
+  pageSize: 5,
   name: "", //老人姓名
   mobile: "", //手机号
   idCard: "", //身份证号

@@ -23,14 +23,8 @@
       <MayTable
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        :label="'采购实际数量'"
         :isoperate="isshou"
-      >
-        <!-- eslint-disable-next-line vue/no-template-shadow -->
-        <template #custom="{ data }">
-          <el-input v-model="data.receiveCounts" style="width: 130px" />
-        </template>
-      </MayTable>
+      />
       <div class="title-image">
         <div>到货凭证</div>
         <div class="image">

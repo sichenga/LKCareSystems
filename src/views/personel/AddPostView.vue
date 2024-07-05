@@ -16,15 +16,17 @@
           <el-input v-model="ruleForm.name" placeholder="请输入" />
         </el-form-item>
         <el-form-item class="tree" label="权限配置:" prop="name">
-          <el-tree
-            ref="treeRef"
-            :data="data.tableData"
-            :expand-on-click-node="false"
-            :props="{ label: 'name' }"
-            node-key="id"
-            show-checkbox
-            style="max-width: 600px"
-          />
+          <el-scrollbar height="350px">
+            <el-tree
+              ref="treeRef"
+              :data="data.tableData"
+              :expand-on-click-node="false"
+              :props="{ label: 'name', children: 'children' }"
+              node-key="id"
+              show-checkbox
+              style="max-width: 600px"
+            />
+          </el-scrollbar>
         </el-form-item>
       </el-form>
     </div>
@@ -44,7 +46,7 @@ import { ElMessage, ElTree } from "element-plus";
 import { Addroles, getList, Rolesget } from "@/service/role/RoleApi";
 import type { Addrole, RoleList } from "@/service/role/Roletype";
 import { useRoute, useRouter } from "vue-router";
-import { TreeData } from "@/utils/utils";
+import { TreeData, convertToTree } from "@/utils/utils";
 
 const router = useRouter();
 const route = useRoute();
@@ -121,7 +123,7 @@ const getlist = async () => {
   let res: any = await getList().catch(() => {});
   console.log("权限", res);
   if (res?.code == 10000) {
-    data.tableData = TreeData(res.data.list);
+    data.tableData = convertToTree(res.data.list);
   }
 };
 onMounted(() => {

@@ -57,6 +57,7 @@
 
 .icon-role:before {
   content: "\e665";
+  font-size: 16px;
 }
 
 .icon-addrole:before {

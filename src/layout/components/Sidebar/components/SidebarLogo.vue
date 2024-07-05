@@ -6,7 +6,8 @@
       </router-link>
 
       <router-link v-else class="wh-full flex-center" to="/">
-        <img v-if="settingsStore.sidebarLogo" :src="logo" class="logo-image" />
+        <!-- <img v-if="settingsStore.sidebarLogo" :src="logo" class="logo-image" /> -->
+        <img src="@/assets/images/lening.png" alt="" class="logo-image" />
         <span class="logo-title"> {{ defaultSettings.title }}</span>
       </router-link>
     </transition>
@@ -41,7 +42,9 @@ const logo = ref(new URL(`../../../../assets/logo1.png`, import.meta.url).href);
   }
 
   .logo-title {
-    flex-shrink: 0; /* 防止容器在空间不足时缩小 */
+    flex-shrink: 0;
+
+    /* 防止容器在空间不足时缩小 */
     margin-left: 10px;
     font-size: 14px;
     font-weight: bold;

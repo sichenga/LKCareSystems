@@ -17,7 +17,6 @@
 import { defineEmits, defineProps, ref, watch } from "vue";
 import { Plus } from "@element-plus/icons-vue";
 import type { UploadProps } from "element-plus";
-
 const imageUrl = ref("");
 const props = defineProps({
   style: {

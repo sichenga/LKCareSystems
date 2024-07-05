@@ -5,6 +5,7 @@
         src="../../assets/images/logo.png"
         style="width: 300px; height: 100%"
       />
+      <img src="" alt="" />
     </div>
     <div class="main">
       <div class="card">
@@ -99,7 +100,6 @@ import { debounce } from "lodash-es";
 import type { FormInstance } from "element-plus";
 import { LocationQuery, LocationQueryValue, useRoute } from "vue-router";
 import router from "@/router";
-import { code, loginback, logo } from "@/utils/images";
 import { Lock, User } from "@element-plus/icons-vue";
 import { getCode } from "@/service/admin/AdminApi";
 import { useApperStore } from "@/store";
@@ -125,7 +125,7 @@ const loginData = ref<any>({
   verifyCode: "",
   verifyCodeId: "",
 });
-console.log(import.meta.env.VITE_APP_API_URL);
+
 const loginRules = computed(() => {
   return {
     username: [
@@ -236,7 +236,7 @@ onMounted(() => {
 
 .header {
   width: 100%;
-  height: 90px;
+  height: 10%;
   display: flex;
   align-items: center;
   padding: 10px 20px;
@@ -254,15 +254,15 @@ onMounted(() => {
 }
 
 .card {
-  width: 80%;
-  height: 80%;
+  width: 1280px;
+  height: 473px;
   display: flex;
   box-shadow: 0 0 20px 10px #ccc;
 
   //
   .right {
-    width: 30%;
-    height: 100%;
+    width: 461px;
+    height: 473px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -274,13 +274,12 @@ onMounted(() => {
       width: 80%;
       height: 100%;
       box-sizing: border-box;
-      margin-top: 15px;
-
+      margin-top: 3%;
       .el-input {
         height: 50px;
       }
       .el-form-item {
-        margin-bottom: 32px;
+        margin-bottom: 20px;
       }
     }
 
@@ -309,9 +308,12 @@ onMounted(() => {
 //
 .footer {
   width: 100%;
-  height: 90px;
+  height: 10%;
   text-align: center;
-  line-height: 90px;
+  // line-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
 }
 

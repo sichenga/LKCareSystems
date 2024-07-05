@@ -56,7 +56,6 @@
         :tableData="data.tableData"
         :tableItem="data.tableItem"
         :identifier="identifier"
-        :autoWidth="'530px'"
       >
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
@@ -152,12 +151,10 @@ const data = reactive({
     {
       prop: "startDate",
       label: "开始日期",
-      width: "120",
     },
     {
       prop: "addTime",
       label: "预定时长（月）",
-      width: "180",
     },
     {
       prop: "amount",
@@ -170,7 +167,6 @@ const data = reactive({
     {
       prop: "startDate",
       label: "登记日期",
-      width: "120",
     },
     // {
     //   prop: 'stateName',
@@ -257,12 +253,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
-.demo-form-inline .el-input {
-  --el-input-width: 200px;
-}
-
-.demo-form-inline .el-select {
-  --el-select-width: 200px;
-}
-</style>
+<style lang="less" scoped></style>

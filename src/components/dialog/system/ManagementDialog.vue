@@ -28,7 +28,11 @@
         <el-input v-model="ruleForm.username" placeholder="请输入账号" />
       </el-form-item>
       <el-form-item label="密码" prop="username">
-        <el-input v-model="ruleForm.pwd" placeholder="请输入密码" />
+        <el-input
+          v-model="ruleForm.pwd"
+          show-password
+          placeholder="请输入密码"
+        />
       </el-form-item>
       <el-form-item label="所属角色" prop="username">
         <el-select

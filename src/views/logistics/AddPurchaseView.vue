@@ -3,20 +3,16 @@
   <div class="app-container">
     <el-card>
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="ingredient">选择食材</el-button>
-        <div class="quantity">{{ data.AddData.foods.length }}</div>
+        <el-badge :value="data.AddData.foods.length" color="green">
+          <el-button type="primary" @click="ingredient">选择食材</el-button>
+        </el-badge>
       </div>
       <!-- 表格 -->
       <MayTable
         :tableData="data.AddData.foods"
         :tableItem="data.tableItem"
-        :label="'采购数量'"
         v-if="data.AddData.foods.length"
       >
-        <!-- eslint-disable-next-line vue/no-template-shadow -->
-        <template #custom="data">
-          <el-input v-model="data.data.creators" style="width: 130px" />
-        </template>
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
           <el-button type="primary" text @click="del(data.id)">删除</el-button>

@@ -218,11 +218,6 @@ const uploadimg = (val: any) => {
   params.certificate = val?.url;
 };
 
-// 移除营业执照
-const uploadrem = () => {
-  params.certificate = "";
-};
-
 // 增加机构图片
 const pictureupload = (val: any) => {
   console.log(val);
@@ -258,20 +253,13 @@ const save = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   let valid = await formEl.validate();
   if (valid) {
-    let res: any;
-    if (!params.id) {
-      res = await companyadd(params).catch(() => {});
-      console.log(res);
-    } else {
-      res = await companyadd(params).catch(() => {});
-      console.log("修改", res);
-    }
-    if (res.code === 10000) {
-      // oneRef.value && oneRef.value.resetFields()
-      // ruleFormRef.value && ruleFormRef.value.resetFields()
-      // towRef.value && towRef.value.resetFields()
-      // threeRef.value && threeRef.value.resetFields()
-      ElMessage.success((!params.id ? "添加" : "修改") + "成功");
+    const res: any = await companyadd(params).catch(() => {});
+    console.log(res);
+    console.log("====================================");
+    console.log(params?.id);
+    console.log("====================================");
+    if (res?.code === 10000) {
+      ElMessage.success(params.id! > 0 ? "修改成功" : "添加成功");
       cancel();
     } else {
       ElMessage.error(res.msg);
@@ -293,7 +281,7 @@ const getcompanyget = async () => {
     console.log("单条数据", res);
     Object.assign(params, res.data);
     if (res.data.certificate) {
-      getMassUpload.value = upload + "/" + res.data.certificate;
+      getMassUpload.value = res.data.certificate;
     }
     // 图片回显
     if (res.data.picture) {
@@ -359,8 +347,12 @@ onMounted(() => {
 .uploadpic {
   :deep(.el-upload-list) {
     display: flex;
+
     left: 100px;
     top: -100px;
+  }
+  :deep(.el-upload) {
+    justify-content: flex-start;
   }
 }
 </style>
