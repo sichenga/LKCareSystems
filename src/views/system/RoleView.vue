@@ -9,7 +9,12 @@
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
           <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+          <el-button
+            type="primary"
+            text
+            @click="del(data.id, data.accountCounts)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -86,7 +91,9 @@ const getData = async () => {
   }
 };
 //删除角色
-const del = async (id: number) => {
+const del = async (id: number, accountCounts: number) => {
+  console.log(accountCounts);
+
   const res = await getMessageBox("确定删除该角色吗?", "删除后不可恢复");
   if (res) {
     let sun: any = await DelList(id);

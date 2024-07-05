@@ -11,7 +11,7 @@
             <div class="image-title">
               <UploadImg
                 :showlist="false"
-                :text="'更换头像'"
+                :title="'更换头像'"
                 :texts="true"
                 @upload="Imgupload"
               />
@@ -25,7 +25,7 @@
         class="demo-ruleForm"
         label-width="auto"
         status-icon
-        style="width: 300px"
+        style="max-width: 500px"
       >
         <el-form-item label="姓名">
           <el-input v-model="ruleForm.name" class="custom-input" disabled />
@@ -51,11 +51,7 @@
           <PassDialog v-if="isdialog" @close="close" />
         </el-form-item>
         <el-form-item label="所属角色">
-          <el-input
-            :model-value="roleData.toString()"
-            class="custom-input"
-            disabled
-          />
+          {{ roleData.toString() }}
         </el-form-item>
       </el-form>
     </el-card>
@@ -181,5 +177,8 @@ onMounted(async () => {
   position: absolute;
   top: 10px;
   left: 80px;
+}
+.el-input {
+  width: 240px;
 }
 </style>
