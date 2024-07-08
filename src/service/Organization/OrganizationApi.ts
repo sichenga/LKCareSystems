@@ -9,3 +9,5 @@ export const companyadd = (data: companyaddParams) =>
 export const companydelete = (id: number) => del("/api/company/delete/" + id);
 //获取单条数据
 export const companyget = (id: number) => get("/api/company/get/" + id);
+// 获取省市 /api/company/getCity
+export const getCity = () => get("/api/company/getCity");

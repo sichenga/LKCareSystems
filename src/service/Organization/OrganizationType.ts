@@ -23,4 +23,6 @@ export interface companyaddParams {
   house: string | null; //房屋性质
   certificate: string | null; //营业执照
   picture: string; //机构图片
+  province: string;
+  city: string;
 }

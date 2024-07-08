@@ -3,8 +3,8 @@
   <el-card>
     <template #header>
       <div class="title">
-        业绩柱状图
-        <el-tooltip effect="dark" content="点击试试下载" placement="bottom">
+        各地区老人柱状图
+        <el-tooltip effect="dark" content="点击下载" placement="bottom">
           <i-ep-download class="download" @click="downloadEchart" />
         </el-tooltip>
       </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { getElderlyCount } from "@/service/dashboard/dashboardApi";
 import * as echarts from "echarts";
 
 const props = defineProps({
@@ -57,7 +58,7 @@ const options = {
   legend: {
     x: "center",
     y: "bottom",
-    data: ["收入", "毛利润", "收入增长率", "利润增长率"],
+    data: [],
     textStyle: {
       color: "#999",
     },
@@ -93,9 +94,9 @@ const options = {
   ],
   series: [
     {
-      name: "收入",
+      name: "",
       type: "bar",
-      data: [7000, 7100, 7200, 7300, 7400],
+      data: [],
       barWidth: 20,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -103,37 +104,6 @@ const options = {
           { offset: 0.5, color: "#188df0" },
           { offset: 1, color: "#188df0" },
         ]),
-      },
-    },
-    {
-      name: "毛利润",
-      type: "bar",
-      data: [8000, 8200, 8400, 8600, 8800],
-      barWidth: 20,
-      itemStyle: {
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          { offset: 0, color: "#25d73c" },
-          { offset: 0.5, color: "#1bc23d" },
-          { offset: 1, color: "#179e61" },
-        ]),
-      },
-    },
-    {
-      name: "收入增长率",
-      type: "line",
-      yAxisIndex: 1,
-      data: [60, 65, 70, 75, 80],
-      itemStyle: {
-        color: "#67C23A",
-      },
-    },
-    {
-      name: "利润增长率",
-      type: "line",
-      yAxisIndex: 1,
-      data: [70, 75, 80, 85, 90],
-      itemStyle: {
-        color: "#409EFF",
       },
     },
   ],
@@ -164,9 +134,17 @@ const downloadEchart = () => {
     }
   };
 };
-
+// 获取各地区老人数柱状图数据
+const getelderlycount = async () => {
+  const res: any = await getElderlyCount();
+  if (res?.code === 10000) {
+    options.series[0].data = res.data.map((item: any) => item.count);
+    options.xAxis[0].data = res.data.map((item: any) => item.name);
+  }
+};
 const chart = ref<any>("");
-onMounted(() => {
+onMounted(async () => {
+  await getelderlycount();
   // 图表初始化
   chart.value = markRaw(
     echarts.init(document.getElementById(props.id) as HTMLDivElement)

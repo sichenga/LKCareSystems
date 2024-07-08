@@ -450,7 +450,7 @@ const handleSelectionChange = (val: any[]) => {
   //display: flex;
   //flex-direction: column;
   padding-left: 5px;
-  z-index: 999;
+  z-index: 2;
 
   span {
     margin-top: 5px;

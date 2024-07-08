@@ -42,6 +42,7 @@ export const useUserStore = defineStore(
               ElMessage.success("登录成功");
             } else {
               ElMessage.error(data.msg ? data.msg : "登陆失败");
+              reject(data?.code);
             }
             user.value.model = data.data.model;
             localStorage.setItem(TOKEN_KEY, data.data.token); // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx

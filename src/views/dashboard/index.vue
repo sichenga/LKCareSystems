@@ -38,7 +38,6 @@
                   <span class="text-[16px] ml-1">{{ item.title }}</span>
                 </div>
               </template>
-              <template v-if="item.suffix" #suffix>/100</template>
             </el-statistic>
           </div>
         </el-col>
@@ -46,7 +45,7 @@
     </el-card>
 
     <!-- 数据卡片 -->
-    <el-row :gutter="10" class="mt-3">
+    <!-- <el-row :gutter="10" class="mt-3">
       <el-col
         v-for="(item, index) in cardData"
         :key="index"
@@ -81,14 +80,14 @@
           </div>
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
 
     <!-- Echarts 图表 -->
     <el-row :gutter="10" class="mt-3">
       <el-col
         v-for="item in chartData"
         :key="item"
-        :lg="8"
+        :lg="12"
         :sm="12"
         :xs="24"
         class="mb-2"
@@ -173,20 +172,20 @@ const statisticData = ref([
   {
     value: 99,
     iconClass: "message",
-    title: "消息",
+    title: "机构数",
     key: "message",
   },
   {
     value: 50,
     iconClass: "todolist",
-    title: "待办",
+    title: "床位数",
     suffix: "/100",
     key: "upcoming",
   },
   {
     value: 10,
     iconClass: "project",
-    title: "项目",
+    title: "老人数",
     key: "project",
   },
 ]);
@@ -241,7 +240,7 @@ const cardData = ref<CardProp[]>([
 ]);
 // 图表数据
 const mobile = import.meta.glob("./views/");
-const chartData = ref(["BarChart", "PieChart", "RadarChart"]);
+const chartData = ref(["ChinaChart", "BarChart"]);
 const chartComponent = (item: string) => {
   return defineAsyncComponent(() => import(`./components/${item}.vue`));
 };

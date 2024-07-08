@@ -51,11 +51,7 @@
           <PassDialog v-if="isdialog" @close="close" />
         </el-form-item>
         <el-form-item label="所属角色">
-          <el-input
-            :model-value="roleData.toString()"
-            class="custom-input"
-            disabled
-          />
+          {{ roleData.length ? roleData?.toString() : "暂无角色" }}
         </el-form-item>
       </el-form>
     </el-card>

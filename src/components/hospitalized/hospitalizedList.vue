@@ -60,6 +60,7 @@
             <el-input-number
               v-model="ruleForm.begPrice"
               :max="10000000000"
+              :precision="1"
               :min="0"
               controls-position="right"
               placeholder="200/天"

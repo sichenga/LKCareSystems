@@ -3,7 +3,7 @@
     <div class="header">
       <img
         src="../../assets/images/logo.png"
-        style="width: 300px; height: 100%"
+        style="width: auto; height: 100%"
       />
       <img src="" alt="" />
     </div>
@@ -188,6 +188,10 @@ function handleLogin() {
           );
 
           router.push({ path: redirect, query: otherQueryParams });
+        })
+        .catch((err) => {
+          // if (err !== 31000) return false;
+          getCaptcha();
         })
         // .catch(() => {
         //   getCaptcha();

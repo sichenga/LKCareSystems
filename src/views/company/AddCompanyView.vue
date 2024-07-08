@@ -24,6 +24,16 @@
           <el-form-item label="机构名称:" prop="name">
             <el-input v-model="params.name" placeholder="请输入" clearable />
           </el-form-item>
+
+          <el-form-item label="选择省份" prop="province">
+            <el-cascader
+              :props="props"
+              :options="options"
+              v-model="cityData"
+              @change="cityChange"
+              style="width: 100%"
+            />
+          </el-form-item>
           <el-form-item label="地址:" prop="address">
             <el-input v-model="params.address" laceholder="请输入" clearable />
           </el-form-item>
@@ -63,6 +73,7 @@
               clearable
             />
           </el-form-item>
+
           <el-form-item label="开业时间:" prop="startTime">
             <MayTimePicker v-model="params.startTime" />
           </el-form-item>
@@ -166,23 +177,25 @@
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import type { UploadUserFile } from "element-plus";
 import type { FormInstance, FormRules } from "element-plus";
-import { companyadd, companyget } from "@/service/Organization/OrganizationApi";
+import {
+  companyadd,
+  companyget,
+  getCity,
+} from "@/service/Organization/OrganizationApi";
 import type { companyaddParams } from "@/service/Organization/OrganizationType";
 import MayTimePicker from "@/components/timepicker/MayTimePicker.vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
 const upload = import.meta.env.VITE_BASE_URL;
-const MassUpload = defineAsyncComponent(
-  () => import("@/components/upload/MassUpload.vue")
-);
+
 const UploadPictures = defineAsyncComponent(
   () => import("@/components/upload/UploadPictures.vue")
 );
 const AvatarUpload = defineAsyncComponent(
   () => import("@/components/upload/AvatarUpload.vue")
 );
-const imgdelete = ref(true);
+
 const route = useRoute();
 const router = useRouter();
 const ruleFormRef = ref<FormInstance>();
@@ -194,6 +207,8 @@ const data = reactive({
 });
 const getMassUpload = ref<any>("");
 const getUploadPictures = ref<UploadUserFile[]>([]);
+// 省会选择值
+const cityData = ref<any>([]);
 const params = reactive<companyaddParams>({
   id: data.id,
   name: "",
@@ -212,12 +227,33 @@ const params = reactive<companyaddParams>({
   house: "", //房屋性质
   certificate: null, //营业执照
   picture: "", //机构图片
+  province: "",
+  city: "",
 });
 // 添加营业执照
 const uploadimg = (val: any) => {
   params.certificate = val?.url;
 };
+// 级联选择器配置
+const props = {
+  label: "n",
+  value: "n",
+  children: "c",
+};
 
+const options = ref<any>([]);
+// 获取省会数据
+const getOptions = async () => {
+  const res: any = await getCity();
+  console.log(111, res);
+  if (res?.code === 10000) {
+    options.value = res.data;
+  }
+};
+const cityChange = (val: any) => {
+  params.province = val[0];
+  params.city = val[1];
+};
 // 增加机构图片
 const pictureupload = (val: any) => {
   console.log(val);
@@ -247,6 +283,7 @@ const rules = reactive<FormRules<companyaddParams>>({
   adminUserName: [{ required: true, message: "请输入账号", trigger: "blur" }],
   adminPwd: [{ required: true, message: "请输入密码", trigger: "blur" }],
   startTime: [{ required: true, message: "请选择开业时间", trigger: "change" }],
+  province: [{ required: true, message: "请选择省份", trigger: "change" }],
 });
 //保存
 const save = async (formEl: FormInstance | undefined) => {
@@ -280,6 +317,7 @@ const getcompanyget = async () => {
     const res: any = await companyget(data.id);
     console.log("单条数据", res);
     Object.assign(params, res.data);
+    cityData.value = [res.data?.province, res.data?.city];
     if (res.data.certificate) {
       getMassUpload.value = res.data.certificate;
     }
@@ -296,6 +334,7 @@ const getcompanyget = async () => {
 };
 
 onMounted(() => {
+  getOptions();
   getcompanyget();
 });
 </script>
