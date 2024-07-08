@@ -2,7 +2,12 @@
   <!-- 账号管理 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-      <el-button type="primary" @click="isdialog = true">新增</el-button>
+      <el-button
+        type="primary"
+        @click="isdialog = true"
+        style="margin-bottom: 15px"
+        >新增</el-button
+      >
       <ManagementDialog v-if="isdialog" :id="deitID" @close="close" />
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
@@ -49,7 +54,7 @@ const data = reactive({
       label: "账号",
     },
     {
-      prop: "pwd",
+      prop: "",
       label: "密码",
     },
   ],
@@ -112,8 +117,4 @@ onMounted(() => {
 });
 </script>
 
-<style lang="less" scoped>
-.el-button {
-  margin-bottom: 20px;
-}
-</style>
+<style lang="less" scoped></style>

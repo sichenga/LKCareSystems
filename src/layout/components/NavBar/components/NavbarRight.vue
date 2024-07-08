@@ -37,7 +37,7 @@
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <a
+          <!-- <a
             href="https://gitee.com/youlaiorg/vue3-element-admin"
             target="_blank"
           >
@@ -45,7 +45,13 @@
           </a>
           <a href="https://juejin.cn/post/7228990409909108793" target="_blank">
             <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
-          </a>
+          </a> -->
+          <el-dropdown-item
+            v-if="userStore.user.model?.type != 3"
+            @click="getInfo"
+          >
+            账号设置
+          </el-dropdown-item>
           <el-dropdown-item divided @click="logout">
             {{ $t("navbar.logout") }}
           </el-dropdown-item>
@@ -105,6 +111,10 @@ function logout() {
       });
   });
 }
+// 跳转账号信息
+const getInfo = () => {
+  router.push("/system/account-set");
+};
 </script>
 <style lang="scss" scoped>
 .setting-item {

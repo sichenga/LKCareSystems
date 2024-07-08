@@ -1,12 +1,13 @@
 <!-- 饼图 -->
 <template>
   <el-card>
-    <template #header> 产品分类饼图 </template>
+    <template #header> 各年龄段数量统计 </template>
     <div :id="id" :class="className" :style="{ height, width }"></div>
   </el-card>
 </template>
 
 <script setup lang="ts">
+import { getAgeGroup } from "@/service/dashboard/dashboardApi";
 import * as echarts from "echarts";
 
 const props = defineProps({
@@ -66,10 +67,21 @@ const options = {
     },
   ],
 };
-
+// 获取各年龄段数量统计数据
+const getagegroup = async () => {
+  const res: any = await getAgeGroup();
+  console.log(111, res);
+  if (res?.code === 10000) {
+    options.series[0].data = res.data.map((item: any) => ({
+      value: item.count,
+      name: item.ageGroup,
+    }));
+  }
+};
 const chart = ref<any>("");
 
-onMounted(() => {
+onMounted(async () => {
+  await getagegroup();
   chart.value = markRaw(
     echarts.init(document.getElementById(props.id) as HTMLDivElement)
   );

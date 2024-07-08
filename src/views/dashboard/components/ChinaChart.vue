@@ -107,18 +107,14 @@ let initChart = () => {
       zoom: 1.1,
       roam: false,
       itemStyle: {
-        normal: {
-          shadowColor: "rgb(58,115,192)",
-          shadowOffsetX: 2,
-          shadowOffsetY: 3,
-        },
+        shadowColor: "rgb(58,115,192)",
+        shadowOffsetX: 2,
+        shadowOffsetY: 3,
       },
     },
     tooltip: {
       trigger: "item", //类型
       formatter: function (params: any) {
-        console.log(params);
-
         if (params.data) {
           return `城市：${params.data.name}<br/>机构数：${params.data.counts}`;
         }
@@ -150,48 +146,38 @@ let initChart = () => {
         roam: false,
         mapType: "china",
         label: {
-          normal: {
-            show: false,
-            textStyle: {
-              color: "#ffffff",
-            },
-          },
-          emphasis: {
-            // show: false,
-            textStyle: {
-              color: "#ffffff",
-            },
-          },
+          show: false,
+          // textStyle: {
+          color: "#ffffff",
+          // },
+          // show: false,
         },
 
         itemStyle: {
-          normal: {
-            borderColor: "rgb(147, 235, 248)",
-            borderWidth: 1,
-            areaColor: {
-              type: "radial",
-              x: 0.5,
-              y: 0.5,
-              r: 0.8,
-              colorStops: [
-                {
-                  offset: 0,
-                  color: "#409EFF", // 0% 处的颜色
-                },
-                {
-                  offset: 1,
-                  color: "#409EFF", // 100% 处的颜色
-                },
-              ],
-              globalCoord: true, // 缺省为 false
-            },
+          borderColor: "rgb(147, 235, 248)",
+          borderWidth: 1,
+          areaColor: {
+            type: "radial",
+            x: 0.5,
+            y: 0.5,
+            r: 0.8,
+            colorStops: [
+              {
+                offset: 0,
+                color: "#409EFF", // 0% 处的颜色
+              },
+              {
+                offset: 1,
+                color: "#409EFF", // 100% 处的颜色
+              },
+            ],
+            globalCoord: true, // 缺省为 false
           },
-          emphasis: {
-            show: false,
-            areaColor: "rgb(46,229,206)",
-            //  shadowColor: 'rgb(12,25,50)',
-            borderWidth: 0.1,
-          },
+
+          // emphasis: {
+          show: false,
+
+          // },
         },
         zoom: 1.1,
         //     roam: false,
@@ -209,24 +195,20 @@ let initChart = () => {
           scale: 4,
           brushType: "fill",
         },
-        hoverAnimation: true,
+        // hoverAnimation: true,
         label: {
-          normal: {
-            formatter: "{b}",
-            position: "right",
-            offset: [-1, 0],
-            color: "#000000",
-            show: true,
-          },
+          formatter: "{b}",
+          position: "right",
+          offset: [-1, 0],
+          color: "#000000",
+          show: true,
         },
         itemStyle: {
-          normal: {
-            color: "#FF0000" /* function (value){ //随机颜色
+          color: "#FF0000" /* function (value){ //随机颜色
  return "#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6);
  }*/,
-            shadowBlur: 10,
-            shadowColor: "#333",
-          },
+          shadowBlur: 10,
+          shadowColor: "#333",
         },
         symbolSize: 12,
         data: points,

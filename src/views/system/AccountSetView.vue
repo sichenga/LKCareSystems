@@ -3,7 +3,7 @@
   <div class="app-container">
     <el-card style="max-width: 100%">
       <div class="headbox">
-        <el-form-item class="title" label="头像">
+        <el-form-item class="title" label="头像:">
           <div class="header">
             <div>
               <img :src="img ? Image + img : defImg" alt="" />
@@ -11,7 +11,7 @@
             <div class="image-title">
               <UploadImg
                 :showlist="false"
-                :text="'更换头像'"
+                :text="'更换头像:'"
                 :texts="true"
                 @upload="Imgupload"
               />
@@ -27,31 +27,33 @@
         status-icon
         style="width: 300px"
       >
-        <el-form-item label="姓名">
-          <el-input v-model="ruleForm.name" class="custom-input" disabled />
+        <el-form-item label="姓名:">
+          <label>{{ ruleForm?.name }}</label>
+          <!-- <el-input v-model="ruleForm.name" class="custom-input" disabled /> -->
         </el-form-item>
-        <el-form-item label="手机号">
-          <el-input v-model="ruleForm.mobile" class="custom-input" disabled />
+        <el-form-item label="手机号:">
+          <label>{{ ruleForm?.mobile }}</label>
+
+          <!-- <el-input v-model="ruleForm.mobile" class="custom-input" disabled /> -->
         </el-form-item>
-        <el-form-item label="账号">
-          <el-input v-model="ruleForm.username" class="custom-input" disabled />
+        <el-form-item label="账号:">
+          <label>{{ ruleForm?.username }}</label>
+          <!-- <el-input v-model="ruleForm.username" class="custom-input" disabled /> -->
         </el-form-item>
-        <el-form-item label="密码">
-          <el-input
+        <el-form-item label="密码:">
+          <!-- <el-input
             v-model="ruleForm.pwd"
             class="custom-pass"
             disabled
             show-password
-          />
+          /> -->
+          <label class="custom-pass">******</label>
           <span
             style="padding-left: 20px; font-size: 12px; color: #75a5ea"
             @click="isdialog = true"
             >修改密码</span
           >
           <PassDialog v-if="isdialog" @close="close" />
-        </el-form-item>
-        <el-form-item label="所属角色">
-          {{ roleData.length ? roleData?.toString() : "暂无角色" }}
         </el-form-item>
       </el-form>
     </el-card>
@@ -134,7 +136,7 @@ onMounted(async () => {
   .header {
     width: 50px;
     height: 50px;
-    margin-left: 20px;
+    // margin-left: 10px;
     border-radius: 50%;
     img {
       width: 50px;
@@ -159,23 +161,23 @@ onMounted(async () => {
   margin-left: 10px;
 }
 
-.custom-input {
-  margin-left: 25px;
-}
+// .custom-input {
+//   // margin-left: 25px;
+// }
 
 .custom-pass {
   width: 100px !important;
-  margin-left: 25px;
+  // margin-left: 25px;
 }
 
 .title {
   position: relative;
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .image-title {
   position: absolute;
   top: 10px;
-  left: 80px;
+  left: 60px;
 }
 </style>
