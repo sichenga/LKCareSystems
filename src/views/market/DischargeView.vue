@@ -25,26 +25,46 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="searcher">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="searcher" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card class="card" style="max-width: 100%">
       <!-- 新增 -->
-      <el-button style="margin-bottom: 20px" type="primary" @click="add"
+      <el-button
+        style="margin-bottom: 20px"
+        type="success"
+        :icon="Plus"
+        @click="add"
         >新增出院申请</el-button
+      >
+      <el-button
+        style="margin-bottom: 20px"
+        type="danger"
+        :icon="Delete"
+        :disabled="!ids.length"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
       >
       <!-- 表格 -->
       <MayTable
         :identifier="identifier"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text type="primary" :icon="Edit" @click="edit(data.id)"
+            >编辑</el-button
+          >
+          <el-button text type="danger" :icon="Delete" @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -61,9 +81,21 @@
 </template>
 
 <script lang="ts" setup>
+import {
+  Tickets,
+  Search,
+  Refresh,
+  Plus,
+  Delete,
+  Edit,
+} from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
-import { dischargeDelete, dischargeList } from "@/service/market/DischargeApi";
+import {
+  dischargeDelete,
+  dischargeList,
+  dischargeDeleteAll,
+} from "@/service/market/DischargeApi";
 import type { dischargeListParams } from "@/service/market/DischargeType";
 import { getMessageBox } from "@/utils/utils";
 
@@ -174,6 +206,24 @@ const del = async (id: number) => {
       ElMessage.success("删除成功");
     } else {
       ElMessage.error(res.msg);
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await dischargeDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
     }
   } else {
     ElMessage.info("取消删除");

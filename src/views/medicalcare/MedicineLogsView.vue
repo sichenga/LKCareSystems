@@ -19,14 +19,25 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="sond">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="sond" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 15px 0">
-        <el-button type="primary" @click="registerinfo">用药登记</el-button>
+        <el-button type="success" :icon="Plus" @click="registerinfo"
+          >用药登记</el-button
+        >
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
         <OldSelectDialog
           v-if="isdialog"
           :toPath="'/medicalcare/add'"
@@ -34,13 +45,27 @@
         />
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        auto-width="300px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         // eslint-disable-next-line vue/no-template-shadow
         <template #operate="{ data }">
-          <el-button text type="primary" @click="details(data.elderlyId)"
+          <el-button
+            text
+            type="primary"
+            @click="details(data.elderlyId)"
+            :icon="Tickets"
             >查看详情</el-button
           >
-          <el-button text type="primary" @click="project(data.elderlyId)"
+          <el-button
+            text
+            type="primary"
+            @click="project(data.elderlyId)"
+            :icon="Memo"
             >用药计划</el-button
           >
         </template>
@@ -58,10 +83,21 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { DrugsList } from "@/service/medicalcare/MedicalcareApi";
+import {
+  DrugsList,
+  DrugsDeleteAll,
+} from "@/service/medicalcare/MedicalcareApi";
 import type { DrugsParams } from "@/service/medicalcare/MedicalcareType";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
-
+import {
+  Memo,
+  Plus,
+  Refresh,
+  Search,
+  Tickets,
+  Delete,
+} from "@element-plus/icons-vue";
+import { getMessageBox } from "@/utils/utils";
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -125,6 +161,24 @@ const getlist = async () => {
   if (res?.code === 10000) {
     total.value = res.data.counts;
     data.tableData = res.data.list;
+  }
+};
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await DrugsDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
   }
 };
 // 用药登记

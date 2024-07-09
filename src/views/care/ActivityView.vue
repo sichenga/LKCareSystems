@@ -28,8 +28,10 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
-          <el-button @click="delde">重置</el-button>
+          <el-button type="primary" @click="search" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="delde" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -38,21 +40,40 @@
     <el-card style="margin-top: 15px">
       <el-button
         style="margin-top: 10px; margin-bottom: 10px"
-        type="primary"
+        type="success"
+        :icon="Plus"
         @click="add"
         >添加老人活动</el-button
       >
-
+      <el-button
+        type="danger"
+        :icon="Delete"
+        :disabled="!idsA.length"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
+      >
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="340px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="getinfo(data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="getinfo(data.id)"
+            :icon="Tickets"
             >查看详情</el-button
           >
-          <el-button text type="primary" @click="compile(data.id)"
+          <el-button text type="primary" @click="compile(data.id)" :icon="Edit"
             >编辑</el-button
           >
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text type="danger" @click="del(data.id)" :icon="Delete"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -71,11 +92,19 @@ import {
   getDeleteList,
   getPlayList,
   getPlayTypeList,
+  getDeleteListAll,
 } from "@/service/care/gooutApi";
 import type { playList } from "@/service/care/gooutType";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-
+import {
+  Delete,
+  Edit,
+  Plus,
+  Refresh,
+  Search,
+  Tickets,
+} from "@element-plus/icons-vue";
 const ActivityDialog = defineAsyncComponent(
   () => import("@/components/dialog/care/ActivityDialog.vue")
 );
@@ -143,6 +172,26 @@ const getlist = async () => {
     counts.value = res.data.counts;
   }
 };
+
+// 批量删除
+let idsA = ref<any>([]);
+const serveListIs = (val: any) => {
+  idsA.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await getDeleteListAll(idsA.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 // 分页
 const handPage = (val: any) => {
   params.page = val;

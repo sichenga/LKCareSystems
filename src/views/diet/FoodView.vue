@@ -3,26 +3,66 @@
   <div class="app-container">
     <div class="box">
       <el-button
-        type="primary"
+        type="success"
+        :icon="Plus"
         @click="isdialog = true"
         style="margin-bottom: 15px"
         >新增</el-button
       >
+      <el-button
+        style="margin-bottom: 15px"
+        type="danger"
+        :icon="Delete"
+        v-if="ids.length >= 1"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
+      >
+      <el-button
+        type="danger"
+        :icon="Delete"
+        disabled
+        style="margin-bottom: 15px"
+        v-if="ids.length <= 0"
+        >批量删除</el-button
+      >
+
       <FoodDialog v-if="isdialog" :foodid="foodid" @close="close" />
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+        autoWidth="350px"
+      >
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button link type="primary" @click="handleEdit(data.id)"
+          <el-button
+            link
+            type="primary"
+            :icon="Edit"
+            @click="handleEdit(data.id)"
             >编辑
           </el-button>
-          <el-button link type="primary" @click="handleDelete(data.id)"
+          <el-button
+            link
+            type="danger"
+            :icon="Delete"
+            @click="handleDelete(data.id)"
             >删除
           </el-button>
-          <el-button link type="primary" @click="priceUpdate(data.id)"
+          <el-button
+            link
+            type="primary"
+            :icon="Tickets"
+            @click="priceUpdate(data.id)"
             >价格更新
           </el-button>
-          <el-button link type="primary" @click="priceAnalysis(data.id)"
+          <el-button
+            link
+            type="primary"
+            :icon="DataLine"
+            @click="priceAnalysis(data.id)"
             >价格分析
           </el-button>
         </template>
@@ -43,13 +83,14 @@
 </template>
 
 <script lang="ts" setup>
+import { Delete, Edit, DataLine, Tickets, Plus } from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import FoodDialog from "@/components/dialog/FoodDialog.vue";
 import PriceDialog from "@/components/dialog/diet/PriceDialog.vue";
 import { useRouter } from "vue-router";
-import { Fooddelete, FoodList } from "@/service/food/FoodApi";
+import { Fooddelete, FoodList, FoodaddAll } from "@/service/food/FoodApi";
 import type { Supplier } from "@/service/food/FoodType";
 
 const router = useRouter();
@@ -136,12 +177,9 @@ const handleEdit = (id: any) => {
 };
 // 删除
 const handleDelete = async (id: number) => {
-  console.log("删除", id);
   let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
-  console.log(11112, res);
   if (res) {
     const del: any = await Fooddelete(id);
-    console.log("删除", del);
     if (del?.code === 10000) {
       ElMessage.success("删除成功");
       getlist();
@@ -150,6 +188,25 @@ const handleDelete = async (id: number) => {
     ElMessage.info("取消删除");
   }
 };
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await FoodaddAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 // 价格更新
 const priceUpdate = (id: number) => {
   console.log("价格更新", id);

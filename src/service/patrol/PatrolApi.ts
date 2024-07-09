@@ -9,3 +9,6 @@ export const patrolAdd = (params: PatrolAdd) => post("/api/patrol/add", params);
 export const patrolDelete = (id: number) => del(`/api/patrol/delete/${id}`);
 // 根据id查询单条夜巡数据
 export const patrolInfo = (id: number) => get(`/api/patrol/info/${id}`);
+
+// 批量删除
+export const patrolDeleteAll = (ids: any) => post("/api/patrol/deleteAll", ids);

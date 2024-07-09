@@ -13,6 +13,12 @@ export const reservationget = (id: number) => {
 export const reservationDelete = (id: number) => {
   return del(`/api/reservation/delete/${id}`);
 };
+
+// 批删预定登记
+export const reservationAll = (ids: any) => {
+  return post("/api/reservation/deleteAll", ids);
+};
+
 // 预定添加
 export const reservationAdd = (data: ReservationAddParams) => {
   return post("/api/reservation/add", data);

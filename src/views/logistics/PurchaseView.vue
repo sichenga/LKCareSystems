@@ -3,7 +3,9 @@
   <div class="app-container">
     <el-card>
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="sond">创建采购申请</el-button>
+        <el-button type="success" @click="sond" :icon="Plus"
+          >创建采购申请</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
@@ -13,10 +15,13 @@
       >
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button type="primary" text @click="del">删除</el-button>
+          <el-button type="danger" :icon="Delete" text @click="del"
+            >删除</el-button
+          >
           <el-button
             type="primary"
             text
+            :icon="DocumentCopy"
             v-if="data.state !== '已经发货'"
             @click="delivery(data.id)"
             >收货验货</el-button
@@ -26,6 +31,7 @@
             text
             v-if="data.state === '已经发货'"
             @click="getifno(data.id)"
+            :icon="Tickets"
             >查看详情</el-button
           >
         </template>
@@ -46,6 +52,7 @@ import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { getPurchaseList } from "@/service/purchase/PurchaseApi";
+import { Delete, DocumentCopy, Plus, Tickets } from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );

@@ -23,20 +23,39 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="inquire">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="inquire" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="max-width: 100%" class="card">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="add">增加</el-button>
+        <el-button type="success" :icon="Plus" @click="add">增加</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="220px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+          <el-button type="primary" text @click="edit(data)" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button type="danger" :icon="Delete" text @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -61,8 +80,10 @@ import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
 import {
   BloodPressureList,
   BloodPressureDelete,
+  BloodPressureDeleteAll,
 } from "@/service/medicalcare/MedicalcareApi";
 import type { BloodPressureParams } from "@/service/medicalcare/MedicalcareType";
+import { Delete, Edit, Plus, Refresh, Search } from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -125,6 +146,26 @@ const getlist = async () => {
     data.tableData = res.data.list;
   }
 };
+
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await BloodPressureDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 // 增加
 const add = () => {
   editid.value = {};

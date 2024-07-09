@@ -262,6 +262,7 @@ onMounted(() => {
   height: 473px;
   display: flex;
   box-shadow: 0 0 20px 10px #ccc;
+
   //
   .right {
     width: 461px;

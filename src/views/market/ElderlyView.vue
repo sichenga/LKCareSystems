@@ -34,32 +34,59 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="getQuery">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="getQuery" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
         <el-button type="primary" @click="add">新增老人</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
         :identifier="identifier"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        :auto-width="'450px'"
+        auto-width="550px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-          <el-button text type="primary" @click="getarchives(data.id)"
+          <el-button text type="primary" @click="edit(data.id)" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button
+            text
+            type="primary"
+            @click="getarchives(data.id)"
+            :icon="Memo"
             >档案管理</el-button
           >
-          <el-button text type="primary" @click="getwork(data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="getwork(data.id)"
+            :icon="Notebook"
             >排班管理</el-button
           >
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
-          <el-button text type="primary" @click="getschedule(data.id)"
+          <el-button text type="danger" :icon="Delete" @click="del(data.id)"
+            >删除</el-button
+          >
+          <el-button
+            text
+            type="primary"
+            @click="getschedule(data.id)"
+            :icon="Tickets"
             >计划任务</el-button
           >
         </template>
@@ -79,7 +106,17 @@ import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-
+import {
+  Delete,
+  Edit,
+  Plus,
+  Refresh,
+  Search,
+  Document,
+  Memo,
+  Notebook,
+  Tickets,
+} from "@element-plus/icons-vue";
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -87,7 +124,11 @@ const MayTable = defineAsyncComponent(
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-import { getElderlyList, deleteElderly } from "@/service/old/OldApi";
+import {
+  getElderlyList,
+  deleteElderly,
+  addElderlyAll,
+} from "@/service/old/OldApi";
 import type { ListElderlyRequest } from "@/service/old/OldType";
 import { useBuildStroke } from "@/store";
 import MayCascader from "@/components/cascader/MayCascader.vue";
@@ -172,6 +213,25 @@ const del = async (id: number) => {
     ElMessage.info("取消删除");
   }
 };
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await addElderlyAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getList();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 // 新增老人
 const add = () => {
   router.push("/market/elderly-add");

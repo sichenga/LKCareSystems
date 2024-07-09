@@ -10,3 +10,7 @@ export const addressupdate = (data: AddressAdd) =>
   put("/api/address/update", data);
 // 地址删除  /api/address/delete/3
 export const addressdelete = (id: number) => del(`/api/address/delete/${id}`);
+
+// 批量删除
+export const addressdeleteAll = (ids: any) =>
+  post("/api/address/deleteAll", ids);

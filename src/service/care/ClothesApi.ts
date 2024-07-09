@@ -25,3 +25,7 @@ export const clothesUpdate = (data: ClothesAddParams) => {
 export const clothesDelete = (id: number) => {
   return del(`/api/clothes/delete/${id}`);
 };
+// 批量删除错衣缺衣信息
+export const clothesDeleteAll = (ids: any) => {
+  return post("/api/clothes/deleteAll", ids);
+};

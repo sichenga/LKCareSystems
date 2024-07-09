@@ -11,7 +11,7 @@
             <div class="image-title">
               <UploadImg
                 :showlist="false"
-                :text="'更换头像:'"
+                :title="'更换头像'"
                 :texts="true"
                 @upload="Imgupload"
               />
@@ -25,7 +25,7 @@
         class="demo-ruleForm"
         label-width="auto"
         status-icon
-        style="width: 300px"
+        style="max-width: 500px"
       >
         <el-form-item label="姓名:">
           <label>{{ ruleForm?.name }}</label>
@@ -61,6 +61,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Delete, Edit, Plus, Search } from "@element-plus/icons-vue";
 import { onMounted, reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
 import { ElMessage } from "element-plus";
@@ -133,17 +134,20 @@ onMounted(async () => {
   height: 50px;
   display: flex;
   margin-top: 30px;
+
   .header {
     width: 50px;
     height: 50px;
     // margin-left: 10px;
     border-radius: 50%;
+
     img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
     }
   }
+
   .replece {
     color: #75a5ea;
     line-height: 50px;
@@ -179,5 +183,9 @@ onMounted(async () => {
   position: absolute;
   top: 10px;
   left: 60px;
+}
+
+.el-input {
+  width: 240px;
 }
 </style>
