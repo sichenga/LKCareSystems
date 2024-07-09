@@ -34,6 +34,10 @@ export const CheckRoomGet = (id: number) => get(`/api/checkRoom/get/${id}`);
 export const CheckRoomDelete = (id: number) =>
   del(`/api/checkRoom/delete/${id}`);
 
+// 批量删除查房记录信息 /api/checkRoom/delete/2
+export const CheckRoomDeleteAll = (ids: any) =>
+  post("/api/checkRoom/deleteAll", ids);
+
 // 查房记录信息添加  /api/checkRoom/add
 export const CheckRoomAdd = (data?: CheckRoomAddParams) =>
   post("/api/checkRoom/add", data || {});
@@ -51,6 +55,9 @@ export const BloodPressureGet = (id: number) =>
 // 删除血压记录信息 /api/bloodPressure/delete/2
 export const BloodPressureDelete = (id: number) =>
   del(`/api/bloodPressure/delete/${id}`);
+
+export const BloodPressureDeleteAll = (ids: any) =>
+  post("/api/bloodPressure/deleteAll", ids);
 // 血压记录添加 /api/bloodPressure/add
 export const BloodPressureAdd = (data?: BloodPressureAddParams) =>
   post("/api/bloodPressure/add", data || {});
@@ -60,6 +67,10 @@ export const BloodPressureUpdate = (data?: BloodPressureAddParams) =>
 // 添加体温记录
 export const TemperatureDelete = (id?: number) => {
   return del("/api/temperature/delete/" + id);
+};
+// 批量删除体温
+export const TemperatureDeleteAll = (ids?: any) => {
+  return post("/api/temperature/deleteAll", ids);
 };
 // 单挑体温
 export const GetTemperature = (id?: number) => {
@@ -83,6 +94,11 @@ export const BloodSugarAdd = (data: Temperature) => {
 export const BloodSugarDelete = (id: number) => {
   return del(`/api/bloodSugar/delete/${id}`);
 };
+
+// 批量删除血糖记录信息
+export const BloodSugarDeleteAll = (ids: any) => {
+  return post("/api/bloodSugar/deleteAll", ids);
+};
 // 获取单条血糖记录信息
 export const BloodSugarGet = (id: number) => {
   return get(`/api/bloodSugar/get/${id}`);
@@ -102,6 +118,9 @@ export const DrugsListForElderly = (id: number) =>
 export const DrugsGet = (id: number) => get(`/api/drugs/get/${id}`);
 // 删除存药登记信息 /api/drugs/delete/2
 export const DrugsDelete = (id: number) => del(`/api/drugs/delete/${id}`);
+
+// 批量删除删除存药登记信息 /api/drugs/delete/2
+export const DrugsDeleteAll = (ids: any) => post("/api/drugs/deleteAll", ids);
 // 存药登记添加 /api/drugs/add
 export const DrugsAdd = (data: DrugsAddParams) =>
   post("/api/drugs/add", data || {});

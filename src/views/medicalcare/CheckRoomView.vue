@@ -31,20 +31,39 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="getCheckRoomList">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="getCheckRoomList" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="max-width: 100%" class="card">
       <!-- 表格 -->
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="add">增加</el-button>
+        <el-button type="success" :icon="Plus" @click="add">增加</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
       </div>
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :isMultiple="true"
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="230px"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="emit(data)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+          <el-button type="primary" text @click="emit(data)" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button type="danger" text @click="del(data.id)" :icon="Delete"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -66,8 +85,10 @@ import type { FormInstance } from "element-plus";
 import {
   CheckRoomList,
   CheckRoomDelete,
+  CheckRoomDeleteAll,
 } from "@/service/medicalcare/MedicalcareApi";
 import type { CheckRoomParams } from "@/service/medicalcare/MedicalcareType";
+import { Delete, Edit, Plus, Refresh, Search } from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -79,6 +100,7 @@ import MayCascader from "@/components/cascader/MayCascader.vue";
 import { useRouter } from "vue-router";
 import { useBuildStroke } from "@/store";
 import CheckRoowDialog from "@/components/dialog/medicalcare/CheckRoowDialog.vue";
+
 const RefChedkRoom = ref<FormInstance>();
 const getUserInfo = useBuildStroke();
 const router = useRouter();
@@ -125,6 +147,25 @@ const getlist = async () => {
   if (res?.code === 10000) {
     total.value = res.data.counts;
     data.tableData = res.data.list;
+  }
+};
+
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await CheckRoomDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
   }
 };
 

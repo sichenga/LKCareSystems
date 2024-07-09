@@ -27,20 +27,46 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="search" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="max-width: 100%" class="card">
-      <el-button type="primary" @click="add" style="margin-bottom: 20px"
+      <el-button
+        type="success"
+        @click="add"
+        style="margin-bottom: 20px"
+        :icon="Plus"
         >添加血糖记录</el-button
       >
+      <el-button
+        style="margin-bottom: 20px"
+        type="danger"
+        :icon="Delete"
+        :disabled="!ids.length"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
+      >
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="220px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data)">编辑</el-button>
-          <el-button type="primary" text @click="handleDelete(data.id)"
+          <el-button type="primary" text @click="edit(data)" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button
+            type="danger"
+            text
+            @click="handleDelete(data.id)"
+            :icon="Delete"
             >删除</el-button
           >
         </template>
@@ -64,6 +90,7 @@ import { reactive, ref, onMounted, defineAsyncComponent } from "vue";
 import {
   BloodSugarList,
   BloodSugarDelete,
+  BloodSugarDeleteAll,
 } from "@/service/medicalcare/MedicalcareApi";
 import type { bloodSugarlistParams } from "@/service/medicalcare/MedicalcareType";
 import { getMessageBox } from "@/utils/utils";
@@ -71,6 +98,7 @@ import { ElMessage } from "element-plus";
 import MayCascader from "@/components/cascader/MayCascader.vue";
 import BloodSugarDialog from "@/components/dialog/medicalcare/BloodSugarDialog.vue";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
+import { Delete, Edit, Plus, Refresh, Search } from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -127,6 +155,26 @@ const getlist = async () => {
     data.total = res.data.counts;
   }
 };
+
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await BloodSugarDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 onMounted(() => {
   getlist();
   bedlist();

@@ -14,6 +14,10 @@ export const getList = (data: Goout) => {
 export const DelgetList = (id: number) => {
   return del("/api/goOut/delete/" + id);
 };
+// 批量删除外出登记
+export const DelgetListAll = (ids: any) => {
+  return post("/api/goOut/deleteAll", ids);
+};
 // 外出登记单挑 列表
 export const goOutList = (id: number) => {
   return get("/api/goOut/get/" + id);
@@ -40,6 +44,10 @@ export const getPlayTypeList = () => {
 //删除院内活动列表 /api/play/list
 export const getDeleteList = (id: number) => {
   return del("/api/play/delete/" + id);
+};
+// 批量删除院内活动
+export const getDeleteListAll = (ids: any) => {
+  return post("/api/play/deleteAll", ids);
 };
 // 添加院内活动列表
 export const AddPlayAdd = (params: AddplayList) => {

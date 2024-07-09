@@ -50,21 +50,32 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="search" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="add">增加</el-button>
-        <el-button @click="location">地址管理</el-button>
+        <el-button type="success" @click="add" :icon="Plus">增加</el-button>
+        <el-button @click="location" :icon="Location">地址管理</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
         :tableData="data.tableData"
         :tableItem="data.tableItem"
         autoWidth="110px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <template #operate="{ data }">
           <el-button :icon="Delete" text type="danger" @click="del(data.id)"
@@ -85,8 +96,18 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
-import { Delete } from "@element-plus/icons-vue";
-import { patrolDelete, patrolList } from "@/service/patrol/PatrolApi";
+import {
+  Delete,
+  Plus,
+  Location,
+  Refresh,
+  Search,
+} from "@element-plus/icons-vue";
+import {
+  patrolDelete,
+  patrolList,
+  patrolDeleteAll,
+} from "@/service/patrol/PatrolApi";
 import { addresslist } from "@/service/address/AddressApi";
 import type { AddressSelect, PatrolList } from "@/service/patrol/PatrolType";
 import { getMessageBox } from "@/utils/utils";
@@ -205,6 +226,24 @@ const close = (isclose: boolean) => {
     getlist();
   }
   isdialog.value = false;
+};
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await patrolDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
 };
 // 删除
 const del = async (id: number) => {

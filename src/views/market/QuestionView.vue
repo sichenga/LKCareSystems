@@ -33,28 +33,44 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="inquire">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="inquire" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card class="section" style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="addRelation">新增咨询</el-button>
+        <el-button type="success" :icon="Plus" @click="addRelation"
+          >新增咨询</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        auto-width="380px"
+        auto-width="420px"
       >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
-          <el-button text type="primary" @click="particulars(data.id)"
+          <el-button text type="primary" :icon="Edit" @click="edit(data.id)"
+            >编辑</el-button
+          >
+          <el-button text type="danger" :icon="Delete" @click="del(data.id)"
+            >删除</el-button
+          >
+          <el-button
+            text
+            type="primary"
+            @click="particulars(data.id)"
+            :icon="Document"
             >详情</el-button
           >
-          <el-button text type="primary" @click="record(data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="record(data.id)"
+            :icon="ChatLineSquare"
             >回访记录</el-button
           >
         </template>
@@ -88,6 +104,15 @@ import { useRoute, useRouter } from "vue-router";
 import { deleteMarket, getMarketList } from "@/service/market/marketApi";
 import type { market } from "@/service/market/marketType";
 
+import {
+  Delete,
+  Edit,
+  Plus,
+  Refresh,
+  Search,
+  Document,
+  ChatLineSquare,
+} from "@element-plus/icons-vue";
 const route = useRoute();
 
 const customerId = ref<any>(route.query?.id);

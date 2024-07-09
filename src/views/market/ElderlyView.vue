@@ -34,32 +34,50 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="getQuery">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="getQuery" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="add">新增老人</el-button>
+        <el-button type="success" :icon="Plus" @click="add">新增老人</el-button>
       </div>
       <!-- 表格 -->
       <MayTable
         :identifier="identifier"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        :auto-width="'450px'"
+        autoWidth="550px"
       >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-          <el-button text type="primary" @click="getarchives(data.id)"
+          <el-button text type="primary" @click="edit(data.id)" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button
+            text
+            type="primary"
+            @click="getarchives(data.id)"
+            :icon="Memo"
             >档案管理</el-button
           >
-          <el-button text type="primary" @click="getwork(data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="getwork(data.id)"
+            :icon="Notebook"
             >排班管理</el-button
           >
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
-          <el-button text type="primary" @click="getschedule(data.id)"
+          <el-button text type="danger" :icon="Delete" @click="del(data.id)"
+            >删除</el-button
+          >
+          <el-button
+            text
+            type="primary"
+            @click="getschedule(data.id)"
+            :icon="Tickets"
             >计划任务</el-button
           >
         </template>
@@ -79,7 +97,17 @@ import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-
+import {
+  Delete,
+  Edit,
+  Plus,
+  Refresh,
+  Search,
+  Document,
+  Memo,
+  Notebook,
+  Tickets,
+} from "@element-plus/icons-vue";
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")

@@ -40,37 +40,54 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="search" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="add">新增潜在客户</el-button>
-        <el-button>EXCEL导入</el-button>
+        <el-button type="success" :icon="Plus" @click="add"
+          >新增潜在客户</el-button
+        >
+        <el-button :icon="UploadFilled">EXCEL导入</el-button>
         <AffDialog v-if="isdialog" @close="close" />
       </div>
       <!-- 表格 -->
       <MayTable
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        autoWidth="350px"
+        autoWidth="410px"
       >
         <template #operate="scope">
-          <el-button text type="primary" @click="handleedit(scope.data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="handleedit(scope.data.id)"
+            :icon="Edit"
             >编辑</el-button
           >
-          <el-button text type="primary" @click="details(scope.data.id)"
+          <el-button
+            text
+            type="primary"
+            @click="details(scope.data.id)"
+            :icon="Document"
             >详情</el-button
           >
           <el-button
             text
             type="primary"
             @click="register(scope.data.id, scope.data.name)"
+            :icon="Postcard"
             >咨询登记</el-button
           >
-          <el-button text type="primary" @click="handleDelete(scope.data.id)"
+          <el-button
+            text
+            type="danger"
+            :icon="Delete"
+            @click="handleDelete(scope.data.id)"
             >删除</el-button
           >
         </template>
@@ -94,7 +111,16 @@ import { CustomerDelete, CustomerList } from "@/service/market/CustomerApi";
 import type { CustomerParams } from "@/service/market/CustomerType";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
-
+import {
+  Delete,
+  Edit,
+  Plus,
+  Postcard,
+  Refresh,
+  Search,
+  Document,
+  UploadFilled,
+} from "@element-plus/icons-vue";
 const router = useRouter();
 const Refcustomer = ref();
 const MayTable = defineAsyncComponent(

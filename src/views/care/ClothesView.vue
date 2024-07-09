@@ -43,23 +43,53 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="search" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
-      <el-button type="primary" @click="add" style="margin-bottom: 20px"
+      <el-button
+        type="success"
+        @click="add"
+        style="margin-bottom: 20px"
+        :icon="Plus"
         >添加洗衣错衣</el-button
       >
+      <el-button
+        style="margin-bottom: 20px"
+        type="danger"
+        :icon="Delete"
+        :disabled="!ids.length"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
+      >
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="340px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="particulars(data.id)"
+          <el-button
+            type="primary"
+            text
+            @click="particulars(data.id)"
+            :icon="Tickets"
             >详情</el-button
           >
-          <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-          <el-button type="primary" text @click="handleDelete(data.id)"
+          <el-button type="primary" text @click="edit(data.id)" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button
+            type="danger"
+            text
+            @click="handleDelete(data.id)"
+            :icon="Delete"
             >删除</el-button
           >
         </template>
@@ -80,11 +110,23 @@
 </template>
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
-import { clothesList, clothesDelete } from "@/service/care/ClothesApi";
+import {
+  clothesList,
+  clothesDelete,
+  clothesDeleteAll,
+} from "@/service/care/ClothesApi";
 import type { ClothesListparams } from "@/service/care/ClothesType";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
+import {
+  Delete,
+  Edit,
+  Plus,
+  Refresh,
+  Search,
+  Tickets,
+} from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -169,6 +211,25 @@ const getlist = async () => {
   if (res.code == 10000) {
     data.tableData = res.data.list;
     data.total = res.data.counts;
+  }
+};
+
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await clothesDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
   }
 };
 

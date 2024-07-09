@@ -30,8 +30,10 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="inquire">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="inquire" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -39,16 +41,44 @@
     <TemperatureDialog v-if="dialogVisible" :data="datas" @close="close" />
 
     <el-card class="card" style="max-width: 100%">
-      <el-button style="margin-bottom: 20px" type="primary" @click="add"
+      <el-button
+        style="margin-bottom: 20px"
+        type="success"
+        @click="add"
+        :icon="Plus"
         >新增体温
       </el-button>
+      <el-button
+        style="margin-bottom: 20px"
+        type="danger"
+        :icon="Delete"
+        :disabled="!ids.length"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
+      >
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="220px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
-          <el-button size="small" text type="primary" @click="record(data)"
+          <el-button
+            size="small"
+            text
+            type="primary"
+            @click="record(data)"
+            :icon="Edit"
             >编辑
           </el-button>
-          <el-button size="small" text type="primary" @click="del(data.id)"
+          <el-button
+            size="small"
+            text
+            type="danger"
+            @click="del(data.id)"
+            :icon="Delete"
             >删除
           </el-button>
         </template>
@@ -65,12 +95,14 @@
 </template>
 
 <script lang="ts" setup>
+import { Delete, Edit, Plus, Refresh, Search } from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import {
   TemperatureDelete,
   TemperatureList,
+  TemperatureDeleteAll,
 } from "@/service/medicalcare/MedicalcareApi";
 import type { MedicalcareParams } from "@/service/medicalcare/MedicalcareType";
 import TemperatureDialog from "@/components/dialog/medicalcare/TemperatureDialog.vue";
@@ -134,6 +166,26 @@ const getlist = async () => {
     counts = res.data.counts;
   }
 };
+
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await TemperatureDeleteAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 // 重置
 const Reftemperature = ref();
 const reset = () => {

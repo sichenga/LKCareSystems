@@ -33,14 +33,23 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="sond">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="sond" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="add">新增外出</el-button>
+        <el-button type="success" @click="add" :icon="Plus">新增外出</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
         <OldSelectDialog
           v-if="dialogVisible"
           :toPath="topath"
@@ -53,13 +62,18 @@
         :identifier="identifier"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
+        autoWidth="340px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="compile(data.id)"
+          <el-button text type="primary" @click="compile(data.id)" :icon="Edit"
             >编辑</el-button
           >
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
-          <el-button text type="primary" @click="btn(data.id)"
+          <el-button text type="danger" @click="del(data.id)" :icon="Delete"
+            >删除</el-button
+          >
+          <el-button text type="primary" @click="btn(data.id)" :icon="Tickets"
             >查看详情</el-button
           >
         </template>
@@ -78,13 +92,20 @@
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import AffDialog from "@/components/dialog/care/AffDialog.vue";
 import { useRouter } from "vue-router";
-import { DelgetList, getList } from "@/service/care/gooutApi";
+import { DelgetList, getList, DelgetListAll } from "@/service/care/gooutApi";
 import type { Goout } from "@/service/care/gooutType";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import OldSelectDialog from "@/components/dialog/OldSelect/OldSelectDialog.vue";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
-
+import {
+  Delete,
+  Edit,
+  Plus,
+  Refresh,
+  Search,
+  Tickets,
+} from "@element-plus/icons-vue";
 const router = useRouter();
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -160,6 +181,24 @@ const getlistData = async () => {
   if (res?.code == 10000) {
     data.tableData = res.data.list;
     total.value = res.data.counts;
+  }
+};
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该数据", "删除后将不可恢复");
+  if (res) {
+    const del: any = await DelgetListAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlistData();
+    }
+  } else {
+    ElMessage.info("取消删除");
   }
 };
 // 关闭弹窗
