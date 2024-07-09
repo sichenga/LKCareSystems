@@ -4,19 +4,31 @@
     <el-card>
       <div style="margin: 15px 0">
         <el-button type="success" :icon="Plus" @click="addRole">新增</el-button>
+        <el-button
+          :icon="Delete"
+          type="danger"
+          @click="delAll"
+          :disabled="data.ids.length <= 0"
+          >批量删除</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
+        :isMultiple="true"
+        autoWidth="200px"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        autoWidth="220px"
+        @serve-list-is="serveListIs"
       >
-        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button text @click="edit(data.id)" type="primary" :icon="Edit"
+          <el-button :icon="Edit" type="primary" text @click="edit(data.id)"
             >编辑</el-button
           >
-          <el-button type="danger" :icon="Delete" text @click="del(data.id)"
+          <el-button
+            :icon="Delete"
+            type="danger"
+            text
+            @click="del(data.id, data.accountCounts)"
             >删除</el-button
           >
         </template>
@@ -35,7 +47,7 @@
 import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { getMessageBox } from "@/utils/utils";
-import { RoleList, DelList } from "@/service/role/RoleApi";
+import { RoleList, DelList, deleteAll } from "@/service/role/RoleApi";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
 const MayTable = defineAsyncComponent(
@@ -60,8 +72,22 @@ const psize = (val: number) => {
   params.pageSize = val;
   getData();
 };
-
+const serveListIs = (val: any) => {
+  const ids = val.map((item: any) => item.id);
+  data.ids = ids;
+};
+// 批量删除
+const delAll = async () => {
+  let res = await getMessageBox("是否确认批量删除该角色", "删除后将不可恢复");
+  if (!res) return ElMessage.info("取消删除");
+  const del: any = await deleteAll(data.ids);
+  if (del?.code === 10000) {
+    ElMessage.success("删除成功");
+    await getData();
+  }
+};
 const data = reactive({
+  ids: [] as any,
   tableData: [] as any,
   tableItem: [
     {
@@ -96,7 +122,9 @@ const getData = async () => {
   }
 };
 //删除角色
-const del = async (id: number) => {
+const del = async (id: number, accountCounts: number) => {
+  console.log(accountCounts);
+
   const res = await getMessageBox("确定删除该角色吗?", "删除后不可恢复");
   if (res) {
     let sun: any = await DelList(id);

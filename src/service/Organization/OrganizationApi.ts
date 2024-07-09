@@ -11,3 +11,5 @@ export const companydelete = (id: number) => del("/api/company/delete/" + id);
 export const companyget = (id: number) => get("/api/company/get/" + id);
 // 获取省市 /api/company/getCity
 export const getCity = () => get("/api/company/getCity");
+// 批量删除
+export const deleteAll = (data: any) => post("/api/company/deleteAll", data);

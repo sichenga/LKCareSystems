@@ -19,3 +19,5 @@ export const Rolesget = (id: number) => get("/api/role/get/" + id);
 
 // 获取所有权限列表 /api/menu/list
 export const getMenuList = () => get("/api/menu/list");
+// 批量删除
+export const deleteAll = (data: any) => post("/api/role/deleteAll", data);
