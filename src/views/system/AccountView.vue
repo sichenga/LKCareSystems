@@ -11,7 +11,11 @@
       >
       <ManagementDialog v-if="isdialog" :id="deitID" @close="close" />
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        autoWidth="160px"
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+      >
         <template #operate="{ data }">
           <el-button :icon="Edit" text type="primary" @click="edit(data.id)"
             >编辑</el-button
