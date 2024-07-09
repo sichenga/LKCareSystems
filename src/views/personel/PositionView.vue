@@ -2,15 +2,25 @@
   <!-- 岗位管理 -->
   <div class="app-container">
     <div class="box">
-      <el-button
-        style="margin-bottom: 30px"
-        type="success"
-        :icon="Plus"
-        @click="add"
+      <el-button class="mb" type="success" :icon="Plus" @click="add"
         >新增岗位</el-button
       >
+      <el-button
+        class="mb"
+        type="danger"
+        :icon="Delete"
+        :disabled="isdisabled"
+        @click="handleDelete(delAllData)"
+        >批量删除</el-button
+      >
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="200px"
+        @serve-list-is="serveListIs"
+        :isMultiple="true"
+      >
         <template #operate="{ data }">
           <el-button
             link
@@ -45,7 +55,7 @@ import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
-import { DelList, RoleList } from "@/service/role/RoleApi";
+import { DelList, RoleList, deleteAll } from "@/service/role/RoleApi";
 import type { Roletype } from "@/service/role/Roletype";
 import { Plus, Edit, Delete } from "@element-plus/icons-vue";
 
@@ -106,19 +116,38 @@ const handleEdit = (id: number) => {
     path: `/personel/position-edit/${id}`,
   });
 };
+// 批量删除按钮是否可以点击
+const isdisabled = ref(true);
 // 删除
 const handleDelete = async (id: any) => {
   console.log("删除", id);
   let res = await getMessageBox("是否确认删除该岗位", "删除后将不可恢复");
-  if (res) {
-    let res: any = await DelList(id);
-    if (res?.code === 10000) {
-      ElMessage.success("删除成功");
-      getlist();
-    }
-  } else {
-    ElMessage.info("取消删除");
+  if (!res) {
+    return ElMessage.info("取消删除");
   }
+  let del: any;
+  if (Array.isArray(id)) {
+    del = await deleteAll(id);
+  } else {
+    del = await DelList(id);
+  }
+  if (del?.code === 10000) {
+    ElMessage.success("删除成功");
+    getlist();
+  }
+  // } else {
+  //   ElMessage.info("取消删除");
+  // }
+};
+const delAllData = ref<any>([]);
+// 获取批量删除数据
+const serveListIs = (val: any) => {
+  if (val.length) {
+    isdisabled.value = false;
+  } else {
+    isdisabled.value = true;
+  }
+  delAllData.value = val.map((item: any) => item.id);
 };
 // 分页
 const getpage = (val: number) => {

@@ -34,11 +34,21 @@
       <el-button class="btn" type="success" :icon="Plus" @click="add"
         >新增房间</el-button
       >
+      <el-button
+        class="btn"
+        type="danger"
+        :icon="Delete"
+        :disabled="isdisabled"
+        @click="handleDelete(delAllData)"
+        >批量删除</el-button
+      >
       <RoomDialog v-if="isdialog" :datail="datail" @close="close" />
       <MayTable
         :tableData="data.tableData"
         :tableItem="data.tableItem"
         autoWidth="210px"
+        @serve-list-is="serveListIs"
+        :isMultiple="true"
       >
         <template #operate="{ data }">
           <el-button :icon="Edit" text type="primary" @click="handleEdit(data)"
@@ -145,7 +155,20 @@ const close = (val: any) => {
     getHouselist();
   }
 };
-
+// 批量删除按钮是否可以点击
+const isdisabled = ref(true);
+// 批量删除
+const delAllData = ref<any>([]);
+// 获取批量删除数据
+const serveListIs = (val: any) => {
+  if (val.length) {
+    isdisabled.value = false;
+  } else {
+    isdisabled.value = true;
+  }
+  delAllData.value = val.map((item: any) => item.id);
+};
+// 删除
 const handleDelete = async (id: number) => {
   console.log("删除", id);
   let res = await getMessageBox("是否确认删除该房屋", "删除后将不可恢复");

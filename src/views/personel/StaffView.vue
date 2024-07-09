@@ -70,25 +70,44 @@
             </el-select>
           </el-form-item>
           <el-form-item>
-            <el-button class="submits" type="primary" @click="onSubmit"
+            <el-button type="primary" :icon="Search" @click="onSubmit"
               >查询</el-button
             >
-            <el-button class="submits" @click="reset">重置</el-button>
+            <el-button @click="reset" :icon="Refresh">重置</el-button>
           </el-form-item>
         </el-form>
       </el-card>
       <el-card class="table">
-        <el-button style="margin-bottom: 20px" type="primary" @click="add"
-          >新增
+        <el-button
+          style="margin-bottom: 20px"
+          type="success"
+          :icon="Plus"
+          @click="add"
+          >新增员工
+        </el-button>
+        <el-button
+          style="margin-bottom: 20px"
+          type="danger"
+          :icon="Delete"
+          :disabled="isdisabled"
+          @click="handleDelete(delAllData)"
+          >批量删除
         </el-button>
         <!-- 表格 -->
         <MayTable
           :identifier="identifier"
           :tableData="data.tableData"
           :tableItem="data.tableItem"
+          :isMultiple="true"
+          @serve-list-is="serveListIs"
+          autoWidth="230px"
         >
           <template #operate="{ data }">
-            <el-button link type="primary" @click="handleEdit(data)"
+            <el-button
+              link
+              type="primary"
+              :icon="Edit"
+              @click="handleEdit(data)"
               >编辑
             </el-button>
             <el-button link type="primary">
@@ -96,7 +115,11 @@
                 !data.enable ? "启用" : "禁用"
               }}</span>
             </el-button>
-            <el-button link type="primary" @click="handleDelete(data.id)"
+            <el-button
+              link
+              type="danger"
+              :icon="Delete"
+              @click="handleDelete(data.id)"
               >删除
             </el-button>
           </template>
@@ -119,11 +142,14 @@ import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
+import { Delete, Edit, Plus, Refresh, Search } from "@element-plus/icons-vue";
+
 import {
   delstaff,
   departmentList,
   staffList,
   updateList,
+  delstaffAll,
 } from "@/service/staff/StaffApi";
 import type { StaffListParams } from "@/service/staff/StaffType";
 import { RoleList } from "@/service/role/RoleApi";
@@ -260,15 +286,32 @@ const reset = () => {
 // 删除
 const handleDelete = async (id: any) => {
   let res = await getMessageBox("是否确认删除该员工", "删除后将不可恢复");
-  if (res) {
-    let reIs: any = await delstaff(id);
-    if (reIs.code == 10000) {
-      ElMessage.success("删除成功");
-      getlist();
-    }
-  } else {
-    ElMessage.info("取消删除");
+  if (!res) {
+    return ElMessage.info("取消删除");
   }
+  let del: any;
+  if (Array.isArray(id)) {
+    del = await delstaffAll(id);
+  } else {
+    del = await delstaff(id);
+  }
+  if (del?.code == 10000) {
+    ElMessage.success("删除成功");
+    getlist();
+  }
+};
+// 批量删除按钮是否可以点击
+const isdisabled = ref(true);
+// 批量删除数据;
+const delAllData = ref<any>([]);
+// 获取批量删除数据
+const serveListIs = (val: any) => {
+  if (val.length) {
+    isdisabled.value = false;
+  } else {
+    isdisabled.value = true;
+  }
+  delAllData.value = val.map((item: any) => item.id);
 };
 
 //查询
@@ -308,17 +351,7 @@ onMounted(() => {
 .table {
   margin-top: 20px;
 }
-</style>
-<style>
-.demo-form-inline .el-input {
-  --el-input-width: 140px;
-}
-
-.demo-form-inline .el-select {
-  --el-select-width: 150px;
-}
-
-.submits {
-  margin-top: 10px;
+.el-select {
+  width: 110px;
 }
 </style>

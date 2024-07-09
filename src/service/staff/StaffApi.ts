@@ -11,6 +11,9 @@ export const staffList = (params: StaffListParams) =>
 
 // 删除员工
 export const delstaff = (id: number) => del("/api/staff/delete/" + id);
+// 批量删除护工
+export const delstaffAll = (data: Array<number>) =>
+  post("/api/staff/deleteAll", data);
 //添加员工
 export const staffAdd = (data: RuleForm) => post("/api/staff/add", data);
 //获取单挑员工
@@ -21,6 +24,7 @@ export const updateList = (params: RuleForm) =>
 
 // 删除护工
 export const carerDelete = (id: number) => del("/api/staff/carerDelete/" + id);
+
 //添加护工
 export const careradd = (data: Array<number>) =>
   post("/api/staff/careradd", data);

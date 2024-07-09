@@ -9,8 +9,22 @@
         style="margin-bottom: 15px"
         >新增服务</el-button
       >
+      <el-button
+        type="danger"
+        @click="del(delAllData)"
+        :icon="Delete"
+        :disabled="isdisabled"
+        style="margin-bottom: 15px"
+        >批量删除</el-button
+      >
       <ServeDialog v-if="isdialog" :data="servicedata" @close="close" />
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="200px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="{ data }">
           <el-button text type="primary" :icon="Edit" @click="emit(data)"
             >编辑</el-button
@@ -37,6 +51,7 @@ import { ElMessage } from "element-plus";
 import {
   ConfigNursingServiceList,
   delNursingService,
+  delNursingServiceBatch,
 } from "@/service/config/ConfigApi";
 import type { NursingServiceList } from "@/service/config/ConfigType";
 import ServeDialog from "@/components/dialog/config/ServeDialog.vue";
@@ -106,19 +121,35 @@ const emit = (data: any) => {
   servicedata.value = data;
   isdialog.value = true;
 };
-
+// 批量删除按钮是否可以点击
+const isdisabled = ref(true);
+// 批量删除数据
+const delAllData = ref<any>([]);
+// 获取批量删除数据
+const serveListIs = (val: any) => {
+  if (val.length) {
+    isdisabled.value = false;
+  } else {
+    isdisabled.value = true;
+  }
+  delAllData.value = val.map((item: any) => item.id);
+};
 //删除
 const del = async (id: number) => {
   let res = await getMessageBox("是否确认删除该服务", "删除后将不可恢复");
-  console.log(1111, res);
-  if (res) {
-    let res: any = await delNursingService(id);
-    if (res?.code === 10000) {
-      getlist();
-      ElMessage.success("删除成功");
-    }
+  // console.log(1111, res);
+  if (!res) {
+    return ElMessage.info("取消删除");
+  }
+  let del: any;
+  if (Array.isArray(id)) {
+    del = await delNursingServiceBatch(id);
   } else {
-    ElMessage.info("取消删除");
+    del = await delNursingService(id);
+  }
+  if (del?.code === 10000) {
+    getlist();
+    ElMessage.success("删除成功");
   }
 };
 

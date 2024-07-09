@@ -26,6 +26,10 @@ export const HousetypeAdd = (params: Housetypeadd) => {
 export const HousetypeDelete = (id: number) => {
   return del(`/api/housetype/delete/${id}`);
 };
+// 批量删除房间类型
+export const HousetypeDeleteBatch = (data: number[]) => {
+  return post("/api/housetype/deleteAll", data);
+};
 
 // 房间类型修改
 export const Housetypeupdate = (data: Housetypeadd) => {
@@ -52,7 +56,9 @@ export const ConfigNursingServiceList = (params?: NursingServiceList) =>
 //删除护理服务  /api/nursingService/delete/5
 export const delNursingService = (id: number) =>
   del("/api/nursingService/delete/" + id);
-
+// 批量删除护理服务
+export const delNursingServiceBatch = (data: number[]) =>
+  post("/api/nursingService/deleteAll", data);
 //添加护理服务 /api/nursingService/add
 export const addNursingService = (data: NursingServiceAdd) =>
   post("/api/nursingService/add", data);
@@ -67,7 +73,9 @@ export const getHouseList = (data?: HouseViewType) =>
 
 //房间删除
 export const deleteHouse = (id: number) => del(`/api/house/delete/${id}`);
-
+// 批量删除房间
+export const deleteHouseBatch = (data: number[]) =>
+  post("/api/house/deleteAll", data);
 //添加房间
 export const addHouse = (params: houseaddType) =>
   post("/api/house/add", params);
@@ -88,6 +96,10 @@ export const getBedsList = (params?: BedsList) => get("/api/beds/list", params);
 
 // 删除床位 /api/beds/delete/2
 export const delBeds = (id: number) => del("/api/beds/delete/" + id);
+
+//批量删除床位
+export const delBedsBatch = (data: number[]) =>
+  post("/api/beds/deleteAll", data);
 
 // 床位添加  /api/beds/add
 export const addBeds = (data: BedsAdd) => post("/api/beds/add", data);
