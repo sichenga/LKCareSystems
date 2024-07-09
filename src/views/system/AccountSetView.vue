@@ -55,12 +55,6 @@
           >
           <PassDialog v-if="isdialog" @close="close" />
         </el-form-item>
-<<<<<<< HEAD
-        <el-form-item label="所属角色">
-          {{ roleData.toString() }}
-        </el-form-item>
-=======
->>>>>>> d95a0bfad05ddbdf2e6a9d6a27240dbc26d36843
       </el-form>
     </el-card>
   </div>
