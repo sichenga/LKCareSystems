@@ -3,14 +3,17 @@
   <div class="app-container">
     <el-card>
       <div style="margin: 15px 0">
-        <el-button type="primary" @click="addRole">新增</el-button>
+        <el-button type="success" :icon="Plus" @click="addRole">新增</el-button>
       </div>
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
+          <el-button :icon="Edit" type="primary" text @click="edit(data.id)"
+            >编辑</el-button
+          >
           <el-button
-            type="primary"
+            :icon="Delete"
+            type="danger"
             text
             @click="del(data.id, data.accountCounts)"
             >删除</el-button
@@ -30,6 +33,7 @@
 <script lang="ts" setup>
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { getMessageBox } from "@/utils/utils";
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { RoleList, DelList } from "@/service/role/RoleApi";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";

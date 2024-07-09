@@ -3,17 +3,22 @@
   <div class="app-container">
     <el-card style="max-width: 100%">
       <el-button
-        type="primary"
         @click="isdialog = true"
         style="margin-bottom: 15px"
+        :icon="Plus"
+        type="success"
         >新增</el-button
       >
       <ManagementDialog v-if="isdialog" :id="deitID" @close="close" />
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button :icon="Edit" text type="primary" @click="edit(data.id)"
+            >编辑</el-button
+          >
+          <el-button :icon="Delete" text type="danger" @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination :total="total" @page="getpage" @psize="getpsize" />
@@ -25,6 +30,7 @@
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import ManagementDialog from "@/components/dialog/system/ManagementDialog.vue";
 import { getMessageBox } from "@/utils/utils";
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { accountdelete, adminList } from "@/service/admin/AdminApi"; // import ManagementView from "@/database/ManagementView.json";
 // import ManagementView from "@/database/ManagementView.json";

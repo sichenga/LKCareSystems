@@ -10,23 +10,37 @@
           <el-input v-model="params.name" clearable placeholder="请输入" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="serch">查询</el-button>
-          <el-button>重置</el-button>
+          <el-button :icon="Search" type="primary" @click="serch"
+            >查询</el-button
+          >
+          <el-button :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="margin-top: 10px">
       <div style="margin: 10px 0">
-        <el-button type="primary" @click="SondAdd">新增</el-button>
+        <el-button :icon="Plus" type="success" @click="SondAdd">新增</el-button>
         <organizationDialog v-if="isdialog" :id="editId" @close="close" />
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        autoWidth="160px"
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+      >
         <template #operate="scope">
-          <el-button text type="primary" @click="amend(scope.data.id)"
-            >修改
+          <el-button
+            :icon="Edit"
+            text
+            type="primary"
+            @click="amend(scope.data.id)"
+            >编辑
           </el-button>
-          <el-button text type="primary" @click="del(scope.data.id)"
+          <el-button
+            :icon="Delete"
+            text
+            type="danger"
+            @click="del(scope.data.id)"
             >删除
           </el-button>
         </template>
@@ -46,6 +60,7 @@ import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
+import { Delete, Edit, Plus, Search, Refresh } from "@element-plus/icons-vue";
 import type { companylistParams } from "@/service/Organization/OrganizationType";
 import {
   companydelete,

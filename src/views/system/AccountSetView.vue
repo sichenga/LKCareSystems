@@ -11,7 +11,7 @@
             <div class="image-title">
               <UploadImg
                 :showlist="false"
-                :text="'更换头像:'"
+                :title="'更换头像'"
                 :texts="true"
                 @upload="Imgupload"
               />
@@ -133,17 +133,20 @@ onMounted(async () => {
   height: 50px;
   display: flex;
   margin-top: 30px;
+
   .header {
     width: 50px;
     height: 50px;
     // margin-left: 10px;
     border-radius: 50%;
+
     img {
       width: 50px;
       height: 50px;
       border-radius: 50%;
     }
   }
+
   .replece {
     color: #75a5ea;
     line-height: 50px;
@@ -180,6 +183,7 @@ onMounted(async () => {
   top: 10px;
   left: 60px;
 }
+
 .el-input {
   width: 240px;
 }
