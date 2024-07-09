@@ -25,15 +25,19 @@
     <el-dropdown class="setting-item" trigger="click">
       <div class="flex-center h100% p10px">
         <img
-          :src="upload + userStore.user.model?.photo"
+          :src="
+            userStore.user.model?.photo
+              ? upload + userStore.user.model?.photo
+              : defImg
+          "
           alt=""
-          class="rounded-full mr-10px w24px w24px"
+          class="rounded-full mr-10px w24px h24px"
         />
         <span>{{ userStore.user.username }}</span>
       </div>
       <template #dropdown>
         <el-dropdown-menu>
-          <a
+          <!-- <a
             href="https://gitee.com/youlaiorg/vue3-element-admin"
             target="_blank"
           >
@@ -41,7 +45,8 @@
           </a>
           <a href="https://juejin.cn/post/7228990409909108793" target="_blank">
             <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
-          </a>
+          </a> -->
+          <el-dropdown-item @click="getInfo"> 账号设置 </el-dropdown-item>
           <el-dropdown-item divided @click="logout">
             {{ $t("navbar.logout") }}
           </el-dropdown-item>
@@ -66,8 +71,9 @@ import {
 } from "@/store";
 import defaultSettings from "@/settings";
 import { DeviceEnum } from "@/enums/DeviceEnum";
-
+import defImg from "@/assets/images/lening.png";
 const upload = import.meta.env.VITE_APP_API_URL + "/";
+
 const appStore = useAppStore();
 const tagsViewStore = useTagsViewStore();
 const userStore = useUserStore();
@@ -100,6 +106,12 @@ function logout() {
       });
   });
 }
+// 跳转账号信息
+const getInfo = () => {
+  router.push(
+    userStore.user.model.type != 3 ? "/system/account-set" : "/userInfo"
+  );
+};
 </script>
 <style lang="scss" scoped>
 .setting-item {

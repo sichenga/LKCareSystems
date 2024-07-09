@@ -28,8 +28,8 @@
             placeholder="请选择"
             style="width: 240px"
           >
-            <el-option :label="'缺衣'" :value="'缺衣'" />
-            <el-option :label="'错衣'" :value="'错衣'" />
+            <el-option label="缺衣" :value="'缺衣'" />
+            <el-option label="错衣" :value="'错衣'" />
           </el-select>
         </el-form-item>
         <el-form-item label="状态：" prop="state">
@@ -99,7 +99,7 @@ const ClothesDialog = defineAsyncComponent(
 );
 const formInline = reactive<ClothesListparams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   elderlyName: "",
   beginDate: "",
   type: "",

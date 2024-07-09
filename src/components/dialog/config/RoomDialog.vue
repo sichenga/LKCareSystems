@@ -120,7 +120,7 @@ const close = (close: boolean = false) => {
 //获取房间类型
 const paramsroom = reactive<getHouseType>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const state = reactive({
   getHouseTypelist: [] as any,

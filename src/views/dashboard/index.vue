@@ -1,21 +1,25 @@
 <template>
   <div class="dashboard-container">
     <!-- github角标 -->
-    <github-corner class="github-corner" />
+    <!-- <github-corner class="github-corner" /> -->
 
     <el-card shadow="never">
       <el-row justify="space-between">
         <el-col :span="18" :xs="24">
           <div class="flex h-full items-center">
             <img
-              :src="baseurl + '/' + userStore.user.model.photo"
+              :src="
+                userStore.user.model.photo
+                  ? baseurl + '/' + userStore.user.model.photo
+                  : defImg
+              "
               alt=""
               class="w-20 h-20 mr-5 rounded-full"
             />
             <div>
               <p>{{ greetings }}</p>
               <p class="text-sm text-gray">
-                今日天气晴朗，气温在15℃至25℃之间，东南风。
+                {{ tx }}
               </p>
             </div>
           </div>
@@ -34,7 +38,6 @@
                   <span class="text-[16px] ml-1">{{ item.title }}</span>
                 </div>
               </template>
-              <template v-if="item.suffix" #suffix>/100</template>
             </el-statistic>
           </div>
         </el-col>
@@ -42,7 +45,7 @@
     </el-card>
 
     <!-- 数据卡片 -->
-    <el-row :gutter="10" class="mt-3">
+    <!-- <el-row :gutter="10" class="mt-3">
       <el-col
         v-for="(item, index) in cardData"
         :key="index"
@@ -77,14 +80,14 @@
           </div>
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
 
     <!-- Echarts 图表 -->
     <el-row :gutter="10" class="mt-3">
       <el-col
         v-for="item in chartData"
         :key="item"
-        :lg="8"
+        :lg="12"
         :sm="12"
         :xs="24"
         class="mb-2"
@@ -104,8 +107,11 @@
 <script lang="ts" setup>
 import type { EpPropMergeType } from "element-plus/es/utils/vue/props/types";
 import { useUserStore } from "@/store/modules/user";
-import { TransitionPresets, useTransition } from "@vueuse/core";
-
+import { computed, ref } from "vue";
+import moment from "moment";
+// import { TransitionPresets, useTransition } from "@vueuse/core";
+import defImg from "@/assets/images/lening.png";
+import { getCountList } from "@/service/dashboard/dashboardApi";
 defineOptions({
   name: "Dashboard",
   inheritAttrs: false,
@@ -129,64 +135,108 @@ const greetings = computed(() => {
   }
 });
 
-const duration = 5000;
+let hour: number = parseInt(moment().format("HH"));
+let week: number = moment().day();
+const tx = ref<string>("");
+
+if (week == 0 || week == 6) {
+  if (hour < 6) {
+    tx.value = "太晚了，该休息了!!!";
+  } else if (hour < 18) {
+    tx.value = "周末出行，别忘记带上放松的心情";
+  } else if (hour < 22) {
+    tx.value = "晚上好!祝你玩的愉快!";
+  } else if (hour < 24) {
+    tx.value = "夜深了! 要注意身体呀! 祝你做个好梦!";
+  }
+} else {
+  if (hour < 6) {
+    tx.value = "太晚了，该休息了!!!";
+  } else if (hour < 8) {
+    tx.value = "早上好!全新的一天开始了!";
+  } else if (hour < 12) {
+    tx.value = "上午好!工作辛苦了!";
+  } else if (hour < 14) {
+    tx.value = "中午好!还在上网吗?";
+  } else if (hour < 18) {
+    tx.value = "下午好!祝你工作顺利!";
+  } else if (hour < 22) {
+    tx.value = "晚上好!祝你玩的愉快!";
+  } else if (hour < 24) {
+    tx.value = "夜深了! 要注意身体呀! 祝你做个好梦!";
+  }
+}
+
+// const duration = 5000;
 // 图片根路径
 const baseurl = import.meta.env.VITE_BASE_URL;
 // 销售额
-const amount = ref(0);
-const amountOutput = useTransition(amount, {
-  duration: duration,
-  transition: TransitionPresets.easeOutExpo,
-});
-amount.value = 2000;
+// const amount = ref(0);
+// const amountOutput = useTransition(amount, {
+//   duration: duration,
+//   transition: TransitionPresets.easeOutExpo,
+// });
+// amount.value = 2000;
 
-// 访客数
-const visitCount = ref(0);
-const visitCountOutput = useTransition(visitCount, {
-  duration: duration,
-  transition: TransitionPresets.easeOutExpo,
-});
-visitCount.value = 2000;
+// // 访客数
+// const visitCount = ref(0);
+// const visitCountOutput = useTransition(visitCount, {
+//   duration: duration,
+//   transition: TransitionPresets.easeOutExpo,
+// });
+// visitCount.value = 2000;
 
-// IP数
-const dauCount = ref(0);
-const dauCountOutput = useTransition(dauCount, {
-  duration: duration,
-  transition: TransitionPresets.easeOutExpo,
-});
-dauCount.value = 2000;
+// // IP数
+// const dauCount = ref(0);
+// const dauCountOutput = useTransition(dauCount, {
+//   duration: duration,
+//   transition: TransitionPresets.easeOutExpo,
+// });
+// dauCount.value = 2000;
 
-// 订单量
-const orderCount = ref(0);
-const orderCountOutput = useTransition(orderCount, {
-  duration: duration,
-  transition: TransitionPresets.easeOutExpo,
-});
-orderCount.value = 2000;
+// // 订单量
+// const orderCount = ref(0);
+// const orderCountOutput = useTransition(orderCount, {
+//   duration: duration,
+// transition: TransitionPresets.easeOutExpo,
+// });
+// orderCount.value = 2000;
 
 // 右上角数量
 const statisticData = ref([
   {
     value: 99,
     iconClass: "message",
-    title: "消息",
+    title: "机构数",
     key: "message",
   },
   {
     value: 50,
     iconClass: "todolist",
-    title: "待办",
+    title: "床位数",
     suffix: "/100",
     key: "upcoming",
   },
   {
     value: 10,
     iconClass: "project",
-    title: "项目",
+    title: "老人数",
     key: "project",
   },
 ]);
-
+// 获取右上角数量统计
+const getcountlist = async () => {
+  const res: any = await getCountList();
+  if (res?.code === 10000) {
+    // statisticData.value = res.data;
+    statisticData.value[0].value = res.data.companyCounts;
+    statisticData.value[1].value = res.data.bedCounts;
+    statisticData.value[2].value = res.data.elderlyCounts;
+  }
+};
+onMounted(() => {
+  getcountlist();
+});
 interface CardProp {
   title: string;
   tagType: EpPropMergeType<
@@ -200,44 +250,47 @@ interface CardProp {
   iconClass: string;
 }
 
-// 卡片数量
-const cardData = ref<CardProp[]>([
-  {
-    title: "访客数",
-    tagType: "success",
-    tagText: "日",
-    count: visitCountOutput,
-    dataDesc: "总访客数",
-    iconClass: "visit",
-  },
-  {
-    title: "IP数",
-    tagType: "success",
-    tagText: "日",
-    count: dauCountOutput,
-    dataDesc: "总IP数",
-    iconClass: "ip",
-  },
-  {
-    title: "销售额",
-    tagType: "primary",
-    tagText: "月",
-    count: amountOutput,
-    dataDesc: "总IP数",
-    iconClass: "money",
-  },
-  {
-    title: "订单量",
-    tagType: "danger",
-    tagText: "季",
-    count: orderCountOutput,
-    dataDesc: "总订单量",
-    iconClass: "order",
-  },
-]);
+// // 卡片数量
+// const cardData = ref<CardProp[]>([
+//   {
+//     title: "访客数",
+//     tagType: "success",
+//     tagText: "日",
+//     count: visitCountOutput,
+//     dataDesc: "总访客数",
+//     iconClass: "visit",
+//   },
+//   {
+//     title: "IP数",
+//     tagType: "success",
+//     tagText: "日",
+//     count: dauCountOutput,
+//     dataDesc: "总IP数",
+//     iconClass: "ip",
+//   },
+//   {
+//     title: "销售额",
+//     tagType: "primary",
+//     tagText: "月",
+//     count: amountOutput,
+//     dataDesc: "总IP数",
+//     iconClass: "money",
+//   },
+//   {
+//     title: "订单量",
+//     tagType: "danger",
+//     tagText: "季",
+//     count: orderCountOutput,
+//     dataDesc: "总订单量",
+//     iconClass: "order",
+//   },
+// ]);
 // 图表数据
-const mobile = import.meta.glob("./views/");
-const chartData = ref(["BarChart", "PieChart", "RadarChart"]);
+const chartData = ref(
+  !userStore.user.model.companyId
+    ? ["ChinaChart", "BarChart"]
+    : ["MarketChart", "PieChart"]
+);
 const chartComponent = (item: string) => {
   return defineAsyncComponent(() => import(`./components/${item}.vue`));
 };

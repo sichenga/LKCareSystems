@@ -2,6 +2,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { UserConfig, ConfigEnv, loadEnv, defineConfig } from "vite";
 
+import viteCompression from "vite-plugin-compression";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
@@ -80,6 +81,15 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       UnoCSS({
         hmrTopLevelAwait: false,
       }),
+      viteCompression({
+        verbose: true, // 默认即可
+        disable: false, // 开启压缩(不禁用)，默认即可
+        deleteOriginFile: false, // 删除源文件
+        threshold: 5120, // 压缩前最小文件大小
+        algorithm: "gzip", // 压缩算法
+        ext: ".gz", // 文件类型
+      }),
+
       // 自动导入参考： https://github.com/sxzz/element-plus-best-practices/blob/main/vite.config.ts
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等

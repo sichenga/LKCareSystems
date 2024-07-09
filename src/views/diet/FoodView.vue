@@ -69,7 +69,7 @@ const foodid = ref(0);
 const params = reactive<Supplier>({
   total: 0,
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const data = reactive({
   tableData: [] as any,

@@ -105,7 +105,7 @@ const Pagination = defineAsyncComponent(
 );
 const formInline = reactive<CustomerParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "",
   idCard: "",
   beginDate: "",

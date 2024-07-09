@@ -69,7 +69,7 @@ const oldInfo = ref<any>()!;
 const total = ref(0);
 const params = reactive({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const isdialog = ref(false);
 let id = route.params?.id;

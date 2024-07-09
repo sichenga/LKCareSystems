@@ -111,7 +111,7 @@ const data = reactive({
   ],
 });
 const params = reactive<Purchase>({
-  pageSize: 5,
+  pageSize: 10,
   page: 1,
   companyId: "",
   state: "",
@@ -129,7 +129,7 @@ const getlist = async () => {
 };
 // 机构名称
 const getdata = async () => {
-  const res: any = await companylist({ page: 1, pageSize: 5 });
+  const res: any = await companylist({ page: 1, pageSize: 10 });
   console.log("机构名称", res);
   if (res.code == 10000) {
     data.companyId = res.data.list;
@@ -174,10 +174,6 @@ const psize = (val: number) => {
 </script>
 
 <style lang="less" scoped>
-.el-form {
-  margin-top: 15px;
-}
-
 .table {
   margin-top: 20px;
 }

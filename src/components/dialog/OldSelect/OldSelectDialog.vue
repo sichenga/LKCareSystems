@@ -125,7 +125,7 @@ const close = (close: boolean = false) => {
 };
 const states = reactive<ListElderlyRequest>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   begId: undefined,
   state: undefined,
   name: "", //老人姓名

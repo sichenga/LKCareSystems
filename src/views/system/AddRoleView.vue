@@ -45,7 +45,7 @@ import type {
 } from "element-plus";
 import { ElMessage } from "element-plus";
 import { convertToTree } from "@/utils/treeUtils";
-import { getList, Addroles, Rolesget } from "@/service/role/RoleApi";
+import { getMenuList, Addroles, Rolesget } from "@/service/role/RoleApi";
 import { useRouter, useRoute } from "vue-router";
 
 const treeRef = ref<InstanceType<typeof ElTree>>();
@@ -81,7 +81,7 @@ const defaultProps = {
 const data: any = ref([]);
 
 const getlist = async () => {
-  let res: any = await getList().catch(() => {});
+  let res: any = await getMenuList().catch(() => {});
   if (res.code == 10000) {
     data.value = convertToTree(res.data.list);
   }

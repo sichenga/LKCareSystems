@@ -20,6 +20,7 @@
 
 .icon-blood:before {
   content: '\e60f';
+  font-size: 16px;
 }
 
 .icon-zixun:before {
@@ -44,6 +45,7 @@
 
 .incon-discharge:before {
   content: '\e615';
+  font-size: 16px;
 }
 
 .icon-house:before {
@@ -52,6 +54,7 @@
 
 .icon-nursingservice:before {
   content: '\e636';
+  font-size: 16px;
 }
 
 .icon-temperature:before {

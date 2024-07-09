@@ -81,7 +81,7 @@ import { useBuildStroke } from "@/store";
 const getUserInfo = useBuildStroke();
 const formInline = reactive<bloodSugarlistParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "",
   beginDate: "", //开始时间yyyy-MM-dd
   endDate: "", //结束时间

@@ -3,7 +3,7 @@
   <el-card>
     <template #header>
       <div class="title">
-        各地区老人柱状图
+        出院、入院、预定 统计
         <el-tooltip effect="dark" content="点击下载" placement="bottom">
           <i-ep-download class="download" @click="downloadEchart" />
         </el-tooltip>
@@ -15,13 +15,17 @@
 </template>
 
 <script setup lang="ts">
-import { getElderlyCount } from "@/service/dashboard/dashboardApi";
+import {
+  getageGroup,
+  getDisCount,
+  getResCount,
+} from "@/service/dashboard/dashboardApi";
 import * as echarts from "echarts";
 
 const props = defineProps({
   id: {
     type: String,
-    default: "barChart",
+    default: "MarketChart",
   },
   className: {
     type: String,
@@ -58,7 +62,7 @@ const options = {
   legend: {
     x: "center",
     y: "bottom",
-    data: [],
+    data: ["入院", "出院", "预定"],
     textStyle: {
       color: "#999",
     },
@@ -66,18 +70,27 @@ const options = {
   xAxis: [
     {
       type: "category",
-      data: ["浙江", "北京", "上海", "广东", "深圳"],
+      data: [],
       axisPointer: {
         type: "shadow",
       },
     },
   ],
   yAxis: [
+    // {
+    //   type: "value",
+    //   min: 0,
+    //   max: 10000,
+    //   interval: 2000,
+    //   axisLabel: {
+    //     formatter: "{value} ",
+    //   },
+    // },
     {
       type: "value",
       min: 0,
-      // max: 10000,
-      // interval: 2000,
+      max: 100,
+      interval: 20,
       axisLabel: {
         formatter: "{value}",
       },
@@ -85,14 +98,9 @@ const options = {
   ],
   series: [
     {
-      name: "",
-      type: "bar",
+      name: "入院",
+      type: "line",
       data: [],
-      label: {
-        show: true,
-        position: "top",
-        formatter: "{c}人",
-      },
       barWidth: 20,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -101,6 +109,18 @@ const options = {
           { offset: 1, color: "#188df0" },
         ]),
       },
+    },
+    {
+      name: "出院",
+      type: "line",
+      data: [],
+      barWidth: 20,
+    },
+    {
+      name: "预定",
+      type: "line",
+      data: [],
+      barWidth: 20,
     },
   ],
 };
@@ -130,17 +150,38 @@ const downloadEchart = () => {
     }
   };
 };
-// 获取各地区老人数柱状图数据
-const getelderlycount = async () => {
-  const res: any = await getElderlyCount();
+// 获取最近12个月入院数量统计
+const getagegroup = async () => {
+  const res: any = await getageGroup();
   if (res?.code === 10000) {
     options.series[0].data = res.data.map((item: any) => item.count);
     options.xAxis[0].data = res.data.map((item: any) => item.name);
+    // options.series[0].data = res.data.map((item: any) => item.count);
+    // options.xAxis[0].data = res.data.map((item: any) => item.name);
+  }
+};
+// 获取最近12个月入院数量统计
+const getdiscount = async () => {
+  const res: any = await getDisCount();
+  if (res?.code === 10000) {
+    options.series[1].data = res.data.map((item: any) => item.count);
+  }
+};
+// 获取最近12个月预定数量统计
+const getrescount = async () => {
+  const res: any = await getResCount();
+  if (res?.code === 10000) {
+    options.series[2].data = res.data.map((item: any) => item.count);
   }
 };
 const chart = ref<any>("");
+const getApi = async () => {
+  await getagegroup();
+  await getdiscount();
+  await getrescount();
+};
 onMounted(async () => {
-  await getelderlycount();
+  await getApi();
   // 图表初始化
   chart.value = markRaw(
     echarts.init(document.getElementById(props.id) as HTMLDivElement)

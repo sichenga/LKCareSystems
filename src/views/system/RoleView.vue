@@ -43,7 +43,7 @@ const router = useRouter();
 const counts = ref(0);
 const params = reactive({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 
 const page = (val: number) => {
@@ -122,13 +122,4 @@ onMounted(() => {
   getData();
 });
 </script>
-<style lang="less" scoped>
-.el-input {
-  height: 40px;
-}
-
-.el-button {
-  height: 40px;
-  line-height: 40px;
-}
-</style>
+<style lang="less" scoped></style>

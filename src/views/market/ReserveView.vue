@@ -100,7 +100,7 @@ const Pagination = defineAsyncComponent(
 );
 const formInline = reactive<ReservationParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "",
   idCard: "",
   mobile: "",

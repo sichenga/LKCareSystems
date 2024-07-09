@@ -7,7 +7,11 @@
         <el-button type="primary" @click="add">新增地址</el-button>
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="180px"
+      >
         <template #operate="{ data }">
           <el-button type="primary" text @click="edit(data)">编辑</el-button>
           <el-button type="primary" text @click="del(data.id)">删除</el-button>
@@ -58,7 +62,7 @@ const addressdata = ref({});
 const total = ref(0);
 const params = reactive<AddressList>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 // 地址管理
 const getlist = async () => {

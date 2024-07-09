@@ -96,7 +96,7 @@ const total = ref(0);
 const RefElderly = ref();
 const formInline = reactive<ListElderlyRequest>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "",
   idCard: undefined,
   begId: undefined,

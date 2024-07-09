@@ -18,6 +18,15 @@
       <el-form-item label="机构名称" prop="name">
         <el-input v-model="params.name" placeholder="请输入机构名称" />
       </el-form-item>
+      <el-form-item label="选择省份" prop="province">
+        <el-cascader
+          :props="cityprops"
+          :options="options"
+          v-model="cityData"
+          @change="cityChange"
+          style="width: 100%"
+        />
+      </el-form-item>
       <el-form-item label="所属区域" prop="address">
         <el-input v-model="params.address" placeholder="请输入所属区域" />
       </el-form-item>
@@ -54,7 +63,11 @@
 import { onMounted, reactive, ref } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage } from "element-plus";
-import { companyadd, companyget } from "@/service/Organization/OrganizationApi";
+import {
+  companyadd,
+  companyget,
+  getCity,
+} from "@/service/Organization/OrganizationApi";
 import type { companyaddParams } from "@/service/Organization/OrganizationType";
 
 const props = defineProps(["id"]);
@@ -79,6 +92,8 @@ const params = reactive<companyaddParams>({
   house: null, //房屋性质,
   certificate: null,
   picture: "",
+  province: "",
+  city: "",
 });
 const rules = reactive<FormRules<companyaddParams>>({
   name: [{ required: true, message: "请输入机构名称", trigger: "blur" }],
@@ -89,6 +104,26 @@ const rules = reactive<FormRules<companyaddParams>>({
   adminUserName: [{ required: true, message: "请输入账号", trigger: "blur" }],
   adminPwd: [{ required: true, message: "请输入密码", trigger: "blur" }],
 });
+// 级联选择器配置
+const cityprops = {
+  label: "n",
+  value: "n",
+  children: "c",
+};
+const cityData = ref<any>([]);
+const options = ref<any>([]);
+// 获取省会数据
+const getOptions = async () => {
+  const res: any = await getCity();
+  console.log(111, res);
+  if (res?.code === 10000) {
+    options.value = res.data;
+  }
+};
+const cityChange = (val: any) => {
+  params.province = val[0];
+  params.city = val[1];
+};
 //弹框
 const dialogVisible = ref(true);
 const emit = defineEmits(["close"]);
@@ -120,11 +155,13 @@ const getcompanyget = async () => {
     const res: any = await companyget(params.id);
     console.log("单条数据", res);
     Object.assign(params, res.data);
+    cityData.value = [res.data?.province, res.data?.city];
   }
 };
 
 onMounted(() => {
   getcompanyget();
+  getOptions();
 });
 </script>
 

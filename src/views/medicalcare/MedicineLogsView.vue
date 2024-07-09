@@ -81,7 +81,7 @@ const formInline = reactive<DrugsParams>({
   endDate: "",
   name: "",
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const data = reactive({
   tableData: [] as any,

@@ -55,7 +55,7 @@ const isoperate = ref(false);
 const isMultiple = ref(true);
 
 const params: Supplier = reactive({
-  pageSize: 5,
+  pageSize: 10,
   page: 1,
   total: 0,
 });

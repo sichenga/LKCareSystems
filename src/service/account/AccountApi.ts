@@ -31,5 +31,4 @@ export {
   rolelistForAccount,
   accountupdate,
   getListForUser,
-  authCode,
 };

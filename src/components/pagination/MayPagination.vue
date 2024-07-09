@@ -3,13 +3,14 @@
     <el-pagination
       v-model:current-page="data.page"
       v-model:page-size="data.psize"
-      :page-sizes="[5, 10, 15, 20]"
+      :page-sizes="[10, 20, 30, 50, 100]"
       :small="false"
       :background="true"
       :layout="props.layout"
       :total="data.total"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
+      :hide-on-single-page="true"
     />
   </div>
 </template>
@@ -31,7 +32,7 @@ const props = defineProps({
   },
   psize: {
     type: Number,
-    default: 5,
+    default: 10,
   },
   total: {
     type: Number,
@@ -70,6 +71,7 @@ const handleCurrentChange = (val: number) => {
 
 .pagination {
   display: flex;
-  flex-direction: row-reverse;
+  // flex-direction: row-reverse;
+  justify-content: center;
 }
 </style>

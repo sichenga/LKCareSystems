@@ -20,7 +20,7 @@
             <el-tree
               ref="treeRef"
               :data="data.tableData"
-              :expand-on-click-node="false"
+              :default-expand-all="false"
               :props="{ label: 'name', children: 'children' }"
               node-key="id"
               show-checkbox
@@ -43,10 +43,10 @@
 import { onMounted, reactive, ref, watch } from "vue";
 import type { ComponentSize, FormInstance, FormRules } from "element-plus";
 import { ElMessage, ElTree } from "element-plus";
-import { Addroles, getList, Rolesget } from "@/service/role/RoleApi";
+import { Addroles, getMenuList, Rolesget } from "@/service/role/RoleApi";
 import type { Addrole, RoleList } from "@/service/role/Roletype";
 import { useRoute, useRouter } from "vue-router";
-import { TreeData, convertToTree } from "@/utils/utils";
+import { convertToTree } from "@/utils/utils";
 
 const router = useRouter();
 const route = useRoute();
@@ -120,10 +120,11 @@ const resetForm = () => {
 
 // 权限列表
 const getlist = async () => {
-  let res: any = await getList().catch(() => {});
+  let res: any = await getMenuList().catch(() => {});
   console.log("权限", res);
   if (res?.code == 10000) {
     data.tableData = convertToTree(res.data.list);
+    console.log(data.tableData);
   }
 };
 onMounted(() => {

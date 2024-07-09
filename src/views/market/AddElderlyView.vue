@@ -1,8 +1,8 @@
 <template>
   <!--新增老人  -->
   <div class="app-container">
-    <el-tabs v-model="activeName" class="demo-tabs" type="card">
-      <el-card>
+    <el-card>
+      <el-tabs v-model="activeName" class="demo-tabs" type="card">
         <!--        {{ ruleForm }}-->
         <el-tab-pane label="基本信息" name="first">
           <OldMessage ref="RefOldMessage" />
@@ -19,8 +19,8 @@
           >
           <el-button size="large" type="primary" @click="add"> 保存 </el-button>
         </div>
-      </el-card>
-    </el-tabs>
+      </el-tabs>
+    </el-card>
   </div>
 </template>
 <script lang="ts" setup>

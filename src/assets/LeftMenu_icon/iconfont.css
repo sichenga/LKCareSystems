@@ -70,6 +70,7 @@
 
 .icon-set:before {
   content: "\e666";
+  font-size: 16px !important;
 }
 
 .icon-jigoulist:before {
