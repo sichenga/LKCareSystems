@@ -61,6 +61,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Delete, Edit, Plus, Search } from "@element-plus/icons-vue";
 import { onMounted, reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
 import { ElMessage } from "element-plus";

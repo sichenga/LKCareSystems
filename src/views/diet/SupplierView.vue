@@ -2,23 +2,51 @@
   <!-- 供应商管理 -->
   <div class="app-container">
     <div class="box">
-      <el-button type="primary" @click="onAdd" style="margin: 15px 0"
+      <el-button
+        type="success"
+        :icon="Plus"
+        @click="onAdd"
+        style="margin: 15px 0"
         >新增</el-button
       >
+      <el-button
+        style="margin: 15px"
+        type="danger"
+        :icon="Delete"
+        v-if="ids.length >= 1"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
+      >
+      <el-button
+        type="danger"
+        :icon="Delete"
+        disabled
+        style="margin: 15px"
+        v-if="ids.length <= 0"
+        >批量删除</el-button
+      >
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="180px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+      >
         <template #operate="scope">
           <el-button
             link
             size="small"
             type="primary"
+            :icon="Edit"
             @click="handleEdit(scope.data.id)"
             >编辑</el-button
           >
           <el-button
             link
             size="small"
-            type="primary"
+            type="danger"
+            :icon="Delete"
             @click="handleDelete(scope.data.id)"
             >删除</el-button
           >
@@ -39,11 +67,16 @@
 </template>
 
 <script lang="ts" setup>
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import SupplierDialog from "@/components/dialog/diet/SupplierDialog.vue";
-import { Supplierdelete, SupplierList } from "@/service/food/FoodApi";
+import {
+  Supplierdelete,
+  SupplierList,
+  SupplierAll,
+} from "@/service/food/FoodApi";
 import type { Supplier } from "@/service/food/FoodType";
 
 const MayTable = defineAsyncComponent(
@@ -135,6 +168,25 @@ const handleDelete = async (id: any) => {
       getlist();
     } else {
       ElMessage.error(res.msg);
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await SupplierAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
     }
   } else {
     ElMessage.info("取消删除");

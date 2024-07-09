@@ -3,17 +3,27 @@
   <div class="app-container">
     <el-card style="max-width: 100%">
       <el-button
-        type="primary"
+        type="success"
+        :icon="Plus"
         @click="isdialog = true"
         style="margin-bottom: 15px"
         >新增</el-button
       >
       <ManagementDialog v-if="isdialog" :id="deitID" @close="close" />
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="220px"
+      >
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text @click="edit(data.id)" type="primary" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button text type="danger" :icon="Delete" @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination :total="total" @page="getpage" @psize="getpsize" />
@@ -22,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import ManagementDialog from "@/components/dialog/system/ManagementDialog.vue";
 import { getMessageBox } from "@/utils/utils";

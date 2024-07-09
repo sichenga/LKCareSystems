@@ -15,8 +15,14 @@ export const getMarketList = (params: market) => {
 export const deleteMarket = (id: number) => {
   return del("/api/question/delete/" + id);
 };
-//添加咨询
-export const questionAdd = (data: Addmarket) => {
+
+//批删咨询
+export const deleteAll = (ids: Addmarket) => {
+  return post("/api/question/deleteAll", ids);
+};
+
+//批删咨询
+export const questionAll = (data: Addmarket) => {
   return post("/api/question/add", data);
 };
 
@@ -56,6 +62,10 @@ export const orderList = (params: order) => {
 //删除入院
 export const orderDelete = (id: number) => {
   return del("/api/order/delete/" + id);
+};
+//批删入院
+export const questionAdd = (ids: any) => {
+  return post("/api/order/deleteAll", ids);
 };
 
 //添加入院

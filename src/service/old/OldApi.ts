@@ -6,6 +6,10 @@ export const deleteElderly = (id: number) => del(`/api/elderly/delete/${id}`);
 // 老人添加  /api/elderly/add
 export const addElderly = (data: AddElderlyRequest) =>
   post("/api/elderly/add", data);
+
+// 批删老人  /api/elderly/add
+export const addElderlyAll = (ids: any) => post("/api/elderly/deleteAll", ids);
+
 // 老人列表 /api/elderly/list
 export const getElderlyList = (params?: ListElderlyRequest) =>
   get("/api/elderly/list", params);

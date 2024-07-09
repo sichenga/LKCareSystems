@@ -42,6 +42,13 @@
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
         <el-button type="primary" @click="add">新增老人</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
@@ -49,6 +56,8 @@
         :tableData="data.tableData"
         :tableItem="data.tableItem"
         :auto-width="'450px'"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <template #operate="{ data }">
           <el-button text type="primary" @click="edit(data.id)">编辑</el-button>
@@ -75,6 +84,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { Delete } from "@element-plus/icons-vue";
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { useRouter } from "vue-router";
 import { getMessageBox } from "@/utils/utils";
@@ -87,7 +97,11 @@ const MayTable = defineAsyncComponent(
 const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
-import { getElderlyList, deleteElderly } from "@/service/old/OldApi";
+import {
+  getElderlyList,
+  deleteElderly,
+  addElderlyAll,
+} from "@/service/old/OldApi";
 import type { ListElderlyRequest } from "@/service/old/OldType";
 import { useBuildStroke } from "@/store";
 import MayCascader from "@/components/cascader/MayCascader.vue";
@@ -172,6 +186,25 @@ const del = async (id: number) => {
     ElMessage.info("取消删除");
   }
 };
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await addElderlyAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getList();
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+
 // 新增老人
 const add = () => {
   router.push("/market/elderly-add");

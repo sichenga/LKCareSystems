@@ -3,13 +3,22 @@
   <div class="app-container">
     <el-card>
       <div style="margin: 15px 0">
-        <el-button type="primary" @click="addRole">新增</el-button>
+        <el-button type="success" :icon="Plus" @click="addRole">新增</el-button>
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="220px"
+      >
+        <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button type="primary" text @click="edit(data.id)">编辑</el-button>
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
+          <el-button text @click="edit(data.id)" type="primary" :icon="Edit"
+            >编辑</el-button
+          >
+          <el-button type="danger" :icon="Delete" text @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -23,6 +32,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { RoleList, DelList } from "@/service/role/RoleApi";

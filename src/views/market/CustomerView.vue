@@ -48,6 +48,13 @@
     <el-card style="margin-top: 15px">
       <div style="margin: 10px 0">
         <el-button type="primary" @click="add">新增潜在客户</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!ids.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
+        >
         <el-button>EXCEL导入</el-button>
         <AffDialog v-if="isdialog" @close="close" />
       </div>
@@ -56,6 +63,8 @@
         :tableData="data.tableData"
         :tableItem="data.tableItem"
         autoWidth="350px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <template #operate="scope">
           <el-button text type="primary" @click="handleedit(scope.data.id)"
@@ -86,11 +95,16 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { Delete } from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import AffDialog from "@/components/dialog/care/AffDialog.vue";
 import MayDateTimePicker from "@/components/timepicker/MayDateTimePicker.vue";
 import { getMessageBox } from "@/utils/utils";
-import { CustomerDelete, CustomerList } from "@/service/market/CustomerApi";
+import {
+  CustomerDelete,
+  CustomerList,
+  CustomerAll,
+} from "@/service/market/CustomerApi";
 import type { CustomerParams } from "@/service/market/CustomerType";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
@@ -207,6 +221,24 @@ const handleDelete = async (id: any) => {
       ElMessage.success("删除成功");
     } else {
       ElMessage.error(res.msg);
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await CustomerAll(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
     }
   } else {
     ElMessage.info("取消删除");

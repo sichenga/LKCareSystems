@@ -13,6 +13,12 @@ export const dischargeGet = (id: number) => {
 export const dischargeDelete = (id: number) => {
   return del(`/api/discharge/delete/${id}`);
 };
+
+// 删除出院信息
+export const dischargeDeleteAll = (ids: any) => {
+  return post("/api/discharge/deleteAll", ids);
+};
+
 // 添加出院信息
 export const dischargeAdd = (data: dischargeAddParams) => {
   return post("/api/discharge/add", data);
