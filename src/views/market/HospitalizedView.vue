@@ -28,17 +28,28 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="sonds">查询</el-button>
-          <el-button @click="reset">重置</el-button>
+          <el-button type="primary" @click="sonds" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="reset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="max-width: 100%" class="card">
       <el-button
-        type="primary"
+        type="success"
+        :icon="Plus"
         @click="isdialog = true"
         style="margin-bottom: 20px"
         >新增入院申请</el-button
+      >
+      <el-button
+        style="margin-bottom: 20px"
+        type="danger"
+        :icon="Delete"
+        :disabled="!ids.length"
+        @click="handleDeleteAll()"
+        >批量删除</el-button
       >
       <!-- <ToHospitalDialog v-if="isdialog" @close="close"></ToHospitalDialog> -->
       <OldSelectDialog
@@ -51,13 +62,21 @@
         :tableItem="data.tableItem"
         :identifier="identifier"
         autoWidth="400px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
       >
         <template #operate="{ data }">
-          <el-button type="primary" text @click="compile(data.id)"
+          <el-button type="primary" :icon="Edit" text @click="compile(data.id)"
             >编辑</el-button
           >
-          <el-button type="primary" text @click="del(data.id)">删除</el-button>
-          <el-button type="primary" text @click="details(data.id)"
+          <el-button type="danger" :icon="Delete" text @click="del(data.id)"
+            >删除</el-button
+          >
+          <el-button
+            type="primary"
+            :icon="Tickets"
+            text
+            @click="details(data.id)"
             >详情</el-button
           >
         </template>
@@ -74,9 +93,22 @@
 </template>
 
 <script lang="ts" setup>
+import {
+  Tickets,
+  Search,
+  Refresh,
+  Plus,
+  Delete,
+  Edit,
+} from "@element-plus/icons-vue";
 import { reactive, ref, onMounted, defineAsyncComponent } from "vue";
 import { ElMessage } from "element-plus";
-import { orderList, orderDelete, orderGet } from "@/service/market/marketApi";
+import {
+  orderList,
+  orderDelete,
+  orderGet,
+  questionAdd,
+} from "@/service/market/marketApi";
 import type { order } from "@/service/market/marketType";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -189,6 +221,24 @@ const del = async (id: number) => {
     if (_res.code == 10000) {
       await getlist();
       ElMessage.success("删除成功");
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+// 批量删除
+let ids = ref<any>([]);
+const serveListIs = (val: any) => {
+  ids.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await questionAdd(ids.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
     }
   } else {
     ElMessage.info("取消删除");

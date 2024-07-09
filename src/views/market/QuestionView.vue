@@ -42,15 +42,22 @@
     </el-card>
     <el-card class="section" style="margin-top: 15px">
       <div style="margin: 10px 0">
-        <el-button type="success" :icon="Plus" @click="addRelation"
-          >新增咨询</el-button
+        <el-button type="primary" @click="addRelation">新增咨询</el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          :disabled="!isIds.length"
+          @click="handleDeleteAll()"
+          >批量删除</el-button
         >
       </div>
       <!-- 表格 -->
       <MayTable
         :tableData="data.tableData"
         :tableItem="data.tableItem"
-        auto-width="420px"
+        :isMultiple="true"
+        @serve-list-is="serveListIs"
+        auto-width="400px"
       >
         <template #operate="{ data }">
           <el-button text type="primary" :icon="Edit" @click="edit(data.id)"
@@ -101,7 +108,11 @@ import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import { useRoute, useRouter } from "vue-router";
-import { deleteMarket, getMarketList } from "@/service/market/marketApi";
+import {
+  deleteMarket,
+  getMarketList,
+  deleteAll,
+} from "@/service/market/marketApi";
 import type { market } from "@/service/market/marketType";
 
 import {
@@ -250,6 +261,24 @@ const del = async (id: number) => {
     if (res?.code == 10000) {
       getlist();
       ElMessage.success("删除成功");
+    }
+  } else {
+    ElMessage.info("取消删除");
+  }
+};
+// 批量删除
+let isIds = ref<any>([]);
+const serveListIs = (val: any) => {
+  isIds.value = val.map((item: any) => item.id);
+};
+//批量删除
+const handleDeleteAll = async () => {
+  let res = await getMessageBox("是否确认删除该食材", "删除后将不可恢复");
+  if (res) {
+    const del: any = await deleteAll(isIds.value);
+    if (del?.code === 10000) {
+      ElMessage.success("删除成功");
+      getlist();
     }
   } else {
     ElMessage.info("取消删除");

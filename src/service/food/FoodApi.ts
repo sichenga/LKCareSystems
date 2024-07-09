@@ -30,6 +30,11 @@ export const Supplierdelete = (id: number) => {
   return del(`/api/supplier/delete/${id}`);
 };
 
+// 批删供应商
+export const SupplierAll = (ids: any) => {
+  return post("/api/supplier/deleteAll", ids);
+};
+
 // 食材管理 /api/foods/list
 export const FoodList = (params: Supplier) => get("/api/foods/list", params);
 
@@ -38,6 +43,9 @@ export const Foodget = (id: number) => get(`/api/foods/get/${id}`);
 
 // 删除食材 /api/foods/delete/4
 export const Fooddelete = (id: number) => del(`/api/foods/delete/${id}`);
+
+//  /api/foods/deleteAll
+export const FoodaddAll = (ids: any) => post("/api/foods/deleteAll", ids);
 
 // 添加食材 /api/foods/add
 export const Foodadd = (data: AddFood) => post("/api/foods/add", data);

@@ -11,6 +11,11 @@ export const CustomerDelete = (id: number) => {
   return del(`/api/customer/delete/${id}`);
 };
 
+// 潜在客户添加
+export const CustomerAll = (ids: any) => {
+  return post("/api/customer/deleteAll", ids);
+};
+
 // 获取单条客户信息
 export const Customerget = (id: number) => {
   return get(`/api/customer/get/${id}`);

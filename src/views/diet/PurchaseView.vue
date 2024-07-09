@@ -34,17 +34,28 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
-          <el-button @click="onReset">重置</el-button>
+          <el-button type="primary" @click="onSubmit" :icon="Search"
+            >查询</el-button
+          >
+          <el-button @click="onReset" :icon="Refresh">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card class="table">
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="180px"
+      >
         <!-- eslint-disable-next-line vue/no-template-shadow -->
         <template #operate="{ data }">
-          <el-button link size="small" type="primary" @click="details(data.id)"
+          <el-button
+            link
+            size="small"
+            type="primary"
+            :icon="Tickets"
+            @click="details(data.id)"
             >查看详情</el-button
           >
         </template>
@@ -62,6 +73,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Tickets, Search, Refresh } from "@element-plus/icons-vue";
 import { defineAsyncComponent, onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { PurchaseList, purchase } from "@/service/food/FoodApi";
