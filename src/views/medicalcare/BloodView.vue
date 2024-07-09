@@ -78,7 +78,7 @@ const formInline = reactive<BloodPressureParams>({
   endDate: "",
   name: "",
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const total = ref(0);
 const data = reactive({

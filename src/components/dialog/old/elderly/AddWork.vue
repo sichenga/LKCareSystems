@@ -101,7 +101,7 @@ const ruleForm = reactive<ScheduleAdd>({
 });
 const params = reactive({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   carer: 1,
   name: "",
 });

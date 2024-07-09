@@ -50,6 +50,11 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/error-page/404.vue"),
         meta: { hidden: true },
       },
+      {
+        path: "userInfo",
+        component: () => import("@/views/system/AccountSetView.vue"),
+        meta: { hidden: true },
+      },
     ],
   },
   // {

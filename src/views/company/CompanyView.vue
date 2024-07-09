@@ -176,7 +176,7 @@ const amend = async (id: any) => {
 //定义页数
 const params = reactive<companylistParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   key: "",
   name: "",
 });

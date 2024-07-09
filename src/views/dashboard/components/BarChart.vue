@@ -76,19 +76,10 @@ const options = {
     {
       type: "value",
       min: 0,
-      max: 10000,
-      interval: 2000,
+      // max: 10000,
+      // interval: 2000,
       axisLabel: {
-        formatter: "{value} ",
-      },
-    },
-    {
-      type: "value",
-      min: 0,
-      max: 100,
-      interval: 20,
-      axisLabel: {
-        formatter: "{value}%",
+        formatter: "{value}",
       },
     },
   ],
@@ -97,6 +88,11 @@ const options = {
       name: "",
       type: "bar",
       data: [],
+      label: {
+        show: true,
+        position: "top",
+        formatter: "{c}人",
+      },
       barWidth: 20,
       itemStyle: {
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [

@@ -58,7 +58,7 @@ const data = reactive({
 });
 const params = reactive<Housetypeparams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const getlist = async () => {
   const res: any = await HousetypeList(params);

@@ -110,7 +110,7 @@ const data = reactive({
 const total = ref(0);
 const params = reactive<BedsList>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   houseId: 0,
 });
 // 增加dialog数据

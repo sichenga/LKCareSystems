@@ -112,7 +112,7 @@ const data = reactive({
 const roomid = ref<any>({});
 const params = reactive<CheckRoomParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   begId: "",
   beginDate: "",
   endDate: "",

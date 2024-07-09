@@ -74,7 +74,7 @@ const getRoleList = async () => {
 
 const states = reactive<StaffListParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "", //护工姓名
   mobile: "", //联系方式
   idCard: undefined, //身份证号

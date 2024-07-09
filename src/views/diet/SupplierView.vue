@@ -81,7 +81,7 @@ const data = reactive({
 });
 const params = reactive<Supplier>({
   total: 0,
-  pageSize: 5,
+  pageSize: 10,
   page: 1,
 });
 const getlist = async () => {

@@ -61,9 +61,15 @@
         <el-button @click="location">地址管理</el-button>
       </div>
       <!-- 表格 -->
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="110px"
+      >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button :icon="Delete" text type="danger" @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -79,6 +85,7 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
+import { Delete } from "@element-plus/icons-vue";
 import { patrolDelete, patrolList } from "@/service/patrol/PatrolApi";
 import { addresslist } from "@/service/address/AddressApi";
 import type { AddressSelect, PatrolList } from "@/service/patrol/PatrolType";
@@ -100,7 +107,7 @@ const AddNightDialog = defineAsyncComponent(
 );
 const formInline = reactive<PatrolList>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "",
   address: "",
   state: undefined,

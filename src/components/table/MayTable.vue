@@ -14,11 +14,10 @@
     :header-cell-style="{
       background: '#f9f9f9',
       color: '#000000',
-      height: '50px',
+      height: '45px',
     }"
     :row-style="cellstyle as any"
     :show-header="props.isShowHeader"
-    border
     @selection-change="handleSelectionChange"
   >
     <el-table-column v-if="isMultiple" type="selection" width="55" />
@@ -462,5 +461,11 @@ const handleSelectionChange = (val: any[]) => {
   width: 100%;
   height: 100%;
   font-size: 12px;
+}
+:deep(.el-table__cell) {
+  padding: 3px 0 !important;
+}
+:deep(span, .cell) {
+  font-size: 14px;
 }
 </style>

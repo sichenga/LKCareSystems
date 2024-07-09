@@ -36,7 +36,7 @@ export function setupPermission() {
         NProgress.done();
       } else {
         const userStore = useUserStore();
-        const hasRoles = router.getRoutes().length > 7;
+        const hasRoles = router.getRoutes().length > 8;
         // console.log('路由11111', hasRoles,userStore.user.roles)
         if (hasRoles) {
           // 未匹配到任何路由，跳转404

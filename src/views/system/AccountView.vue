@@ -93,7 +93,7 @@ const del = async (id: number) => {
 const total = ref(0);
 const params = reactive({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 // 获取账号列表数据
 const getlist = async () => {

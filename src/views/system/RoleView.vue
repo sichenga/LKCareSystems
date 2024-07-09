@@ -38,7 +38,7 @@ const router = useRouter();
 const counts = ref(0);
 const params = reactive({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 
 const page = (val: number) => {

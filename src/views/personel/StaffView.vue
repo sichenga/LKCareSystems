@@ -187,7 +187,7 @@ const data = reactive({
 
 const states = ref<StaffListParams>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "", //员工姓名
   mobile: "", //联系方式
   idCard: "", //身份证号

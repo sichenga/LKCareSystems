@@ -46,7 +46,7 @@ const Pagination = defineAsyncComponent(
 const total = ref(0);
 const params = reactive<Roletype>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const data = reactive({
   tableData: [] as any,

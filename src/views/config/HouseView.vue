@@ -151,7 +151,7 @@ const handleDelete = async (id: number) => {
 //房间列表
 const params = reactive<HouseViewType>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "",
   buildingId: undefined,
 });

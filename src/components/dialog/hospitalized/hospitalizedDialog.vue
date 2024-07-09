@@ -56,7 +56,7 @@ const data = reactive({
 // 护理列表
 const params = reactive<NursingServiceList>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
 });
 const getlist = async () => {
   let res: any = await ConfigNursingServiceList(params);

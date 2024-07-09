@@ -137,7 +137,7 @@ const statelist = [
 ] as any;
 const params = reactive<Goout>({
   page: 1,
-  pageSize: 5,
+  pageSize: 10,
   name: "", //老人姓名
   accountId: null, //登记人iD
   state: null, //状态
