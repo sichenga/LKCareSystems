@@ -33,7 +33,9 @@
             <el-input v-model="states.name" clearable placeholder="请输入" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="search">查询</el-button>
+            <el-button type="primary" @click="search" :icon="Search"
+              >查询</el-button
+            >
             <el-button @click="reset">重置</el-button>
           </el-form-item>
         </el-form>
@@ -41,7 +43,8 @@
       <el-card class="card" style="max-width: 100%">
         <el-button
           style="margin-bottom: 15px"
-          type="primary"
+          type="success"
+          :icon="Plus"
           @click="isdialog = true"
           >新增
         </el-button>
@@ -51,9 +54,10 @@
           :identifier="identifier"
           :tableData="data.tableData"
           :tableItem="data.tableItem"
+          autoWidth="110px"
         >
           <template #operate="{ data }">
-            <el-button text type="primary" @click="del(data.id)"
+            <el-button :icon="Delete" text type="danger" @click="del(data.id)"
               >删除
             </el-button>
           </template>
@@ -80,7 +84,7 @@ import WorkersDialog from "@/components/dialog/config/WorkersDialog.vue";
 
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-
+import { Delete, Plus, Search } from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );

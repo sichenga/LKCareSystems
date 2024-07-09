@@ -23,20 +23,32 @@
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="search">查询</el-button>
+          <el-button type="primary" :icon="Search" @click="search"
+            >查询</el-button
+          >
           <el-button @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
     </el-card>
     <el-card style="max-width: 100%; margin-top: 20px">
-      <el-button class="btn" type="primary" @click="add">新增房间</el-button>
+      <el-button class="btn" type="success" :icon="Plus" @click="add"
+        >新增房间</el-button
+      >
       <RoomDialog v-if="isdialog" :datail="datail" @close="close" />
-      <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
+      <MayTable
+        :tableData="data.tableData"
+        :tableItem="data.tableItem"
+        autoWidth="210px"
+      >
         <template #operate="{ data }">
-          <el-button text type="primary" @click="handleEdit(data)"
+          <el-button :icon="Edit" text type="primary" @click="handleEdit(data)"
             >编辑
           </el-button>
-          <el-button text type="primary" @click="handleDelete(data.id)"
+          <el-button
+            :icon="Delete"
+            text
+            type="danger"
+            @click="handleDelete(data.id)"
             >删除
           </el-button>
         </template>
@@ -57,6 +69,7 @@ import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import RoomDialog from "@/components/dialog/config/RoomDialog.vue";
 import type { FormInstance } from "element-plus";
 import { ElMessage } from "element-plus";
+import { Delete, Edit, Search, Plus } from "@element-plus/icons-vue";
 //房间列表
 import {
   buildingList,

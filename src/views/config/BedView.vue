@@ -14,7 +14,11 @@
         </div>
       </el-card>
       <el-card class="right-card" style="max-width: 84%">
-        <el-button type="primary" @click="add" style="margin-bottom: 15px"
+        <el-button
+          type="success"
+          :icon="Plus"
+          @click="add"
+          style="margin-bottom: 15px"
           >新增床位</el-button
         >
         <BerthDialog
@@ -27,10 +31,13 @@
           :identifier="identifier"
           :tableData="data.tableData"
           :tableItem="data.tableItem"
+          autoWidth="200px"
         >
           <template #operate="{ data }">
-            <el-button text type="primary" @click="emit(data)">编辑</el-button>
-            <el-button text type="primary" @click="del(data.id)"
+            <el-button text type="primary" :icon="Edit" @click="emit(data)"
+              >编辑</el-button
+            >
+            <el-button text type="danger" :icon="Delete" @click="del(data.id)"
               >删除</el-button
             >
           </template>
@@ -59,7 +66,7 @@ import {
 import { getMessageBox, TreeData } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import type { BedsList, HouseList } from "@/service/config/ConfigType";
-
+import { Plus, Edit, Delete } from "@element-plus/icons-vue";
 const identifier = "Workers";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")

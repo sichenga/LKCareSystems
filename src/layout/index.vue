@@ -37,8 +37,9 @@
         <NavBar v-if="layout === 'left'" />
         <TagsView v-if="showTagsView" />
       </div>
+      <!-- <el-scrollbar> -->
       <AppMain />
-
+      <!-- </el-scrollbar> -->
       <Settings v-if="defaultSettings.showSettings" />
     </div>
   </div>
@@ -138,7 +139,7 @@ watch(route, () => {
 
 .main-container {
   position: relative;
-  min-height: 100%;
+  height: 100%;
   margin-left: $sidebar-width;
   transition: margin-left 0.28s;
 }

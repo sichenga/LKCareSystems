@@ -2,14 +2,22 @@
   <!-- 护理服务 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-      <el-button type="primary" @click="add()" style="margin-bottom: 15px"
+      <el-button
+        type="success"
+        @click="add()"
+        :icon="Plus"
+        style="margin-bottom: 15px"
         >新增服务</el-button
       >
       <ServeDialog v-if="isdialog" :data="servicedata" @close="close" />
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button text type="primary" @click="emit(data)">编辑</el-button>
-          <el-button text type="primary" @click="del(data.id)">删除</el-button>
+          <el-button text type="primary" :icon="Edit" @click="emit(data)"
+            >编辑</el-button
+          >
+          <el-button :icon="Delete" text type="danger" @click="del(data.id)"
+            >删除</el-button
+          >
         </template>
       </MayTable>
       <Pagination
@@ -32,6 +40,7 @@ import {
 } from "@/service/config/ConfigApi";
 import type { NursingServiceList } from "@/service/config/ConfigType";
 import ServeDialog from "@/components/dialog/config/ServeDialog.vue";
+import { Delete, Edit, Plus } from "@element-plus/icons-vue";
 
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")

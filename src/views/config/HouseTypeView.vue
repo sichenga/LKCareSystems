@@ -2,14 +2,20 @@
   <!-- 房型管理 -->
   <div class="app-container">
     <el-card style="max-width: 100%">
-      <el-button type="primary" @click="add">新增房间类型</el-button>
+      <el-button type="success" class="m-b" :icon="Plus" @click="add"
+        >新增房间类型</el-button
+      >
       <ManageDialog v-if="isdialog" :dataget="dataget" @close="close" />
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button link type="primary" @click="handleEdit(data)"
+          <el-button link type="primary" :icon="Edit" @click="handleEdit(data)"
             >编辑
           </el-button>
-          <el-button link type="primary" @click="handleDelete(data.id)"
+          <el-button
+            link
+            type="danger"
+            :icon="Delete"
+            @click="handleDelete(data.id)"
             >删除
           </el-button>
         </template>
@@ -34,6 +40,7 @@ import ManageDialog from "@/components/dialog/config/ManageDialog.vue";
 //删除
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
+import { Plus, Edit, Delete } from "@element-plus/icons-vue";
 
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
@@ -117,8 +124,4 @@ const getpsize = (val: number) => {
 };
 </script>
 
-<style lang="less" scoped>
-.el-button {
-  margin-bottom: 20px;
-}
-</style>
+<style lang="less" scoped></style>

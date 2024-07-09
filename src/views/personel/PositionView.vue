@@ -2,16 +2,28 @@
   <!-- 岗位管理 -->
   <div class="app-container">
     <div class="box">
-      <el-button style="margin-bottom: 30px" type="primary" @click="add"
+      <el-button
+        style="margin-bottom: 30px"
+        type="success"
+        :icon="Plus"
+        @click="add"
         >新增岗位</el-button
       >
       <!-- 表格 -->
       <MayTable :tableData="data.tableData" :tableItem="data.tableItem">
         <template #operate="{ data }">
-          <el-button link type="primary" @click="handleEdit(data.id)"
+          <el-button
+            link
+            type="primary"
+            :icon="Edit"
+            @click="handleEdit(data.id)"
             >编辑</el-button
           >
-          <el-button link type="primary" @click="handleDelete(data.id)"
+          <el-button
+            link
+            type="danger"
+            :icon="Delete"
+            @click="handleDelete(data.id)"
             >删除</el-button
           >
         </template>
@@ -35,6 +47,7 @@ import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
 import { DelList, RoleList } from "@/service/role/RoleApi";
 import type { Roletype } from "@/service/role/Roletype";
+import { Plus, Edit, Delete } from "@element-plus/icons-vue";
 
 const router = useRouter();
 const MayTable = defineAsyncComponent(
