@@ -4,12 +4,21 @@
     <el-card>
       <div style="margin: 15px 0">
         <el-button type="success" :icon="Plus" @click="addRole">新增</el-button>
+        <el-button
+          :icon="Delete"
+          type="danger"
+          @click="delAll"
+          :disabled="data.ids.length <= 0"
+          >批量删除</el-button
+        >
       </div>
       <!-- 表格 -->
       <MayTable
+        :isMultiple="true"
         autoWidth="160px"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
+        @serve-list-is="serveListIs"
       >
         <template #operate="{ data }">
           <el-button :icon="Edit" type="primary" text @click="edit(data.id)"
@@ -38,7 +47,7 @@
 import { ref, reactive, onMounted, defineAsyncComponent } from "vue";
 import { getMessageBox } from "@/utils/utils";
 import { Delete, Edit, Plus } from "@element-plus/icons-vue";
-import { RoleList, DelList } from "@/service/role/RoleApi";
+import { RoleList, DelList, deleteAll } from "@/service/role/RoleApi";
 import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
 const MayTable = defineAsyncComponent(
@@ -63,8 +72,22 @@ const psize = (val: number) => {
   params.pageSize = val;
   getData();
 };
-
+const serveListIs = (val: any) => {
+  const ids = val.map((item: any) => item.id);
+  data.ids = ids;
+};
+// 批量删除
+const delAll = async () => {
+  let res = await getMessageBox("是否确认批量删除该角色", "删除后将不可恢复");
+  if (!res) return ElMessage.info("取消删除");
+  const del: any = await deleteAll(data.ids);
+  if (del?.code === 10000) {
+    ElMessage.success("删除成功");
+    await getData();
+  }
+};
 const data = reactive({
+  ids: [] as any,
   tableData: [] as any,
   tableItem: [
     {

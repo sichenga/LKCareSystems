@@ -9,6 +9,8 @@ const adminList = (params: AccountList) => get("/api/account/list", params);
 const accountget = (id: number) => get(`/api/account/get/${id}`);
 // 添加账号 /api/account/add
 const accountadd = (data: AccountAdd) => post("/api/account/add", data);
+// 批量删除
+export const deleteAll = (data: any) => post("/api/account/deleteAll", data);
 
 // 删除账号 /api/account/delete/28
 const accountdelete = (id: number) => del(`/api/account/delete/${id}`);

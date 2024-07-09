@@ -20,13 +20,22 @@
     <el-card style="margin-top: 10px">
       <div style="margin: 10px 0">
         <el-button :icon="Plus" type="success" @click="SondAdd">新增</el-button>
+        <el-button
+          :icon="Delete"
+          type="danger"
+          @click="delAll"
+          :disabled="data.ids.length <= 0"
+          >批量删除</el-button
+        >
         <organizationDialog v-if="isdialog" :id="editId" @close="close" />
       </div>
       <!-- 表格 -->
       <MayTable
+        :isMultiple="true"
         autoWidth="160px"
         :tableData="data.tableData"
         :tableItem="data.tableItem"
+        @serve-list-is="serveListIs"
       >
         <template #operate="scope">
           <el-button
@@ -66,6 +75,7 @@ import {
   companydelete,
   companyget,
   companylist,
+  deleteAll,
 } from "@/service/Organization/OrganizationApi";
 import { useUserStore } from "@/store";
 import organizationDialog from "@/components/dialog/company/organizationDialog.vue";
@@ -80,6 +90,7 @@ const Pagination = defineAsyncComponent(
   () => import("@/components/pagination/MayPagination.vue")
 );
 const data = reactive({
+  ids: [] as any,
   total: undefined,
   tableData: [] as any,
   tableItem: [
@@ -120,6 +131,10 @@ const close = (val: boolean) => {
     isdialog.value = false;
     getcompanylist();
   }
+};
+const serveListIs = (val: any) => {
+  const ids = val.map((item: any) => item.id);
+  data.ids = ids;
 };
 //添加
 const editId = ref(0);
@@ -169,7 +184,16 @@ const del = async (id: any) => {
       break;
   }
 };
-
+// 批量删除
+const delAll = async () => {
+  let res = await getMessageBox("是否确认批量删除该机构", "删除后将不可恢复");
+  if (!res) return ElMessage.info("取消删除");
+  const del: any = await deleteAll(data.ids);
+  if (del?.code === 10000) {
+    ElMessage.success("删除成功");
+    await getcompanylist();
+  }
+};
 //修改
 const amend = async (id: any) => {
   console.log("修改", id);
