@@ -2,7 +2,7 @@
   <!-- 部门管理 -->
   <div class="app-container">
     <el-card class="box-card">
-      <el-button type="primary" @click="add">添加部门</el-button>
+      <el-button type="success" :icon="Plus" @click="add">添加部门</el-button>
       <DepartmentTree
         v-if="isdialog"
         :depid="depid"
@@ -140,7 +140,7 @@ const close = (isrefresh: boolean) => {
 }
 
 .tree {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .custom-tree-node {

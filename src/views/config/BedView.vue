@@ -4,18 +4,39 @@
     <div class="card-container">
       <el-card class="left-card" style="max-width: 15%">
         <div class="room-list">
-          <p>房间列表</p>
+          <span>房间列表</span>
+          <el-input
+            type="text"
+            :icon="Search"
+            placeholder="房间名称"
+            class="mb mt"
+            v-model="houseName"
+          />
           <el-tree
             :data="treedata"
             :props="defaultProps"
             style="max-width: 600px"
+            ref="treeRef"
             @node-click="handleNodeClick"
+            :filter-node-method="filterNode"
           />
         </div>
       </el-card>
       <el-card class="right-card" style="max-width: 84%">
-        <el-button type="primary" @click="add" style="margin-bottom: 15px"
+        <el-button
+          type="success"
+          :icon="Plus"
+          @click="add"
+          style="margin-bottom: 15px"
           >新增床位</el-button
+        >
+        <el-button
+          type="danger"
+          :icon="Delete"
+          @click="del(delAllData)"
+          :disabled="isdisabled"
+          style="margin-bottom: 15px"
+          >批量删除</el-button
         >
         <BerthDialog
           v-if="isdialog"
@@ -27,10 +48,15 @@
           :identifier="identifier"
           :tableData="data.tableData"
           :tableItem="data.tableItem"
+          autoWidth="200px"
+          @serve-list-is="serveListIs"
+          :is-multiple="true"
         >
           <template #operate="{ data }">
-            <el-button text type="primary" @click="emit(data)">编辑</el-button>
-            <el-button text type="primary" @click="del(data.id)"
+            <el-button text type="primary" :icon="Edit" @click="emit(data)"
+              >编辑</el-button
+            >
+            <el-button text type="danger" :icon="Delete" @click="del(data.id)"
               >删除</el-button
             >
           </template>
@@ -50,15 +76,18 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 import BerthDialog from "@/components/dialog/config/BerthDialog.vue";
+import { debounce } from "lodash-es";
 import {
   buildingList,
   delBeds,
+  delBedsBatch,
   getBedsList,
   getHouseList,
 } from "@/service/config/ConfigApi";
 import { getMessageBox, TreeData } from "@/utils/utils";
 import { ElMessage } from "element-plus";
 import type { BedsList, HouseList } from "@/service/config/ConfigType";
+import { Plus, Edit, Delete, Search } from "@element-plus/icons-vue";
 
 const identifier = "Workers";
 const MayTable = defineAsyncComponent(
@@ -188,18 +217,34 @@ const close = (isclose: boolean) => {
   isdialog.value = false;
   emitbeddata.value = {};
 };
+// 批量删除按钮是否可以点击
+const isdisabled = ref(true);
+// 批量删除
+const delAllData = ref<any>([]);
+// 获取批量删除数据
+const serveListIs = (val: any) => {
+  if (val.length) {
+    isdisabled.value = false;
+  } else {
+    isdisabled.value = true;
+  }
+  delAllData.value = val.map((item: any) => item.id);
+};
 //删除
 const del = async (id: number) => {
   let res = await getMessageBox("是否确认删除该床位", "删除后将不可恢复");
-
-  if (res) {
-    let del: any = await delBeds(id);
-    if (del?.code === 10000) {
-      ElMessage.success("删除成功");
-      getbedslist();
-    }
+  if (!res) {
+    return ElMessage.info("取消删除");
+  }
+  let del: any;
+  if (Array.isArray(id)) {
+    del = await delBedsBatch(id);
   } else {
-    ElMessage.info("取消删除");
+    del = await delBeds(id);
+  }
+  if (del?.code === 10000) {
+    ElMessage.success("删除成功");
+    getbedslist();
   }
 };
 const getpage = (page: number) => {
@@ -210,7 +255,25 @@ const getpsize = (pageSize: number) => {
   params.pageSize = pageSize;
   getbedslist();
 };
+// 左侧搜索房间数据
+const houseName = ref("");
+// 获取树形组件实例
+const treeRef = ref<any>(null);
+watch(
+  houseName,
+  debounce((val) => {
+    treeRef.value!.filter(val);
+  }, 500)
+);
+interface Tree {
+  [key: string]: any;
+}
+const filterNode = (value: string, data: Tree) => {
+  console.log(value, data.name);
 
+  if (!value) return true;
+  return data.name.includes(value);
+};
 onMounted(async () => {
   await gethouse();
   await getbedslist();

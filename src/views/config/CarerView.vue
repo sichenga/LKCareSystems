@@ -33,7 +33,9 @@
             <el-input v-model="states.name" clearable placeholder="请输入" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="search">查询</el-button>
+            <el-button type="primary" @click="search" :icon="Search"
+              >查询</el-button
+            >
             <el-button @click="reset">重置</el-button>
           </el-form-item>
         </el-form>
@@ -41,9 +43,18 @@
       <el-card class="card" style="max-width: 100%">
         <el-button
           style="margin-bottom: 15px"
-          type="primary"
+          type="success"
+          :icon="Plus"
           @click="isdialog = true"
-          >新增
+          >新增护工
+        </el-button>
+        <el-button
+          style="margin-bottom: 15px"
+          type="danger"
+          :icon="Delete"
+          :disabled="isdisabled"
+          @click="del(delAllData)"
+          >批量删除
         </el-button>
         <WorkersDialog v-if="isdialog" @close="close" />
 
@@ -51,9 +62,12 @@
           :identifier="identifier"
           :tableData="data.tableData"
           :tableItem="data.tableItem"
+          autoWidth="110px"
+          :isMultiple="true"
+          @serve-list-is="serveListIs"
         >
           <template #operate="{ data }">
-            <el-button text type="primary" @click="del(data.id)"
+            <el-button :icon="Delete" text type="danger" @click="del(data.id)"
               >删除
             </el-button>
           </template>
@@ -73,14 +87,14 @@
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
 
-import { carerDelete, staffList } from "@/service/staff/StaffApi";
+import { carerDelete, staffList, delstaffAll } from "@/service/staff/StaffApi";
 import { RoleList } from "@/service/role/RoleApi";
 import type { StaffListParams } from "@/service/staff/StaffType";
 import WorkersDialog from "@/components/dialog/config/WorkersDialog.vue";
 
 import { getMessageBox } from "@/utils/utils";
 import { ElMessage } from "element-plus";
-
+import { Delete, Plus, Search } from "@element-plus/icons-vue";
 const MayTable = defineAsyncComponent(
   () => import("@/components/table/MayTable.vue")
 );
@@ -169,18 +183,34 @@ const close = (val: boolean) => {
     getlist(); //护工
   }
 };
-
+// 批量删除按钮是否可以点击
+const isdisabled = ref(true);
+// 批量删除数据
+const delAllData = ref<any>([]);
+// 获取批量删除数据
+const serveListIs = (val: any) => {
+  if (val.length) {
+    isdisabled.value = false;
+  } else {
+    isdisabled.value = true;
+  }
+  delAllData.value = val.map((item: any) => item.id);
+};
 //删除护工
 const del = async (id: number) => {
   let res = await getMessageBox("是否确认删除该护工", "删除后将不可恢复");
-  if (res) {
-    let item: any = await carerDelete(id);
-    if (item?.code === 10000) {
-      getlist();
-      ElMessage.success("删除成功");
-    }
+  if (!res) {
+    return ElMessage.info("取消删除");
+  }
+  let del: any;
+  if (Array.isArray(id)) {
+    del = await delstaffAll(id);
   } else {
-    ElMessage.info("取消删除");
+    del = await carerDelete(id);
+  }
+  if (del?.code === 10000) {
+    getlist();
+    ElMessage.success("删除成功");
   }
 };
 // 分页
