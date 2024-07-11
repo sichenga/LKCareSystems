@@ -254,11 +254,13 @@ const getData = async () => {
     }
   }
 };
-
+let nextId = 0;
 // 添加
 const addFamilyMember = (newFamilyMember: any) => {
   console.log("添加");
-
+  if (!newFamilyMember.id) {
+    newFamilyMember.id = nextId++;
+  }
   if (newFamilyMember) {
     if (!data.id) {
       ruleForm.family.push(newFamilyMember);
